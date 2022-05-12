@@ -1,0 +1,17 @@
+#
+# swiftgenOutputFiles.xcfilelist
+# Chronos
+#
+# Created by Jean-Pierre Höhmann on 2022-05-04.
+#
+#
+
+#
+# Output files for swiftgen.
+#
+# This is a list of files that swiftgen generates.
+#
+
+$(SRCROOT)/Shared/Assets+Generated.swift
+$(SRCROOT)/Shared/CoreData+Generated.swift
+$(SRCROOT)/Shared/Strings+Generated.swift

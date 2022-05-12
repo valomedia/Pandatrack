@@ -1,0 +1,48 @@
+#
+# swiftgen.yml
+# Chronos
+#
+# Created by Jean-Pierre Höhmann on 2022-05-04.
+#
+#
+
+#
+# Configuration for swiftgen.
+#
+
+# Generate constants for localized strings.
+#
+strings:
+  inputs:
+    - Shared/Resources/Base.lproj
+  outputs:
+    - templatePath: Shared/Strings.stencil
+      params:
+        publicAccess: true
+      output: Shared/Strings+Generated.swift
+
+# Generate constants for Assets Catalogs
+#
+# This will generate constants for images, colors, ARKit resources, etc.
+#
+xcassets:
+  inputs:
+    - Shared/Assets.xcassets
+  outputs:
+    - templatePath: Shared/Assets.stencil
+      params:
+        forceProvidesNamespaces: true
+        publicAccess: true
+      output: Shared/Assets+Generated.swift
+
+# Generate properties for the CoreData Model.
+#
+coredata:
+  inputs:
+    - Shared/Chronos.xcdatamodeld
+  outputs:
+    - templatePath: Shared/CoreData.stencil
+      params:
+        generateObjcName: true
+        publicAccess: true
+      output: Shared/CoreData+Generated.swift

@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AttributeChoiceValueRelationship" representedClassName="AttributeChoiceValueRelationship" isAbstract="YES" parentEntity="AttributeValueRelationship" syncable="YES"/>
+    <entity name="AttributeDeclaration" representedClassName="AttributeDeclaration" isAbstract="YES" syncable="YES">
+        <attribute name="id" attributeType="String" regularExpressionString="^[^\.{}\[\]=]+$"/>
+        <attribute name="path" transient="YES" attributeType="String"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CustomAttributeDeclaration" inverseName="children" inverseEntity="CustomAttributeDeclaration"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="parent"/>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="AttributeListValueRelationship" representedClassName="AttributeListValueRelationship" isAbstract="YES" parentEntity="AttributeValueRelationship" syncable="YES"/>
+    <entity name="AttributeReferenceRelationship" representedClassName="AttributeReferenceRelationship" isAbstract="YES" parentEntity="AttributeRelationship" syncable="YES"/>
+    <entity name="AttributeRelationship" representedClassName="AttributeRelationship" isAbstract="YES" syncable="YES">
+        <attribute name="key" transient="YES" attributeType="String"/>
+    </entity>
+    <entity name="AttributeSingleValueRelationship" representedClassName="AttributeSingleValueRelationship" isAbstract="YES" parentEntity="AttributeValueRelationship" syncable="YES"/>
+    <entity name="AttributeValueRelationship" representedClassName="AttributeValueRelationship" isAbstract="YES" parentEntity="AttributeRelationship" syncable="YES"/>
+    <entity name="BuiltinAttributeChoiceDeclaration" representedClassName="BuiltinAttributeChoiceDeclaration" isAbstract="YES" parentEntity="BuiltinAttributeDeclaration" syncable="YES"/>
+    <entity name="BuiltinAttributeDeclaration" representedClassName="BuiltinAttributeDeclaration" isAbstract="YES" parentEntity="AttributeDeclaration" syncable="YES"/>
+    <entity name="BuiltinAttributeListDeclaration" representedClassName="BuiltinAttributeListDeclaration" isAbstract="YES" parentEntity="BuiltinAttributeDeclaration" syncable="YES"/>
+    <entity name="BuiltinAttributeSingleDeclaration" representedClassName="BuiltinAttributeSingleDeclaration" isAbstract="YES" parentEntity="BuiltinAttributeDeclaration" syncable="YES"/>
+    <entity name="CurrencyAttributeChoiceDeclaration" representedClassName="CurrencyAttributeChoiceDeclaration" parentEntity="BuiltinAttributeChoiceDeclaration" syncable="YES">
+        <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[CurrencyAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeChoiceRelationship" inverseName="declaration" inverseEntity="CurrencyAttributeChoiceRelationship"/>
+    </entity>
+    <entity name="CurrencyAttributeChoiceRelationship" representedClassName="CurrencyAttributeChoiceRelationship" parentEntity="AttributeChoiceValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="CurrencyAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="CurrencyAttributeChoiceDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="currencyAttributeChoices" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CurrencyAttributeListDeclaration" representedClassName="CurrencyAttributeListDeclaration" parentEntity="BuiltinAttributeListDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[CurrencyAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeListRelationship" inverseName="declaration" inverseEntity="CurrencyAttributeListRelationship"/>
+    </entity>
+    <entity name="CurrencyAttributeListRelationship" representedClassName="CurrencyAttributeListRelationship" parentEntity="AttributeListValueRelationship" syncable="YES">
+        <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[CurrencyAttribute]"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyAttributeListDeclaration" inverseName="relationships" inverseEntity="CurrencyAttributeListDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="currencyAttributeLists" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CurrencyAttributeSingleDeclaration" representedClassName="CurrencyAttributeSingleDeclaration" parentEntity="BuiltinAttributeSingleDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="CurrencyAttribute"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeSingleRelationship" inverseName="declaration" inverseEntity="CurrencyAttributeSingleRelationship"/>
+    </entity>
+    <entity name="CurrencyAttributeSingleRelationship" representedClassName="CurrencyAttributeSingleRelationship" parentEntity="AttributeSingleValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="CurrencyAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyAttributeSingleDeclaration" inverseName="relationships" inverseEntity="CurrencyAttributeSingleDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="currencyAttributes" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CustomAttribute" representedClassName="CustomAttribute" parentEntity="Node" syncable="YES">
+        <relationship name="customAttributeListRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="CustomAttributeListRelationship" inverseName="attributes" inverseEntity="CustomAttributeListRelationship"/>
+        <relationship name="customAttributeSingleRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="CustomAttributeSingleRelationship" inverseName="attribute" inverseEntity="CustomAttributeSingleRelationship"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="CustomAttributeDeclaration" inverseName="instances" inverseEntity="CustomAttributeDeclaration"/>
+    </entity>
+    <entity name="CustomAttributeDeclaration" representedClassName="CustomAttributeDeclaration" parentEntity="AttributeDeclaration" syncable="YES">
+        <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="AttributeDeclaration" inverseName="parent" inverseEntity="AttributeDeclaration"/>
+        <relationship name="instances" toMany="YES" deletionRule="Cascade" destinationEntity="CustomAttribute" inverseName="declaration" inverseEntity="CustomAttribute"/>
+    </entity>
+    <entity name="CustomAttributeListDeclaration" representedClassName="CustomAttributeListDeclaration" parentEntity="CustomAttributeDeclaration" syncable="YES">
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="CustomAttributeListRelationship" inverseName="declaration" inverseEntity="CustomAttributeListRelationship"/>
+    </entity>
+    <entity name="CustomAttributeListRelationship" representedClassName="CustomAttributeListRelationship" parentEntity="AttributeReferenceRelationship" syncable="YES">
+        <relationship name="attributes" toMany="YES" deletionRule="Nullify" destinationEntity="CustomAttribute" inverseName="customAttributeListRelationships" inverseEntity="CustomAttribute"/>
+        <relationship name="declaration" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CustomAttributeListDeclaration" inverseName="relationships" inverseEntity="CustomAttributeListDeclaration"/>
+        <relationship name="source" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="customMultipleAttributes" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CustomAttributeSingleDeclaration" representedClassName="CustomAttributeSingleDeclaration" parentEntity="CustomAttributeDeclaration" syncable="YES">
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="CustomAttributeSingleRelationship" inverseName="declaration" inverseEntity="CustomAttributeSingleRelationship"/>
+    </entity>
+    <entity name="CustomAttributeSingleRelationship" representedClassName="CustomAttributeSingleRelationship" parentEntity="AttributeReferenceRelationship" syncable="YES">
+        <relationship name="attribute" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CustomAttribute" inverseName="customAttributeSingleRelationships" inverseEntity="CustomAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="CustomAttributeSingleDeclaration" inverseName="relationships" inverseEntity="CustomAttributeSingleDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="customSingleAttributes" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="DateAttributeChoiceDeclaration" representedClassName="DateAttributeChoiceDeclaration" parentEntity="BuiltinAttributeChoiceDeclaration" syncable="YES">
+        <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[DateAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="DateAttributeChoiceRelationship" inverseName="declaration" inverseEntity="DateAttributeChoiceRelationship"/>
+    </entity>
+    <entity name="DateAttributeChoiceRelationship" representedClassName="DateAttributeChoiceRelationship" parentEntity="AttributeChoiceValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="DateAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="DateAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="DateAttributeChoiceDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="dateAttributeChoices" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="DateAttributeListDeclaration" representedClassName="DateAttributeListDeclaration" parentEntity="BuiltinAttributeListDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[DateAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="DateAttributeListRelationship" inverseName="declaration" inverseEntity="DateAttributeListRelationship"/>
+    </entity>
+    <entity name="DateAttributeListRelationship" representedClassName="DateAttributeListRelationship" parentEntity="AttributeListValueRelationship" syncable="YES">
+        <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[DateAttribute]"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="DateAttributeListDeclaration" inverseName="relationships" inverseEntity="DateAttributeListDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="dateAttributeLists" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="DateAttributeSingleDeclaration" representedClassName="DateAttributeSingleDeclaration" parentEntity="BuiltinAttributeSingleDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="DateAttribute"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="DateAttributeSingleRelationship" inverseName="declaration" inverseEntity="DateAttributeSingleRelationship"/>
+    </entity>
+    <entity name="DateAttributeSingleRelationship" representedClassName="DateAttributeSingleRelationship" parentEntity="AttributeSingleValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="DateAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="DateAttributeSingleDeclaration" inverseName="relationships" inverseEntity="DateAttributeSingleDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="dateAttributes" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Entry" representedClassName="Entry" parentEntity="Item" syncable="YES">
+        <attribute name="interval" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="DateInterval"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="entries" inverseEntity="Project"/>
+        <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="entries" inverseEntity="Tag"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" isAbstract="YES" syncable="YES">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" regularExpressionString="^[^/{}@#\$&amp;:]+$"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Node" representedClassName="Node" isAbstract="YES" parentEntity="Item" syncable="YES">
+        <attribute name="path" transient="YES" attributeType="String"/>
+        <relationship name="currencyAttributeChoices" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeChoiceRelationship" inverseName="source" inverseEntity="CurrencyAttributeChoiceRelationship"/>
+        <relationship name="currencyAttributeLists" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeListRelationship" inverseName="source" inverseEntity="CurrencyAttributeListRelationship"/>
+        <relationship name="currencyAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeSingleRelationship" inverseName="source" inverseEntity="CurrencyAttributeSingleRelationship"/>
+        <relationship name="customMultipleAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="CustomAttributeListRelationship" inverseName="source" inverseEntity="CustomAttributeListRelationship"/>
+        <relationship name="customSingleAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="CustomAttributeSingleRelationship" inverseName="source" inverseEntity="CustomAttributeSingleRelationship"/>
+        <relationship name="dateAttributeChoices" toMany="YES" deletionRule="Cascade" destinationEntity="DateAttributeChoiceRelationship" inverseName="source" inverseEntity="DateAttributeChoiceRelationship"/>
+        <relationship name="dateAttributeLists" toMany="YES" deletionRule="Cascade" destinationEntity="DateAttributeListRelationship" inverseName="source" inverseEntity="DateAttributeListRelationship"/>
+        <relationship name="dateAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="DateAttributeSingleRelationship" inverseName="source" inverseEntity="DateAttributeSingleRelationship"/>
+        <relationship name="numberAttributeChoices" toMany="YES" deletionRule="Cascade" destinationEntity="NumberAttributeChoiceRelationship" inverseName="source" inverseEntity="NumberAttributeChoiceRelationship"/>
+        <relationship name="numberAttributeLists" toMany="YES" deletionRule="Cascade" destinationEntity="NumberAttributeListRelationship" inverseName="source" inverseEntity="NumberAttributeListRelationship"/>
+        <relationship name="numberAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="NumberAttributeSingleRelationship" inverseName="source" inverseEntity="NumberAttributeSingleRelationship"/>
+        <relationship name="percentageAttributeChoices" toMany="YES" deletionRule="Cascade" destinationEntity="PercentageAttributeChoiceRelationship" inverseName="source" inverseEntity="PercentageAttributeChoiceRelationship"/>
+        <relationship name="percentageAttributeLists" toMany="YES" deletionRule="Cascade" destinationEntity="PercentageAttributeListRelationship" inverseName="source" inverseEntity="PercentageAttributeListRelationship"/>
+        <relationship name="percentageAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="PercentageAttributeSingleRelationship" inverseName="source" inverseEntity="PercentageAttributeSingleRelationship"/>
+        <relationship name="stringAttributeChoices" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeChoiceRelationship" inverseName="source" inverseEntity="StringAttributeChoiceRelationship"/>
+        <relationship name="stringAttributeLists" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeListRelationship" inverseName="source" inverseEntity="StringAttributeListRelationship"/>
+        <relationship name="stringAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeSingleRelationship" inverseName="source" inverseEntity="StringAttributeSingleRelationship"/>
+        <relationship name="themeAttributeChoices" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeChoiceRelationship" inverseName="source" inverseEntity="ThemeAttributeChoiceRelationship"/>
+        <relationship name="themeAttributeLists" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeListRelationship" inverseName="source" inverseEntity="ThemeAttributeListRelationship"/>
+        <relationship name="themeAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeSingleRelationship" inverseName="source" inverseEntity="ThemeAttributeSingleRelationship"/>
+        <relationship name="urlAttributeChoices" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeChoiceRelationship" inverseName="source" inverseEntity="URLAttributeChoiceRelationship"/>
+        <relationship name="urlAttributeLists" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeListRelationship" inverseName="source" inverseEntity="URLAttributeListRelationship"/>
+        <relationship name="urlAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeSingleRelationship" inverseName="source" inverseEntity="URLAttributeSingleRelationship"/>
+        <fetchedProperty name="attributes" optional="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="AttributeRelationship" predicateString="source == $FETCH_SOURCE"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="NumberAttributeChoiceDeclaration" representedClassName="NumberAttributeChoiceDeclaration" parentEntity="BuiltinAttributeChoiceDeclaration" syncable="YES">
+        <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[NumberAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="NumberAttributeChoiceRelationship" inverseName="declaration" inverseEntity="NumberAttributeChoiceRelationship"/>
+    </entity>
+    <entity name="NumberAttributeChoiceRelationship" representedClassName="NumberAttributeChoiceRelationship" parentEntity="AttributeChoiceValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="NumberAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="NumberAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="NumberAttributeChoiceDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="numberAttributeChoices" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="NumberAttributeListDeclaration" representedClassName="NumberAttributeListDeclaration" parentEntity="BuiltinAttributeListDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[NumberAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="NumberAttributeListRelationship" inverseName="declaration" inverseEntity="NumberAttributeListRelationship"/>
+    </entity>
+    <entity name="NumberAttributeListRelationship" representedClassName="NumberAttributeListRelationship" parentEntity="AttributeListValueRelationship" syncable="YES">
+        <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[NumberAttribute]"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="NumberAttributeListDeclaration" inverseName="relationships" inverseEntity="NumberAttributeListDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="numberAttributeLists" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="NumberAttributeSingleDeclaration" representedClassName="NumberAttributeSingleDeclaration" parentEntity="BuiltinAttributeSingleDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="NumberAttribute"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="NumberAttributeSingleRelationship" inverseName="declaration" inverseEntity="NumberAttributeSingleRelationship"/>
+    </entity>
+    <entity name="NumberAttributeSingleRelationship" representedClassName="NumberAttributeSingleRelationship" parentEntity="AttributeSingleValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="NumberAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="NumberAttributeSingleDeclaration" inverseName="relationships" inverseEntity="NumberAttributeSingleDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="numberAttributes" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="PercentageAttributeChoiceDeclaration" representedClassName="PercentageAttributeChoiceDeclaration" parentEntity="BuiltinAttributeChoiceDeclaration" syncable="YES">
+        <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[PercentageAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="PercentageAttributeChoiceRelationship" inverseName="declaration" inverseEntity="PercentageAttributeChoiceRelationship"/>
+    </entity>
+    <entity name="PercentageAttributeChoiceRelationship" representedClassName="PercentageAttributeChoiceRelationship" parentEntity="AttributeChoiceValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="PercentageAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="PercentageAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="PercentageAttributeChoiceDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="percentageAttributeChoices" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="PercentageAttributeListDeclaration" representedClassName="PercentageAttributeListDeclaration" parentEntity="BuiltinAttributeListDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[PercentageAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="PercentageAttributeListRelationship" inverseName="declaration" inverseEntity="PercentageAttributeListRelationship"/>
+    </entity>
+    <entity name="PercentageAttributeListRelationship" representedClassName="PercentageAttributeListRelationship" parentEntity="AttributeListValueRelationship" syncable="YES">
+        <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[PercentageAttribute]"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="PercentageAttributeListDeclaration" inverseName="relationships" inverseEntity="PercentageAttributeListDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="percentageAttributeLists" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="declaration"/>
+                <constraint value="source"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="PercentageAttributeSingleDeclaration" representedClassName="PercentageAttributeSingleDeclaration" parentEntity="BuiltinAttributeSingleDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="PercentageAttribute"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="PercentageAttributeSingleRelationship" inverseName="declaration" inverseEntity="PercentageAttributeSingleRelationship"/>
+    </entity>
+    <entity name="PercentageAttributeSingleRelationship" representedClassName="PercentageAttributeSingleRelationship" parentEntity="AttributeSingleValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" minValueString="0" maxValueString="100" customClassName="PercentageAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="PercentageAttributeSingleDeclaration" inverseName="relationships" inverseEntity="PercentageAttributeSingleDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="percentageAttributes" inverseEntity="Node"/>
+    </entity>
+    <entity name="Project" representedClassName="Project" parentEntity="Node" syncable="YES">
+        <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="Project" inverseName="parent" inverseEntity="Project"/>
+        <relationship name="entries" toMany="YES" deletionRule="Cascade" destinationEntity="Entry" inverseName="project" inverseEntity="Entry"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="children" inverseEntity="Project"/>
+    </entity>
+    <entity name="StringAttributeChoiceDeclaration" representedClassName="StringAttributeChoiceDeclaration" parentEntity="BuiltinAttributeChoiceDeclaration" syncable="YES">
+        <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[StringAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeChoiceRelationship" inverseName="declaration" inverseEntity="StringAttributeChoiceRelationship"/>
+    </entity>
+    <entity name="StringAttributeChoiceRelationship" representedClassName="StringAttributeChoiceRelationship" parentEntity="AttributeChoiceValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="StringAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="StringAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="StringAttributeChoiceDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="stringAttributeChoices" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="StringAttributeListDeclaration" representedClassName="StringAttributeListDeclaration" parentEntity="BuiltinAttributeListDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[StringAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeListRelationship" inverseName="declaration" inverseEntity="StringAttributeListRelationship"/>
+    </entity>
+    <entity name="StringAttributeListRelationship" representedClassName="StringAttributeListRelationship" parentEntity="AttributeListValueRelationship" syncable="YES">
+        <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[StringAttribute]"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="StringAttributeListDeclaration" inverseName="relationships" inverseEntity="StringAttributeListDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="stringAttributeLists" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="StringAttributeSingleDeclaration" representedClassName="StringAttributeSingleDeclaration" parentEntity="BuiltinAttributeSingleDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="StringAttribute"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeSingleRelationship" inverseName="declaration" inverseEntity="StringAttributeSingleRelationship"/>
+    </entity>
+    <entity name="StringAttributeSingleRelationship" representedClassName="StringAttributeSingleRelationship" parentEntity="AttributeSingleValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="StringAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="StringAttributeSingleDeclaration" inverseName="relationships" inverseEntity="StringAttributeSingleDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="stringAttributes" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" parentEntity="Node" syncable="YES">
+        <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="Tag" inverseName="parent" inverseEntity="Tag"/>
+        <relationship name="entries" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="tags" inverseEntity="Entry"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" inverseName="children" inverseEntity="Tag"/>
+    </entity>
+    <entity name="ThemeAttributeChoiceDeclaration" representedClassName="ThemeAttributeChoiceDeclaration" parentEntity="BuiltinAttributeChoiceDeclaration" syncable="YES">
+        <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[ThemeAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeChoiceRelationship" inverseName="declaration" inverseEntity="ThemeAttributeChoiceRelationship"/>
+    </entity>
+    <entity name="ThemeAttributeChoiceRelationship" representedClassName="ThemeAttributeChoiceRelationship" parentEntity="AttributeChoiceValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="ThemeAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="ThemeAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="ThemeAttributeChoiceDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="themeAttributeChoices" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="ThemeAttributeListDeclaration" representedClassName="ThemeAttributeListDeclaration" parentEntity="BuiltinAttributeListDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[ThemeAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeListRelationship" inverseName="declaration" inverseEntity="ThemeAttributeListRelationship"/>
+    </entity>
+    <entity name="ThemeAttributeListRelationship" representedClassName="ThemeAttributeListRelationship" parentEntity="AttributeListValueRelationship" syncable="YES">
+        <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[ThemeAttribute]"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="ThemeAttributeListDeclaration" inverseName="relationships" inverseEntity="ThemeAttributeListDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="themeAttributeLists" inverseEntity="Node"/>
+    </entity>
+    <entity name="ThemeAttributeSingleDeclaration" representedClassName="ThemeAttributeSingleDeclaration" parentEntity="BuiltinAttributeSingleDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="ThemeAttribute"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeSingleRelationship" inverseName="declaration" inverseEntity="ThemeAttributeSingleRelationship"/>
+    </entity>
+    <entity name="ThemeAttributeSingleRelationship" representedClassName="ThemeAttributeSingleRelationship" parentEntity="AttributeSingleValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="ThemeAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="ThemeAttributeSingleDeclaration" inverseName="relationships" inverseEntity="ThemeAttributeSingleDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="themeAttributes" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="URLAttributeChoiceDeclaration" representedClassName="URLAttributeChoiceDeclaration" parentEntity="BuiltinAttributeChoiceDeclaration" syncable="YES">
+        <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[URLAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeChoiceRelationship" inverseName="declaration" inverseEntity="URLAttributeChoiceRelationship"/>
+    </entity>
+    <entity name="URLAttributeChoiceRelationship" representedClassName="URLAttributeChoiceRelationship" parentEntity="AttributeChoiceValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="URLAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="URLAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="URLAttributeChoiceDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="urlAttributeChoices" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="URLAttributeListDeclaration" representedClassName="URLAttributeListDeclaration" parentEntity="BuiltinAttributeListDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[URLAttribute]"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeListRelationship" inverseName="declaration" inverseEntity="URLAttributeListRelationship"/>
+    </entity>
+    <entity name="URLAttributeListRelationship" representedClassName="URLAttributeListRelationship" parentEntity="AttributeListValueRelationship" syncable="YES">
+        <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[URLAttribute]"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="URLAttributeListDeclaration" inverseName="relationships" inverseEntity="URLAttributeListDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="urlAttributeLists" inverseEntity="Node"/>
+    </entity>
+    <entity name="URLAttributeSingleDeclaration" representedClassName="URLAttributeSingleDeclaration" parentEntity="BuiltinAttributeSingleDeclaration" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="URLAttribute"/>
+        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeSingleRelationship" inverseName="declaration" inverseEntity="URLAttributeSingleRelationship"/>
+    </entity>
+    <entity name="URLAttributeSingleRelationship" representedClassName="URLAttributeSingleRelationship" parentEntity="AttributeSingleValueRelationship" syncable="YES">
+        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="URLAttribute"/>
+        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="URLAttributeSingleDeclaration" inverseName="relationships" inverseEntity="URLAttributeSingleDeclaration"/>
+        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="urlAttributes" inverseEntity="Node"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="source"/>
+                <constraint value="declaration"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="AttributeChoiceValueRelationship" positionX="2502" positionY="-1926" width="128" height="29"/>
+        <element name="AttributeDeclaration" positionX="2435.6015625" positionY="-2101.9296875" width="128" height="74"/>
+        <element name="AttributeListValueRelationship" positionX="2475" positionY="-1989" width="128" height="29"/>
+        <element name="AttributeReferenceRelationship" positionX="2448" positionY="-2034" width="128" height="29"/>
+        <element name="AttributeRelationship" positionX="2434.21484375" positionY="-2092.359375" width="128" height="44"/>
+        <element name="AttributeSingleValueRelationship" positionX="2466" positionY="-1998" width="128" height="29"/>
+        <element name="AttributeValueRelationship" positionX="2457" positionY="-2025" width="128" height="29"/>
+        <element name="BuiltinAttributeChoiceDeclaration" positionX="2502" positionY="-1926" width="128" height="29"/>
+        <element name="BuiltinAttributeDeclaration" positionX="2466" positionY="-2016" width="128" height="29"/>
+        <element name="BuiltinAttributeListDeclaration" positionX="2457" positionY="-2007" width="128" height="29"/>
+        <element name="BuiltinAttributeSingleDeclaration" positionX="2448" positionY="-2016" width="128" height="29"/>
+        <element name="CurrencyAttributeChoiceDeclaration" positionX="2475" positionY="-1953" width="128" height="59"/>
+        <element name="CurrencyAttributeChoiceRelationship" positionX="2475" positionY="-1953" width="128" height="74"/>
+        <element name="CurrencyAttributeListDeclaration" positionX="2439" positionY="-2025" width="128" height="59"/>
+        <element name="CurrencyAttributeListRelationship" positionX="2457" positionY="-2007" width="128" height="74"/>
+        <element name="CurrencyAttributeSingleDeclaration" positionX="2475" positionY="-2007" width="128" height="59"/>
+        <element name="CurrencyAttributeSingleRelationship" positionX="2493" positionY="-1989" width="128" height="74"/>
+        <element name="CustomAttribute" positionX="2466" positionY="-2025" width="128" height="74"/>
+        <element name="CustomAttributeDeclaration" positionX="2484" positionY="-2007" width="128" height="59"/>
+        <element name="CustomAttributeListDeclaration" positionX="2493" positionY="-1998" width="128" height="44"/>
+        <element name="CustomAttributeListRelationship" positionX="2439" positionY="-2052" width="128" height="74"/>
+        <element name="CustomAttributeSingleDeclaration" positionX="2466" positionY="-2025" width="128" height="44"/>
+        <element name="CustomAttributeSingleRelationship" positionX="2484" positionY="-2007" width="128" height="74"/>
+        <element name="DateAttributeChoiceDeclaration" positionX="2466" positionY="-1962" width="128" height="59"/>
+        <element name="DateAttributeChoiceRelationship" positionX="2466" positionY="-1962" width="128" height="74"/>
+        <element name="DateAttributeListDeclaration" positionX="2475" positionY="-1989" width="128" height="59"/>
+        <element name="DateAttributeListRelationship" positionX="2448" positionY="-2016" width="128" height="74"/>
+        <element name="DateAttributeSingleDeclaration" positionX="2466" positionY="-2052" width="128" height="59"/>
+        <element name="DateAttributeSingleRelationship" positionX="2475" positionY="-2043" width="128" height="74"/>
+        <element name="Entry" positionX="2398.21484375" positionY="-2164.359375" width="128" height="74"/>
+        <element name="Item" positionX="2398.21484375" positionY="-2173.359375" width="128" height="74"/>
+        <element name="Node" positionX="2461.21484375" positionY="-2056.359375" width="128" height="410"/>
+        <element name="NumberAttributeChoiceDeclaration" positionX="2457" positionY="-1971" width="128" height="59"/>
+        <element name="NumberAttributeChoiceRelationship" positionX="2457" positionY="-1971" width="128" height="74"/>
+        <element name="NumberAttributeListDeclaration" positionX="2484" positionY="-1980" width="128" height="59"/>
+        <element name="NumberAttributeListRelationship" positionX="2493" positionY="-1971" width="128" height="74"/>
+        <element name="NumberAttributeSingleDeclaration" positionX="2452.21484375" positionY="-2083.359375" width="128" height="59"/>
+        <element name="NumberAttributeSingleRelationship" positionX="2443.21484375" positionY="-2092.359375" width="128" height="74"/>
+        <element name="PercentageAttributeChoiceDeclaration" positionX="2484" positionY="-1944" width="128" height="59"/>
+        <element name="PercentageAttributeChoiceRelationship" positionX="2484" positionY="-1944" width="128" height="74"/>
+        <element name="PercentageAttributeListDeclaration" positionX="2448" positionY="-2016" width="128" height="59"/>
+        <element name="PercentageAttributeListRelationship" positionX="2466" positionY="-1998" width="128" height="74"/>
+        <element name="PercentageAttributeSingleDeclaration" positionX="2484" positionY="-1998" width="128" height="59"/>
+        <element name="PercentageAttributeSingleRelationship" positionX="2439" positionY="-2043" width="128" height="74"/>
+        <element name="Project" positionX="2416.21484375" positionY="-2137.359375" width="128" height="74"/>
+        <element name="StringAttributeChoiceDeclaration" positionX="2448" positionY="-1980" width="128" height="59"/>
+        <element name="StringAttributeChoiceRelationship" positionX="2448" positionY="-1980" width="128" height="74"/>
+        <element name="StringAttributeListDeclaration" positionX="2493" positionY="-1971" width="128" height="59"/>
+        <element name="StringAttributeListRelationship" positionX="2484" positionY="-1980" width="128" height="74"/>
+        <element name="StringAttributeSingleDeclaration" positionX="2452.21484375" positionY="-2065.359375" width="128" height="59"/>
+        <element name="StringAttributeSingleRelationship" positionX="2425.21484375" positionY="-2119.359375" width="128" height="74"/>
+        <element name="Tag" positionX="2407.21484375" positionY="-2146.359375" width="128" height="74"/>
+        <element name="ThemeAttributeChoiceDeclaration" positionX="2466" positionY="-1926" width="128" height="59"/>
+        <element name="ThemeAttributeChoiceRelationship" positionX="2493" positionY="-1899" width="128" height="74"/>
+        <element name="ThemeAttributeListDeclaration" positionX="2457" positionY="-1935" width="128" height="59"/>
+        <element name="ThemeAttributeListRelationship" positionX="2484" positionY="-1908" width="128" height="74"/>
+        <element name="ThemeAttributeSingleDeclaration" positionX="2511" positionY="-1881" width="128" height="59"/>
+        <element name="ThemeAttributeSingleRelationship" positionX="2475" positionY="-1917" width="128" height="74"/>
+        <element name="URLAttributeChoiceDeclaration" positionX="2493" positionY="-1935" width="128" height="59"/>
+        <element name="URLAttributeChoiceRelationship" positionX="2493" positionY="-1935" width="128" height="74"/>
+        <element name="URLAttributeListDeclaration" positionX="2466" positionY="-1998" width="128" height="59"/>
+        <element name="URLAttributeListRelationship" positionX="2484" positionY="-1935" width="128" height="74"/>
+        <element name="URLAttributeSingleDeclaration" positionX="2484" positionY="-2025" width="128" height="59"/>
+        <element name="URLAttributeSingleRelationship" positionX="2439" positionY="-2079" width="128" height="74"/>
+    </elements>
+</model>
