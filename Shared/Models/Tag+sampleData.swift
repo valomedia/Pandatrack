@@ -21,6 +21,7 @@ extension Tag {
     ///
     /// - Todo: Document.
     /// - Parameter context:
+    @discardableResult
     @SetBuilder<Tag>
     public class func sampleData(for context: NSManagedObjectContext) -> Set<Tag> {
         Tag(context, name: "Secret") {

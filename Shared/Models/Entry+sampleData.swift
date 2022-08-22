@@ -25,6 +25,7 @@ extension Entry {
     ///     - context:
     ///     - projects:
     ///     - tags:
+    @discardableResult
     @SetBuilder<Entry>
     public class func sampleData(for context: NSManagedObjectContext) throws -> Set<Entry> {
         let projects = try Set(context.fetch(Project.makeFetchRequest()))

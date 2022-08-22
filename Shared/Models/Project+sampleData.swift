@@ -21,6 +21,7 @@ extension Project {
     ///
     /// - Todo: Document.
     /// - Parameter context:
+    @discardableResult
     @SetBuilder<Project>
     public class func sampleData(for context: NSManagedObjectContext) -> Set<Project> {
         Project(context, name: "ACME") {
