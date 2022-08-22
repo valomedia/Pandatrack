@@ -16,7 +16,7 @@ import OrderedCollections
 ///
 /// - Todo: Document.
 @objc(Project)
-public final class Project: Node, ManagedTree {
+public final class Project: Node, Tree {
 
     // MARK: - Life cycle methods
 
@@ -53,5 +53,7 @@ public final class Project: Node, ManagedTree {
         if let children = children() {
             self.children = children
         }
+
     }
+
 }

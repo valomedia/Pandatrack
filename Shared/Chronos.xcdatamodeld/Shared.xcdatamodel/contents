@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AttributeChoiceValueRelationship" representedClassName="AttributeChoiceValueRelationship" isAbstract="YES" parentEntity="AttributeValueRelationship" syncable="YES"/>
     <entity name="AttributeDeclaration" representedClassName="AttributeDeclaration" isAbstract="YES" syncable="YES">
         <attribute name="id" attributeType="String" regularExpressionString="^[^\.{}\[\]=]+$"/>
@@ -151,7 +151,8 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Entry" representedClassName="Entry" parentEntity="Item" syncable="YES">
-        <attribute name="interval" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="DateInterval"/>
+        <attribute name="end" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="start" attributeType="Date" valueTransformerName="NSSecureUnarchiveFromDataTransformer" usesScalarValueType="NO" customClassName="NSDateInterval"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="entries" inverseEntity="Project"/>
         <relationship name="tags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="entries" inverseEntity="Tag"/>
     </entity>
@@ -166,7 +167,6 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Node" representedClassName="Node" isAbstract="YES" parentEntity="Item" syncable="YES">
-        <attribute name="path" transient="YES" attributeType="String"/>
         <relationship name="currencyAttributeChoices" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeChoiceRelationship" inverseName="source" inverseEntity="CurrencyAttributeChoiceRelationship"/>
         <relationship name="currencyAttributeLists" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeListRelationship" inverseName="source" inverseEntity="CurrencyAttributeListRelationship"/>
         <relationship name="currencyAttributes" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeSingleRelationship" inverseName="source" inverseEntity="CurrencyAttributeSingleRelationship"/>
@@ -441,9 +441,9 @@
         <element name="DateAttributeListRelationship" positionX="2448" positionY="-2016" width="128" height="74"/>
         <element name="DateAttributeSingleDeclaration" positionX="2466" positionY="-2052" width="128" height="59"/>
         <element name="DateAttributeSingleRelationship" positionX="2475" positionY="-2043" width="128" height="74"/>
-        <element name="Entry" positionX="2398.21484375" positionY="-2164.359375" width="128" height="74"/>
+        <element name="Entry" positionX="2398.21484375" positionY="-2164.359375" width="128" height="89"/>
         <element name="Item" positionX="2398.21484375" positionY="-2173.359375" width="128" height="74"/>
-        <element name="Node" positionX="2461.21484375" positionY="-2056.359375" width="128" height="410"/>
+        <element name="Node" positionX="2461.21484375" positionY="-2056.359375" width="128" height="395"/>
         <element name="NumberAttributeChoiceDeclaration" positionX="2457" positionY="-1971" width="128" height="59"/>
         <element name="NumberAttributeChoiceRelationship" positionX="2457" positionY="-1971" width="128" height="74"/>
         <element name="NumberAttributeListDeclaration" positionX="2484" positionY="-1980" width="128" height="59"/>

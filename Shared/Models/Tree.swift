@@ -25,9 +25,31 @@ protocol Tree: Hashable {
 
     ///
     /// - Todo: Document.
+    var name: String { get set }
+
+    ///
+    /// - Todo: Document.
+    var path: String { get }
+
+    ///
+    /// - Todo: Document.
     var parent: Self? { get set }
 
     ///
     /// - Todo: Document.
     var children: Set<Self> { get set }
+
+}
+
+// MARK: + path
+
+extension Tree {
+
+    // MARK: - Properties
+
+    // TODO Cache the result of this for the lifetime of the object.
+    var path: String {
+        [ parent?.path, name ].compactMap({ $0 }).joined(separator: Self.pathSeparator)
+    }
+
 }

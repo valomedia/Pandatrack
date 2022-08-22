@@ -34,7 +34,8 @@ public class Entry: Item {
             project: Project? = nil,
             tags: Set<Tag>? = nil) {
         super.init(context, name: name)
-        primitiveInterval = interval
+        primitiveStart = interval.start
+        primitiveEnd = interval.end
 
         if let project = project {
             self.project = project
@@ -42,6 +43,18 @@ public class Entry: Item {
 
         if let tags = tags {
             self.tags = tags
+        }
+    }
+
+    // MARK: - Properties
+
+    public var interval: DateInterval {
+        get {
+            DateInterval(start: start, end: end)
+        }
+        set {
+            start = newValue.start
+            end = newValue.end
         }
     }
 }

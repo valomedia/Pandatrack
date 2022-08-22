@@ -15,7 +15,7 @@ import CoreData
 ///
 /// - Todo: Document.
 @objc(Tag)
-public final class Tag: Node, ManagedTree {
+public final class Tag: Node, Tree {
 
     // MARK: - Life cycle methods
 
