@@ -34,17 +34,17 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(items) { item in
+                ForEach(entries) { entry in
                     NavigationLink {
                         VStack {
-                            Text("Hello, World!")
-                            Text("Item at \(item.timestamp, formatter: ContentView.dateFormatter)")
+                            Text(entry.name)
+                            Text("Item at \(entry.timestamp, formatter: ContentView.dateFormatter)")
                         }
                     } label: {
-                        Text(item.timestamp, formatter: ContentView.dateFormatter)
+                        Text(entry.name)
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteEntries)
             }
             .toolbar {
                 #if os(iOS)
@@ -53,8 +53,8 @@ struct ContentView: View {
                 }
                 #endif
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    Button(action: addEntry) {
+                        Label("Add Entry", systemImage: "plus")
                     }
                 }
             }
@@ -66,15 +66,16 @@ struct ContentView: View {
     private var viewContext
 
     @FetchRequest(
-            sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+            sortDescriptors: [NSSortDescriptor(keyPath: \Entry.timestamp, ascending: true)],
             animation: .default)
-    private var items: FetchedResults<Item>
+    private var entries: FetchedResults<Entry>
 
     // MARK: - Methods
 
-    private func addItem() {
+    private func addEntry() {
         withAnimation {
-            _ = Item(viewContext, name: "Hello, World!")
+            // Todo: Implement.
+            // _ = Item(viewContext, name: "Hello, World!")
 
             do {
                 try viewContext.save()
@@ -87,9 +88,9 @@ struct ContentView: View {
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteEntries(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { entries[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()

@@ -26,10 +26,13 @@ struct PersistenceController {
         #if DEBUG && targetEnvironment(simulator)
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            _ = Item(viewContext, name: "Hello, World!")
-        }
         do {
+            // Build sample data for all entities currently in use.  Order matters here, since the sample data has
+            // implicit interdependencies.  This would be inexcusable in production code, but since these code paths
+            // are only reached when running in DEBUG mode on the simulator, I feel like we can get away with it.
+            Project.sampleData(for: viewContext)
+            Tag.sampleData(for: viewContext)
+            try Entry.sampleData(for: viewContext)
             try viewContext.save()
         } catch let error as NSError {
             fatalError("Unresolved error \(error), \(error.userInfo)")
