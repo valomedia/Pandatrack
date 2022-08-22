@@ -11,8 +11,7 @@
 #
 # This is a list of files that swiftgen uses during code generation.
 # Any change to any of these files causes a regeneration of all the
-# generated code (except core data classes, which are handled by
-# motoswift).
+# generated code.
 #
 
 $(SRCROOT)/swiftgen.yml
