@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(NumberAttributeListDeclaration)
-public class NumberAttributeListDeclaration: BuiltinAttributeListDeclaration {
+public class NumberAttributeListDeclaration: BuiltinAttributeDeclaration {
 
 }

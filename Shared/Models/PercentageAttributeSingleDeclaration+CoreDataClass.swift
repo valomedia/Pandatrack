@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(PercentageAttributeSingleDeclaration)
-public class PercentageAttributeSingleDeclaration: BuiltinAttributeSingleDeclaration {
+public class PercentageAttributeSingleDeclaration: BuiltinAttributeDeclaration {
 
 }

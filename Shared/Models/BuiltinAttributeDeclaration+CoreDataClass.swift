@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(BuiltinAttributeDeclaration)
-public class BuiltinAttributeDeclaration: AttributeDeclaration {
+public class BuiltinAttributeDeclaration: NSManagedObject, AttributeDeclaration {
 
 }

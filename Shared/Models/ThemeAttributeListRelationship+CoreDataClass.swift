@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(ThemeAttributeListRelationship)
-public class ThemeAttributeListRelationship: AttributeListValueRelationship {
+public class ThemeAttributeListRelationship: NSManagedObject, AttributeListValueRelationship {
 
 }

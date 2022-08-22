@@ -16,13 +16,23 @@ import OrderedCollections
 ///
 /// - Todo: Document.
 @objc(Project)
-public final class Project: Node, Tree {
+public final class Project: NSManagedObject, Tree {
 
     // MARK: - Life cycle methods
 
     @available(*, unavailable)
-    public override init(_ context: NSManagedObjectContext, name: String) {
-        super.init(context, name: name)
+    public init() {
+        fatalError("init() has not been implemented")
+    }
+
+    @available(*, unavailable)
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+
+    @available(*, unavailable)
+    public init(context moc: NSManagedObjectContext) {
+        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
     }
 
     ///
@@ -40,7 +50,8 @@ public final class Project: Node, Tree {
             parent: Project? = nil,
             @SetBuilder<Project>
             _ children: () -> Set<Project>? = { nil }) {
-        super.init(context, name: name)
+        super.init(entity: Self.entity(in: context)!, insertInto: context)
+        primitiveName = name
 
         if let entries = entries {
             self.entries = entries

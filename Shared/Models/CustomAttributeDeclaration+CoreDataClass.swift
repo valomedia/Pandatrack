@@ -9,7 +9,16 @@
 import Foundation
 import CoreData
 
+// MARK: CustomAttributeDeclaration
+
+///
+/// - Todo: Document.
 @objc(CustomAttributeDeclaration)
-public class CustomAttributeDeclaration: AttributeDeclaration {
+public final class CustomAttributeDeclaration: NSManagedObject, AttributeDeclaration, Node {
+
+
+    // MARK: - Static properties
+
+    public static let pathSeparator: String = "."
 
 }

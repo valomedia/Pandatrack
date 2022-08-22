@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(URLAttributeListDeclaration)
-public class URLAttributeListDeclaration: BuiltinAttributeListDeclaration {
+public class URLAttributeListDeclaration: BuiltinAttributeDeclaration {
 
 }

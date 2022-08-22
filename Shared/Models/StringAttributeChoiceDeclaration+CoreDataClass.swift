@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(StringAttributeChoiceDeclaration)
-public class StringAttributeChoiceDeclaration: BuiltinAttributeChoiceDeclaration {
+public class StringAttributeChoiceDeclaration: BuiltinAttributeDeclaration {
 
 }

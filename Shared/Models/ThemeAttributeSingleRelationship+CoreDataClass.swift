@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(ThemeAttributeSingleRelationship)
-public class ThemeAttributeSingleRelationship: AttributeSingleValueRelationship {
+public class ThemeAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 
 }

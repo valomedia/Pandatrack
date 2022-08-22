@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(PercentageAttributeSingleRelationship)
-public class PercentageAttributeSingleRelationship: AttributeSingleValueRelationship {
+public class PercentageAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 
 }

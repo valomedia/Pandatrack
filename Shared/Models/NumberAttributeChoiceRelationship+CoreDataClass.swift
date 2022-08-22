@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(NumberAttributeChoiceRelationship)
-public class NumberAttributeChoiceRelationship: AttributeChoiceValueRelationship {
+public class NumberAttributeChoiceRelationship: NSManagedObject, AttributeChoiceValueRelationship {
 
 }

@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(CurrencyAttributeSingleDeclaration)
-public class CurrencyAttributeSingleDeclaration: BuiltinAttributeSingleDeclaration {
+public class CurrencyAttributeSingleDeclaration: BuiltinAttributeDeclaration {
 
 }

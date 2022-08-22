@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(URLAttributeChoiceRelationship)
-public class URLAttributeChoiceRelationship: AttributeChoiceValueRelationship {
+public class URLAttributeChoiceRelationship: NSManagedObject, AttributeChoiceValueRelationship {
 
 }

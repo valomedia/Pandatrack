@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(DateAttributeSingleRelationship)
-public class DateAttributeSingleRelationship: AttributeSingleValueRelationship {
+public class DateAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 
 }

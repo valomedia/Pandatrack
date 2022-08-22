@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(ThemeAttributeListDeclaration)
-public class ThemeAttributeListDeclaration: BuiltinAttributeListDeclaration {
+public class ThemeAttributeListDeclaration: BuiltinAttributeDeclaration {
 
 }

@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(URLAttributeListRelationship)
-public class URLAttributeListRelationship: AttributeListValueRelationship {
+public class URLAttributeListRelationship: NSManagedObject, AttributeListValueRelationship {
 
 }

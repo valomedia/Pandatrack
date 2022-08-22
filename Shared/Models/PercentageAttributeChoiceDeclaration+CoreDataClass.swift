@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(PercentageAttributeChoiceDeclaration)
-public class PercentageAttributeChoiceDeclaration: BuiltinAttributeChoiceDeclaration {
+public class PercentageAttributeChoiceDeclaration: BuiltinAttributeDeclaration {
 
 }

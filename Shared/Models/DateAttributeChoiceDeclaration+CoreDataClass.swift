@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(DateAttributeChoiceDeclaration)
-public class DateAttributeChoiceDeclaration: BuiltinAttributeChoiceDeclaration {
+public class DateAttributeChoiceDeclaration: BuiltinAttributeDeclaration {
 
 }

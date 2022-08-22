@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(DateAttributeSingleDeclaration)
-public class DateAttributeSingleDeclaration: BuiltinAttributeSingleDeclaration {
+public class DateAttributeSingleDeclaration: BuiltinAttributeDeclaration {
 
 }

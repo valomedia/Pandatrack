@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(PercentageAttributeChoiceRelationship)
-public class PercentageAttributeChoiceRelationship: AttributeChoiceValueRelationship {
+public class PercentageAttributeChoiceRelationship: NSManagedObject, AttributeChoiceValueRelationship {
 
 }

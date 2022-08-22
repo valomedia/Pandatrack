@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(URLAttributeChoiceDeclaration)
-public class URLAttributeChoiceDeclaration: BuiltinAttributeChoiceDeclaration {
+public class URLAttributeChoiceDeclaration: BuiltinAttributeDeclaration {
 
 }

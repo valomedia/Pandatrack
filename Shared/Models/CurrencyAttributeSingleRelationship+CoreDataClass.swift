@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(CurrencyAttributeSingleRelationship)
-public class CurrencyAttributeSingleRelationship: AttributeSingleValueRelationship {
+public class CurrencyAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 
 }
