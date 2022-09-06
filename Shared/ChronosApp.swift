@@ -50,7 +50,7 @@ struct ChronosApp: App {
             #if DEBUG && targetEnvironment(simulator)
             ContentView_Previews.previews
             #else
-            ContentView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ChronosView().environment(\.managedObjectContext, persistenceController.container.viewContext)
             #endif
         }
     }

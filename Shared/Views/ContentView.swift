@@ -2,10 +2,11 @@
 //  ContentView.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-02-07.
+//  Created by Jean-Pierre Höhmann on 2022-09-06.
 //
 //
 
+import Foundation
 import SwiftUI
 import CoreData
 
@@ -26,6 +27,10 @@ struct ContentView: View {
         return formatter
     }()
 
+    // MARK: - Class methods
+
+    // MARK: - Life cycle methods
+
     // MARK: - Properties
 
     /**
@@ -44,21 +49,20 @@ struct ContentView: View {
                         Text(entry.name)
                     }
                 }
-                .onDelete(perform: deleteEntries)
+                        .onDelete(perform: deleteEntries)
             }
-            .toolbar {
-                #if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                #endif
-                ToolbarItem {
-                    Button(action: addEntry) {
-                        Label("Add Entry", systemImage: "plus")
+                    .toolbar {
+                        #if os(iOS)
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            EditButton()
+                        }
+                        #endif
+                        ToolbarItem {
+                            Button(action: addEntry) {
+                                Label("Add Entry", systemImage: "plus")
+                            }
+                        }
                     }
-                }
-            }
-            Text("Select an item")
         }
     }
 
@@ -104,8 +108,6 @@ struct ContentView: View {
     }
 }
 
-// MARK: ContentView_Previews
-
 /**
  - Todo: Document.
  */
@@ -121,17 +123,4 @@ class ContentView_Previews: PreviewProvider {
             ContentView().environment(\.managedObjectContext, context)
         }
     }
-
-    // MARK: - Methods
-
-    /**
-     - Todo: Document.
-     */
-    #if DEBUG
-    @objc class func injected() {
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        windowScene?.windows.first?.rootViewController =
-                UIHostingController(rootView: ContentView_Previews.previews)
-    }
-    #endif
 }
