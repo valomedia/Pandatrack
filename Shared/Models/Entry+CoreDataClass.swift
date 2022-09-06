@@ -39,19 +39,21 @@ public class Entry: NSManagedObject, Item {
     /// - Parameters:
     ///     - context:
     ///     - name:
-    ///     - interval:
+    ///     - start:
+    ///     - end:
     ///     - project:
     ///     - tags:
     public init(
             _ context: NSManagedObjectContext,
             name: String,
-            interval: DateInterval,
+            start: Date,
+            end: Date? = nil,
             project: Project? = nil,
             tags: Set<Tag>? = nil) {
         super.init(entity: Self.entity(in: context)!, insertInto: context)
         primitiveName = name
-        primitiveStart = interval.start
-        primitiveEnd = interval.end
+        primitiveStart = start
+        primitiveEnd = end
 
         if let project = project {
             self.project = project
@@ -62,15 +64,37 @@ public class Entry: NSManagedObject, Item {
         }
     }
 
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - context:
+    ///     - name:
+    ///     - interval:
+    ///     - project:
+    ///     - tags:
+    public convenience init(
+            _ context: NSManagedObjectContext,
+            name: String,
+            interval: DateInterval,
+            project: Project? = nil,
+            tags: Set<Tag>? = nil) {
+        self.init(context, name: name, start: interval.start, end: interval.end, project: project, tags: tags)
+    }
+
     // MARK: - Properties
 
     public var interval: DateInterval {
         get {
-            DateInterval(start: start, end: end)
+            DateInterval(start: start, end: end ?? Date())
         }
         set {
             start = newValue.start
             end = newValue.end
         }
     }
+
+    public var running: Bool {
+        end == nil
+    }
+
 }
