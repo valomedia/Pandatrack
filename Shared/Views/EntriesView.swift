@@ -29,7 +29,7 @@ struct EntriesView: View {
         List {
             ForEach(entries) { entry in
                 NavigationLink(destination: EntryDetailView(entry: entry)) {
-                    Text(entry.name)
+                    EntryView(entry: entry)
                 }
             }
                     .onDelete(perform: deleteEntries)
@@ -90,13 +90,15 @@ struct EntriesView: View {
     }
 }
 
+// MARK: EntriesView_Previews
+
 /// Undocumented.
 ///
 /// - Todo: Document.
 ///
 class EntriesView_Previews: PreviewProvider {
 
-    // MARK: Static properties
+    // MARK: - Static properties
 
     /// Undocumented.
     ///
