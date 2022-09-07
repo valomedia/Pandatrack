@@ -85,7 +85,6 @@ extension {{ entityClassName }} {
         }
     }
 
-    @objc
     {{ accessModifier }} var {{ attribute.name }}: {{ rawType }}{% if not unwrapOptional %}?{% endif %} {
         get {
             willAccessValue(forKey: "{{ attribute.name }}")
@@ -100,7 +99,7 @@ extension {{ entityClassName }} {
             }
             {% endif %}
 
-            return {{ rawType }}(rawValue: value)
+            return value
         }
         set {
             willChangeValue(forKey: "{{ attribute.name }}")
