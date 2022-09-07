@@ -21,6 +21,7 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
     case purple
     case teal
     case yellow
+    case none
 
     // MARK: - Properties
 
@@ -29,7 +30,7 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
      */
     public var foregroundColor: Color {
         switch self {
-        case .orange, .teal, .yellow:
+        case .orange, .teal, .yellow, .none:
             return .black
         case .indigo, .purple:
             return .white
@@ -53,6 +54,8 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
             return .teal
         case .yellow:
             return .yellow
+        case .none:
+            return .white
         }
     }
 
