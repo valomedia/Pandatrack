@@ -19,15 +19,6 @@ import CoreData
 ///
 struct EntriesView: View {
 
-    // MARK: - Static properties
-
-    private static let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .medium
-        return formatter
-    }()
-
     // MARK: - Properties
 
     /// Undocumented.
@@ -37,12 +28,7 @@ struct EntriesView: View {
     var body: some View {
         List {
             ForEach(entries) { entry in
-                NavigationLink {
-                    VStack {
-                        Text(entry.name)
-                        Text("Item at \(entry.timestamp, formatter: EntriesView.dateFormatter)")
-                    }
-                } label: {
+                NavigationLink(destination: EntryDetailView(entry: entry)) {
                     Text(entry.name)
                 }
             }
