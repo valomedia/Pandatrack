@@ -46,12 +46,14 @@ public final class Project: NSManagedObject, Tree {
     public init(
             _ context: NSManagedObjectContext,
             name: String,
+            theme: Theme? = nil,
             entries: Set<Entry>? = nil,
             parent: Project? = nil,
             @SetBuilder<Project>
             _ children: () -> Set<Project>? = { nil }) {
         super.init(entity: Self.entity(in: context)!, insertInto: context)
         primitiveName = name
+        primitiveTheme = theme
 
         if let entries = entries {
             self.entries = entries
@@ -65,6 +67,16 @@ public final class Project: NSManagedObject, Tree {
             self.children = children
         }
 
+    }
+
+    // MARK: - Methods
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    func resolveTheme() -> Theme? {
+        theme ?? parent?.resolveTheme()
     }
 
 }

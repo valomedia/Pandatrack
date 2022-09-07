@@ -97,4 +97,8 @@ public class Entry: NSManagedObject, Item {
         end == nil
     }
 
+    public var theme: Theme {
+        project?.resolveTheme() ?? Theme.none
+    }
+
 }

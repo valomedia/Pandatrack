@@ -101,7 +101,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Entry" representedClassName="Entry" syncable="YES">
-        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="end" optional="YES" attributeType="Date" valueTransformerName="NSSecureUnarchiveFromV" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="start" attributeType="Date" valueTransformerName="NSSecureUnarchiveFromDataTransformer" usesScalarValueType="NO" customClassName="NSDateInterval"/>
@@ -196,6 +196,11 @@
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="theme" optional="YES" attributeType="String" valueTransformerName="" customClassName="Theme">
+            <userInfo>
+                <entry key="RawType" value="Theme"/>
+            </userInfo>
+        </attribute>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="Project" inverseName="parent" inverseEntity="Project"/>
         <relationship name="currencyAttributeChoiceRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeChoiceRelationship" inverseName="source" inverseEntity="CurrencyAttributeChoiceRelationship"/>
@@ -215,9 +220,6 @@
         <relationship name="stringAttributeChoiceRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeChoiceRelationship" inverseName="source" inverseEntity="StringAttributeChoiceRelationship"/>
         <relationship name="stringAttributeListRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeListRelationship" inverseName="source" inverseEntity="StringAttributeListRelationship"/>
         <relationship name="stringAttributeRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeSingleRelationship" inverseName="source" inverseEntity="StringAttributeSingleRelationship"/>
-        <relationship name="themeAttributeChoiceRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeChoiceRelationship" inverseName="source" inverseEntity="ThemeAttributeChoiceRelationship"/>
-        <relationship name="themeAttributeListRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeListRelationship" inverseName="source" inverseEntity="ThemeAttributeListRelationship"/>
-        <relationship name="themeAttributeRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeSingleRelationship" inverseName="source" inverseEntity="ThemeAttributeSingleRelationship"/>
         <relationship name="urlAttributeChoiceRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeChoiceRelationship" inverseName="source" inverseEntity="URLAttributeChoiceRelationship"/>
         <relationship name="urlAttributeListRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeListRelationship" inverseName="source" inverseEntity="URLAttributeListRelationship"/>
         <relationship name="urlAttributeRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeSingleRelationship" inverseName="source" inverseEntity="URLAttributeSingleRelationship"/>
@@ -274,45 +276,6 @@
         <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="Tag" inverseName="parent" inverseEntity="Tag"/>
         <relationship name="entries" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="tags" inverseEntity="Entry"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" inverseName="children" inverseEntity="Tag"/>
-    </entity>
-    <entity name="ThemeAttributeChoiceDeclaration" representedClassName="ThemeAttributeChoiceDeclaration" parentEntity="BuiltinAttributeDeclaration" syncable="YES">
-        <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[ThemeAttribute]"/>
-        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeChoiceRelationship" inverseName="declaration" inverseEntity="ThemeAttributeChoiceRelationship"/>
-    </entity>
-    <entity name="ThemeAttributeChoiceRelationship" representedClassName="ThemeAttributeChoiceRelationship" syncable="YES">
-        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="ThemeAttribute"/>
-        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="ThemeAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="ThemeAttributeChoiceDeclaration"/>
-        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="themeAttributeChoiceRelationships" inverseEntity="Project"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="source"/>
-                <constraint value="declaration"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
-    </entity>
-    <entity name="ThemeAttributeListDeclaration" representedClassName="ThemeAttributeListDeclaration" parentEntity="BuiltinAttributeDeclaration" syncable="YES">
-        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[ThemeAttribute]"/>
-        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeListRelationship" inverseName="declaration" inverseEntity="ThemeAttributeListRelationship"/>
-    </entity>
-    <entity name="ThemeAttributeListRelationship" representedClassName="ThemeAttributeListRelationship" syncable="YES">
-        <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[ThemeAttribute]"/>
-        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="ThemeAttributeListDeclaration" inverseName="relationships" inverseEntity="ThemeAttributeListDeclaration"/>
-        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="themeAttributeListRelationships" inverseEntity="Project"/>
-    </entity>
-    <entity name="ThemeAttributeSingleDeclaration" representedClassName="ThemeAttributeSingleDeclaration" parentEntity="BuiltinAttributeDeclaration" syncable="YES">
-        <attribute name="defaultValue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="ThemeAttribute"/>
-        <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="ThemeAttributeSingleRelationship" inverseName="declaration" inverseEntity="ThemeAttributeSingleRelationship"/>
-    </entity>
-    <entity name="ThemeAttributeSingleRelationship" representedClassName="ThemeAttributeSingleRelationship" syncable="YES">
-        <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="ThemeAttribute"/>
-        <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="ThemeAttributeSingleDeclaration" inverseName="relationships" inverseEntity="ThemeAttributeSingleDeclaration"/>
-        <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="themeAttributeRelationships" inverseEntity="Project"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="source"/>
-                <constraint value="declaration"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
     </entity>
     <entity name="URLAttributeChoiceDeclaration" representedClassName="URLAttributeChoiceDeclaration" parentEntity="BuiltinAttributeDeclaration" syncable="YES">
         <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[URLAttribute]"/>
@@ -381,7 +344,7 @@
         <element name="PercentageAttributeListRelationship" positionX="2466" positionY="-1998" width="128" height="74"/>
         <element name="PercentageAttributeSingleDeclaration" positionX="2484" positionY="-1998" width="128" height="59"/>
         <element name="PercentageAttributeSingleRelationship" positionX="2439" positionY="-2043" width="128" height="74"/>
-        <element name="Project" positionX="2461.21484375" positionY="-2056.359375" width="128" height="434"/>
+        <element name="Project" positionX="2461.21484375" positionY="-2056.359375" width="128" height="404"/>
         <element name="StringAttributeChoiceDeclaration" positionX="2448" positionY="-1980" width="128" height="59"/>
         <element name="StringAttributeChoiceRelationship" positionX="2448" positionY="-1980" width="128" height="74"/>
         <element name="StringAttributeListDeclaration" positionX="2493" positionY="-1971" width="128" height="59"/>
@@ -389,12 +352,6 @@
         <element name="StringAttributeSingleDeclaration" positionX="2452.21484375" positionY="-2065.359375" width="128" height="59"/>
         <element name="StringAttributeSingleRelationship" positionX="2425.21484375" positionY="-2119.359375" width="128" height="74"/>
         <element name="Tag" positionX="2407.21484375" positionY="-2146.359375" width="128" height="119"/>
-        <element name="ThemeAttributeChoiceDeclaration" positionX="2466" positionY="-1926" width="128" height="59"/>
-        <element name="ThemeAttributeChoiceRelationship" positionX="2493" positionY="-1899" width="128" height="74"/>
-        <element name="ThemeAttributeListDeclaration" positionX="2457" positionY="-1935" width="128" height="59"/>
-        <element name="ThemeAttributeListRelationship" positionX="2484" positionY="-1908" width="128" height="74"/>
-        <element name="ThemeAttributeSingleDeclaration" positionX="2511" positionY="-1881" width="128" height="59"/>
-        <element name="ThemeAttributeSingleRelationship" positionX="2475" positionY="-1917" width="128" height="74"/>
         <element name="URLAttributeChoiceDeclaration" positionX="2493" positionY="-1935" width="128" height="59"/>
         <element name="URLAttributeChoiceRelationship" positionX="2493" positionY="-1935" width="128" height="74"/>
         <element name="URLAttributeListDeclaration" positionX="2466" positionY="-1998" width="128" height="59"/>
