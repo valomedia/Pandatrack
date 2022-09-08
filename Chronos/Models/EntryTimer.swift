@@ -80,33 +80,33 @@ class EntryTimer: ObservableObject {
     ///
     /// - Parameters:
     ///     - entry: The Entry to start tracking.
-    /// - Returns: The Entry that has ended or nil if the Entry was not running or unnamed.
-    func track(_ entry: Entry) -> Entry? {
-        let result = reset()
-
+    /// - Returns: The EntryTimer
+    @discardableResult
+    func track(_ entry: Entry) -> EntryTimer {
+        reset()
         self.entry = entry
         update()
-
-        return result
+        return self
     }
 
-    ///
     /// Reset this EntryTimer.
     ///
-    /// This will stop the clock and reset it to zero for the next entry. It will take the current Entry and return it,
-    /// if it was running and named, removing it from its context (if applicable) and returning nil otherwise.
+    /// This will stop the Entry and reset the clock to zero for the next entry. If there is a running Entry that is
+    /// unnamed, of will be removed from its context (if applicable).
     ///
-    /// - Returns: The Entry that has just ended, or nil if the Entry was not running or unnamed.
-    func reset() -> Entry? {
-        let result: Entry?
-        if let entry = entry, entry.name != "" {
-            result = entry
-        } else {
-            result = nil
+    /// - Returns: The EntryTimer
+    @discardableResult
+    func reset() -> EntryTimer {
+        if let entry = entry {
+            if entry.name == "" {
+                entry.managedObjectContext?.delete(entry)
+            } else {
+                entry.end = Date()
+            }
         }
 
         zero()
-        return result
+        return self
     }
 
     ///
@@ -118,6 +118,7 @@ class EntryTimer: ObservableObject {
     /// - Parameters:
     ///     - timerShouldBeStopped: If `true`, the Timer is stopped if running. Otherwise, it is started if stopped.
     /// - Returns: The EntryTimer
+    @discardableResult
     func setTimer(timerShouldBeStopped: Bool) -> EntryTimer {
         timerShouldBeStopped ? stopTimer() : startTimer()
     }
@@ -129,6 +130,7 @@ class EntryTimer: ObservableObject {
     /// Entry itself is running or not.
     ///
     /// - Returns: The EntryTimer
+    @discardableResult
     func startTimer() -> EntryTimer {
         guard timerStopped else {
             return self
@@ -152,6 +154,7 @@ class EntryTimer: ObservableObject {
     /// screen.
     ///
     /// - Returns: The EntryTimer
+    @discardableResult
     func stopTimer() -> EntryTimer {
         timer?.invalidate()
         timer = nil

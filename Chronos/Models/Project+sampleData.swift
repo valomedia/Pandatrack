@@ -25,14 +25,14 @@ extension Project {
     @SetBuilder<Project>
     public class func sampleData(for context: NSManagedObjectContext) -> Set<Project> {
         Project(context, name: "Business") {
-            Project(context, name: "ACME") {
+            Project(context, name: "ACME", theme: .indigo) {
                 Project(context, name: "Transmogrifier")
                 Project(context, name: "Froobnicator")
             }
-            Project(context, name: "Contoso") {
+            Project(context, name: "Contoso", theme: .orange) {
                 Project(context, name: "Chronos")
             }
-            Project(context, name: "Tailspin Toys")
+            Project(context, name: "Tailspin Toys", theme: .purple)
         }
         Project(context, name: "Private")
     }

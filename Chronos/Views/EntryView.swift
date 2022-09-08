@@ -19,6 +19,23 @@ import CoreData
 ///
 struct EntryView: View {
 
+    // MARK: - Static properties
+
+    private static let briefDateComponentsFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.collapsesLargestUnit = true
+        formatter.unitsStyle = .brief
+        return formatter
+    }()
+
+    private static let fullDateComponentsFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.unitsStyle = .full
+        return formatter
+    }()
+
     // MARK: - Properties
 
     /// Undocumented.
@@ -26,7 +43,21 @@ struct EntryView: View {
     /// - Todo: Document.
     ///
     var body: some View {
-        Text(entry.name)
+        CardView(
+                title: entry.name,
+                theme: entry.theme,
+                labels: (
+                        (Label(entry.project?.name ?? "No Project", systemImage: "at"),
+                                Label(
+                                        Self.briefDateComponentsFormatter.string(from: entry.interval.duration) ?? "",
+                                        systemImage: "hourglass")),
+                        (Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
+                                Label(
+                                        RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "",
+                                        systemImage: "clock"))))
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Entry")
+                .accessibilityValue(entry.name)
     }
 
     /// Undocumented.

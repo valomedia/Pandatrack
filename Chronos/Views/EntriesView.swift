@@ -31,9 +31,11 @@ struct EntriesView: View {
                 NavigationLink(destination: EntryDetailView(entry: entry)) {
                     EntryView(entry: entry)
                 }
+                        .listRowBackground(entry.theme.backgroundColor)
             }
                     .onDelete(perform: deleteEntries)
         }
+                .navigationTitle("Time Entries")
                 .toolbar {
                     #if os(iOS)
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -44,6 +46,12 @@ struct EntriesView: View {
                         Button(action: addEntry) {
                             Label("Add Entry", systemImage: "plus")
                         }
+                                .accessibilityLabel("New Entry")
+                    }
+                }
+                .sheet(isPresented: $isPresentingNewEntryView) {
+                    NavigationView {
+
                     }
                 }
     }
@@ -56,12 +64,16 @@ struct EntriesView: View {
             animation: .default)
     private var entries: FetchedResults<Entry>
 
+    /// Whether the view for creating a new Entry is currently visible
+    ///
+    @State
+    private var isPresentingNewEntryView = false
+
     // MARK: - Methods
 
     private func addEntry() {
         withAnimation {
-            // Todo: Implement.
-            // _ = Item(viewContext, name: "Hello, World!")
+            isPresentingNewEntryView = true
 
             do {
                 try viewContext.save()

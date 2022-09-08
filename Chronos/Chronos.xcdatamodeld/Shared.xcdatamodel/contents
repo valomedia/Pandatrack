@@ -195,7 +195,7 @@
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" attributeType="String"/>
+        <attribute name="name" attributeType="String" minValueString="1"/>
         <attribute name="theme" optional="YES" attributeType="String" valueTransformerName="" customClassName="Theme">
             <userInfo>
                 <entry key="RawType" value="Theme"/>
@@ -271,7 +271,7 @@
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" attributeType="String"/>
+        <attribute name="name" attributeType="String" minValueString="1"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="Tag" inverseName="parent" inverseEntity="Tag"/>
         <relationship name="entries" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="tags" inverseEntity="Entry"/>

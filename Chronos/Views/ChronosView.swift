@@ -42,7 +42,9 @@ class ChronosView_Previews: PreviewProvider {
      */
     static var previews: some View {
         if let context = PersistenceController.preview?.container.viewContext {
-            ChronosView().environment(\.managedObjectContext, context)
+            ChronosView()
+                    .environment(\.managedObjectContext, context)
+                    .environmentObject(EntryTimer())
         }
     }
 
