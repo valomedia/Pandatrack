@@ -19,7 +19,7 @@ extension Bool {
 
     /// Whether this is running in iOS 15 or above.
     ///
-    /// This predicate checks whether the operating system code is running is at least iOS 15 (or macCatalyst 15).
+    /// This predicate checks whether the operating system code is running on is at least iOS 15 (or macCatalyst 15).
     ///
     /// - Todo: Document.
     ///
