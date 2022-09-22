@@ -12,6 +12,6 @@
 # This is a list of files that swiftgen generates.
 #
 
-$(SRCROOT)/Shared/Assets+Generated.swift
-$(SRCROOT)/Shared/CoreData+Generated.swift
-$(SRCROOT)/Shared/Strings+Generated.swift
+$(SRCROOT)/Chronos/Assets+Generated.swift
+$(SRCROOT)/Chronos/CoreData+Generated.swift
+$(SRCROOT)/Chronos/Strings+Generated.swift

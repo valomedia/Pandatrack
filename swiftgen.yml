@@ -14,12 +14,12 @@
 #
 strings:
   inputs:
-    - Shared/Resources/Base.lproj
+    - Chronos/Resources/Base.lproj
   outputs:
-    - templatePath: Shared/Strings.stencil
+    - templatePath: Chronos/Strings.stencil
       params:
         publicAccess: true
-      output: Shared/Strings+Generated.swift
+      output: Chronos/Strings+Generated.swift
 
 # Generate constants for Assets Catalogs
 #
@@ -27,22 +27,22 @@ strings:
 #
 xcassets:
   inputs:
-    - Shared/Assets.xcassets
+    - Chronos/Assets.xcassets
   outputs:
-    - templatePath: Shared/Assets.stencil
+    - templatePath: Chronos/Assets.stencil
       params:
         forceProvidesNamespaces: true
         publicAccess: true
-      output: Shared/Assets+Generated.swift
+      output: Chronos/Assets+Generated.swift
 
 # Generate properties for the CoreData Model.
 #
 coredata:
   inputs:
-    - Shared/Chronos.xcdatamodeld
+    - Chronos/Chronos.xcdatamodeld
   outputs:
-    - templatePath: Shared/CoreData.stencil
+    - templatePath: Chronos/CoreData.stencil
       params:
         generateObjcName: true
         publicAccess: true
-      output: Shared/CoreData+Generated.swift
+      output: Chronos/CoreData+Generated.swift

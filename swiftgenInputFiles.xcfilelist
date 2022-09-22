@@ -16,14 +16,14 @@
 
 $(SRCROOT)/swiftgen.yml
 
-$(SRCROOT)/Shared/Assets.stencil
-$(SRCROOT)/Shared/CoreData.stencil
-$(SRCROOT)/Shared/Strings.stencil
+$(SRCROOT)/Chronos/Assets.stencil
+$(SRCROOT)/Chronos/CoreData.stencil
+$(SRCROOT)/Chronos/Strings.stencil
 
-$(SRCROOT)/Shared/Assets.xcassets/AccentColor.colorset/Contents.json
-$(SRCROOT)/Shared/Assets.xcassets/AppIcon.appiconset/Contents.json
-$(SRCROOT)/Shared/Assets.xcassets/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/AccentColor.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/AppIcon.appiconset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Contents.json
 
-$(SRCROOT)/Shared/Chronos.xcdatamodeld/Shared.xcdatamodel/contents
+$(SRCROOT)/Chronos/Chronos.xcdatamodeld/Shared.xcdatamodel/contents
 
-$(SRCROOT)/Shared/Resources/Base.lproj/Localizable.strings
+$(SRCROOT)/Chronos/Resources/Base.lproj/Localizable.strings
