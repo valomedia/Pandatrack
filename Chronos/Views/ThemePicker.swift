@@ -1,5 +1,5 @@
 //
-//  ThemePickerView.swift
+//  ThemePicker.swift
 //  Chronos
 //
 //  Created by Jean-Pierre Höhmann on 2022-09-08.
