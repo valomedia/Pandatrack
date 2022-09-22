@@ -30,10 +30,12 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
      */
     public var foregroundColor: Color {
         switch self {
-        case .orange, .teal, .yellow, .none:
+        case .orange, .teal, .yellow:
             return .black
         case .indigo, .purple:
             return .white
+        case .none:
+            return .primaryForeground
         }
     }
 
@@ -55,7 +57,7 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
         case .yellow:
             return .yellow
         case .none:
-            return .white
+            return .tertiaryBackground
         }
     }
 
