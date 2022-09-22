@@ -81,6 +81,15 @@ public class Entry: NSManagedObject, Item {
         self.init(context, name: name, start: interval.start, end: interval.end, project: project, tags: tags)
     }
 
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - entry:
+    public convenience init?(continueFrom entry: Entry) {
+        guard let context = entry.managedObjectContext else { return nil }
+        self.init(context, name: entry.name, start: Date(), project: entry.project, tags: entry.tags)
+    }
+
     // MARK: - Properties
 
     public var interval: DateInterval {
