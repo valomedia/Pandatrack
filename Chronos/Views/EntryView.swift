@@ -80,9 +80,7 @@ struct EntryView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        if let entry = Self.entry {
-            EntryView(entry: entry)
-                    .previewLayout(.fixed(width: 400, height: 60))
-        }
+        EntryView(entry: Self.entry)
+                .previewLayout(.fixed(width: 400, height: 60))
     }
 }

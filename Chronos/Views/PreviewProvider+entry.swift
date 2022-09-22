@@ -23,7 +23,7 @@ extension PreviewProvider {
     ///
     /// - Todo: Document.
     ///
-    static var entry: Entry? {
-        try? PersistenceController.preview?.container.viewContext.fetch(Entry.makeFetchRequest()).first
+    static var entry: Entry {
+        try! PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()).first!
     }
 }
