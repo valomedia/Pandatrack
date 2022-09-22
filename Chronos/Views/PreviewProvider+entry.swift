@@ -24,6 +24,6 @@ extension PreviewProvider {
     /// - Todo: Document.
     ///
     static var entry: Entry? {
-        try? PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()).first
+        try? PersistenceController.preview?.container.viewContext.fetch(Entry.makeFetchRequest()).first
     }
 }
