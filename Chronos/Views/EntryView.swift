@@ -60,9 +60,7 @@ struct EntryView: View {
                 .accessibilityValue(entry.name)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
+    /// The Entry being shown.
     ///
     let entry: Entry
 }
@@ -82,7 +80,7 @@ struct EntryView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        if let entry = try? PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()).first {
+        if let entry = Self.entry {
             EntryView(entry: entry)
                     .previewLayout(.fixed(width: 400, height: 60))
         }
