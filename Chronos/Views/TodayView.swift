@@ -1,5 +1,5 @@
 //
-//  EntryTimerDetailView.swift
+//  TodayView.swift
 //  Chronos
 //
 //  Created by Jean-Pierre Höhmann on 2022-09-22.
@@ -11,13 +11,13 @@ import SwiftUI
 import CoreData
 
 
-// MARK: EntryTimerDetailView
+// MARK: TodayView
 
 /// Undocumented.
 ///
 /// - Todo: Document.
 ///
-struct EntryTimerDetailView: View {
+struct TodayView: View {
 
     // MARK: - Properties
 
@@ -29,14 +29,6 @@ struct EntryTimerDetailView: View {
     /// A function to call to start editing the current Entry.
     ///
     let editAction: ()->Void
-
-    /// A function to start a new Entry.
-    ///
-    let startAction: ()->Void
-
-    /// A function to call to write out the Entry when the timer is stopped.
-    ///
-    let stopAction: ()->Void
 
     /// The Theme to use.
     ///
@@ -63,11 +55,7 @@ struct EntryTimerDetailView: View {
                 Circle()
                         .strokeBorder(lineWidth: 24)
                 Spacer()
-                EntryTimerView(
-                        entryTimer: entryTimer,
-                        editAction: editAction,
-                        startAction: startAction,
-                        stopAction: stopAction)
+                EntryTimerView(entryTimer: entryTimer, editAction: editAction)
             }
         }
                 .padding()
@@ -76,13 +64,13 @@ struct EntryTimerDetailView: View {
     }
 }
 
-// MARK: EntryTimerView_Previews
+// MARK: TodayView_Previews
 
 /// Undocumented.
 ///
 /// - Todo: Document.
 ///
-struct EntryTimerView_Previews: PreviewProvider {
+struct TodayView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
@@ -91,15 +79,9 @@ struct EntryTimerView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        let entryTimer = try! EntryTimer.shared.track(
-                PersistenceController.preview!.container.viewContext,
-                continueFrom: Set(PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()))
-                        .first { $0.name == "Take over the world!" }!)
-        return EntryTimerDetailView(
-                editAction: {},
-                startAction: {},
-                stopAction: {})
-                .background(entryTimer.entry?.theme.backgroundColor)
+        TodayView(editAction: {})
+                .environmentObject(ChronosEnvironment.preview!)
+                .background(EntryTimer.shared.entry?.theme.backgroundColor)
                 .previewLayout(.sizeThatFits)
     }
 }

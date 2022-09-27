@@ -29,12 +29,8 @@ struct ChronosView: View {
         ContentView()
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     @EnvironmentObject
-    var environment: ChronosEnvironment
+    private var env: ChronosEnvironment
 }
 
 // MARK: ContentView_Previews
@@ -52,11 +48,9 @@ class ChronosView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        if let context = PersistenceController.preview?.container.viewContext {
-            ChronosView()
-                    .environment(\.managedObjectContext, context)
-                    .environmentObject(ChronosEnvironment.shared)
-        }
+        ChronosView()
+                .environment(\.managedObjectContext, PersistenceController.preview!.container.viewContext)
+                .environmentObject(ChronosEnvironment.preview!)
     }
 
     // MARK: - Methods

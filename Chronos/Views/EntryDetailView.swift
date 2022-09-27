@@ -60,7 +60,7 @@ struct EntryDetailView: View {
     var body: some View {
         List {
             Section(header: Text("Time Entry")) {
-                Button(action: { /* Todo */ }) {
+                Button(action: { env.startEntry(continueFrom: entry) }) {
                     HStack {
                         Label("Continue", systemImage: "timer")
                                 .font(.headline)
@@ -70,6 +70,8 @@ struct EntryDetailView: View {
                                 .accessibilityHidden(true)
                     }
                 }
+                        // Work around for a bug in XCode 14 (FB11278036).
+                        .buttonStyle(.borderless)
                 HStack {
                     Label("Start Time", systemImage: "clock")
                     Spacer()
@@ -156,15 +158,39 @@ struct EntryDetailView: View {
                 }
                 .sheet(isPresented: $isPresentingEditView) {
                     NavigationView {
+                        EntryDetailEditView(entry: $entry)
+                                .navigationTitle(entry.name)
+                                .toolbar {
+                                    ToolbarItem(placement: .cancellationAction) {
+                                        Button("Cancel") {
+                                            isPresentingEditView = false
+                                            entry.managedObjectContext?.rollback()
+                                        }
+                                    }
+                                    ToolbarItem(placement: .confirmationAction) {
+                                        Button("Done") {
+                                            isPresentingEditView = false
+
+                                            do {
+                                                try entry.managedObjectContext?.save()
+                                            } catch let error as NSError {
+                                                // TODO: Replace this implementation with code to handle the error.
+                                                fatalError("Unresolved error \(error), \(error.userInfo)")
+                                            }
+                                        }
+                                    }
+                                }
                     }
                 }
     }
 
-    /// Undocumented.
+    /// The Entry being shown.
     ///
-    /// - Todo: Document.
-    ///
-    let entry: Entry
+    @Binding
+    var entry: Entry
+
+    @EnvironmentObject
+    private var env: ChronosEnvironment
 
     @State
     private var isPresentingEditView = false
@@ -185,8 +211,10 @@ struct EntryDetailView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        if let entry = try? PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()).first {
-            EntryDetailView(entry: entry)
-        }
+        try! EntryDetailView(
+                entry: .constant(
+                        Set(PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()))
+                                .first { $0.name == "Take over the world!" }!))
+                .environmentObject(ChronosEnvironment.preview!)
     }
 }

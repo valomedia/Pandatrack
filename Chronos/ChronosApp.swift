@@ -50,7 +50,7 @@ struct ChronosApp: App {
     /// - Todo: Document.
     ///
     @StateObject
-    private var chronosEnvironment = ChronosEnvironment.shared
+    private var chronosEnvironment = ChronosEnvironment(PersistenceController.shared.container.viewContext)
 
     /**
      - Todo: Document.

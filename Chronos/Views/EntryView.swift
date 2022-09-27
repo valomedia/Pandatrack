@@ -62,7 +62,8 @@ struct EntryView: View {
 
     /// The Entry being shown.
     ///
-    let entry: Entry
+    @ObservedObject
+    var entry: Entry
 }
 
 // MARK: EntryView_Previews

@@ -28,7 +28,7 @@ struct EntriesView: View {
     var body: some View {
         List {
             ForEach(entries) { entry in
-                NavigationLink(destination: EntryDetailView(entry: entry)) {
+                NavigationLink(destination: EntryDetailView(entry: .constant(entry))) {
                     EntryView(entry: entry)
                 }
                         .listRowBackground(entry.theme.backgroundColor)
@@ -59,6 +59,9 @@ struct EntriesView: View {
     @Environment(\.managedObjectContext)
     private var viewContext
 
+    @EnvironmentObject
+    private var env: ChronosEnvironment
+
     @FetchRequest(
             sortDescriptors: [NSSortDescriptor(keyPath: \Entry.timestamp, ascending: true)],
             predicate: NSPredicate(format: "end != nil"),
@@ -75,30 +78,14 @@ struct EntriesView: View {
     private func addEntry() {
         withAnimation {
             isPresentingNewEntryView = true
-
-            do {
-                try viewContext.save()
-            } catch let error as NSError {
-                // TODO: Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this
-                // function in a shipping application, although it may be useful during development.
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
+            env.save()
         }
     }
 
     private func deleteEntries(offsets: IndexSet) {
         withAnimation {
             offsets.map { entries[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch let error as NSError {
-                // TODO: Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this
-                // function in a shipping application, although it may be useful during development.
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
+            env.save()
         }
     }
 }
@@ -118,8 +105,8 @@ class EntriesView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        if let context = PersistenceController.preview?.container.viewContext {
-            EntriesView().environment(\.managedObjectContext, context)
-        }
+        EntriesView()
+                .environment(\.managedObjectContext, PersistenceController.preview!.container.viewContext)
+                .environmentObject(ChronosEnvironment.preview!)
     }
 }

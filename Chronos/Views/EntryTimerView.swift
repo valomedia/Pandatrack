@@ -46,19 +46,8 @@ struct EntryTimerView: View {
     ///
     let editAction: ()->Void
 
-    /// A function to start a new Entry.
-    ///
-    let startAction: ()->Void
-
-    /// A function to call to write out the Entry when the timer is stopped.
-    ///
-    let stopAction: ()->Void
-
-    /// The Theme to use.
-    ///
-    var theme: Theme {
-        entryTimer.entry?.theme ?? Theme.none
-    }
+    @EnvironmentObject
+    private var env: ChronosEnvironment
 
     /// Undocumented.
     ///
@@ -76,24 +65,21 @@ struct EntryTimerView: View {
                         Button(action: editAction) {
                             Image(systemName: "slider.horizontal.3")
                         }
-                                .foregroundColor(theme.foregroundColor)
+                                .foregroundColor(env.theme.foregroundColor)
                                 .accessibilityLabel("Edit running timer")
-                        Button(action: stopAction) {
+                        Button(action: env.stopEntry) {
                             Image(systemName: "stop.fill")
                         }
-                                .foregroundColor(theme.foregroundColor)
+                                .foregroundColor(env.theme.foregroundColor)
                                 .accessibilityLabel("Stop timer")
-                        Button(action: {
-                            stopAction()
-                            startAction()
-                        }) {
+                        Button(action: env.startEntry) {
                             Image(systemName: "forward.end.fill")
                         }
-                                .foregroundColor(theme.foregroundColor)
+                                .foregroundColor(env.theme.foregroundColor)
                                 .accessibilityLabel("Stop timer and start new timer")
                     } else {
                         // Starting a stopped timer will automatically enter edit mode.
-                        Button(action: startAction) {
+                        Button(action: env.startEntry) {
                             Image(systemName: "play.fill")
                         }
                                 .accessibilityLabel("Start timer")
@@ -144,6 +130,8 @@ struct EntryTimerView: View {
         }
                 .frame(height: 60)
                 .padding()
+                .background(env.theme.backgroundColor)
+                .foregroundColor(env.theme.foregroundColor)
     }
 }
 
@@ -162,10 +150,7 @@ struct EntryTimerDetailView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        let _ = try! EntryTimer.shared.track(
-                PersistenceController.preview!.container.viewContext,
-                continueFrom: Set(PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()))
-                        .first { $0.name == "Take over the world!" }!)
-        EntryTimerView(editAction: {}, startAction: {}, stopAction: {})
+        EntryTimerView(editAction: {})
+                .environmentObject(ChronosEnvironment.preview!)
     }
 }

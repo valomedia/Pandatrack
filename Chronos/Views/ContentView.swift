@@ -30,18 +30,12 @@ struct ContentView: View {
             NavigationView {
                 EntriesView()
             }
-            Button(action: { isPresentingEntryTimerView = true }) {
-                EntryTimerView(
-                        editAction: editAction,
-                        startAction: startAction,
-                        stopAction: stopAction)
-                        .background(entryTimer.entry?.project?.theme?.backgroundColor)
-                        .foregroundColor(entryTimer.entry?.project?.theme?.foregroundColor)
-                        .sheet(isPresented: $isPresentingEntryTimerView) {
-                            EntryTimerDetailView(
-                                    editAction: editAction,
-                                    startAction: startAction,
-                                    stopAction: stopAction)
+            Button(action: { isPresentingTodayView = true }) {
+                EntryTimerView(editAction: editAction)
+                        .sheet(isPresented: $isPresentingTodayView) {
+                            TodayView(editAction: editAction)
+                                    .background(env.theme.backgroundColor)
+                                    .foregroundColor(env.theme.foregroundColor)
                         }
                         .sheet(isPresented: $isPresentingEntryTimerDetailEditView) {
                             NavigationView {
@@ -54,6 +48,9 @@ struct ContentView: View {
                 .onDisappear { entryTimer.stopTimer() }
     }
 
+    @EnvironmentObject
+    private var env: ChronosEnvironment
+
     /// The timer for the currently running entry.
     ///
     @ObservedObject
@@ -62,7 +59,7 @@ struct ContentView: View {
     /// Whether the sheet showing the full EntryTimerView is visible.
     ///
     @State
-    private var isPresentingEntryTimerView = false
+    private var isPresentingTodayView = false
 
     /// Whether the sheet showing the EntryTimerDetailEditView is visible.
     ///
@@ -74,34 +71,8 @@ struct ContentView: View {
 
     // MARK: - Methods
 
-    private func startAction() {
-        entryTimer.track(Entry(viewContext, name: "", start: Date()))
-
-        do {
-            try viewContext.save()
-        } catch let error as NSError {
-            // TODO: Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this
-            // function in a shipping application, although it may be useful during development.
-            fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
-    }
-
-    private func stopAction() {
-        entryTimer.reset()
-
-        do {
-            try viewContext.save()
-        } catch let error as NSError {
-            // TODO: Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this
-            // function in a shipping application, although it may be useful during development.
-            fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
-    }
-
     private func editAction() {
-        isPresentingEntryTimerView = false
+        isPresentingTodayView = false
         isPresentingEntryTimerDetailEditView = true
     }
 }
@@ -121,5 +92,6 @@ class ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
                 .environment(\.managedObjectContext, PersistenceController.preview!.container.viewContext)
+                .environmentObject(ChronosEnvironment.preview!)
     }
 }
