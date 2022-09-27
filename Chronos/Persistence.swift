@@ -12,16 +12,18 @@ import CoreData
 
 // MARK: PersistenceController
 
-/**
- TODO Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document
+///
 struct PersistenceController {
 
     // MARK: - Static properties
 
-    /**
-     TODO Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     static let preview: PersistenceController? = {
         #if DEBUG && targetEnvironment(simulator)
         let result = PersistenceController(inMemory: true)
@@ -43,9 +45,10 @@ struct PersistenceController {
         #endif
     }()
 
-    /**
-     TODO Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     static var shared: PersistenceController {
         preview ?? _shared
     }
@@ -54,11 +57,12 @@ struct PersistenceController {
 
     // MARK: - Life cycle methods
 
-    /**
-     TODO Document.
-
-     - Parameter inMemory:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document
+    /// - Parameters:
+    ///     - inMemory:
+    ///
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Chronos")
         if inMemory {
@@ -85,8 +89,8 @@ struct PersistenceController {
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
     let container: NSPersistentContainer
 }

@@ -80,7 +80,9 @@ struct EntryView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        EntryView(entry: Self.entry)
+        try! EntryView(
+                entry: Set(PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()))
+                        .first { $0.name == "Take over the world!" }!)
                 .previewLayout(.fixed(width: 400, height: 60))
     }
 }

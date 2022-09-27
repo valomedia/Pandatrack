@@ -61,6 +61,7 @@ struct EntriesView: View {
 
     @FetchRequest(
             sortDescriptors: [NSSortDescriptor(keyPath: \Entry.timestamp, ascending: true)],
+            predicate: NSPredicate(format: "end != nil"),
             animation: .default)
     private var entries: FetchedResults<Entry>
 

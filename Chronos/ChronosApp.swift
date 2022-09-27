@@ -12,17 +12,19 @@ import SwiftUI
 
 // MARK: ChronosApp
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @main
 struct ChronosApp: App {
 
     // MARK: - Life cycle methods
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     init() {
         #if DEBUG
         var injectionBundlePath = "/Applications/InjectionIII.app/Contents/Resources"
@@ -37,10 +39,18 @@ struct ChronosApp: App {
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     let persistenceController = PersistenceController.shared
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    @StateObject
+    private var chronosEnvironment = ChronosEnvironment.shared
 
     /**
      - Todo: Document.
@@ -50,7 +60,9 @@ struct ChronosApp: App {
             #if DEBUG && targetEnvironment(simulator)
             ContentView_Previews.previews
             #else
-            ChronosView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ChronosView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .environmentObject(chronosEnvironment)
             #endif
         }
     }

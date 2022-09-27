@@ -31,7 +31,23 @@ struct ContentView: View {
                 EntriesView()
             }
             Button(action: { isPresentingEntryTimerView = true }) {
-
+                EntryTimerView(
+                        editAction: editAction,
+                        startAction: startAction,
+                        stopAction: stopAction)
+                        .background(entryTimer.entry?.project?.theme?.backgroundColor)
+                        .foregroundColor(entryTimer.entry?.project?.theme?.foregroundColor)
+                        .sheet(isPresented: $isPresentingEntryTimerView) {
+                            EntryTimerDetailView(
+                                    editAction: editAction,
+                                    startAction: startAction,
+                                    stopAction: stopAction)
+                        }
+                        .sheet(isPresented: $isPresentingEntryTimerDetailEditView) {
+                            NavigationView {
+                                // Todo
+                            }
+                        }
             }
         }
                 .onAppear { entryTimer.startTimer() }
@@ -40,8 +56,8 @@ struct ContentView: View {
 
     /// The timer for the currently running entry.
     ///
-    @EnvironmentObject
-    private var entryTimer: EntryTimer
+    @ObservedObject
+    private var entryTimer = EntryTimer.shared
 
     /// Whether the sheet showing the full EntryTimerView is visible.
     ///
@@ -102,31 +118,8 @@ class ContentView_Previews: PreviewProvider {
     ///
     /// - Todo: Document.
     ///
-    static let context = PersistenceController.preview?.container.viewContext
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    static let entryTimer: EntryTimer? = {
-        guard let context = context else {
-            return nil
-        }
-        let project = try? Set(context.fetch(Project.makeFetchRequest())).first { $0.name == "Private" }
-        let entryTimer = EntryTimer()
-        _ = entryTimer.track(Entry(context, name: "Take over the world", start: Date(), project: project))
-        return entryTimer
-    }()
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
-        if let context = context, let entryTimer = entryTimer {
-            ContentView()
-                    .environment(\.managedObjectContext, context)
-                    .environmentObject(entryTimer)
-        }
+        ContentView()
+                .environment(\.managedObjectContext, PersistenceController.preview!.container.viewContext)
     }
 }

@@ -7,54 +7,61 @@
 //
 
 import Foundation
+import CoreData
 
 
 // MARK: EntryTimer
 
-///
 /// Keeps time for an Entry.
+///
 class EntryTimer: ObservableObject {
 
     // MARK: - Static properties
 
-    // MARK: - Class methods
+    /// The EntryTimer singleton instance.
+    ///
+    static var shared = EntryTimer()
 
     // MARK: - Life cycle methods
 
+    fileprivate init() {
+        zero()
+    }
+
     // MARK: - Properties
 
-    ///
     /// The PomodoroTimer for this entry.
+    ///
     @Published
     var pomodoroTimer: PomodoroTimer?
 
-    ///
     /// The number of seconds the entry has been running for.
+    ///
     @Published
     var secondsElapsed: Int?
 
-    ///
     /// The number of minutes the entry has been running for.
+    ///
     @Published
     var minutesElapsed: Int?
 
-    ///
     /// The number of hours the entry has been running for.
+    ///
     @Published
     var hoursElapsed: Int?
 
-    ///
     /// The elapsed time formatted as hh:mm:ss.
+    ///
     @Published
     var timeElapsedString: String?
 
-    ///
     /// The elapsed time in words.
+    ///
     @Published
     var timeElapsedAccessibilityLabel: String?
 
-    ///
     /// Whether the Timer is currently running.
+    ///
     ///
     /// This will reflect whether the timer is currently active. This only shows whether the EntryTimer is currently
     /// updating its fields and notifying subscribers once per second. It has nothing to do with the state of the
@@ -63,8 +70,8 @@ class EntryTimer: ObservableObject {
     @Published
     var timerStopped = true
 
-    ///
     /// The Entry that is running.
+    ///
     var entry: Entry?
 
     private let frequency = 1.0 / 60.0
@@ -72,44 +79,77 @@ class EntryTimer: ObservableObject {
 
     // MARK: - Methods
 
-    ///
-    /// Start a new Entry.
+    /// Start a given Entry.
     ///
     /// This will stop the current Entry if one is running, removing it from the context if it was unnamed and start
-    // tracking the given Entry.
+    /// tracking the given Entry.
     ///
     /// - Parameters:
     ///     - entry: The Entry to start tracking.
     /// - Returns: The EntryTimer
+    ///
     @discardableResult
     func track(_ entry: Entry) -> EntryTimer {
         reset()
         self.entry = entry
+        pomodoroTimer = PomodoroTimer(startDate: entry.start)
         update()
         return self
     }
 
+    /// Start a new Entry.
+    ///
+    /// This will stop the current Entry if one is running, create a new entry with the given information and start
+    /// tracking.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - context:
+    ///     - name:
+    ///     - start:
+    ///     - project:
+    ///     - tags:
+    /// - Returns: The EntryTimer
+    ///
+    @discardableResult
+    func track(
+            _ context: NSManagedObjectContext,
+            name: String? = nil,
+            start: Date? = nil,
+            project: Project? = nil,
+            tags: Set<Tag>? = nil
+    ) -> EntryTimer {
+        track(Entry(context, name: name, start: start, project: project, tags: tags))
+    }
+
+    /// Continue a given Entry.
+    ///
+    /// This will stop the current Entry if one is running, create a new entry with the given information and start
+    /// tracking.
+    ///
+    /// - Parameters:
+    ///     - context: The NSManagedObjectContext to add the new Entry to
+    ///     - entry: The Entry to continue
+    /// - Returns: The EntryTimer
+    ///
+    @discardableResult
+    func track(_ context: NSManagedObjectContext, continueFrom entry: Entry) -> EntryTimer {
+        track(Entry(context, continueFrom: entry))
+    }
+
     /// Reset this EntryTimer.
     ///
-    /// This will stop the Entry and reset the clock to zero for the next entry. If there is a running Entry that is
-    /// unnamed, of will be removed from its context (if applicable).
+    /// This will stop the Entry and reset the clock to zero for the next entry.
     ///
     /// - Returns: The EntryTimer
+    ///
     @discardableResult
     func reset() -> EntryTimer {
-        if let entry = entry {
-            if entry.name == "" {
-                entry.managedObjectContext?.delete(entry)
-            } else {
-                entry.end = Date()
-            }
-        }
-
+        entry?.end = Date()
         zero()
         return self
     }
 
-    ///
     /// Either start of stop the timer if needed.
     ///
     /// This is a convenience function for automatically calling `startTimer()`, or `stopTimer()` given a boolean
@@ -118,18 +158,19 @@ class EntryTimer: ObservableObject {
     /// - Parameters:
     ///     - timerShouldBeStopped: If `true`, the Timer is stopped if running. Otherwise, it is started if stopped.
     /// - Returns: The EntryTimer
+    ///
     @discardableResult
     func setTimer(timerShouldBeStopped: Bool) -> EntryTimer {
         timerShouldBeStopped ? stopTimer() : startTimer()
     }
 
-    ///
     /// Start counting seconds.
     ///
     /// This will start the timer, notifying every observer once a second. This has nothing to do with whether the
     /// Entry itself is running or not.
     ///
     /// - Returns: The EntryTimer
+    ///
     @discardableResult
     func startTimer() -> EntryTimer {
         guard timerStopped else {
@@ -147,13 +188,13 @@ class EntryTimer: ObservableObject {
         return self
     }
 
-    ///
     /// Stop counting seconds.
     ///
     /// This can be used to stop the Timer again, to prevent pointless churn when the Timer isn't visible anywhere on
     /// screen.
     ///
     /// - Returns: The EntryTimer
+    ///
     @discardableResult
     func stopTimer() -> EntryTimer {
         timer?.invalidate()
@@ -190,5 +231,7 @@ class EntryTimer: ObservableObject {
         hoursElapsed = 0
         timeElapsedString = "00:00:00"
         timeElapsedAccessibilityLabel = "0 hours, 0 minutes, and 0 seconds"
+        pomodoroTimer = nil
+        entry = nil
     }
 }

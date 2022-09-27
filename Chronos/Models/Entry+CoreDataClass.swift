@@ -34,6 +34,7 @@ public class Entry: NSManagedObject, Item {
         super.init(entity: Self.entity(in: moc)!, insertInto: moc)
     }
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
     /// - Parameters:
@@ -43,16 +44,18 @@ public class Entry: NSManagedObject, Item {
     ///     - end:
     ///     - project:
     ///     - tags:
+    ///
     public init(
             _ context: NSManagedObjectContext,
-            name: String,
-            start: Date,
+            name: String? = nil,
+            start: Date? = nil,
             end: Date? = nil,
             project: Project? = nil,
-            tags: Set<Tag>? = nil) {
+            tags: Set<Tag>? = nil
+    ) {
         super.init(entity: Self.entity(in: context)!, insertInto: context)
-        primitiveName = name
-        primitiveStart = start
+        primitiveName = name ?? ""
+        primitiveStart = start ?? Date()
         primitiveEnd = end
 
         if let project = project {
@@ -64,6 +67,7 @@ public class Entry: NSManagedObject, Item {
         }
     }
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
     /// - Parameters:
@@ -72,21 +76,25 @@ public class Entry: NSManagedObject, Item {
     ///     - interval:
     ///     - project:
     ///     - tags:
+    ///
     public convenience init(
             _ context: NSManagedObjectContext,
-            name: String,
-            interval: DateInterval,
+            name: String?,
+            interval: DateInterval?,
             project: Project? = nil,
-            tags: Set<Tag>? = nil) {
-        self.init(context, name: name, start: interval.start, end: interval.end, project: project, tags: tags)
+            tags: Set<Tag>? = nil
+    ) {
+        self.init(context, name: name, start: interval?.start, end: interval?.end, project: project, tags: tags)
     }
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
     /// - Parameters:
+    ///     - context:
     ///     - entry:
-    public convenience init?(continueFrom entry: Entry) {
-        guard let context = entry.managedObjectContext else { return nil }
+    ///
+    public convenience init(_ context: NSManagedObjectContext, continueFrom entry: Entry) {
         self.init(context, name: entry.name, start: Date(), project: entry.project, tags: entry.tags)
     }
 
