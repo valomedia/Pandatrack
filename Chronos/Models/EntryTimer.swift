@@ -72,6 +72,7 @@ class EntryTimer: ObservableObject {
 
     /// The Entry that is running.
     ///
+    @Published
     var entry: Entry?
 
     private let frequency = 1.0 / 60.0
