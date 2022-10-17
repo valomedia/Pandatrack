@@ -12,37 +12,25 @@ import CoreData
 
 // MARK: Tag
 
+/// Undocumented.
 ///
 /// - Todo: Document.
+///
 @objc(Tag)
 public final class Tag: NSManagedObject, Tree {
 
     // MARK: - Life cycle methods
 
-    @available(*, unavailable)
-    public init() {
-        fatalError("init() has not been implemented")
-    }
-
-    @available(*, unavailable)
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertInto: context)
-    }
-
-    @available(*, unavailable)
-    public init(context moc: NSManagedObjectContext) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
-    }
-
     /// Undocumented.
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///   - moc:
-    ///   - name:
-    ///   - entries:
-    ///   - parent:
-    ///   - children:
+    ///     - moc:
+    ///     - name:
+    ///     - entries:
+    ///     - parent:
+    ///     - children:
+    ///
     public init(
             _ moc: NSManagedObjectContext,
             name: String,
@@ -83,4 +71,20 @@ public final class Tag: NSManagedObject, Tree {
             _ children: () -> Set<Tag>? = { nil }) {
         self.init(moc, name: name, entries: nil, parent: parent, children)
     }
+
+    @available(*, unavailable)
+    public init() {
+        fatalError("init() has not been implemented")
+    }
+
+    @available(*, unavailable)
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+
+    @available(*, unavailable)
+    public init(context moc: NSManagedObjectContext) {
+        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
+    }
+
 }

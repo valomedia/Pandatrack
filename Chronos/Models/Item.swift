@@ -16,7 +16,7 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-public protocol Item: Identifiable {
+protocol Item: Identifiable {
 
     // MARK: - Properties
 

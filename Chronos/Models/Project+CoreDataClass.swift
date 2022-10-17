@@ -25,37 +25,6 @@ public final class Project: NSManagedObject, Tree {
     /// Undocumented.
     ///
     /// - Todo: Document.
-    ///
-    @available(*, unavailable)
-    public init() {
-        fatalError("init() has not been implemented")
-    }
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///   - entity:
-    ///   - context:
-    ///
-    @available(*, unavailable)
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertInto: context)
-    }
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameter moc:
-    ///
-    @available(*, unavailable)
-    public init(context moc: NSManagedObjectContext) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
-    }
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
     /// - Parameters:
     ///   - moc:
     ///   - name:
@@ -105,6 +74,21 @@ public final class Project: NSManagedObject, Tree {
             @SetBuilder<Project>
             _ children: () -> Set<Project>? = { nil }) {
         self.init(moc, name: name, theme: nil, entries: nil, parent: parent, children)
+    }
+
+    @available(*, unavailable)
+    public init() {
+        fatalError("init() has not been implemented")
+    }
+
+    @available(*, unavailable)
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+
+    @available(*, unavailable)
+    public init(context moc: NSManagedObjectContext) {
+        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
     }
 
     // MARK: - Methods

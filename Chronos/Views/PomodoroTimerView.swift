@@ -23,8 +23,7 @@ struct PomodoroTimerView: View {
     ///
     /// - Todo: Document.
     ///
-    @StateObject
-    var pomodoroTimer: PomodoroTimer
+    @StateObject var pomodoroTimer: PomodoroTimer
 
     /// Undocumented
     ///
@@ -32,10 +31,6 @@ struct PomodoroTimerView: View {
     ///
     let theme: Theme
 
-    /// Undocumented
-    ///
-    /// - Todo: Document.
-    ///
     var body: some View {
         VStack {
             Text("Pomodoro Timer")
@@ -66,6 +61,7 @@ struct PomodoroTimerView: View {
                 .onAppear { pomodoroTimer.startTimer() }
                 .onDisappear { pomodoroTimer.stopTimer() }
     }
+
 }
 
 // MARK: PomodoroTimerView_Previews
@@ -78,12 +74,9 @@ struct PomodoroTimerView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         PomodoroTimerView(pomodoroTimer: PomodoroTimer(), theme: .yellow)
                 .previewLayout(.sizeThatFits)
     }
+
 }

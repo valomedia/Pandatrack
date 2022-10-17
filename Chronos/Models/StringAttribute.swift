@@ -11,54 +11,54 @@ import Foundation
 
 // MARK: StringAttribute
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(StringAttribute)
 public class StringAttribute: NSObject, BuiltinAttribute {
 
-    // MARK: Keys
-
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public enum Keys: String {
         case id
         case string
     }
 
-    // MARK: Static properties
+    // MARK: - Static properties
 
-    /**
-     - Todo: Document.
-     */
-    public static var supportsSecureCoding: Bool = true
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    public static var supportsSecureCoding = true
 
-    // MARK: Life cycle methods
+    // MARK: - Life cycle methods
 
-    /**
-     - Todo: Document.
-     - Parameters:
-       - string:
-       - id:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - string:
+    ///     - id:
+    ///
     public required init(_ string: String, id: UUID = UUID()) {
         self.string = string
         self.id = id
     }
 
-    /**
-     - Todo: Document.
-     - Parameter mutable:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - mutable:
+    ///
     public convenience init(from mutable: MutableStringAttribute) {
         self.init(mutable.string, id: mutable.id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.string.rawValue) as! String,
@@ -66,70 +66,63 @@ public class StringAttribute: NSObject, BuiltinAttribute {
         )
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(string, forKey: Keys.string.rawValue)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func copy(with zone: NSZone? = nil) -> Any {
         Self(string, id: id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableStringAttribute(from: self)
     }
 
     // MARK: Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let id: UUID
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let string: String
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var value: Any {
         string
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public override var description: String {
         string.description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var localizedDescription: String {
         description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var accessibilityDescription: String {
         localizedDescription
     }
+
 }

@@ -21,10 +21,10 @@ struct EntriesView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
+    /// The Entries being shown by this View.
     ///
-    /// - Todo: Document.
-    ///
+    let entries: AnyRandomAccessCollection<Entry>
+
     var body: some View {
         ForEach(entries) { entry in
             NavigationLink(destination: EntryDetailView(entry: .constant(entry))) {
@@ -38,12 +38,7 @@ struct EntriesView: View {
     @Environment(\.managedObjectContext)
     private var moc
 
-    @EnvironmentObject
-    private var env: ChronosEnvironment
-
-    /// The Entries being shown by this View.
-    ///
-    let entries: AnyRandomAccessCollection<Entry>
+    @EnvironmentObject private var env: ChronosEnvironment
 
     // MARK: - Methods
 
@@ -54,7 +49,9 @@ struct EntriesView: View {
                     .forEach(moc.delete)
         }
     }
+
 }
+
 
 // MARK: EntriesView_Previews
 

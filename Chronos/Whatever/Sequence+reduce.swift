@@ -28,4 +28,5 @@ extension Sequence {
     ) rethrows -> Result {
         try self.reduce(nil, nextPartialResult)!
     }
+
 }

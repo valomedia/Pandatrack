@@ -11,17 +11,17 @@ import Foundation
 
 // MARK: URLAttribute
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(URLAttribute)
 public class URLAttribute: NSObject, BuiltinAttribute {
 
-    // MARK: - Keys
-
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public enum Keys: String {
         case id
         case url
@@ -29,36 +29,32 @@ public class URLAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    /**
-     - Todo: Document.
-     */
-    public static var supportsSecureCoding: Bool = true
+    public static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
-    /**
-     - Todo: Document.
-     - Parameters:
-       - url:
-       - id:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - url:
+    ///     - id:
+    ///
     public required init(_ url: URL, id: UUID = UUID()) {
         self.url = url
         self.id = id
     }
 
-    /**
-     - Todo: Document.
-     - Parameter mutable:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - mutable:
+    ///
     public convenience init(from mutable: MutableURLAttribute) {
         self.init(mutable.url, id: mutable.id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.url.rawValue) as! URL,
@@ -66,70 +62,63 @@ public class URLAttribute: NSObject, BuiltinAttribute {
         )
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(url, forKey: Keys.url.rawValue)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func copy(with zone: NSZone? = nil) -> Any {
         Self(url, id: id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableURLAttribute(from: self)
     }
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let id: UUID
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let url: URL
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var value: Any {
         url
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public override var description: String {
         url.description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var localizedDescription: String {
         description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var accessibilityDescription: String {
         localizedDescription
     }
+
 }

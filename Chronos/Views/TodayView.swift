@@ -21,10 +21,10 @@ struct TodayView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
+    /// The EntryTimer being shown.
     ///
-    /// - Todo: Document.
-    ///
+    @ObservedObject var entryTimer = EntryTimer.shared
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16.0)
@@ -47,11 +47,6 @@ struct TodayView: View {
                 .navigationBarTitleDisplayMode(.inline)
     }
 
-    /// The EntryTimer being shown.
-    ///
-    @ObservedObject
-    var entryTimer = EntryTimer.shared
-
     @Environment(\.managedObjectContext)
     private var moc
 
@@ -64,6 +59,7 @@ struct TodayView: View {
     let editAction: ()->Void
 
 }
+
 
 // MARK: TodayView_Previews
 
@@ -86,4 +82,5 @@ struct TodayView_Previews: PreviewProvider {
                 .background(env.theme.backgroundColor)
                 .previewLayout(.sizeThatFits)
     }
+
 }

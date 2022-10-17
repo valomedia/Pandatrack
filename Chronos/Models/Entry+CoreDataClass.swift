@@ -12,27 +12,14 @@ import CoreData
 
 // MARK: Entry
 
+/// Undocumented.
 ///
 /// - Todo: Document.
+///
 @objc(Entry)
 public class Entry: NSManagedObject, Item {
 
     // MARK: - Life cycle methods
-
-    @available(*, unavailable)
-    public init() {
-        fatalError("init() has not been implemented")
-    }
-
-    @available(*, unavailable)
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertInto: context)
-    }
-
-    @available(*, unavailable)
-    public init(context moc: NSManagedObjectContext) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
-    }
 
     /// Undocumented.
     ///
@@ -98,8 +85,27 @@ public class Entry: NSManagedObject, Item {
         self.init(context, name: entry.name, start: Date(), project: entry.project, tags: entry.tags)
     }
 
+    @available(*, unavailable)
+    public init() {
+        fatalError("init() has not been implemented")
+    }
+
+    @available(*, unavailable)
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+
+    @available(*, unavailable)
+    public init(context moc: NSManagedObjectContext) {
+        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
+    }
+
     // MARK: - Properties
 
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var interval: DateInterval {
         get {
             DateInterval(start: start, end: end ?? Date())
@@ -110,10 +116,18 @@ public class Entry: NSManagedObject, Item {
         }
     }
 
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var running: Bool {
         end == nil
     }
 
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var theme: Theme {
         project?.resolveTheme() ?? Theme.none
     }

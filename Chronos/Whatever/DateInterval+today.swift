@@ -22,4 +22,5 @@ extension DateInterval {
     static var today: DateInterval {
         DateInterval(start: Date.today, end: Date.tomorrow)
     }
+
 }

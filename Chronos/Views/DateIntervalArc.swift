@@ -22,8 +22,6 @@ struct DateIntervalArc: Shape {
 
     private let gap = 2.0
 
-    // MARK: - Static methods
-
     // MARK: - Life cycle methods
 
     /// Draw an arc from two intervals.
@@ -66,4 +64,5 @@ struct DateIntervalArc: Shape {
             }
         }
     }
+
 }

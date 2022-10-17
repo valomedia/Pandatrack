@@ -20,6 +20,10 @@ struct ProjectDetailView: View {
 
     // MARK: - Properties
 
+    /// The Project being shown by this View.
+    ///
+    @Binding var project: Project
+
     var body: some View {
         List {
             ProjectView(project: project)
@@ -35,14 +39,12 @@ struct ProjectDetailView: View {
                 }
     }
 
-    /// The Project being shown by this View.
-    ///
-    @Binding var project: Project
-
     @State private var isPresentingEditView = false
 
     @EnvironmentObject private var env: ChronosEnvironment
+
 }
+
 
 // MARK: ProjectDetailView_Previews
 
@@ -61,4 +63,5 @@ class ProjectDetailView_Previews: PreviewProvider {
                     .environmentObject(env)
         }
     }
+
 }

@@ -38,6 +38,7 @@ struct EntryProjectEditView: View {
 
 }
 
+
 // MARK: EntryProjectEditView_Previews
 
 /// Undocumented.

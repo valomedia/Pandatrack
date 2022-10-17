@@ -19,10 +19,6 @@ import CoreData
 ///
 struct ParentPicker<Entity: NSManagedObject & Tree>: View {
 
-    // MARK: - Static properties
-
-    // MARK: - Static methods
-
     // MARK: - Life cycle methods
 
     /// Undocumented.
@@ -31,12 +27,19 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
     /// - Parameters:
     ///     - entity:
     ///     - content:
+    ///
     init<Content: View>(entity: Binding<Entity>, @ViewBuilder content: @escaping () -> Content) {
         _entity = entity
         self.content = { AnyView(content()) }
     }
 
     // MARK: - Properties
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    @Binding var entity: Entity
 
     var body: some View {
         TreePicker(
@@ -64,8 +67,6 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
             content()
         }
     }
-
-    @Binding var entity: Entity
 
     // MARK: - Methods
 
@@ -100,4 +101,5 @@ class ParentPicker_Previews: PreviewProvider {
         }
                 .environment(\.managedObjectContext, moc)
     }
+
 }

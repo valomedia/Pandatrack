@@ -21,10 +21,11 @@ struct ContentView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
+    var entryTimerView: some View {
+        EntryTimerView(editAction: editAction)
+                .onTapGesture { isPresentingTodayView = true }
+    }
+
     var body: some View {
         TabView {
             VStack(spacing: 0) {
@@ -66,10 +67,13 @@ struct ContentView: View {
                 }
     }
 
-    var entryTimerView: some View {
-        EntryTimerView(editAction: editAction)
-                .onTapGesture { isPresentingTodayView = true }
-    }
+    /// Whether the sheet showing the full EntryTimerView is visible.
+    ///
+    @State private var isPresentingTodayView = false
+
+    /// Whether the sheet showing the EntryTimerDetailEditView is visible.
+    ///
+    @State private var isPresentingEditView = false
 
     /// The timer for the currently running entry.
     ///
@@ -80,14 +84,6 @@ struct ContentView: View {
     @Environment(\.scenePhase)
     private var phase
 
-    /// Whether the sheet showing the full EntryTimerView is visible.
-    ///
-    @State private var isPresentingTodayView = false
-
-    /// Whether the sheet showing the EntryTimerDetailEditView is visible.
-    ///
-    @State private var isPresentingEditView = false
-
     @Environment(\.managedObjectContext)
     private var moc
 
@@ -97,7 +93,11 @@ struct ContentView: View {
         isPresentingTodayView = false
         isPresentingEditView = true
     }
+
 }
+
+
+// MARK: ContentView_Previews
 
 /// Undocumented.
 ///
@@ -116,4 +116,5 @@ class ContentView_Previews: PreviewProvider {
                 .environment(\.managedObjectContext, moc)
                 .environmentObject(env)
     }
+
 }

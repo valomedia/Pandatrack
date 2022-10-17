@@ -21,10 +21,11 @@ struct EntryView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
+    /// The Entry being shown.
     ///
-    /// - Todo: Document.
-    ///
+    @ObservedObject
+    var entry: Entry
+
     var body: some View {
         CardView(
                 title: entry.name,
@@ -44,11 +45,8 @@ struct EntryView: View {
                 .accessibilityValue(entry.name)
     }
 
-    /// The Entry being shown.
-    ///
-    @ObservedObject
-    var entry: Entry
 }
+
 
 // MARK: EntryView_Previews
 

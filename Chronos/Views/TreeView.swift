@@ -68,8 +68,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
 
     /// The binding for the Entity that is selected.
     ///
-    @Binding
-    var entity: Entity?
+    @Binding var entity: Entity?
 
     /// Undocumented.
     ///
@@ -83,16 +82,6 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///
     let content: ((Binding<Entity>) -> AnyView)?
 
-    @Environment(\.managedObjectContext)
-    private var moc
-
-    @State
-    private var subtrees: [Entity] = []
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var body: some View {
             Wrapper {
                 if subtrees.isEmpty {
@@ -154,7 +143,13 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                     }
     }
 
+    @Environment(\.managedObjectContext)
+    private var moc
+
+    @State private var subtrees: [Entity] = []
+
 }
+
 
 // MARK: TreeView_Previews
 
@@ -166,10 +161,6 @@ class TreeView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         Group {
             NavigationView {
@@ -179,4 +170,5 @@ class TreeView_Previews: PreviewProvider {
             }
         }
     }
+
 }

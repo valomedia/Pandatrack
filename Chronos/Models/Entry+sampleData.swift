@@ -13,12 +13,11 @@ import CoreData
 
 // MARK: Entry
 
-// MARK: + sampleData
-
 extension Entry {
 
-    // MARK: - Class methods
+    // MARK: + sampleData
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
     /// - Parameters:
@@ -95,4 +94,5 @@ extension Entry {
                         end:   Calendar.current.date(bySettingHour: 21, minute: 00, second: 00, of: Date.yesterday)!),
                 project: projects.first { $0.name == "Private" })
     }
+
 }

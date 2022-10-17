@@ -11,6 +11,8 @@ import CoreData
 
 // MARK: AttributeRelationship
 
+/// Undocumented.
 ///
 /// - Todo: Document.
-public protocol AttributeRelationship {}
+///
+protocol AttributeRelationship {}

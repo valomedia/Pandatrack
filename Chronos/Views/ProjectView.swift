@@ -25,10 +25,6 @@ struct ProjectView: View {
     ///
     @ObservedOptionalObject var project: Project?
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var body: some View {
         VStack {
             HStack {
@@ -57,7 +53,9 @@ struct ProjectView: View {
             }
         }
     }
+
 }
+
 
 // MARK: ProjectView_Previews
 

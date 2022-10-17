@@ -16,7 +16,7 @@ import CoreData
 ///
 /// - Todo: Document
 ///
-public protocol Entity {
+protocol Entity {
     associatedtype FetchRequestResultType: NSFetchRequestResult
 
     // MARK: - Static properties
@@ -45,9 +45,4 @@ public protocol Entity {
     ///
     static func makeFetchRequest() -> NSFetchRequest<FetchRequestResultType>
 
-    // MARK: - Life cycle methods
-
-    // MARK: - Properties
-
-    // MARK: - Methods
 }

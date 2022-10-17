@@ -11,66 +11,63 @@ import Foundation
 
 // MARK: MutableNumberAttribute
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(MutableNumberAttribute)
 public class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: Life cycle methods
 
-    /**
-     - Todo: Document.
-     - Parameters:
-       - number:
-       - id:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - number:
+    ///     - id:
+    ///
     public required init(_ number: Double, id: UUID) {
         self.number = number
         self.id = id
     }
 
-    /**
-     - Todo: Document.
-     - Parameter immutable:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - immutable:
+    ///
     public convenience init(from immutable: NumberAttribute) {
         self.init(immutable.number, id: immutable.id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func copy(with zone: NSZone? = nil) -> Any {
         NumberAttribute(from: self)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func mutableCopy(with zone: NSZone? = nil) -> Any {
         Self(number, id: id)
     }
 
     // MARK: Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var id: UUID
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var number: Double
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var value: Any {
         get {
             number
@@ -80,27 +77,31 @@ public class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
         }
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public override var description: String {
         // TODO Replace this with a more efficient solution.
         NumberAttribute(from: self).description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var localizedDescription: String {
         // TODO Replace this with a more efficient solution.
         NumberAttribute(from: self).localizedDescription
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var accessibilityDescription: String {
         // TODO Replace this with a more efficient solution.
         NumberAttribute(from: self).accessibilityDescription
     }
+
 }

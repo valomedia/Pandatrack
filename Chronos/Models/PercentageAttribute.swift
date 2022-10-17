@@ -11,17 +11,17 @@ import Foundation
 
 // MARK: PercentageAttribute
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(PercentageAttribute)
 public class PercentageAttribute: NSObject, BuiltinAttribute {
 
-    // MARK: - Keys
-
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public enum Keys: String {
         case id
         case percentage
@@ -29,36 +29,36 @@ public class PercentageAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    /**
-     - Todo: Document.
-     */
-    public static var supportsSecureCoding: Bool = true
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    public static var supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
-    /**
-     - Todo: Document.
-     - Parameters:
-       - percentage:
-       - id:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - percentage:
+    ///     - id:
+    ///
     public required init(_ percentage: Int, id: UUID = UUID()) {
         self.percentage = percentage
         self.id = id
     }
 
-    /**
-     - Todo: Document.
-     - Parameter mutable:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - mutable:
+    ///
     public convenience init(from mutable: MutablePercentageAttribute) {
         self.init(mutable.percentage, id: mutable.id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeInteger(forKey: Keys.percentage.rawValue),
@@ -66,62 +66,53 @@ public class PercentageAttribute: NSObject, BuiltinAttribute {
         )
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(percentage, forKey: Keys.percentage.rawValue)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func copy(with zone:NSZone? = nil) -> Any {
         Self(percentage, id: id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutablePercentageAttribute(from: self)
     }
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let id: UUID
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let percentage: Int
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var value: Any {
         percentage
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public override var description: String {
         "\(percentage)%"
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var localizedDescription: String {
         if #available(macCatalyst 15.0, iOS 15.0, *) {
             return percentage.formatted(.percent)
@@ -131,10 +122,12 @@ public class PercentageAttribute: NSObject, BuiltinAttribute {
         }
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var accessibilityDescription: String {
         localizedDescription
     }
+
 }

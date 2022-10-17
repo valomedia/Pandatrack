@@ -9,4 +9,11 @@
 import Foundation
 import CoreData
 
-public protocol AttributeReferenceRelationship: AttributeRelationship {}
+
+// MARK: AttributeReferenceRelationship
+
+/// Undocumented.
+///
+/// - Todo: Document.
+///
+protocol AttributeReferenceRelationship: AttributeRelationship {}

@@ -16,7 +16,7 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-public protocol Tree: Node, Item, Entity, NSFetchRequestResult {
+protocol Tree: Node, Item, Entity, NSFetchRequestResult {
 
     // MARK: - Static methods
 
@@ -28,6 +28,10 @@ public protocol Tree: Node, Item, Entity, NSFetchRequestResult {
 
     // MARK: - Life cycle methods
 
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     init(_ moc: NSManagedObjectContext, name: String, parent: Self?, _ children: () -> Set<Self>?)
 
     // MARK: - Properties
@@ -43,6 +47,7 @@ public protocol Tree: Node, Item, Entity, NSFetchRequestResult {
     /// - Todo: Document.
     ///
     var children: Set<Self> { get set }
+
 }
 
 extension Tree {
@@ -65,4 +70,5 @@ extension Tree {
                     ?? Self(moc, name: element, parent: result) { nil }
         }
     }
+
 }

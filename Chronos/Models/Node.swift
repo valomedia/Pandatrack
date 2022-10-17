@@ -15,7 +15,7 @@ import Foundation
 ///
 /// - Todo: Document.
 ///
-public protocol Node: Hashable {
+protocol Node: Hashable {
 
     // MARK: - Static properties
 
@@ -47,7 +47,6 @@ public protocol Node: Hashable {
 
 }
 
-
 extension Node {
 
     // MARK: + pathSeparator
@@ -69,5 +68,6 @@ extension Node {
     public var path: String {
         [ parent?.path, Self.pathSeparator, name ].compactMap({ $0 }).joined()
     }
+
 }
 

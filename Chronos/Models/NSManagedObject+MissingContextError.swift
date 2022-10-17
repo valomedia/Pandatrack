@@ -20,5 +20,6 @@ extension NSManagedObject {
     ///
     /// - Todo: Document.
     ///
-    struct MissingContextError : Error {}
+    public struct MissingContextError : Error {}
+
 }

@@ -22,14 +22,7 @@ struct EntryTagsEditView: View {
 
     /// The Set of Tags being edited.
     ///
-    @Binding
-    var tags: Set<Tag>
-
-    @Environment(\.managedObjectContext)
-    private var moc
-
-    @State
-    private var newTagPath = ""
+    @Binding var tags: Set<Tag>
 
     var body: some View {
         ForEach(tags.sorted(by: \.path)) { tag in
@@ -54,6 +47,12 @@ struct EntryTagsEditView: View {
         }
     }
 
+    @Environment(\.managedObjectContext)
+    private var moc
+
+    @State
+    private var newTagPath = ""
+
     // MARK: - Methods
 
     private func addTag() {
@@ -72,9 +71,18 @@ struct EntryTagsEditView: View {
                     .forEach(moc.delete)
         }
     }
+
 }
 
+
+// MARK: TagsEditView_Previews
+
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 struct TagsEditView_Previews: PreviewProvider {
+
     static var previews: some View {
         NavigationView {
             List {
@@ -83,4 +91,5 @@ struct TagsEditView_Previews: PreviewProvider {
             }
         }
     }
+
 }

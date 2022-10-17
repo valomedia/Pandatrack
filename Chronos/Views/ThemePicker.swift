@@ -24,13 +24,8 @@ struct ThemePicker: View {
     ///
     /// - Todo: Document.
     ///
-    @Binding
-    var selection: Theme?
+    @Binding var selection: Theme?
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var body: some View {
         HStack {
             Image(systemName: "paintpalette")
@@ -45,7 +40,9 @@ struct ThemePicker: View {
                     .pickerStyle(.menu)
         }
     }
+
 }
+
 
 // MARK: ThemePicker_Previews
 
@@ -57,10 +54,6 @@ struct ThemePicker_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         NavigationView {
             Form {
@@ -70,4 +63,5 @@ struct ThemePicker_Previews: PreviewProvider {
             }
         }
     }
+
 }

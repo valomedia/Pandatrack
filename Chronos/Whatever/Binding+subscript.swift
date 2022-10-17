@@ -19,7 +19,9 @@ extension Binding {
     subscript<WrappedValue, WrappedSubject>(_ keyPath: WritableKeyPath<WrappedValue, WrappedSubject>)
 			-> Binding<WrappedSubject?> where Value == WrappedValue? {
 		.init(
-				get: { wrappedValue?[keyPath: keyPath] },
+				get: {
+					wrappedValue?[keyPath: keyPath]
+				},
 				set: { newValue in
 					if let newValue = newValue {
 						wrappedValue?[keyPath: keyPath] = newValue

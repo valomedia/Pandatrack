@@ -49,7 +49,6 @@ class ChronosUITestsLaunchTests: XCTestCase {
     ///
     override func tearDownWithError() throws {}
 
-
     // MARK: - Tests
 
     /// Take a screenshot.
@@ -67,4 +66,5 @@ class ChronosUITestsLaunchTests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
     }
+
 }

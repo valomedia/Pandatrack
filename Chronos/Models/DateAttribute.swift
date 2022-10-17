@@ -11,17 +11,17 @@ import Foundation
 
 // MARK: DateAttribute
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(DateAttribute)
 public class DateAttribute: NSObject, BuiltinAttribute {
 
-    // MARK: - Keys
-
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     enum Keys: String {
         case id
         case date
@@ -30,20 +30,22 @@ public class DateAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    /**
-     - Todo: Document.
-     */
-    public static var supportsSecureCoding: Bool = true
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    public static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
-    /**
-     - Todo: Document.
-     - Parameters:
-       - date:
-       - showTime:
-       - id:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - date:
+    ///     - showTime:
+    ///     - id:
+    ///
     public required init(_ date: Date, showTime: Bool = false, id: UUID = UUID()) {
         self.date = date
         self.showTime = showTime
@@ -60,18 +62,16 @@ public class DateAttribute: NSObject, BuiltinAttribute {
         self.accessibilityFormatter = accessibilityFormatter
     }
 
-    /**
-     - Todo: Document.
-     - Parameter mutable:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - mutable:
+    ///
     public convenience init(from mutable: MutableDateAttribute) {
         self.init(mutable.date, id: mutable.id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.date.rawValue) as! Date,
@@ -80,79 +80,73 @@ public class DateAttribute: NSObject, BuiltinAttribute {
         )
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(date, forKey: Keys.date.rawValue)
         coder.encode(showTime, forKey: Keys.showTime.rawValue)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func copy(with zone: NSZone? = nil) -> Any {
         Self(date, showTime: showTime, id: id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableDateAttribute(from: self)
     }
 
     // MARK: Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let id: UUID
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let date: Date
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let showTime: Bool
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var value: Any {
         date
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public override var description: String {
         date.description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var localizedDescription: String {
         formatter.string(from: date)
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var accessibilityDescription: String {
         accessibilityFormatter.string(from: date)
     }
 
     private let formatter: DateFormatter
     private let accessibilityFormatter: DateFormatter
+
 }

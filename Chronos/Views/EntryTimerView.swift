@@ -46,13 +46,6 @@ struct EntryTimerView: View {
     ///
     let editAction: ()->Void
 
-    @EnvironmentObject
-    private var env: ChronosEnvironment
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var body: some View {
         VStack {
             HStack {
@@ -135,7 +128,12 @@ struct EntryTimerView: View {
                 .background(env.theme.backgroundColor)
                 .foregroundColor(env.theme.foregroundColor)
     }
+
+    @EnvironmentObject
+    private var env: ChronosEnvironment
+
 }
+
 
 // MARK: EntryTimerView_Previews
 
@@ -156,4 +154,5 @@ struct EntryTimerView_Previews: PreviewProvider {
                 .environmentObject(env)
                 .previewLayout(.sizeThatFits)
     }
+
 }

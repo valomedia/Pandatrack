@@ -24,6 +24,10 @@ import SwiftUI
 ///
 func ??<Value>(left: Binding<Optional<Value>>, right: @escaping @autoclosure () -> Value) -> Binding<Value> {
     Binding(
-            get: { left.wrappedValue ?? right() },
-            set: { left.wrappedValue = $0 })
+            get: {
+                left.wrappedValue ?? right()
+            },
+            set: { newValue in
+                left.wrappedValue = newValue
+            })
 }

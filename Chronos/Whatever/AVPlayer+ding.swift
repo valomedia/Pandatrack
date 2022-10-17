@@ -12,9 +12,9 @@ import AVFoundation
 
 // MARK: AVPlayer
 
-// MARK: + ding
-
 extension AVPlayer {
+
+    // MARK: + ding
 
     /// An AVPlayer for a clear sound of a bell.
     ///
@@ -26,4 +26,5 @@ extension AVPlayer {
         }
         return AVPlayer(url: url)
     }()
+
 }

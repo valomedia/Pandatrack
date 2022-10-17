@@ -27,12 +27,19 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     /// - Parameters:
     ///     - entity:
     ///     - content:
+    ///
     init<Content: View>(entity: Binding<Entity?>, @ViewBuilder content: @escaping () -> Content) {
         _entity = entity
         self.content = { AnyView(content()) }
     }
 
     // MARK: - Properties
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document
+    ///
+    @Binding var entity: Entity?
 
     var body: some View {
         NavigationLink(
@@ -49,17 +56,7 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
-    @Binding var entity: Entity?
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
-    @State var isPresentingTreePicker = false
+    @State private var isPresentingTreePicker = false
 
     // MARK: - Methods
 
@@ -70,6 +67,7 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     var content: () -> AnyView
 
 }
+
 
 // MARK: TreePicker_Previews
 
@@ -93,4 +91,5 @@ class TreePicker_Previews: PreviewProvider {
         }
                 .environment(\.managedObjectContext, moc)
     }
+
 }

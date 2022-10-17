@@ -9,4 +9,11 @@
 import Foundation
 import CoreData
 
-public protocol AttributeChoiceValueRelationship: AttributeValueRelationship {}
+
+// MARK: AttributeChoiceValueRelationship
+
+/// Undocumented.
+///
+/// - Todo: Document.
+///
+protocol AttributeChoiceValueRelationship: AttributeValueRelationship {}

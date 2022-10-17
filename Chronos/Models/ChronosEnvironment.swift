@@ -47,9 +47,6 @@ class ChronosEnvironment: ObservableObject {
 
     // MARK: - Properties
 
-    private var ctx: NSManagedObjectContext
-    private var scheduledSaveAction: DispatchWorkItem?
-
     /// The Theme to use.
     ///
     var theme: Theme {
@@ -68,6 +65,9 @@ class ChronosEnvironment: ObservableObject {
     /// - Todo: Document
     ///
     @Published var errorWrapper: ErrorWrapper?
+
+    private var ctx: NSManagedObjectContext
+    private var scheduledSaveAction: DispatchWorkItem?
 
     // MARK: - Methods
 
@@ -141,8 +141,7 @@ class ChronosEnvironment: ObservableObject {
     ///     - entry:
     /// - Returns:
     ///
-    @discardableResult
-    func startEntry(continueFrom entry: Entry?) -> Entry {
+    @discardableResult func startEntry(continueFrom entry: Entry?) -> Entry {
         let entry = Entry(
                 ctx,
                 name: entry?.name ?? "",
@@ -159,8 +158,7 @@ class ChronosEnvironment: ObservableObject {
     /// - Todo: Document.
     /// - Returns:
     ///
-    @discardableResult
-    func startEntry() -> Entry {
+    @discardableResult func startEntry() -> Entry {
         startEntry(continueFrom: nil)
     }
 
@@ -169,8 +167,7 @@ class ChronosEnvironment: ObservableObject {
     /// - Todo: Document
     /// - Returns:
     ///
-    @discardableResult
-    func stopEntry() -> Entry? {
+    @discardableResult func stopEntry() -> Entry? {
         let entry = EntryTimer.shared.entry
         EntryTimer.shared.reset()
         save()

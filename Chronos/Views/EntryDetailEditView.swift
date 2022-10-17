@@ -32,8 +32,7 @@ struct EntryDetailEditView: View {
 
     /// The Entry being modified.
     ///
-    @Binding
-    var entry: Entry
+    @Binding var entry: Entry
 
     var body: some View {
         Form {
@@ -64,7 +63,9 @@ struct EntryDetailEditView: View {
             }
         }
     }
+
 }
+
 
 // MARK: EntryDetailEditView_Previews
 
@@ -87,4 +88,5 @@ struct EntryDetailEditView_Previews: PreviewProvider {
                             Set(moc.fetch(Entry.makeFetchRequest())).first { $0.name == "Take over the world" }!))
         }
     }
+
 }

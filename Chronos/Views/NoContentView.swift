@@ -44,12 +44,8 @@ struct NoContentView: View {
     ///
     let caption: String
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     var body: some View {
-        Wrapper{
+        Wrapper {
             VStack {
                 if let image = image {
                     image
@@ -75,6 +71,7 @@ struct NoContentView: View {
     // MARK: - Methods
 }
 
+
 // MARK: NoContentView_Previews
 
 /// Undocumented.
@@ -85,10 +82,6 @@ class NoContentView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var previews: some View {
         NoContentView(
                 title: "Lorem Ipsum",

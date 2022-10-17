@@ -22,16 +22,8 @@ struct ProjectDetailEditView: View {
 
     /// The Project being modified.
     ///
-    @Binding
-    var project: Project
+    @Binding var project: Project
 
-    @FetchRequest()
-    private var projects: FetchedResults<Project>
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var body: some View {
         Form {
             Section("Project") {
@@ -49,7 +41,12 @@ struct ProjectDetailEditView: View {
             }
         }
     }
+
+    @FetchRequest()
+    private var projects: FetchedResults<Project>
+
 }
+
 
 // MARK: ProjectDetailEditView_Previews
 
@@ -72,4 +69,5 @@ class ProjectDetailEditView_Previews: PreviewProvider {
                     .environment(\.managedObjectContext, moc)
         }
     }
+
 }

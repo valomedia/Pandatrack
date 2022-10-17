@@ -53,6 +53,7 @@ struct EntriesTab: View {
 
 }
 
+
 // MARK: EntriesTab_Previews
 
 /// Undocumented.
@@ -71,4 +72,5 @@ class EntriesTab_Previews: PreviewProvider {
             EntriesTab()
         }
     }
+
 }

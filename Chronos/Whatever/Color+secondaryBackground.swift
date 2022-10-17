@@ -12,15 +12,14 @@ import SwiftUI
 
 // MARK: Color
 
-// MARK: + secondaryBackground
-
 extension Color {
 
-    // MARK: - Static properties
+    // MARK: + secondaryBackground
 
     /// The color for text secondaryBackgrounds that contain primary content.
     ///
     static var secondaryBackground: Color {
         Color(UIColor.secondarySystemBackground)
     }
+
 }

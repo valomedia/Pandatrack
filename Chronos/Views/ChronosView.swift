@@ -21,10 +21,6 @@ struct ChronosView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var body: some View {
         ContentView()
                 .sheet(item: $env.errorWrapper) { wrapper in
@@ -37,9 +33,6 @@ struct ChronosView: View {
     @ObservedObject private var entryTimer = EntryTimer.shared
 
     @EnvironmentObject private var env: ChronosEnvironment
-
-    @Environment(\.scenePhase)
-    private var phase
 
 }
 

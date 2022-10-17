@@ -11,17 +11,17 @@ import Foundation
 
 // MARK: CurrencyAttribute
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(CurrencyAttribute)
 public class CurrencyAttribute: NSObject, BuiltinAttribute {
 
-    // MARK: - Keys
-
-    /**
-     - Todo: Document
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     enum Keys: String {
         case id
         case currency
@@ -29,36 +29,32 @@ public class CurrencyAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    /**
-     - Todo: Document
-     */
-    public static var supportsSecureCoding: Bool = true
+    public static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
-    /**
-     - Todo: Document.
-     - Parameters:
-       - currency:
-       - id:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - currency:
+    ///     - id:
+    ///
     public required init(_ currency: Currency, id: UUID = UUID()) {
         self.currency = currency
         self.id = id
     }
 
-    /**
-     - Todo: Document.
-     - Parameter mutable:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - mutable:
+    ///
     public convenience init(from mutable: MutableCurrencyAttribute) {
         self.init(mutable.currency, id: mutable.id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.currency.rawValue) as! Currency,
@@ -66,70 +62,63 @@ public class CurrencyAttribute: NSObject, BuiltinAttribute {
         )
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(currency, forKey: Keys.currency.rawValue)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func copy(with zone: NSZone? = nil) -> Any {
         Self(currency, id: id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableCurrencyAttribute(from: self)
     }
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let id: UUID
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let currency: Currency
 
-    /**
-     - Todo: Document
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var value: Any {
         currency
     }
 
-    /**
-     - Todo: Document
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public override var description: String {
         currency.description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var localizedDescription: String {
         description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var accessibilityDescription: String {
         localizedDescription
     }
+
 }

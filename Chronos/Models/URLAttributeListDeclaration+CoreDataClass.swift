@@ -9,7 +9,31 @@
 import Foundation
 import CoreData
 
+
+// MARK: URLAttributeListDeclaration
+
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(URLAttributeListDeclaration)
 public class URLAttributeListDeclaration: BuiltinAttributeDeclaration {
+
+    // MARK: - Life cycle methods
+
+    @available(*, unavailable)
+    public init() {
+        fatalError("init() has not been implemented")
+    }
+
+    @available(*, unavailable)
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+
+    @available(*, unavailable)
+    public override init(context moc: NSManagedObjectContext) {
+        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
+    }
 
 }

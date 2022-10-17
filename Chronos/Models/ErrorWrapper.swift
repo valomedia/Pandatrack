@@ -17,12 +17,6 @@ import Foundation
 ///
 struct ErrorWrapper: Identifiable {
 
-    // MARK: - Static properties
-
-    // MARK: - Static methods
-
-    // MARK: - Life cycle methods
-
     // MARK: - Properties
 
     /// Undocumented.
@@ -43,5 +37,4 @@ struct ErrorWrapper: Identifiable {
     ///
     let guidance: String
 
-    // MARK: - Methods
 }

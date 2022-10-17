@@ -25,4 +25,5 @@ extension Bool {
     func then<Value>(_ value: Value) -> Optional<Value> {
         self ? value : nil
     }
+
 }

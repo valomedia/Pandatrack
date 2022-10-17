@@ -12,11 +12,9 @@ import SwiftUI
 
 // MARK: View
 
-// MARK: + ifNotNil
-
 extension View {
 
-    // MARK: - Methods
+    // MARK: + ifNotNil
 
     /// Applies the given transform if the given optional is not nil.
     ///
@@ -34,4 +32,5 @@ extension View {
             self
         }
     }
+
 }

@@ -24,10 +24,6 @@ struct TagsView: View {
     ///
     let tags: AnyRandomAccessCollection<Tag>
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var body: some View {
         ForEach(tags) { tag in
             Label(tag.path, systemImage: "number")
@@ -35,6 +31,7 @@ struct TagsView: View {
     }
 
 }
+
 
 // MARK: TagsView_Previews
 
@@ -46,10 +43,6 @@ class TagsView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         NavigationView {
             List {

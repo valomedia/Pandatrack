@@ -11,17 +11,17 @@ import Foundation
 
 // MARK: NumberAttribute
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(NumberAttribute)
 public class NumberAttribute: NSObject, BuiltinAttribute {
 
-    // MARK: - Keys
-
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     enum Keys: String {
         case id
         case number
@@ -29,36 +29,36 @@ public class NumberAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    /**
-     - Todo: Document.
-     */
-    public static var supportsSecureCoding: Bool = true
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    public static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
-    /**
-     - Todo: Document.
-     - Parameters:
-       - number:
-       - id:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - number:
+    ///     - id:
+    ///
     public required init(_ number: Double, id: UUID = UUID()) {
         self.number = number
         self.id = id
     }
 
-    /**
-     - Todo: Document.
-     - Parameter mutable:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - mutable:
+    ///
     public convenience init(from mutable: MutableNumberAttribute) {
         self.init(mutable.number, id: mutable.id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.number.rawValue) as! Double,
@@ -66,62 +66,53 @@ public class NumberAttribute: NSObject, BuiltinAttribute {
         )
     }
 
-    /**
-     - Todo: Document.
-     - Parameter coder:
-     */
     public func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(number, forKey: Keys.number.rawValue)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func copy(with zone: NSZone? = nil) -> Any {
         Self(number, id: id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableNumberAttribute(from: self)
     }
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let id: UUID
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public let number: Double
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var value: Any {
         number
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public override var description: String {
         number.description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var localizedDescription: String {
         if #available(macCatalyst 15.0, iOS 15.0, *) {
             return number.formatted(.number)
@@ -131,10 +122,12 @@ public class NumberAttribute: NSObject, BuiltinAttribute {
         }
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var accessibilityDescription: String {
         localizedDescription
     }
+
 }

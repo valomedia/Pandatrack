@@ -9,5 +9,11 @@
 import Foundation
 import CoreData
 
-public protocol AttributeDeclaration {
-}
+
+// MARK: AttributeDeclaration
+
+/// Undocumented.
+///
+/// - Todo: Document.
+///
+protocol AttributeDeclaration {}

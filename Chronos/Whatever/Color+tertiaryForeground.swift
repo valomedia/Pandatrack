@@ -12,15 +12,14 @@ import SwiftUI
 
 // MARK: Color
 
-// MARK: + tertiaryForeground
-
 extension Color {
 
-    // MARK: - Static properties
+    // MARK: + tertiaryForeground
 
     /// The color for text labels that contain tertiary content.
     ///
     static var tertiaryForeground: Color {
         Color(UIColor.tertiaryLabel)
     }
+
 }

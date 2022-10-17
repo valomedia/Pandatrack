@@ -26,10 +26,6 @@ struct ThemeView: View {
     ///
     let theme: Theme
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 4)
@@ -42,7 +38,9 @@ struct ThemeView: View {
                 .foregroundColor(theme.foregroundColor)
                 .fixedSize(horizontal: true, vertical: true)
     }
+
 }
+
 
 // MARK: ThemeView_Previews
 
@@ -54,12 +52,9 @@ struct ThemeView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         ThemeView(theme: .yellow)
                 .previewLayout(.sizeThatFits)
     }
+
 }

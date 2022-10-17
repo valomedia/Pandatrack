@@ -46,6 +46,7 @@ struct PomodoroProgressViewStyle: ProgressViewStyle {
                     .padding(.horizontal)
         }
     }
+
 }
 
 // MARK: PomodoroProgressViewStyle_Previews
@@ -55,9 +56,11 @@ struct PomodoroProgressViewStyle: ProgressViewStyle {
 /// - Todo: Document.
 ///
 struct PomodoroProgressViewStyle_Previews: PreviewProvider {
+
     static var previews: some View {
         ProgressView(value: 0.4)
                 .progressViewStyle(PomodoroProgressViewStyle(theme: .yellow))
                 .previewLayout(.sizeThatFits)
     }
+
 }

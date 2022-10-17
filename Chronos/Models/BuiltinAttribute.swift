@@ -11,20 +11,24 @@ import Foundation
 
 // MARK: BuiltinAttribute
 
-/**
- - Todo: Document.
- */
-public protocol BuiltinAttribute: Attribute, NSCopying, NSMutableCopying, NSSecureCoding {
+/// Undocumented.
+///
+/// - Todo: Document.
+///
+protocol BuiltinAttribute: Attribute, NSCopying, NSMutableCopying, NSSecureCoding {
 
-    // MARK: Properties
+    // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     var id: UUID { get }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     var value: Any { get }
+
 }

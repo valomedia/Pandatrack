@@ -12,34 +12,35 @@ import SwiftUI
 
 // MARK: CardView
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 struct CardView: View {
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     let title: String
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     let theme: Theme
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     let labels: (
             (Label<Text, Image>, Label<Text, Image>),
             (Label<Text, Image>, Label<Text, Image>)
     )
 
-    /**
-     - Todo: Document.
-     */
     var body: some View {
         VStack(alignment: .leading) {
             Text(title).font(.headline).accessibilityAddTraits(.isHeader)
@@ -63,16 +64,14 @@ struct CardView: View {
 
 // MARK: CardView_Previews
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 class CardView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /**
-     - Todo: Document.
-     */
     static var previews: some View {
         CardView(
                 title: "Hello, World!",
@@ -85,4 +84,5 @@ class CardView_Previews: PreviewProvider {
                 .background(Theme.yellow.backgroundColor)
                 .previewLayout(.fixed(width: 400, height: 60))
     }
+
 }

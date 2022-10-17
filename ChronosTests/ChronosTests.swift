@@ -22,23 +22,12 @@ class ChronosTests: XCTestCase {
 
     // MARK: - Life cycle methods
 
-    /// Setup code.
-    ///
-    /// This method is called before the invocation of each test method in the class.
-    ///
-    /// - Throws:
-    ///
     override func setUpWithError() throws {}
 
-    /// Teardown code.
-    ///
-    /// This method is called after the invocation of each test method in the class.
-    ///
-    /// - Throws:
-    ///
     override func tearDownWithError() throws {}
 
     // MARK: - Tests
 
     // Todo
+
 }

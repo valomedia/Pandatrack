@@ -12,15 +12,15 @@ import CoreData
 
 // MARK: Tag
 
-// MARK: + sampleData
 
 extension Tag {
 
-    // MARK: - Class methods
+    // MARK: + sampleData
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
-    /// - Parameter context:
+    ///
     @discardableResult
     @SetBuilder<Tag>
     public class func sampleData(for context: NSManagedObjectContext) -> Set<Tag> {

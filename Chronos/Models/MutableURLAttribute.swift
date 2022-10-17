@@ -11,66 +11,63 @@ import Foundation
 
 // MARK: MutableURLAttribute
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(MutableURLAttribute)
 public class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /**
-     - Todo: Document.
-     - Parameters:
-       - url:
-       - id:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - url:
+    ///     - id
+    ///
     public required init(_ url: URL, id: UUID) {
         self.url = url
         self.id = id
     }
 
-    /**
-     - Todo: Document.
-     - Parameter immutable:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - immutable:
+    ///
     public convenience init(from immutable: URLAttribute) {
         self.init(immutable.url, id: immutable.id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func copy(with zone: NSZone? = nil) -> Any {
         URLAttribute(from: self)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func mutableCopy(with zone: NSZone? = nil) -> Any {
         Self(url, id: id)
     }
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var id: UUID
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var url: URL
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var value: Any {
         get {
             url
@@ -80,27 +77,31 @@ public class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
         }
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public override var description: String {
         // TODO Replace this with a more efficient solution.
         URLAttribute(from: self).description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var localizedDescription: String {
         // TODO Replace this with a more efficient solution.
         URLAttribute(from: self).localizedDescription
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var accessibilityDescription: String {
         // TODO Replace this with a more efficient solution.
         URLAttribute(from: self).accessibilityDescription
     }
+
 }

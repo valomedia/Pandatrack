@@ -12,39 +12,41 @@ import SwiftUI
 
 // MARK: LeadingIconLabelStyle
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 struct LeadingIconLabelStyle: LabelStyle {
 
     // MARK: Methods
 
-    /**
-     - Todo: Document.
-     - Parameter configuration:
-     - Returns:
-     */
     func makeBody(configuration: Configuration) -> some View {
         HStack {
             configuration.icon.frame(width: 10)
             configuration.title
         }
     }
+
 }
 
 // MARK: LabelStyle
 
 // MARK: + LeadingIconLabelStyle
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 extension LabelStyle where Self == LeadingIconLabelStyle {
 
     // MARK: - Static properties
 
-    /**
-     - Todo: Document.
-     */
-    static var leadingIcon: Self { Self() }
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    static var leadingIcon: Self {
+        Self()
+    }
+
 }

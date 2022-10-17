@@ -21,10 +21,6 @@ struct ChronosApp: App {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     init() {
         #if DEBUG
         var injectionBundlePath = "/Applications/InjectionIII.app/Contents/Resources"
@@ -39,22 +35,6 @@ struct ChronosApp: App {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    let persistenceController = PersistenceController.shared
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    @StateObject
-    private var chronosEnvironment = ChronosEnvironment(PersistenceController.shared.container.viewContext)
-
-    /**
-     - Todo: Document.
-     */
     var body: some Scene {
         WindowGroup {
             #if DEBUG && targetEnvironment(simulator)
@@ -66,4 +46,17 @@ struct ChronosApp: App {
             #endif
         }
     }
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    let persistenceController = PersistenceController.shared
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    @StateObject private var chronosEnvironment = ChronosEnvironment(PersistenceController.shared.container.viewContext)
+
 }

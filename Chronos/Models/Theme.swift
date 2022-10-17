@@ -12,9 +12,10 @@ import SwiftUI
 
 // MARK: Theme
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible {
     case indigo
     case orange
@@ -25,9 +26,10 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var foregroundColor: Color {
         switch self {
         case .orange, .teal, .yellow:
@@ -39,11 +41,11 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
         }
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var backgroundColor: Color {
-        // TODO: Figure out why this isn't working
         //Color(rawValue)
         switch self {
         case .indigo:
@@ -61,24 +63,28 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
         }
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var name: String {
         rawValue.capitalized
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var id: String {
         rawValue
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var description: String {
         name
     }
+
 }

@@ -12,11 +12,9 @@ import SwiftUI
 
 // MARK: View
 
-// MARK: + if
-
 extension View {
 
-    // MARK: - Methods
+    // MARK: + if
 
     /// Applies the given transform if the given condition evaluates to true.
     ///
@@ -33,4 +31,5 @@ extension View {
             self
         }
     }
+
 }

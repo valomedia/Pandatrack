@@ -12,15 +12,14 @@ import SwiftUI
 
 // MARK: Color
 
-// MARK: + secondaryForeground
-
 extension Color {
 
-    // MARK: - Static properties
+    // MARK: + secondaryForeground
 
     /// The color for text labels that contain secondary content.
     ///
     static var secondaryForeground: Color {
         Color(UIColor.secondaryLabel)
     }
+
 }

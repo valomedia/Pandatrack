@@ -151,14 +151,17 @@ extension {{ entityClassName }}{{ protocol }} {
     {% endfor %}
     {% for relationship in entity.relationships %}
     {% if relationship.isToMany %}
+
     @NSManaged
     {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}>{% endif %}{% if relationship.isOptional %}?{% endif %}
     {% else %}
+
     @NSManaged
     {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
     {% endif %}
     {% endfor %}
     {% for fetchedProperty in entity.fetchedProperties %}
+
     @NSManaged
     {{ accessModifier }} var {{ fetchedProperty.name }}: [{{ model.entities[fetchedProperty.fetchRequest.entity].className }}]
     {% endfor %}
@@ -185,6 +188,7 @@ extension {{ entityClassName }}{{ protocol }} {
 
 extension {{ entityClassName }} {
     {% if relationship.isOrdered %}
+
     @objc(insertObject:in{{ relationshipName }}AtIndex:)
     @NSManaged
     public func insertInto{{ relationshipName }}(_ value: {{ destinationEntityClassName }}, at idx: Int)

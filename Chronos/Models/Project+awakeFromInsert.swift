@@ -12,15 +12,14 @@ import CoreData
 
 // MARK: Project
 
-// MARK: + awakeFromInsert
-
 extension Project {
 
-    // MARK: - Life cycle methods
+    // MARK: + awakeFromInsert
 
     public override func awakeFromInsert() {
         super.awakeFromInsert()
         primitiveId = UUID()
         primitiveTimestamp = Date()
     }
+
 }

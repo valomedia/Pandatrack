@@ -52,11 +52,10 @@ struct EntryDetailView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
+    /// The Entry being shown.
     ///
-    /// - Todo: Document.
-    /// - Todo: Add continuing existing entry
-    ///
+    @Binding var entry: Entry
+
     var body: some View {
         List {
             Section(header: Text("Time Entry")) {
@@ -131,16 +130,10 @@ struct EntryDetailView: View {
                 }
     }
 
-    /// The Entry being shown.
-    ///
-    @Binding
-    var entry: Entry
+    @EnvironmentObject private var env: ChronosEnvironment
 
-    @EnvironmentObject
-    private var env: ChronosEnvironment
+    @State private var isPresentingEditView = false
 
-    @State
-    private var isPresentingEditView = false
 }
 
 // MARK: EntryDetailView_Previews

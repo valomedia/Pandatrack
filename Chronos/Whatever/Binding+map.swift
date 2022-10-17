@@ -16,6 +16,10 @@ extension Binding {
 
     // MARK: + map
 
+	/// Undocumented.
+	///
+	/// - Todo: Document.
+	///
     func map<Subject>(
 		get: @escaping (Value) -> Subject,
 		set: @escaping (inout Value, Subject) -> Void

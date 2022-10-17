@@ -11,66 +11,63 @@ import Foundation
 
 // MARK: MutableStringAttribute
 
-/**
- - Todo: Document.
- */
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 @objc(MutableStringAttribute)
 public class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /**
-     - Todo: Document.
-     - Parameters:
-       - string:
-       - id:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - string:
+    ///     - id:
+    ///
     public required init(_ string: String, id: UUID) {
         self.string = string
         self.id = id
     }
 
-    /**
-     - Todo: Document.
-     - Parameter immutable:
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - immutable:
+    ///
     public convenience init(from immutable: StringAttribute) {
         self.init(immutable.string, id: immutable.id)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func copy(with zone: NSZone? = nil) -> Any {
         StringAttribute(from: self)
     }
 
-    /**
-     - Todo: Document.
-     - Parameter zone:
-     - Returns:
-     */
     public func mutableCopy(with zone: NSZone? = nil) -> Any {
         Self(string, id: id)
     }
 
     // MARK: - Properties
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var id: UUID
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var string: String
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var value: Any {
         get {
             string
@@ -80,27 +77,31 @@ public class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
         }
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public override var description: String {
         // TODO Replace this with a more efficient solution.
         StringAttribute(from: self).description
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var localizedDescription: String {
         // TODO Replace this with a more efficient solution
         StringAttribute(from: self).localizedDescription
     }
 
-    /**
-     - Todo: Document.
-     */
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public var accessibilityDescription: String {
         // TODO Replace this with a more efficient solution
         StringAttribute(from: self).accessibilityDescription
     }
+
 }

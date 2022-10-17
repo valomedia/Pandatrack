@@ -32,33 +32,27 @@ class EntryTimer: ObservableObject {
 
     /// The PomodoroTimer for this entry.
     ///
-    @Published
-    var pomodoroTimer: PomodoroTimer?
+    @Published var pomodoroTimer: PomodoroTimer?
 
     /// The number of seconds the entry has been running for.
     ///
-    @Published
-    var secondsElapsed: Int?
+    @Published var secondsElapsed: Int?
 
     /// The number of minutes the entry has been running for.
     ///
-    @Published
-    var minutesElapsed: Int?
+    @Published var minutesElapsed: Int?
 
     /// The number of hours the entry has been running for.
     ///
-    @Published
-    var hoursElapsed: Int?
+    @Published var hoursElapsed: Int?
 
     /// The elapsed time formatted as hh:mm:ss.
     ///
-    @Published
-    var timeElapsedString: String?
+    @Published var timeElapsedString: String?
 
     /// The elapsed time in words.
     ///
-    @Published
-    var timeElapsedAccessibilityLabel: String?
+    @Published var timeElapsedAccessibilityLabel: String?
 
     /// Whether the Timer is currently running.
     ///
@@ -67,13 +61,12 @@ class EntryTimer: ObservableObject {
     /// updating its fields and notifying subscribers once per second. It has nothing to do with the state of the
     /// actual Entry. In order to figure out whether the EntryTimer is currently tracking an Entry, check whether
     /// `entry` is set.
-    @Published
-    var timerStopped = true
+    ///
+    @Published var timerStopped = true
 
     /// The Entry that is running.
     ///
-    @Published
-    var entry: Entry?
+    @Published var entry: Entry?
 
     private let frequency = 1.0 / 60.0
     private var timer: Timer?
@@ -89,8 +82,7 @@ class EntryTimer: ObservableObject {
     ///     - entry: The Entry to start tracking.
     /// - Returns: The EntryTimer
     ///
-    @discardableResult
-    func track(_ entry: Entry) -> EntryTimer {
+    @discardableResult func track(_ entry: Entry) -> EntryTimer {
         reset()
         self.entry = entry
         pomodoroTimer = PomodoroTimer(startDate: entry.start)
@@ -112,8 +104,7 @@ class EntryTimer: ObservableObject {
     ///     - tags:
     /// - Returns: The EntryTimer
     ///
-    @discardableResult
-    func track(
+    @discardableResult func track(
             _ context: NSManagedObjectContext,
             name: String? = nil,
             start: Date? = nil,
@@ -133,8 +124,7 @@ class EntryTimer: ObservableObject {
     ///     - entry: The Entry to continue
     /// - Returns: The EntryTimer
     ///
-    @discardableResult
-    func track(_ context: NSManagedObjectContext, continueFrom entry: Entry) -> EntryTimer {
+    @discardableResult func track(_ context: NSManagedObjectContext, continueFrom entry: Entry) -> EntryTimer {
         track(Entry(context, continueFrom: entry))
     }
 
@@ -144,8 +134,7 @@ class EntryTimer: ObservableObject {
     ///
     /// - Returns: The EntryTimer
     ///
-    @discardableResult
-    func reset() -> EntryTimer {
+    @discardableResult func reset() -> EntryTimer {
         entry?.end = Date()
         zero()
         return self
@@ -223,4 +212,5 @@ class EntryTimer: ObservableObject {
         pomodoroTimer = nil
         entry = nil
     }
+
 }

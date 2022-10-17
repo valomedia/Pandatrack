@@ -20,10 +20,6 @@ import ObservedOptionalObject
 ///
 struct DayView: View {
 
-    // MARK: - Static properties
-
-    // MARK: - Static methods
-
     // MARK: - Life cycle methods
 
     /// Undocumented
@@ -86,9 +82,8 @@ struct DayView: View {
 
     private let day: DateInterval
 
-    // MARK: - Methods
-
 }
+
 
 // MARK: DayView_Previews
 

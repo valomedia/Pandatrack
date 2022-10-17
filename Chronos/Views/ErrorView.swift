@@ -18,13 +18,13 @@ import SwiftUI
 ///
 struct ErrorView: View {
 
-    // MARK: - Static properties
-
-    // MARK: - Static methods
-
-    // MARK: - Life cycle methods
-
     // MARK: - Properties
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document
+    ///
+    let errorWrapper: ErrorWrapper
 
     var body: some View {
         NavigationView {
@@ -43,17 +43,11 @@ struct ErrorView: View {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
-    let errorWrapper: ErrorWrapper
-
     @Environment(\.dismiss)
     private var dismiss
 
-    // MARK: - Methods
 }
+
 
 // MARK: ErrorView_Previews
 
