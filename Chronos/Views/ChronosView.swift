@@ -27,10 +27,20 @@ struct ChronosView: View {
     ///
     var body: some View {
         ContentView()
+                .sheet(item: $env.errorWrapper) { wrapper in
+                    ErrorView(errorWrapper: wrapper)
+                }
     }
 
-    @EnvironmentObject
-    private var env: ChronosEnvironment
+    /// The timer for the currently running entry.
+    ///
+    @ObservedObject private var entryTimer = EntryTimer.shared
+
+    @EnvironmentObject private var env: ChronosEnvironment
+
+    @Environment(\.scenePhase)
+    private var phase
+
 }
 
 // MARK: ContentView_Previews
@@ -43,22 +53,14 @@ class ChronosView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         ChronosView()
-                .environment(\.managedObjectContext, PersistenceController.preview!.container.viewContext)
-                .environmentObject(ChronosEnvironment.preview!)
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(env)
     }
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     #if DEBUG
     @objc class func injected() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
@@ -66,4 +68,5 @@ class ChronosView_Previews: PreviewProvider {
                 UIHostingController(rootView: ChronosView_Previews.previews)
     }
     #endif
+
 }

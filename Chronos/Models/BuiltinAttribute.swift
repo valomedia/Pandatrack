@@ -14,7 +14,6 @@ import Foundation
 /**
  - Todo: Document.
  */
-@objc(BuiltinAttribute)
 public protocol BuiltinAttribute: Attribute, NSCopying, NSMutableCopying, NSSecureCoding {
 
     // MARK: Properties

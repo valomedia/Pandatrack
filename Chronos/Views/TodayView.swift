@@ -21,21 +21,6 @@ struct TodayView: View {
 
     // MARK: - Properties
 
-    /// The EntryTimer being shown.
-    ///
-    @ObservedObject
-    var entryTimer = EntryTimer.shared
-
-    /// A function to call to start editing the current Entry.
-    ///
-    let editAction: ()->Void
-
-    /// The Theme to use.
-    ///
-    var theme: Theme {
-        entryTimer.entry?.theme ?? Theme.none
-    }
-
     /// Undocumented.
     ///
     /// - Todo: Document.
@@ -43,25 +28,41 @@ struct TodayView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16.0)
-                    .fill(theme.backgroundColor)
+                    .fill(env.theme.backgroundColor)
             VStack {
                 if let pomodoroTimer = entryTimer.pomodoroTimer {
-                    PomodoroTimerView(pomodoroTimer: pomodoroTimer, theme: theme)
+                    PomodoroTimerView(pomodoroTimer: pomodoroTimer, theme: env.theme)
                 }
                 Spacer()
                 Text("Today")
                         .frame(alignment: .center)
                         .font(.largeTitle)
-                Circle()
-                        .strokeBorder(lineWidth: 24)
+                DayView()
                 Spacer()
-                EntryTimerView(entryTimer: entryTimer, editAction: editAction)
+                EntryTimerView(editAction: editAction)
             }
         }
                 .padding()
-                .foregroundColor(theme.foregroundColor)
+                .foregroundColor(env.theme.foregroundColor)
                 .navigationBarTitleDisplayMode(.inline)
     }
+
+    /// The EntryTimer being shown.
+    ///
+    @ObservedObject
+    var entryTimer = EntryTimer.shared
+
+    @Environment(\.managedObjectContext)
+    private var moc
+
+    @EnvironmentObject private var env: ChronosEnvironment
+
+    // MARK: - Functions
+
+    /// A function to call to start editing the current Entry.
+    ///
+    let editAction: ()->Void
+
 }
 
 // MARK: TodayView_Previews
@@ -80,8 +81,9 @@ struct TodayView_Previews: PreviewProvider {
     ///
     static var previews: some View {
         TodayView(editAction: {})
-                .environmentObject(ChronosEnvironment.preview!)
-                .background(EntryTimer.shared.entry?.theme.backgroundColor)
+                .environmentObject(env)
+                .environment(\.managedObjectContext, moc)
+                .background(env.theme.backgroundColor)
                 .previewLayout(.sizeThatFits)
     }
 }

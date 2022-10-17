@@ -11,53 +11,63 @@ import Foundation
 
 // MARK: Node
 
+/// Undocumented.
 ///
 /// - Todo: Document.
+///
 public protocol Node: Hashable {
 
     // MARK: - Static properties
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
+    ///
     static var pathSeparator: String { get }
 
     // MARK: - Properties
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
+    ///
     var name: String { get set }
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
+    ///
     var path: String { get }
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
+    ///
     var parent: Self? { get set }
 
 }
 
-// MARK: + pathSeparator
 
 extension Node {
 
-    // MARK: - Static properties
+    // MARK: + pathSeparator
 
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     public static var pathSeparator: String {
         "/"
     }
 
-}
+    // MARK: + path
 
-// MARK: + path
-
-extension Node {
-
-    // MARK: - Properties
-
-    // TODO Cache the result of this for the lifetime of the object.
+    /// The path to this Node.
+    ///
+    /// - Todo: Cache the result of this for the lifetime of the object.
+    ///
     public var path: String {
-        [ parent?.path, name ].compactMap({ $0 }).joined(separator: Self.pathSeparator)
+        [ parent?.path, Self.pathSeparator, name ].compactMap({ $0 }).joined()
     }
-
 }
+

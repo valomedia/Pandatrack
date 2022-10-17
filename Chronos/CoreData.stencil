@@ -35,6 +35,7 @@ import {{ import }}
 {% for model in models %}
 {% for name, entity in model.entities %}
 {% set superclass %}{{ model.entities[entity.superEntity].className|default:"NSManagedObject" }}{% endset %}
+{% set protocol %}{% if superclass == "NSManagedObject" %}: Entity{% endif %}{% endset %}
 {% set entityClassName %}{{ entity.className|default:"NSManagedObject" }}{% endset %}
 
 
@@ -47,7 +48,7 @@ import {{ import }}
 // Warning: '{{ entityClassName }}' cannot be a valid type name, skipping code generation.
 
 {% else %}
-extension {{ entityClassName }} {
+extension {{ entityClassName }}{{ protocol }} {
     @objc
     {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
     {{ override }}{{ accessModifier }} class var entityName: String {

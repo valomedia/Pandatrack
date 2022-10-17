@@ -68,6 +68,8 @@ struct EntryDetailView: View {
                         Spacer()
                         Text(RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "")
                                 .accessibilityHidden(true)
+                        Image(systemName: "play.fill")
+                                .padding(.leading)
                     }
                 }
                         // Work around for a bug in XCode 14 (FB11278036).
@@ -102,51 +104,19 @@ struct EntryDetailView: View {
                             .accessibilityElement(children: .combine)
                 }
             }
-            Section(header: Text("Project")) {
-                HStack {
-                    Label("Project", systemImage: "at")
-                    Spacer()
-                    Text(entry.project?.name ?? "No project")
+            if let project = entry.project {
+                Section(header: Text("Project")) {
+                    ProjectView(project: project)
                 }
-                        .accessibilityElement(children: .combine)
-                if let parent = entry.project?.parent {
-                    HStack {
-                        Label("Folder", systemImage: "folder")
-                        Spacer()
-                        Text(parent.name)
-                    }
-                            .accessibilityElement(children: .combine)
-                }
-                HStack {
-                    Label("Theme", systemImage: "paintpalette")
-                    Spacer()
-                    Text(entry.theme.name)
-                            .padding(4)
-                            .foregroundColor(entry.theme.foregroundColor)
-                            .background(entry.theme.backgroundColor)
-                            .cornerRadius(4)
-                }
-                        .accessibilityElement(children: .combine)
             }
             if !entry.tags.isEmpty {
                 Section(header: Text("Tags")) {
-                    ForEach(entry.tags.map(\.path).sorted(), id: \.self) {
-                        Label($0, systemImage: "number")
-                    }
+                    TagsView(tags: AnyRandomAccessCollection(entry.tags.sorted(by: \.path)))
                 }
             }
             if let history = entry.project?.entries, !history.isEmpty {
                 Section(header: Text("History")) {
-                    ForEach(history.sorted(by: \.start)) { entry in
-                        Button(action: { /* Todo */ }) {
-                            HStack {
-                                EntryView(entry: entry)
-                                Image(systemName: "play.fill")
-                            }
-                        }
-                                .foregroundColor(entry.theme.foregroundColor)
-                                .listRowBackground(entry.theme.backgroundColor)
-                    }
+                    EntriesView(entries: AnyRandomAccessCollection(history.sorted(by: \.start)))
                 }
             }
         }
@@ -156,31 +126,8 @@ struct EntryDetailView: View {
                         isPresentingEditView = true
                     }
                 }
-                .sheet(isPresented: $isPresentingEditView) {
-                    NavigationView {
-                        EntryDetailEditView(entry: $entry)
-                                .navigationTitle(entry.name)
-                                .toolbar {
-                                    ToolbarItem(placement: .cancellationAction) {
-                                        Button("Cancel") {
-                                            isPresentingEditView = false
-                                            entry.managedObjectContext?.rollback()
-                                        }
-                                    }
-                                    ToolbarItem(placement: .confirmationAction) {
-                                        Button("Done") {
-                                            isPresentingEditView = false
-
-                                            do {
-                                                try entry.managedObjectContext?.save()
-                                            } catch let error as NSError {
-                                                // TODO: Replace this implementation with code to handle the error.
-                                                fatalError("Unresolved error \(error), \(error.userInfo)")
-                                            }
-                                        }
-                                    }
-                                }
-                    }
+                .modal(env, title: entry.name, isPresented: $isPresentingEditView) {
+                    EntryDetailEditView(entry: $entry)
                 }
     }
 
@@ -211,10 +158,11 @@ struct EntryDetailView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        try! EntryDetailView(
-                entry: .constant(
-                        Set(PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()))
-                                .first { $0.name == "Take over the world!" }!))
-                .environmentObject(ChronosEnvironment.preview!)
+        NavigationView {
+            try! EntryDetailView(
+                    entry: .constant(
+                            Set(moc.fetch(Entry.makeFetchRequest())).first { $0.name == "Take over the world" }!))
+                    .environmentObject(env)
+        }
     }
 }

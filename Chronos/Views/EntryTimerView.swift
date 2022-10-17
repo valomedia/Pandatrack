@@ -61,25 +61,27 @@ struct EntryTimerView: View {
                         .accessibilityAddTraits(.isHeader)
                 Spacer()
                 HStack {
+                    Button(action: editAction) {
+                        Image(systemName: "slider.horizontal.3")
+                    }
+                            .foregroundColor(env.theme.foregroundColor)
+                            .accessibilityLabel("Edit running timer")
                     if entryTimer.entry != nil {
-                        Button(action: editAction) {
-                            Image(systemName: "slider.horizontal.3")
-                        }
-                                .foregroundColor(env.theme.foregroundColor)
-                                .accessibilityLabel("Edit running timer")
-                        Button(action: env.stopEntry) {
+                        // Have to wrap the function in a lambda, because Swift is picky about unused return values.
+                        Button(action: { env.stopEntry() }) {
                             Image(systemName: "stop.fill")
                         }
                                 .foregroundColor(env.theme.foregroundColor)
                                 .accessibilityLabel("Stop timer")
-                        Button(action: env.startEntry) {
+                        // Have to wrap the function in a lambda, because Swift is picky about unused return values.
+                        Button(action: { env.startEntry() }) {
                             Image(systemName: "forward.end.fill")
                         }
                                 .foregroundColor(env.theme.foregroundColor)
                                 .accessibilityLabel("Stop timer and start new timer")
                     } else {
-                        // Starting a stopped timer will automatically enter edit mode.
-                        Button(action: env.startEntry) {
+                        // Have to wrap the function in a lambda, because Swift is picky about unused return values.
+                        Button(action: { env.startEntry() }) {
                             Image(systemName: "play.fill")
                         }
                                 .accessibilityLabel("Start timer")
@@ -135,13 +137,13 @@ struct EntryTimerView: View {
     }
 }
 
-// MARK: EntryTimerDetailView_Previews
+// MARK: EntryTimerView_Previews
 
 /// Undocumented.
 ///
 /// - Todo: Document.
 ///
-struct EntryTimerDetailView_Previews: PreviewProvider {
+struct EntryTimerView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
@@ -151,6 +153,7 @@ struct EntryTimerDetailView_Previews: PreviewProvider {
     ///
     static var previews: some View {
         EntryTimerView(editAction: {})
-                .environmentObject(ChronosEnvironment.preview!)
+                .environmentObject(env)
+                .previewLayout(.sizeThatFits)
     }
 }

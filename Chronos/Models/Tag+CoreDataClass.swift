@@ -34,22 +34,23 @@ public final class Tag: NSManagedObject, Tree {
         super.init(entity: Self.entity(in: moc)!, insertInto: moc)
     }
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///   - context:
+    ///   - moc:
     ///   - name:
     ///   - entries:
     ///   - parent:
     ///   - children:
     public init(
-            _ context: NSManagedObjectContext,
+            _ moc: NSManagedObjectContext,
             name: String,
             entries: Set<Entry>? = nil,
             parent: Tag? = nil,
             @SetBuilder<Tag>
             _ children: () -> Set<Tag>? = { nil }) {
-        super.init(entity: Self.entity(in: context)!, insertInto: context)
+        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
         primitiveName = name
 
         if let entries = entries {
@@ -63,5 +64,23 @@ public final class Tag: NSManagedObject, Tree {
         if let children = children() {
             self.children = children
         }
+    }
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - moc:
+    ///     - name:
+    ///     - parent:
+    ///     - children:
+    ///
+    public convenience init(
+            _ moc: NSManagedObjectContext,
+            name: String,
+            parent: Tag? = nil,
+            @SetBuilder<Tag>
+            _ children: () -> Set<Tag>? = { nil }) {
+        self.init(moc, name: name, entries: nil, parent: parent, children)
     }
 }

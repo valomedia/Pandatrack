@@ -16,14 +16,14 @@ import SwiftUI
 
 /// Undocumented.
 ///
-/// -Todo: Document.
+/// - Todo: Document.
 /// - Parameters:
 ///     - left:
 ///     - right:
 /// - Returns:
-func ??<Value>(left: Binding<Optional<Value>>, right: Value) -> Binding<Value> {
+///
+func ??<Value>(left: Binding<Optional<Value>>, right: @escaping @autoclosure () -> Value) -> Binding<Value> {
     Binding(
-            get: { left.wrappedValue ?? right },
-            set: { left.wrappedValue = $0 }
-    )
+            get: { left.wrappedValue ?? right() },
+            set: { left.wrappedValue = $0 })
 }

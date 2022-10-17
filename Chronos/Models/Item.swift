@@ -12,22 +12,30 @@ import CoreData
 
 // MARK: Item
 
+/// Undocumented.
 ///
 /// - Todo: Document.
+///
 public protocol Item: Identifiable {
 
     // MARK: - Properties
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
+    ///
     var id: UUID { get set }
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
+    ///
     var name: String { get set }
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
+    ///
     var timestamp: Date { get set }
 
 }

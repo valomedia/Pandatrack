@@ -11,11 +11,9 @@ import Foundation
 
 // MARK: Bool
 
-// MARK: + iOS15
-
 extension Bool {
 
-    // MARK: - Static properties
+    // MARK: + iOS15
 
     /// Whether this is running in iOS 15 or above.
     ///

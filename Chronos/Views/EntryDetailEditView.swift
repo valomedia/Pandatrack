@@ -41,18 +41,26 @@ struct EntryDetailEditView: View {
                 TextField("Name", text: $entry.name)
                         .multilineTextAlignment(.leading)
                 DatePicker("Start", selection: $entry.interval.start, displayedComponents: [.date, .hourAndMinute])
-                DatePicker("End", selection: $entry.interval.end, displayedComponents: [.date, .hourAndMinute])
-                HStack {
-                    Slider(value: $entry.interval.duration, in: 5*60...4*60*60, step: 5*60)
-                    Spacer()
-                    Text(
-                            String(
-                                    format: "%dh %02dm",
-                                    Int(entry.interval.duration / 60 / 60),
-                                    Int(entry.interval.duration) / 60 % 60))
-                            .font(.system(.body, design: .monospaced))
+                if entry.end != nil {
+                    DatePicker("End", selection: $entry.interval.end, displayedComponents: [.date, .hourAndMinute])
+                    HStack {
+                        Slider(value: $entry.interval.duration, in: 5 * 60...4 * 60 * 60, step: 5 * 60)
+                        Spacer()
+                        Text(
+                                String(
+                                        format: "%dh %02dm",
+                                        Int(entry.interval.duration / 60 / 60),
+                                        Int(entry.interval.duration) / 60 % 60))
+                                .font(.system(.body, design: .monospaced))
+                    }
+                            .accessibilityHidden(true)
                 }
-                        .accessibilityHidden(true)
+            }
+            Section(header: Text("Project")) {
+                EntryProjectEditView(project: $entry.project)
+            }
+            Section(header: Text("Tags")) {
+                EntryTagsEditView(tags: $entry.tags)
             }
         }
     }
@@ -76,8 +84,7 @@ struct EntryDetailEditView_Previews: PreviewProvider {
         NavigationView {
             try! EntryDetailEditView(
                     entry: .constant(
-                            Set(PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()))
-                                    .first { $0.name == "Take over the world!" }!))
+                            Set(moc.fetch(Entry.makeFetchRequest())).first { $0.name == "Take over the world" }!))
         }
     }
 }

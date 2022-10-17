@@ -12,15 +12,15 @@ import CoreData
 
 // MARK: Project
 
-// MARK: + sampleData
-
 extension Project {
 
-    // MARK: - Class methods
+    // MARK: + sampleData
 
+    /// Undocumented.
     ///
     /// - Todo: Document.
     /// - Parameter context:
+    ///
     @discardableResult
     @SetBuilder<Project>
     public class func sampleData(for context: NSManagedObjectContext) -> Set<Project> {

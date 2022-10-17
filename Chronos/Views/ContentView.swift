@@ -26,54 +26,76 @@ struct ContentView: View {
     /// - Todo: Document.
     ///
     var body: some View {
-        VStack(spacing: 1) {
-            NavigationView {
-                EntriesView()
+        TabView {
+            VStack(spacing: 0) {
+                EntriesTab()
+                entryTimerView
             }
-            Button(action: { isPresentingTodayView = true }) {
-                EntryTimerView(editAction: editAction)
-                        .sheet(isPresented: $isPresentingTodayView) {
-                            TodayView(editAction: editAction)
-                                    .background(env.theme.backgroundColor)
-                                    .foregroundColor(env.theme.foregroundColor)
-                        }
-                        .sheet(isPresented: $isPresentingEntryTimerDetailEditView) {
-                            NavigationView {
-                                // Todo
-                            }
-                        }
+                    .tabItem {
+                        Label("Entries", systemImage: "timer")
+                    }
+            VStack(spacing: 0) {
+                ProjectsTab()
+                entryTimerView
             }
+                    .tabItem {
+                        Label("Projects", systemImage: "at")
+                    }
         }
-                .onAppear { entryTimer.startTimer() }
-                .onDisappear { entryTimer.stopTimer() }
+                .onAppear(perform: entryTimer.startTimer)
+                .onDisappear(perform: entryTimer.stopTimer)
+                .onChange(of: phase) { phase in
+                    if phase == .inactive {
+                        env.save()
+                    }
+                }
+                .sheet(isPresented: $isPresentingTodayView) {
+                    TodayView(editAction: editAction)
+                            .background(env.theme.backgroundColor)
+                            .foregroundColor(env.theme.foregroundColor)
+                }
+                .modal(env, title: entryTimer.entry?.name, isPresented: $isPresentingEditView) {
+                    if let entry = Binding<Entry>($entryTimer.entry) {
+                        EntryDetailEditView(entry: entry)
+                    } else {
+                        NoContentView(
+                                title: "There Is Nothing Here",
+                                headline: "No Entry Is Running",
+                                caption: "Please start a new entry to begin editing.")
+                    }
+                }
     }
 
-    @EnvironmentObject
-    private var env: ChronosEnvironment
+    var entryTimerView: some View {
+        EntryTimerView(editAction: editAction)
+                .onTapGesture { isPresentingTodayView = true }
+    }
 
     /// The timer for the currently running entry.
     ///
-    @ObservedObject
-    private var entryTimer = EntryTimer.shared
+    @ObservedObject private var entryTimer = EntryTimer.shared
+
+    @EnvironmentObject private var env: ChronosEnvironment
+
+    @Environment(\.scenePhase)
+    private var phase
 
     /// Whether the sheet showing the full EntryTimerView is visible.
     ///
-    @State
-    private var isPresentingTodayView = false
+    @State private var isPresentingTodayView = false
 
     /// Whether the sheet showing the EntryTimerDetailEditView is visible.
     ///
-    @State
-    private var isPresentingEntryTimerDetailEditView = false
+    @State private var isPresentingEditView = false
 
     @Environment(\.managedObjectContext)
-    private var viewContext
+    private var moc
 
     // MARK: - Methods
 
     private func editAction() {
         isPresentingTodayView = false
-        isPresentingEntryTimerDetailEditView = true
+        isPresentingEditView = true
     }
 }
 
@@ -91,7 +113,7 @@ class ContentView_Previews: PreviewProvider {
     ///
     static var previews: some View {
         ContentView()
-                .environment(\.managedObjectContext, PersistenceController.preview!.container.viewContext)
-                .environmentObject(ChronosEnvironment.preview!)
+                .environment(\.managedObjectContext, moc)
+                .environmentObject(env)
     }
 }

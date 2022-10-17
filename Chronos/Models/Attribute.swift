@@ -14,7 +14,6 @@ import Foundation
 /**
  - Todo: Document.
  */
-@objc(Attribute)
 public protocol Attribute {
 
     // MARK: - Properties

@@ -36,9 +36,11 @@ struct ThemeView: View {
                     .fill(theme.backgroundColor)
             Label(theme.name, systemImage: "paintpalette")
                     .padding(4)
+                    .labelStyle(.leadingIcon)
+                    .padding(.horizontal)
         }
                 .foregroundColor(theme.foregroundColor)
-                .fixedSize(horizontal: false, vertical: true)
+                .fixedSize(horizontal: true, vertical: true)
     }
 }
 

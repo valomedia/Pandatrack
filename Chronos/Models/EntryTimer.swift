@@ -158,10 +158,8 @@ class EntryTimer: ObservableObject {
     ///
     /// - Parameters:
     ///     - timerShouldBeStopped: If `true`, the Timer is stopped if running. Otherwise, it is started if stopped.
-    /// - Returns: The EntryTimer
     ///
-    @discardableResult
-    func setTimer(timerShouldBeStopped: Bool) -> EntryTimer {
+    func setTimer(timerShouldBeStopped: Bool) {
         timerShouldBeStopped ? stopTimer() : startTimer()
     }
 
@@ -170,13 +168,8 @@ class EntryTimer: ObservableObject {
     /// This will start the timer, notifying every observer once a second. This has nothing to do with whether the
     /// Entry itself is running or not.
     ///
-    /// - Returns: The EntryTimer
-    ///
-    @discardableResult
-    func startTimer() -> EntryTimer {
-        guard timerStopped else {
-            return self
-        }
+    func startTimer() {
+        guard timerStopped else { return }
 
         timer = Timer.scheduledTimer(withTimeInterval: frequency, repeats: true) { [weak self] timer in
             guard let self = self else {
@@ -185,8 +178,6 @@ class EntryTimer: ObservableObject {
             self.update()
         }
         timerStopped = false
-
-        return self
     }
 
     /// Stop counting seconds.
@@ -194,14 +185,11 @@ class EntryTimer: ObservableObject {
     /// This can be used to stop the Timer again, to prevent pointless churn when the Timer isn't visible anywhere on
     /// screen.
     ///
-    /// - Returns: The EntryTimer
     ///
-    @discardableResult
-    func stopTimer() -> EntryTimer {
+    func stopTimer() {
         timer?.invalidate()
         timer = nil
         timerStopped = true
-        return self
     }
 
     private func update() {

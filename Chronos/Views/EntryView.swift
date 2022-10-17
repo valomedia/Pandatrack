@@ -19,23 +19,6 @@ import CoreData
 ///
 struct EntryView: View {
 
-    // MARK: - Static properties
-
-    private static let briefDateComponentsFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute]
-        formatter.collapsesLargestUnit = true
-        formatter.unitsStyle = .brief
-        return formatter
-    }()
-
-    private static let fullDateComponentsFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute]
-        formatter.unitsStyle = .full
-        return formatter
-    }()
-
     // MARK: - Properties
 
     /// Undocumented.
@@ -49,7 +32,8 @@ struct EntryView: View {
                 labels: (
                         (Label(entry.project?.name ?? "No Project", systemImage: "at"),
                                 Label(
-                                        Self.briefDateComponentsFormatter.string(from: entry.interval.duration) ?? "",
+                                        DateComponentsFormatter.briefTimeFormatter.string(from: entry.interval.duration)
+                                                ?? "",
                                         systemImage: "hourglass")),
                         (Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
                                 Label(
@@ -81,9 +65,7 @@ struct EntryView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        try! EntryView(
-                entry: Set(PersistenceController.preview!.container.viewContext.fetch(Entry.makeFetchRequest()))
-                        .first { $0.name == "Take over the world!" }!)
+        try! EntryView(entry: Set(moc.fetch(Entry.makeFetchRequest())).first { $0.name == "Take over the world" }!)
                 .previewLayout(.fixed(width: 400, height: 60))
     }
 }

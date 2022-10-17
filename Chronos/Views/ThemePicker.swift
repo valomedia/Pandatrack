@@ -25,18 +25,24 @@ struct ThemePicker: View {
     /// - Todo: Document.
     ///
     @Binding
-    var selection: Theme
+    var selection: Theme?
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
     var body: some View {
-        Picker("Theme", selection: $selection) {
-            ForEach(Theme.allCases) { theme in
-                ThemeView(theme: theme)
-                        .tag(theme)
+        HStack {
+            Image(systemName: "paintpalette")
+                    .padding(.trailing)
+                    .foregroundColor(.accentColor)
+            Picker("Theme", selection: $selection) {
+                ForEach(Theme.allCases) { theme in
+                    ThemeView(theme: theme)
+                            .tag((theme != Theme.none).then(theme))
+                }
             }
+                    .pickerStyle(.menu)
         }
     }
 }
@@ -56,7 +62,12 @@ struct ThemePicker_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        ThemePicker(selection: .constant(.teal))
-                .previewLayout(.sizeThatFits)
+        NavigationView {
+            Form {
+                List {
+                    ThemePicker(selection: .constant(.teal))
+                }
+            }
+        }
     }
 }
