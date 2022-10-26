@@ -8,6 +8,8 @@
 
 import Foundation
 
+infix operator .!!
+
 
 // MARK: Bool
 
@@ -37,4 +39,28 @@ extension Bool {
         self ? value : nil
     }
 
+}
+
+/// Undocumented.
+///
+/// - Todo: Document.
+/// - Parameters:
+///     - left:
+///     - right:
+/// - Returns:
+///
+func .!!<Value>(left: Bool, right: Value) -> Value? {
+    left.then(right)
+}
+
+/// Undocumented.
+///
+/// - Todo: Document.
+/// - Parameters:
+///     - left:
+///     - right:
+/// - Returns:
+///
+func .!!<Value>(left: Bool, right: Value?) -> Value? {
+    left.then(right)
 }
