@@ -22,7 +22,18 @@ extension Bool {
     ///     - value:
     /// - Returns:
     ///
-    func then<Value>(_ value: Value) -> Optional<Value> {
+    func then<Value>(_ value: Value) -> Value? {
+        self ? value : nil
+    }
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - value:
+    /// - Returns:
+    ///
+    func then<Value>(_ value: Value?) -> Value? {
         self ? value : nil
     }
 
