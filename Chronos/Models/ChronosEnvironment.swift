@@ -128,10 +128,10 @@ class ChronosEnvironment: ObservableObject {
         // Nothing to discard, or already being discarded.
         guard waitingForConfirmation else { return }
 
-        DispatchQueue.main.async(execute: DispatchWorkItem { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.waitingForConfirmation = false
             self?.ctx.rollback()
-        })
+        }
     }
 
     /// Undocumented.
