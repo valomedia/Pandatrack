@@ -125,6 +125,7 @@
 		E9E97C1DAECDC554835AA8E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9E979095AE3B2CAAC258BCF /* Assets.xcassets */; };
 		E9E97C305600F65D4CB08430 /* EntryTagsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9772845C5B07E8EAF3D97 /* EntryTagsEditView.swift */; };
 		E9E97C6E667C2E92C675BE4F /* FetchRequest+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97300066D5871C5708AC3 /* FetchRequest+init.swift */; };
+		E9E97C79B186D143076425C9 /* View+floatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97991BB7E532399EA1943 /* View+floatingActionButton.swift */; };
 		E9E97C96553B22631E3ADAA7 /* MutableNumberAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97320D3004E5DE20965C9 /* MutableNumberAttribute.swift */; };
 		E9E97CA9D97B23B7F4A78802 /* URLAttributeChoiceRelationship+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E979D4E182F09A62BECC5B /* URLAttributeChoiceRelationship+CoreDataClass.swift */; };
 		E9E97CB378198B3EBB1C68D2 /* NumberAttributeSingleRelationship+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9770FEED50EC3DC0215F5 /* NumberAttributeSingleRelationship+CoreDataClass.swift */; };
@@ -313,6 +314,7 @@
 		E9E97953A52DDE4BB249795B /* Entry+sampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Entry+sampleData.swift"; sourceTree = "<group>"; };
 		E9E9795F50C728A3C7B6421D /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		E9E9798980469F2CCDF25342 /* NumberAttributeListRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberAttributeListRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E9E97991BB7E532399EA1943 /* View+floatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+floatingActionButton.swift"; sourceTree = "<group>"; };
 		E9E979D4E182F09A62BECC5B /* URLAttributeChoiceRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLAttributeChoiceRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E979EC756DF3135CC345F4 /* BuiltinAttributeDeclaration+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BuiltinAttributeDeclaration+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E979F8BD63253DDB9CEEDF /* URLAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLAttribute.swift; sourceTree = "<group>"; };
