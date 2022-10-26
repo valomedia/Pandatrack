@@ -18,13 +18,31 @@ import SwiftUI
 ///
 struct NoContentView: View {
 
+    // MARK: - Life cycle methods
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - image:
+    ///     - title:
+    ///     - headline:
+    ///     - caption:
+    ///
+    init(image: Image? = nil, title: String = "There is nothing here", headline: String, caption: String) {
+        self.image = image
+        self.title = title
+        self.headline = headline
+        self.caption = caption
+    }
+
     // MARK: - Properties
 
     /// Undocumented.
     ///
     /// - Todo: Document
     ///
-    let image: Image? = nil
+    let image: Image?
 
     /// Undocumented.
     ///
