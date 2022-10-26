@@ -100,6 +100,7 @@
 		E9E979E628C9388049A7A38A /* EntryProjectEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9767A1B6E5B5BDC3C3749 /* EntryProjectEditView.swift */; };
 		E9E979E6B1617CCD45B335E7 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9736A7CD88EE1C2019F69 /* Tag+CoreDataClass.swift */; };
 		E9E979F9B71F29E44C0AD94A /* ProjectsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97ED2C81DE282D83662CB /* ProjectsTab.swift */; };
+		E9E97AACDD42A7BF94B43A43 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97CE85A222497259D8A35 /* FloatingActionButton.swift */; };
 		E9E97AB6AE596B9902056E1D /* PercentageAttributeChoiceDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9768C6D0E4E873E422E1B /* PercentageAttributeChoiceDeclaration+CoreDataClass.swift */; };
 		E9E97AE400D8638FDB74B7CB /* URLAttributeListDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97BA8CEFB7D2FE74CF870 /* URLAttributeListDeclaration+CoreDataClass.swift */; };
 		E9E97AEC5CFD5ABF126B133E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E975F76EED4335BE982F2A /* Attribute.swift */; };
@@ -343,6 +344,7 @@
 		E9E97CA9B9BE1785B738FEEB /* DateComponentsFormatter+fullTimeFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+fullTimeFormatter.swift"; sourceTree = "<group>"; };
 		E9E97CD358169E0B07D0091C /* Bool+iOS15.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bool+iOS15.swift"; sourceTree = "<group>"; };
 		E9E97CD9395918970B570F2E /* MutableCurrencyAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableCurrencyAttribute.swift; sourceTree = "<group>"; };
+		E9E97CE85A222497259D8A35 /* FloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		E9E97D023D1319CFAE84BD99 /* DateIntervalArc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateIntervalArc.swift; sourceTree = "<group>"; };
 		E9E97D807FBCAC648ACF7B81 /* LeadingIconLabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeadingIconLabelStyle.swift; sourceTree = "<group>"; };
 		E9E97DA105C758AE92001A39 /* Entry+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Entry+CoreDataClass.swift"; sourceTree = "<group>"; };
