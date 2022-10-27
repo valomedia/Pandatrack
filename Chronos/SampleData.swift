@@ -1,13 +1,12 @@
 //
-//  Entry+sampleData.swift
+//  SampleData.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-05-12.
+//  Created by Jean-Pierre Höhmann on 2022-10-25.
 //
 //
 
 import Foundation
-import SwiftUI
 import CoreData
 
 
@@ -26,7 +25,7 @@ extension Entry {
     ///     - tags:
     @discardableResult
     @SetBuilder<Entry>
-    public class func sampleData(for context: NSManagedObjectContext) throws -> Set<Entry> {
+    static func sampleData(for context: NSManagedObjectContext) throws -> Set<Entry> {
         let projects = try Set(context.fetch(Project.makeFetchRequest()))
         let tags = try Set(context.fetch(Tag.makeFetchRequest()))
 
@@ -93,6 +92,60 @@ extension Entry {
                         start: Calendar.current.date(bySettingHour: 18, minute: 00, second: 00, of: Date.yesterday)!,
                         end:   Calendar.current.date(bySettingHour: 21, minute: 00, second: 00, of: Date.yesterday)!),
                 project: projects.first { $0.name == "Private" })
+    }
+
+}
+
+
+// MARK: Project
+
+extension Project {
+
+    // MARK: + sampleData
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameter context:
+    ///
+    @discardableResult
+    @SetBuilder<Project>
+    static func sampleData(for context: NSManagedObjectContext) -> Set<Project> {
+        Project(context, name: "Business") {
+            Project(context, name: "ACME", theme: .indigo) {
+                Project(context, name: "Transmogrifier")
+                Project(context, name: "Froobnicator")
+            }
+            Project(context, name: "Contoso", theme: .orange) {
+                Project(context, name: "Chronos")
+            }
+            Project(context, name: "Tailspin Toys", theme: .purple)
+        }
+        Project(context, name: "Private")
+    }
+
+}
+
+
+// MARK: Tag
+
+extension Tag {
+
+    // MARK: + sampleData
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    @discardableResult
+    @SetBuilder<Tag>
+    static func sampleData(for context: NSManagedObjectContext) -> Set<Tag> {
+        Tag(context, name: "Secret") {
+            Tag(context, name: "Foo")
+            Tag(context, name: "Bar")
+            Tag(context, name: "Baz")
+        }
+        Tag(context, name: "Client Work")
     }
 
 }
