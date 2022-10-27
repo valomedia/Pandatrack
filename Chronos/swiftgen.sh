@@ -18,6 +18,6 @@
 set +euo pipefail
 
 # shellcheck disable=SC2164
-cd "${SRCROOT}"
+cd "${SRCROOT}/Chronos"
 
 exec swiftgen

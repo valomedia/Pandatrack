@@ -14,11 +14,11 @@
 # generated code.
 #
 
-$(SRCROOT)/swiftgen.yml
+$(SRCROOT)/Chronos/swiftgen.yml
 
-$(SRCROOT)/Chronos/Assets.stencil
-$(SRCROOT)/Chronos/CoreData.stencil
-$(SRCROOT)/Chronos/Strings.stencil
+$(SRCROOT)/Chronos/Templates/Assets.stencil
+$(SRCROOT)/Chronos/Templates/CoreData.stencil
+$(SRCROOT)/Chronos/Templates/Strings.stencil
 
 $(SRCROOT)/Chronos/Assets.xcassets/AccentColor.colorset/Contents.json
 $(SRCROOT)/Chronos/Assets.xcassets/AppIcon.appiconset/Contents.json
