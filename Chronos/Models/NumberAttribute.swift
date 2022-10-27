@@ -16,7 +16,7 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(NumberAttribute)
-public class NumberAttribute: NSObject, BuiltinAttribute {
+class NumberAttribute: NSObject, BuiltinAttribute {
 
     /// Undocumented.
     ///
@@ -33,7 +33,7 @@ public class NumberAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public static let supportsSecureCoding = true
+    static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
@@ -41,41 +41,34 @@ public class NumberAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - number:
-    ///     - id:
+    ///     - mutable:
     ///
-    public required init(_ number: Double, id: UUID = UUID()) {
+    convenience init(from mutable: MutableNumberAttribute) {
+        self.init(mutable.number, id: mutable.id)
+    }
+
+    required init(_ number: Double, id: UUID = UUID()) {
         self.number = number
         self.id = id
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
-    public convenience init(from mutable: MutableNumberAttribute) {
-        self.init(mutable.number, id: mutable.id)
-    }
-
-    public required convenience init?(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.number.rawValue) as! Double,
                 id: coder.decodeObject(forKey: Keys.id.rawValue) as! UUID
         )
     }
 
-    public func encode(with coder: NSCoder) {
+    func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(number, forKey: Keys.number.rawValue)
     }
 
-    public func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with zone: NSZone? = nil) -> Any {
         Self(number, id: id)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableNumberAttribute(from: self)
     }
 
@@ -85,19 +78,19 @@ public class NumberAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public let id: UUID
+    let id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public let number: Double
+    let number: Double
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         number
     }
 
@@ -105,7 +98,7 @@ public class NumberAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         number.description
     }
 
@@ -113,7 +106,7 @@ public class NumberAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         if #available(macCatalyst 15.0, iOS 15.0, *) {
             return number.formatted(.number)
         } else {
@@ -126,7 +119,7 @@ public class NumberAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         localizedDescription
     }
 

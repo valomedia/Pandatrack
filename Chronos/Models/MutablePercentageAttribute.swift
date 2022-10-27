@@ -16,7 +16,7 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(MutablePercentageAttribute)
-public class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
+class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
@@ -24,29 +24,22 @@ public class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - percentage:
-    ///     - id:
+    ///     - immutable:
     ///
-    public required init(_ percentage: Int, id: UUID) {
+    convenience init(from immutable: PercentageAttribute) {
+        self.init(immutable.percentage, id: immutable.id)
+    }
+
+    required init(_ percentage: Int, id: UUID) {
         self.percentage = percentage
         self.id = id
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
-    public convenience init(from immutable: PercentageAttribute) {
-        self.init(immutable.percentage, id: immutable.id)
-    }
-
-    public func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with zone: NSZone? = nil) -> Any {
         PercentageAttribute(from: self)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         Self(percentage, id: id)
     }
 
@@ -56,19 +49,19 @@ public class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var id: UUID
+    var id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var percentage: Int
+    var percentage: Int
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         get {
             percentage
         }
@@ -81,7 +74,7 @@ public class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         // TODO Replace this with a more efficient solution.
         PercentageAttribute(from: self).description
     }
@@ -90,7 +83,7 @@ public class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         // TODO Replace this with a more efficient solution.
         PercentageAttribute(from: self).localizedDescription
     }
@@ -99,7 +92,7 @@ public class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         // TODO Replace this with a more efficient solution.
         PercentageAttribute(from: self).accessibilityDescription
     }

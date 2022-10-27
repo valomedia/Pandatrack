@@ -17,21 +17,15 @@ import CoreData
 /// - Todo: Document.
 ///
 @objc(BuiltinAttributeDeclaration)
-public class BuiltinAttributeDeclaration: NSManagedObject, AttributeDeclaration {
+class BuiltinAttributeDeclaration: NSManagedObject, AttributeDeclaration {
 
     // MARK: - Life cycle methods
 
-    @available(*, unavailable)
-    public init() {
-        fatalError("init() has not been implemented")
-    }
-
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        guard !entity.isAbstract else {
+            fatalError("init(entity:insertInto:) has not been implemented")
+        }
         super.init(entity: entity, insertInto: context)
-    }
-
-    public init(context moc: NSManagedObjectContext) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
     }
 
 }

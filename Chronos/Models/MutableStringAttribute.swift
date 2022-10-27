@@ -16,7 +16,7 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(MutableStringAttribute)
-public class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
+class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
@@ -24,29 +24,22 @@ public class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - string:
-    ///     - id:
+    ///     - immutable:
     ///
-    public required init(_ string: String, id: UUID) {
+    convenience init(from immutable: StringAttribute) {
+        self.init(immutable.string, id: immutable.id)
+    }
+
+    required init(_ string: String, id: UUID) {
         self.string = string
         self.id = id
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
-    public convenience init(from immutable: StringAttribute) {
-        self.init(immutable.string, id: immutable.id)
-    }
-
-    public func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with zone: NSZone? = nil) -> Any {
         StringAttribute(from: self)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         Self(string, id: id)
     }
 
@@ -56,19 +49,19 @@ public class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var id: UUID
+    var id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var string: String
+    var string: String
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         get {
             string
         }
@@ -81,7 +74,7 @@ public class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         // TODO Replace this with a more efficient solution.
         StringAttribute(from: self).description
     }
@@ -90,7 +83,7 @@ public class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         // TODO Replace this with a more efficient solution
         StringAttribute(from: self).localizedDescription
     }
@@ -99,7 +92,7 @@ public class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         // TODO Replace this with a more efficient solution
         StringAttribute(from: self).accessibilityDescription
     }

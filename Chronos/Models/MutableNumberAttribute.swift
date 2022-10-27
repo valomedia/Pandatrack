@@ -16,7 +16,7 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(MutableNumberAttribute)
-public class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
+class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: Life cycle methods
 
@@ -24,29 +24,22 @@ public class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - number:
-    ///     - id:
+    ///     - immutable:
     ///
-    public required init(_ number: Double, id: UUID) {
+    convenience init(from immutable: NumberAttribute) {
+        self.init(immutable.number, id: immutable.id)
+    }
+
+    required init(_ number: Double, id: UUID) {
         self.number = number
         self.id = id
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
-    public convenience init(from immutable: NumberAttribute) {
-        self.init(immutable.number, id: immutable.id)
-    }
-
-    public func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with zone: NSZone? = nil) -> Any {
         NumberAttribute(from: self)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         Self(number, id: id)
     }
 
@@ -56,19 +49,19 @@ public class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var id: UUID
+    var id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var number: Double
+    var number: Double
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         get {
             number
         }
@@ -81,7 +74,7 @@ public class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         // TODO Replace this with a more efficient solution.
         NumberAttribute(from: self).description
     }
@@ -90,7 +83,7 @@ public class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         // TODO Replace this with a more efficient solution.
         NumberAttribute(from: self).localizedDescription
     }
@@ -99,7 +92,7 @@ public class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         // TODO Replace this with a more efficient solution.
         NumberAttribute(from: self).accessibilityDescription
     }

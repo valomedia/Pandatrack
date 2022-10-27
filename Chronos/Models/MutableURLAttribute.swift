@@ -16,7 +16,7 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(MutableURLAttribute)
-public class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
+class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
@@ -24,29 +24,22 @@ public class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - url:
-    ///     - id
+    ///     - immutable:
     ///
-    public required init(_ url: URL, id: UUID) {
+    convenience init(from immutable: URLAttribute) {
+        self.init(immutable.url, id: immutable.id)
+    }
+
+    required init(_ url: URL, id: UUID) {
         self.url = url
         self.id = id
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
-    public convenience init(from immutable: URLAttribute) {
-        self.init(immutable.url, id: immutable.id)
-    }
-
-    public func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with zone: NSZone? = nil) -> Any {
         URLAttribute(from: self)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         Self(url, id: id)
     }
 
@@ -56,19 +49,19 @@ public class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var id: UUID
+    var id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var url: URL
+    var url: URL
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         get {
             url
         }
@@ -81,7 +74,7 @@ public class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         // TODO Replace this with a more efficient solution.
         URLAttribute(from: self).description
     }
@@ -90,7 +83,7 @@ public class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         // TODO Replace this with a more efficient solution.
         URLAttribute(from: self).localizedDescription
     }
@@ -99,7 +92,7 @@ public class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         // TODO Replace this with a more efficient solution.
         URLAttribute(from: self).accessibilityDescription
     }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Algorithms
 
 
 // MARK: Node
@@ -15,7 +16,7 @@ import Foundation
 ///
 /// - Todo: Document.
 ///
-protocol Node: Hashable {
+protocol Node: Item {
 
     // MARK: - Static properties
 
@@ -26,12 +27,6 @@ protocol Node: Hashable {
     static var pathSeparator: String { get }
 
     // MARK: - Properties
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    var name: String { get set }
 
     /// Undocumented.
     ///
@@ -55,7 +50,7 @@ extension Node {
     ///
     /// - Todo: Document.
     ///
-    public static var pathSeparator: String {
+    static var pathSeparator: String {
         "/"
     }
 
@@ -65,8 +60,8 @@ extension Node {
     ///
     /// - Todo: Cache the result of this for the lifetime of the object.
     ///
-    public var path: String {
-        [ parent?.path, Self.pathSeparator, name ].compactMap({ $0 }).joined()
+    var path: String {
+        [parent?.path, name].compacted().joined(separator: Self.pathSeparator)
     }
 
 }

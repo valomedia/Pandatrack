@@ -14,16 +14,16 @@ import CoreData
 
 /// Undocumented.
 ///
-/// - Todo: Document
+/// - Todo: Document.
 ///
-protocol Entity {
+protocol Entity: Identifiable, Hashable {
     associatedtype FetchRequestResultType: NSFetchRequestResult
 
     // MARK: - Static properties
 
     /// Undocumented.
     ///
-    /// - Todo: Document
+    /// - Todo: Document.
     ///
     static var entityName: String { get }
 
@@ -31,7 +31,7 @@ protocol Entity {
 
     /// Undocumented.
     ///
-    /// - Todo: Document
+    /// - Todo: Document.
     /// - Parameters:
     ///     - managedObjectContext:
     /// - Returns:
@@ -40,9 +40,35 @@ protocol Entity {
 
     /// Undocumented.
     ///
-    /// - Todo: Document
+    /// - Todo: Document.
     /// - Returns:
     ///
     static func makeFetchRequest() -> NSFetchRequest<FetchRequestResultType>
+
+    // MARK: - Properties
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    var primitiveId: UUID? { get set }
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    var id: UUID { get set }
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    var primitiveTimestamp: Date? { get set }
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    var timestamp: Date { get set }
 
 }

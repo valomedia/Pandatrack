@@ -15,7 +15,7 @@ import Foundation
 ///
 /// - Todo: Document.
 ///
-public struct Currency: Codable, CustomStringConvertible {
+struct Currency: Codable, CustomStringConvertible {
 
     // MARK: Life cycle methods
 
@@ -26,7 +26,7 @@ public struct Currency: Codable, CustomStringConvertible {
     ///     - amount:
     ///     - code:
     ///
-    public init(_ amount: Decimal, code: String = Locale.current.currencyCode ?? "USD") {
+    init(_ amount: Decimal, code: String = Locale.current.currencyCode ?? "USD") {
         self.amount = amount
         self.code = code
     }
@@ -37,19 +37,19 @@ public struct Currency: Codable, CustomStringConvertible {
     ///
     /// - Todo: Document.
     ///
-    public let code: String
+    let code: String
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public let amount: Decimal
+    let amount: Decimal
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var description: String {
+    var description: String {
         "\(amount) \(code)"
     }
 

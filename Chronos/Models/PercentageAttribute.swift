@@ -16,13 +16,13 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(PercentageAttribute)
-public class PercentageAttribute: NSObject, BuiltinAttribute {
+class PercentageAttribute: NSObject, BuiltinAttribute {
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public enum Keys: String {
+    enum Keys: String {
         case id
         case percentage
     }
@@ -33,7 +33,7 @@ public class PercentageAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public static var supportsSecureCoding = true
+    static var supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
@@ -41,41 +41,34 @@ public class PercentageAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - percentage:
-    ///     - id:
+    ///     - mutable:
     ///
-    public required init(_ percentage: Int, id: UUID = UUID()) {
+    convenience init(from mutable: MutablePercentageAttribute) {
+        self.init(mutable.percentage, id: mutable.id)
+    }
+
+    required init(_ percentage: Int, id: UUID = UUID()) {
         self.percentage = percentage
         self.id = id
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
-    public convenience init(from mutable: MutablePercentageAttribute) {
-        self.init(mutable.percentage, id: mutable.id)
-    }
-
-    public required convenience init?(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeInteger(forKey: Keys.percentage.rawValue),
                 id: coder.decodeObject(forKey: Keys.id.rawValue) as! UUID
         )
     }
 
-    public func encode(with coder: NSCoder) {
+    func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(percentage, forKey: Keys.percentage.rawValue)
     }
 
-    public func copy(with zone:NSZone? = nil) -> Any {
+    func copy(with zone:NSZone? = nil) -> Any {
         Self(percentage, id: id)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutablePercentageAttribute(from: self)
     }
 
@@ -85,19 +78,19 @@ public class PercentageAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public let id: UUID
+    let id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public let percentage: Int
+    let percentage: Int
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         percentage
     }
 
@@ -105,7 +98,7 @@ public class PercentageAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         "\(percentage)%"
     }
 
@@ -113,7 +106,7 @@ public class PercentageAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         if #available(macCatalyst 15.0, iOS 15.0, *) {
             return percentage.formatted(.percent)
         } else {
@@ -126,7 +119,7 @@ public class PercentageAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         localizedDescription
     }
 

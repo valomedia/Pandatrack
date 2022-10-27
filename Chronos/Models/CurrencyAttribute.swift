@@ -16,7 +16,7 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(CurrencyAttribute)
-public class CurrencyAttribute: NSObject, BuiltinAttribute {
+class CurrencyAttribute: NSObject, BuiltinAttribute {
 
     /// Undocumented.
     ///
@@ -29,7 +29,7 @@ public class CurrencyAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    public static let supportsSecureCoding = true
+    static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
@@ -37,41 +37,34 @@ public class CurrencyAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - currency:
-    ///     - id:
+    ///     - mutable:
     ///
-    public required init(_ currency: Currency, id: UUID = UUID()) {
+    convenience init(from mutable: MutableCurrencyAttribute) {
+        self.init(mutable.currency, id: mutable.id)
+    }
+
+    required init(_ currency: Currency, id: UUID = UUID()) {
         self.currency = currency
         self.id = id
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
-    public convenience init(from mutable: MutableCurrencyAttribute) {
-        self.init(mutable.currency, id: mutable.id)
-    }
-
-    public required convenience init?(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.currency.rawValue) as! Currency,
                 id: coder.decodeObject(forKey: Keys.id.rawValue) as! UUID
         )
     }
 
-    public func encode(with coder: NSCoder) {
+    func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(currency, forKey: Keys.currency.rawValue)
     }
 
-    public func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with zone: NSZone? = nil) -> Any {
         Self(currency, id: id)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableCurrencyAttribute(from: self)
     }
 
@@ -81,19 +74,19 @@ public class CurrencyAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public let id: UUID
+    let id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public let currency: Currency
+    let currency: Currency
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         currency
     }
 
@@ -101,7 +94,7 @@ public class CurrencyAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         currency.description
     }
 
@@ -109,7 +102,7 @@ public class CurrencyAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         description
     }
 
@@ -117,7 +110,7 @@ public class CurrencyAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         localizedDescription
     }
 

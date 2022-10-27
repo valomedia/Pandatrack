@@ -16,7 +16,7 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-protocol Item: Identifiable {
+protocol Item: Entity {
 
     // MARK: - Properties
 
@@ -24,18 +24,6 @@ protocol Item: Identifiable {
     ///
     /// - Todo: Document.
     ///
-    var id: UUID { get set }
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var name: String { get set }
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    var timestamp: Date { get set }
 
 }

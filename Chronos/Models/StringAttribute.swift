@@ -16,13 +16,13 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(StringAttribute)
-public class StringAttribute: NSObject, BuiltinAttribute {
+class StringAttribute: NSObject, BuiltinAttribute {
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public enum Keys: String {
+    enum Keys: String {
         case id
         case string
     }
@@ -33,7 +33,7 @@ public class StringAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public static var supportsSecureCoding = true
+    static var supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
@@ -41,41 +41,34 @@ public class StringAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - string:
-    ///     - id:
+    ///     - mutable:
     ///
-    public required init(_ string: String, id: UUID = UUID()) {
+    convenience init(from mutable: MutableStringAttribute) {
+        self.init(mutable.string, id: mutable.id)
+    }
+
+    required init(_ string: String, id: UUID = UUID()) {
         self.string = string
         self.id = id
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
-    public convenience init(from mutable: MutableStringAttribute) {
-        self.init(mutable.string, id: mutable.id)
-    }
-
-    public required convenience init?(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.string.rawValue) as! String,
                 id: coder.decodeObject(forKey: Keys.id.rawValue) as! UUID
         )
     }
 
-    public func encode(with coder: NSCoder) {
+    func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(string, forKey: Keys.string.rawValue)
     }
 
-    public func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with zone: NSZone? = nil) -> Any {
         Self(string, id: id)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableStringAttribute(from: self)
     }
 
@@ -85,19 +78,19 @@ public class StringAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public let id: UUID
+    let id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public let string: String
+    let string: String
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         string
     }
 
@@ -105,7 +98,7 @@ public class StringAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         string.description
     }
 
@@ -113,7 +106,7 @@ public class StringAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         description
     }
 
@@ -121,7 +114,7 @@ public class StringAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         localizedDescription
     }
 

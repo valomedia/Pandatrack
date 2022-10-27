@@ -16,20 +16,20 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(URLAttribute)
-public class URLAttribute: NSObject, BuiltinAttribute {
+class URLAttribute: NSObject, BuiltinAttribute {
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public enum Keys: String {
+    enum Keys: String {
         case id
         case url
     }
 
     // MARK: - Static properties
 
-    public static let supportsSecureCoding = true
+    static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
@@ -37,41 +37,34 @@ public class URLAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - url:
-    ///     - id:
+    ///     - mutable:
     ///
-    public required init(_ url: URL, id: UUID = UUID()) {
+    convenience init(from mutable: MutableURLAttribute) {
+        self.init(mutable.url, id: mutable.id)
+    }
+
+    required init(_ url: URL, id: UUID = UUID()) {
         self.url = url
         self.id = id
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
-    public convenience init(from mutable: MutableURLAttribute) {
-        self.init(mutable.url, id: mutable.id)
-    }
-
-    public required convenience init?(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.url.rawValue) as! URL,
                 id: coder.decodeObject(forKey: Keys.id.rawValue) as! UUID
         )
     }
 
-    public func encode(with coder: NSCoder) {
+    func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(url, forKey: Keys.url.rawValue)
     }
 
-    public func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with zone: NSZone? = nil) -> Any {
         Self(url, id: id)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableURLAttribute(from: self)
     }
 
@@ -81,19 +74,19 @@ public class URLAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public let id: UUID
+    let id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public let url: URL
+    let url: URL
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         url
     }
 
@@ -101,7 +94,7 @@ public class URLAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         url.description
     }
 
@@ -109,7 +102,7 @@ public class URLAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         description
     }
 
@@ -117,7 +110,7 @@ public class URLAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         localizedDescription
     }
 

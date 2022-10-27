@@ -16,4 +16,4 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-protocol AttributeDeclaration {}
+protocol AttributeDeclaration: Entity {}

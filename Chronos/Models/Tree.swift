@@ -16,7 +16,7 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-protocol Tree: Node, Item, Entity, NSFetchRequestResult {
+protocol Tree: Node, NSFetchRequestResult {
 
     // MARK: - Static methods
 

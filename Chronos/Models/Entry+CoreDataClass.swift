@@ -17,7 +17,7 @@ import CoreData
 /// - Todo: Document.
 ///
 @objc(Entry)
-public class Entry: NSManagedObject, Item {
+class Entry: NSManagedObject, Item {
 
     // MARK: - Life cycle methods
 
@@ -32,7 +32,7 @@ public class Entry: NSManagedObject, Item {
     ///     - project:
     ///     - tags:
     ///
-    public init(
+    convenience init(
             _ context: NSManagedObjectContext,
             name: String? = nil,
             start: Date? = nil,
@@ -40,7 +40,7 @@ public class Entry: NSManagedObject, Item {
             project: Project? = nil,
             tags: Set<Tag>? = nil
     ) {
-        super.init(entity: Self.entity(in: context)!, insertInto: context)
+        self.init(entity: Self.entity(in: context)!, insertInto: context)
         primitiveName = name ?? ""
         primitiveStart = start ?? Date()
         primitiveEnd = end
@@ -64,7 +64,7 @@ public class Entry: NSManagedObject, Item {
     ///     - project:
     ///     - tags:
     ///
-    public convenience init(
+    convenience init(
             _ context: NSManagedObjectContext,
             name: String?,
             interval: DateInterval?,
@@ -81,23 +81,12 @@ public class Entry: NSManagedObject, Item {
     ///     - context:
     ///     - entry:
     ///
-    public convenience init(_ context: NSManagedObjectContext, continueFrom entry: Entry) {
+    convenience init(_ context: NSManagedObjectContext, continueFrom entry: Entry) {
         self.init(context, name: entry.name, start: Date(), project: entry.project, tags: entry.tags)
     }
 
-    @available(*, unavailable)
-    public init() {
-        fatalError("init() has not been implemented")
-    }
-
-    @available(*, unavailable)
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
-    }
-
-    @available(*, unavailable)
-    public init(context moc: NSManagedObjectContext) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
     }
 
     // MARK: - Properties

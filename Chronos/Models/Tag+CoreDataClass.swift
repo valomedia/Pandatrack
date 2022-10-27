@@ -17,7 +17,7 @@ import CoreData
 /// - Todo: Document.
 ///
 @objc(Tag)
-public final class Tag: NSManagedObject, Tree {
+final class Tag: NSManagedObject, Tree {
 
     // MARK: - Life cycle methods
 
@@ -31,14 +31,13 @@ public final class Tag: NSManagedObject, Tree {
     ///     - parent:
     ///     - children:
     ///
-    public init(
+    convenience init(
             _ moc: NSManagedObjectContext,
             name: String,
             entries: Set<Entry>? = nil,
             parent: Tag? = nil,
-            @SetBuilder<Tag>
-            _ children: () -> Set<Tag>? = { nil }) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
+            @SetBuilder<Tag> _ children: () -> Set<Tag>? = { nil }) {
+        self.init(entity: Self.entity(in: moc)!, insertInto: moc)
         primitiveName = name
 
         if let entries = entries {
@@ -63,28 +62,16 @@ public final class Tag: NSManagedObject, Tree {
     ///     - parent:
     ///     - children:
     ///
-    public convenience init(
+    convenience init(
             _ moc: NSManagedObjectContext,
             name: String,
             parent: Tag? = nil,
-            @SetBuilder<Tag>
-            _ children: () -> Set<Tag>? = { nil }) {
+            @SetBuilder<Tag> _ children: () -> Set<Tag>? = { nil }) {
         self.init(moc, name: name, entries: nil, parent: parent, children)
     }
 
-    @available(*, unavailable)
-    public init() {
-        fatalError("init() has not been implemented")
-    }
-
-    @available(*, unavailable)
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
-    }
-
-    @available(*, unavailable)
-    public init(context moc: NSManagedObjectContext) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
     }
 
 }

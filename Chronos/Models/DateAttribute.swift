@@ -16,7 +16,7 @@ import Foundation
 /// - Todo: Document.
 ///
 @objc(DateAttribute)
-public class DateAttribute: NSObject, BuiltinAttribute {
+class DateAttribute: NSObject, BuiltinAttribute {
 
     /// Undocumented.
     ///
@@ -34,7 +34,7 @@ public class DateAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public static let supportsSecureCoding = true
+    static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
 
@@ -42,11 +42,13 @@ public class DateAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - date:
-    ///     - showTime:
-    ///     - id:
+    ///     - mutable:
     ///
-    public required init(_ date: Date, showTime: Bool = false, id: UUID = UUID()) {
+    convenience init(from mutable: MutableDateAttribute) {
+        self.init(mutable.date, id: mutable.id)
+    }
+
+    required init(_ date: Date, showTime: Bool = false, id: UUID = UUID()) {
         self.date = date
         self.showTime = showTime
         self.id = id
@@ -62,17 +64,7 @@ public class DateAttribute: NSObject, BuiltinAttribute {
         self.accessibilityFormatter = accessibilityFormatter
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
-    public convenience init(from mutable: MutableDateAttribute) {
-        self.init(mutable.date, id: mutable.id)
-    }
-
-    public required convenience init?(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
         self.init(
                 coder.decodeObject(forKey: Keys.date.rawValue) as! Date,
                 showTime: coder.decodeBool(forKey: Keys.showTime.rawValue),
@@ -80,17 +72,17 @@ public class DateAttribute: NSObject, BuiltinAttribute {
         )
     }
 
-    public func encode(with coder: NSCoder) {
+    func encode(with coder: NSCoder) {
         coder.encode(id, forKey: Keys.id.rawValue)
         coder.encode(date, forKey: Keys.date.rawValue)
         coder.encode(showTime, forKey: Keys.showTime.rawValue)
     }
 
-    public func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with zone: NSZone? = nil) -> Any {
         Self(date, showTime: showTime, id: id)
     }
 
-    public func mutableCopy(with zone: NSZone? = nil) -> Any {
+    func mutableCopy(with zone: NSZone? = nil) -> Any {
         MutableDateAttribute(from: self)
     }
 
@@ -100,25 +92,25 @@ public class DateAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public let id: UUID
+    let id: UUID
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public let date: Date
+    let date: Date
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public let showTime: Bool
+    let showTime: Bool
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var value: Any {
+    var value: Any {
         date
     }
 
@@ -126,7 +118,7 @@ public class DateAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public override var description: String {
+    override var description: String {
         date.description
     }
 
@@ -134,7 +126,7 @@ public class DateAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var localizedDescription: String {
+    var localizedDescription: String {
         formatter.string(from: date)
     }
 
@@ -142,7 +134,7 @@ public class DateAttribute: NSObject, BuiltinAttribute {
     ///
     /// - Todo: Document.
     ///
-    public var accessibilityDescription: String {
+    var accessibilityDescription: String {
         accessibilityFormatter.string(from: date)
     }
 

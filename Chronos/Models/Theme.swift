@@ -16,7 +16,7 @@ import SwiftUI
 ///
 /// - Todo: Document.
 ///
-public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible {
+enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible, ExpressibleByNilLiteral {
     case indigo
     case orange
     case purple
@@ -24,13 +24,19 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
     case yellow
     case none
 
+    // MARK: - Life cycle methods
+
+    init(nilLiteral: ()) {
+        self = .none
+    }
+
     // MARK: - Properties
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    public var foregroundColor: Color {
+    var foregroundColor: Color {
         switch self {
         case .orange, .teal, .yellow:
             return .black
@@ -45,7 +51,7 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
     ///
     /// - Todo: Document.
     ///
-    public var backgroundColor: Color {
+    var backgroundColor: Color {
         //Color(rawValue)
         switch self {
         case .indigo:
@@ -67,7 +73,7 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
     ///
     /// - Todo: Document.
     ///
-    public var name: String {
+    var name: String {
         rawValue.capitalized
     }
 
@@ -75,7 +81,7 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
     ///
     /// - Todo: Document.
     ///
-    public var id: String {
+    var id: String {
         rawValue
     }
 
@@ -83,7 +89,7 @@ public enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConv
     ///
     /// - Todo: Document.
     ///
-    public var description: String {
+    var description: String {
         name
     }
 

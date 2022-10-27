@@ -17,23 +17,12 @@ import CoreData
 /// - Todo: Document.
 ///
 @objc(PercentageAttributeSingleDeclaration)
-public class PercentageAttributeSingleDeclaration: BuiltinAttributeDeclaration {
+final class PercentageAttributeSingleDeclaration: BuiltinAttributeDeclaration {
 
     // MARK: - Life cycle methods
 
-    @available(*, unavailable)
-    public init() {
-        fatalError("init() has not been implemented")
-    }
-
-    @available(*, unavailable)
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
-    }
-
-    @available(*, unavailable)
-    public override init(context moc: NSManagedObjectContext) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
     }
 
 }

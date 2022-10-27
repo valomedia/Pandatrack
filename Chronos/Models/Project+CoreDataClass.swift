@@ -18,7 +18,7 @@ import OrderedCollections
 /// - Todo: Document.
 ///
 @objc(Project)
-public final class Project: NSManagedObject, Tree {
+final class Project: NSManagedObject, Tree {
 
     // MARK: - Life cycle methods
 
@@ -33,15 +33,14 @@ public final class Project: NSManagedObject, Tree {
     ///   - parent:
     ///   - children:
     ///
-    public init(
+    convenience init(
             _ moc: NSManagedObjectContext,
             name: String,
             theme: Theme? = nil,
             entries: Set<Entry>? = nil,
             parent: Project? = nil,
-            @SetBuilder<Project>
-            _ children: () -> Set<Project>? = { nil }) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
+            @SetBuilder<Project> _ children: () -> Set<Project>? = { nil }) {
+        self.init(entity: Self.entity(in: moc)!, insertInto: moc)
         primitiveName = name
         primitiveTheme = theme
 
@@ -67,28 +66,16 @@ public final class Project: NSManagedObject, Tree {
     ///     - parent:
     ///     - children:
     ///
-    public convenience init(
+    convenience init(
             _ moc: NSManagedObjectContext,
             name: String,
             parent: Project? = nil,
-            @SetBuilder<Project>
-            _ children: () -> Set<Project>? = { nil }) {
+            @SetBuilder<Project> _ children: () -> Set<Project>? = { nil }) {
         self.init(moc, name: name, theme: nil, entries: nil, parent: parent, children)
     }
 
-    @available(*, unavailable)
-    public init() {
-        fatalError("init() has not been implemented")
-    }
-
-    @available(*, unavailable)
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
-    }
-
-    @available(*, unavailable)
-    public init(context moc: NSManagedObjectContext) {
-        super.init(entity: Self.entity(in: moc)!, insertInto: moc)
     }
 
     // MARK: - Methods

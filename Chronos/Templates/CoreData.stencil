@@ -31,6 +31,7 @@ import {{ import }}
 
 // swiftlint:disable attributes file_length vertical_whitespace_closing_braces
 // swiftlint:disable identifier_name line_length type_body_length
+
 {% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
 {% for model in models %}
 {% for name, entity in model.entities %}
@@ -38,8 +39,7 @@ import {{ import }}
 {% set protocol %}{% if superclass == "NSManagedObject" %}: Entity{% endif %}{% endset %}
 {% set entityClassName %}{{ entity.className|default:"NSManagedObject" }}{% endset %}
 
-
-// MARK: - {{ entity.name }}
+// MARK: {{ entity.name }}
 
 {% if not entity.shouldGenerateCode %}
 // Note: '{{ entity.name }}' has codegen enabled for Xcode, skipping code generation.
@@ -49,31 +49,68 @@ import {{ import }}
 
 {% else %}
 extension {{ entityClassName }}{{ protocol }} {
-    @objc
-    {% set override %}{% if superclass != "NSManagedObject" %}override {% endif %}{% endset %}
-    {{ override }}{{ accessModifier }} class var entityName: String {
+    {% set override %}{% if superclass != "NSManagedObject" %}override {%+ endif %}{% endset %}
+    {% set objc %}{% if superclass == "NSManagedObject" %}@objc {%+ endif %}{% endset %}
+
+    // MARK: + entityName
+
+    {{ objc }}{{ override }}{{ accessModifier }} class var entityName: String {
         "{{ entity.name }}"
     }
 
-    @objc
-    {{
-        override
-    }}{{
-        accessModifier
-    }} class func entity(in managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+    // MARK: + entity
+
+    {{ objc }}{{ override }}{{ accessModifier }} class func entity(in managedObjectContext: NSManagedObjectContext)
+            -> NSEntityDescription? {
         NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)
     }
+
+    // MARK: + makeFetchRequest
 
     {{ accessModifier }} class func makeFetchRequest() -> NSFetchRequest<{{ entityClassName }}> {
         NSFetchRequest<{{ entityClassName }}>(entityName: entityName)
     }
 
+    // MARK: + init
+
+    @available(*, unavailable)
+    {{ accessModifier }} convenience init() {
+        fatalError("init() has not been implemented")
+    }
+
+    @available(*, unavailable)
+    {{ accessModifier }} convenience init(context moc: NSManagedObjectContext) {
+        fatalError("init(context:) has not been implemented")
+    }
+
     // swiftlint:disable discouraged_optional_boolean discouraged_optional_collection
     {% for attribute in entity.attributes %}
 
+    // MARK: + {{ attribute.name }}
+
     {% if attribute.userInfo.RawType %}
     {% set rawType attribute.userInfo.RawType %}
-    {% set unwrapOptional attribute.userInfo.unwrapOptional %}
+    {% set unwrapOptional attribute.userInfo.unwrapOptional -%}
+
+    {{ accessModifier }} var {{ attribute.name }}: {{ rawType }}{% if not unwrapOptional %}?{% endif %} {
+        get {
+            willAccessValue(forKey: "{{ attribute.name }}")
+            defer { didAccessValue(forKey: "{{ attribute.name }}") }
+            let value = primitive{{ attribute.name|capitalize }}
+            {% if unwrapOptional %}
+            guard let value = value else {
+                fatalError("Could not convert value for key '{{ attribute.name }}' to type '{{ rawType }}'")
+            }
+            {% endif %}
+            return value
+        }
+        set {
+            willChangeValue(forKey: "{{ attribute.name }}")
+            defer { didChangeValue(forKey: "{{ attribute.name }}") }
+            primitive{{ attribute.name|capitalize }} = newValue
+        }
+    }
+
     {{ accessModifier }} var primitive{{ attribute.name|capitalize }}: {{ rawType }}? {
         get {
             guard let value = primitiveValue(forKey: "{{ attribute.name }}") as? {{ rawType }}.RawValue else {
@@ -86,32 +123,28 @@ extension {{ entityClassName }}{{ protocol }} {
         }
     }
 
-    {{ accessModifier }} var {{ attribute.name }}: {{ rawType }}{% if not unwrapOptional %}?{% endif %} {
+    {%- else -%}
+
+    @objc
+    {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% endif %} {
         get {
             willAccessValue(forKey: "{{ attribute.name }}")
-            defer {
-                didAccessValue(forKey: "{{ attribute.name }}")
-            }
-
+            defer { didAccessValue(forKey: "{{ attribute.name }}") }
             let value = primitive{{ attribute.name|capitalize }}
-            {% if unwrapOptional %}
+            {% if not attribute.isOptional %}
             guard let value = value else {
-                fatalError("Could not convert value for key '{{ attribute.name }}' to type '{{ rawType }}'")
+                fatalError("Value for key '{{ attribute.name }}' was nil when accessed")
             }
             {% endif %}
-
             return value
         }
         set {
             willChangeValue(forKey: "{{ attribute.name }}")
-            defer {
-                didChangeValue(forKey: "{{ attribute.name }}")
-            }
-
+            defer { didChangeValue(forKey: "{{ attribute.name }}") }
             primitive{{ attribute.name|capitalize }} = newValue
         }
     }
-    {% else %}
+
     {{ accessModifier }} var primitive{{ attribute.name|capitalize }}: {{ attribute.typeName }}? {
         get {
             primitiveValue(forKey: "{{ attribute.name }}") as? {{ attribute.typeName }}
@@ -121,137 +154,140 @@ extension {{ entityClassName }}{{ protocol }} {
         }
     }
 
-    @objc
-    {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% endif %} {
-        get {
-            willAccessValue(forKey: "{{ attribute.name }}")
-            defer {
-                didAccessValue(forKey: "{{ attribute.name }}")
-            }
-
-            let value = primitive{{ attribute.name|capitalize }}
-            {% if not attribute.isOptional %}
-            guard let value = value else {
-                fatalError("Value for key '{{ attribute.name }}' was nil when accessed")
-            }
-            {% endif %}
-
-            return value
-        }
-        set {
-            willChangeValue(forKey: "{{ attribute.name }}")
-            defer {
-                didChangeValue(forKey: "{{ attribute.name }}")
-            }
-
-            primitive{{ attribute.name|capitalize }} = newValue
-        }
-    }
-    {% endif %}
+    {%- endif %}
     {% endfor %}
-    {% for relationship in entity.relationships %}
+
+    {%- for relationship in entity.relationships %}
+
+    // MARK: + {{ relationship.name }}
+
     {% if relationship.isToMany %}
-
-    @NSManaged
-    {{ accessModifier }} var {{ relationship.name }}: {% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}>{% endif %}{% if relationship.isOptional %}?{% endif %}
+    {%- set type -%}
+        {%- if relationship.isOrdered -%}
+            NSOrderedSet
+        {%- else -%}
+            Set<{{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}>
+        {%- endif -%}
+        {%- if relationship.isOptional %}?{% endif -%}
+    {%- endset -%}
+    @NSManaged {{ accessModifier }} var {{ relationship.name }}: {{ type }}
     {% else %}
-
-    @NSManaged
-    {{ accessModifier }} var {{ relationship.name }}: {{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}{% if relationship.isOptional %}?{% endif %}
+    {%- set type -%}
+        {{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}
+        {%- if relationship.isOptional %}?{% endif -%}
+    {%- endset -%}
+    @NSManaged {{ accessModifier }} var {{ relationship.name }}: {{ type }}
     {% endif %}
-    {% endfor %}
-    {% for fetchedProperty in entity.fetchedProperties %}
 
-    @NSManaged
-    {{ accessModifier }} var {{ fetchedProperty.name }}: [{{ model.entities[fetchedProperty.fetchRequest.entity].className }}]
-    {% endfor %}
+    {%- endfor %}
+
+    {%- for fetchedProperty in entity.fetchedProperties %}
+
+    // MARK: + {{ fetchedProperty.name }}
+
+    {% set type %}[{{ model.entities[fetchedProperty.fetchRequest.entity].className }}]{% endset %}
+    @NSManaged {{ accessModifier }} var {{ fetchedProperty.name }}: {{ type }}
+
+    {%- endfor %}
+
     // swiftlint:enable discouraged_optional_boolean discouraged_optional_collection
+
+    // MARK: - Methods
+
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        primitiveId = UUID()
+        primitiveTimestamp = Date()
+    }
+
 }
 
 {% for relationship in entity.relationships where relationship.isToMany %}
-{% set destinationEntityClassName %}{{
-    model.entities[relationship.destinationEntity].className|default:"NSManagedObject"
-}}{% endset %}
-{%
-    set collectionClassName
-%}{%
-    if relationship.isOrdered
-%}NSOrderedSet{%
-    else
-%}Set<{{ destinationEntityClassName }}>{%
-    endif
-%}{%
-    endset
-%}
-{% set relationshipName %}{{ relationship.name|upperFirstLetter }}{% endset %}
-// MARK: Relationship {{ relationshipName }}
+{% set destinationEntityClassName -%}
+    {{ model.entities[relationship.destinationEntity].className|default:"NSManagedObject" }}
+{%- endset %}
+{% set collectionClassName -%}
+    {% if relationship.isOrdered %}NSOrderedSet{% else %}Set<{{ destinationEntityClassName }}>{% endif %}
+{%- endset %}
+{% set relationshipName %}{{ relationship.name | upperFirstLetter }}{% endset %}
 
 extension {{ entityClassName }} {
-    {% if relationship.isOrdered %}
+
+    {%- if relationship.isOrdered %}
+
+    // MARK: + insertInto{{ relationshipName }}
 
     @objc(insertObject:in{{ relationshipName }}AtIndex:)
     @NSManaged
-    public func insertInto{{ relationshipName }}(_ value: {{ destinationEntityClassName }}, at idx: Int)
-
-    @objc(removeObjectFrom{{ relationshipName }}AtIndex:)
-    @NSManaged
-    public func removeFrom{{ relationshipName }}(at idx: Int)
+    {{ accessModifier }} func insertInto{{ relationshipName }}(_ value: {{ destinationEntityClassName }}, at idx: Int)
 
     @objc(insert{{ relationshipName }}:atIndexes:)
     @NSManaged
-    public func insertInto{{ relationshipName }}(_ values: [{{ destinationEntityClassName }}], at indexes: NSIndexSet)
+    {{ accessModifier }} func insertInto{{ relationshipName }}(
+            _ values: [{{ destinationEntityClassName }}],
+            at indexes: NSIndexSet)
+
+    // MARK: + removeFrom{{ relationshipName }}
+
+    @objc(removeObjectFrom{{ relationshipName }}AtIndex:)
+    @NSManaged {{ accessModifier }} func removeFrom{{ relationshipName }}(at idx: Int)
 
     @objc(remove{{ relationshipName }}AtIndexes:)
-    @NSManaged
-    public func removeFrom{{ relationshipName }}(at indexes: NSIndexSet)
+    @NSManaged {{ accessModifier }} func removeFrom{{ relationshipName }}(at indexes: NSIndexSet)
+
+    // MARK: + replace{{ relationshipName }}
 
     @objc(replaceObjectIn{{ relationshipName }}AtIndex:withObject:)
     @NSManaged
-    public func replace{{ relationshipName }}(at idx: Int, with value: {{ destinationEntityClassName }})
+    {{ accessModifier }} func replace{{ relationshipName }}(at idx: Int, with value: {{ destinationEntityClassName }})
 
     @objc(replace{{ relationshipName }}AtIndexes:with{{ relationshipName }}:)
     @NSManaged
-    public func replace{{ relationshipName }}(at indexes: NSIndexSet, with values: [{{ destinationEntityClassName }}])
+    {{ accessModifier }} func replace{{ relationshipName }}(
+            at indexes: NSIndexSet,
+            with values: [{{ destinationEntityClassName }}])
 
-    {% endif %}
+    {%- endif %}
+
+    // MARK: + addTo{{ relationshipName }}
+
     @objc(add{{ relationshipName }}Object:)
-    @NSManaged
-    public func addTo{{ relationshipName }}(_ value: {{ destinationEntityClassName }})
-
-    @objc(remove{{ relationshipName }}Object:)
-    @NSManaged
-    public func removeFrom{{ relationshipName }}(_ value: {{ destinationEntityClassName }})
+    @NSManaged {{ accessModifier }} func addTo{{ relationshipName }}(_ value: {{ destinationEntityClassName }})
 
     @objc(add{{ relationshipName }}:)
-    @NSManaged
-    public func addTo{{ relationshipName }}(_ values: {{ collectionClassName }})
+    @NSManaged {{ accessModifier }} func addTo{{ relationshipName }}(_ values: {{ collectionClassName }})
+
+    // MARK: + removeFrom{{ relationshipName }}
+
+    @objc(remove{{ relationshipName }}Object:)
+    @NSManaged {{ accessModifier }} func removeFrom{{ relationshipName }}(_ value: {{ destinationEntityClassName }})
 
     @objc(remove{{ relationshipName }}:)
-    @NSManaged
-    public func removeFrom{{ relationshipName }}(_ values: {{ collectionClassName }})
+    @NSManaged {{ accessModifier }} func removeFrom{{ relationshipName }}(_ values: {{ collectionClassName }})
+
 }
 
 {% endfor %}
 {% if model.fetchRequests[entity.name].count > 0 %}
-// MARK: Fetch Requests
-
 extension {{ entityClassName }} {
     {% for fetchRequest in model.fetchRequests[entity.name] %}
-    {% set resultTypeName %}{% filter removeNewlines:"leading" %}
-        {% if fetchRequest.resultType == "Object" %}
+
+    // MARK: + fetch{{ fetchRequest.name | upperFirstLetter }}
+
+    {% set resultTypeName -%}
+        {%- if fetchRequest.resultType == "Object" -%}
         {{ entityClassName }}
-        {% elif fetchRequest.resultType == "Object ID" %}
+        {%- elif fetchRequest.resultType == "Object ID" -%}
         NSManagedObjectID
-        {% elif fetchRequest.resultType == "Dictionary" %}
+        {%- elif fetchRequest.resultType == "Dictionary" -%}
         [String: Any]
-        {% endif %}
-    {% endfilter %}{% endset %}
-    class func fetch{{ fetchRequest.name | upperFirstLetter }}({% filter removeNewlines:"leading" %}
-        managedObjectContext: NSManagedObjectContext
-        {% for variableName, variableType in fetchRequest.substitutionVariables %}
+        {%- endif -%}
+    {%- endset %}
+    class func fetch{{ fetchRequest.name | upperFirstLetter }}(managedObjectContext: NSManagedObjectContext
+        {%- for variableName, variableType in fetchRequest.substitutionVariables -%}
         , {{ variableName | lowerFirstWord }}: {{ variableType }}
-        {% endfor %}
-    {% endfilter %}) throws -> [{{ resultTypeName }}] {
+        {%- endfor -%}
+    ) throws -> [{{ resultTypeName }}] {
         guard let persistentStoreCoordinator = managedObjectContext.persistentStoreCoordinator else {
             fatalError("Managed object context has no persistent store coordinator for getting fetch request templates")
         }
@@ -264,7 +300,10 @@ extension {{ entityClassName }} {
             {% endfor %}
         ]
 
-        guard let fetchRequest = model.fetchRequestFromTemplate(withName: "{{ fetchRequest.name }}", substitutionVariables: substitutionVariables) else {
+        guard let fetchRequest = model.fetchRequestFromTemplate(
+                withName: "{{ fetchRequest.name }}",
+                substitutionVariables: substitutionVariables)
+        else {
             fatalError("No fetch request template named '{{ fetchRequest.name }}' found.")
         }
 
