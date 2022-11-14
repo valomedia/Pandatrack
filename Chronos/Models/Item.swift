@@ -16,7 +16,7 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-protocol Item: Entity {
+@objc protocol Item {
 
     // MARK: - Properties
 

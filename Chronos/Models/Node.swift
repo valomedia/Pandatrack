@@ -16,7 +16,7 @@ import Algorithms
 ///
 /// - Todo: Document.
 ///
-protocol Node: Item {
+protocol Node: Entity, Item {
 
     // MARK: - Static properties
 
