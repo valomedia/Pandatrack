@@ -42,14 +42,38 @@ struct EntriesTab: View {
                 }
             }
                     .navigationTitle("Time Entries")
+                    .floatingActionButton(action: createAction)
+                    .modal("New Entry", isPresented: $isPresentingEditView) {
+                        EntryDetailEditView(entry: newEntry)
+                    }
         }
     }
+
+    /// The new Entry being created, if any.
+    ///
+    @State @ManagedEntity private var newEntry: Entry?
+
+    /// Whether the sheet showing the EntryTimerDetailEditView is visible.
+    ///
+    @State private var isPresentingEditView = false
 
     @FetchRequest(
             sortDescriptors: [SortDescriptor(\.start, order: .reverse)],
             predicate: NSPredicate(format: "end != nil"),
             animation: .default)
     private var entries: FetchedResults<Entry>
+
+    @EnvironmentObject private var env: ChronosEnvironment
+
+    @Environment(\.managedObjectContext)
+    private var moc
+
+    // MARK: - Methods
+
+    private func createAction() {
+        isPresentingEditView = true
+        newEntry = Entry(moc, start: Date() - 3600, end: Date())
+    }
 
 }
 
