@@ -117,7 +117,7 @@ struct EntryDetailView: View {
             }
             if let history = entry?.project?.entries, !history.isEmpty {
                 Section(header: Text("History")) {
-                    EntriesView(entries: AnyRandomAccessCollection(history.sorted(by: \.start)))
+                    EntriesView(entries: AnyRandomAccessCollection(history.sorted(by: \.start).reversed()))
                 }
             }
         }
