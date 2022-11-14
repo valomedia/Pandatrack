@@ -68,7 +68,9 @@ import Combine
             }
         }
     }
-    @Published var _wrappedValue: Wrapped?
+    @Published private var _wrappedValue: Wrapped?
+
+    var projectedValue: ManagedEntity<Wrapped> { self }
 
     private var anyCancellable: AnyCancellable? = nil
 
