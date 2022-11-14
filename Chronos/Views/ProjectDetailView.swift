@@ -22,19 +22,19 @@ struct ProjectDetailView: View {
 
     /// The Project being shown by this View.
     ///
-    @Binding var project: Project
+    @State @ManagedEntity var project: Project?
 
     var body: some View {
         List {
             ProjectView(project: project)
         }
-                .navigationTitle(project.name)
+                .navigationTitle(project?.name ?? "")
                 .toolbar {
                     Button("Edit") {
                         isPresentingEditView = true
                     }
                 }
-                .modal(env, title: project.name, isPresented: $isPresentingEditView) {
+                .modal(env, title: project?.name, isPresented: $isPresentingEditView) {
                     ProjectDetailEditView(project: $project)
                 }
     }
@@ -58,8 +58,7 @@ class ProjectDetailView_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            try! ProjectDetailView(
-                    project: .constant(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!))
+            try! ProjectDetailView(project: moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" })
                     .environmentObject(env)
         }
     }

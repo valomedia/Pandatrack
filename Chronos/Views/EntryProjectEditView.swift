@@ -24,7 +24,7 @@ struct EntryProjectEditView: View {
     ///
     /// - Todo: Document
     ///
-    @Binding var project: Project?
+    @Binding @ManagedEntity var project: Project?
 
     /// Undocumented.
     ///
@@ -57,7 +57,9 @@ class EntryProjectEditView_Previews: PreviewProvider {
         NavigationView {
             List {
                 try! EntryProjectEditView(
-                        project: .constant(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!))
+                        project: .constant(
+                                ManagedEntity(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }))
+                )
                         .environment(\.managedObjectContext, moc)
             }
         }

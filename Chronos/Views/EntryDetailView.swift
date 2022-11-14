@@ -54,79 +54,81 @@ struct EntryDetailView: View {
 
     /// The Entry being shown.
     ///
-    @Binding var entry: Entry
+    @State @ManagedEntity var entry: Entry?
 
     var body: some View {
         List {
-            Section(header: Text("Time Entry")) {
-                Button(action: { env.startEntry(continueFrom: entry) }) {
-                    HStack {
-                        Label("Continue", systemImage: "timer")
-                                .font(.headline)
-                                .foregroundColor(.accentColor)
-                        Spacer()
-                        Text(RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "")
-                                .accessibilityHidden(true)
-                        Image(systemName: "play.fill")
-                                .padding(.leading)
+            if let entry = entry {
+                Section(header: Text("Time Entry")) {
+                    Button(action: { env.startEntry(continueFrom: entry) }) {
+                        HStack {
+                            Label("Continue", systemImage: "timer")
+                                    .font(.headline)
+                                    .foregroundColor(.accentColor)
+                            Spacer()
+                            Text(RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "")
+                                    .accessibilityHidden(true)
+                            Image(systemName: "play.fill")
+                                    .padding(.leading)
+                        }
                     }
-                }
-                        // Work around for a bug in XCode 14 (FB11278036).
-                        .buttonStyle(.borderless)
-                HStack {
-                    Label("Start Time", systemImage: "clock")
-                    Spacer()
-                    Text(Self.shortDateFormatter.string(from: entry.start))
-                }
-                        .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("Start Time")
-                        .accessibilityValue(Self.longDateFormatter.string(from: entry.start))
-                if let end = entry.end {
+                            // Work around for a bug in XCode 14 (FB11278036).
+                            .buttonStyle(.borderless)
                     HStack {
-                        Label("End Time", systemImage: "clock")
+                        Label("Start Time", systemImage: "clock")
                         Spacer()
-                        Text(Self.shortDateFormatter.string(from: end))
+                        Text(Self.shortDateFormatter.string(from: entry.start))
                     }
                             .accessibilityElement(children: .ignore)
-                            .accessibilityLabel("End Time")
-                            .accessibilityValue(Self.longDateFormatter.string(from: end))
-                }
-                if
-                        let duration = entry.interval.duration,
-                        let durationString = Self.positionalDateComponentsFormatter.string(from: duration),
-                        entry.end != nil {
-                    HStack {
-                        Label("Duration", systemImage: "hourglass")
-                        Spacer()
-                        Text(durationString)
+                            .accessibilityLabel("Start Time")
+                            .accessibilityValue(Self.longDateFormatter.string(from: entry.start))
+                    if let end = entry.end {
+                        HStack {
+                            Label("End Time", systemImage: "clock")
+                            Spacer()
+                            Text(Self.shortDateFormatter.string(from: end))
+                        }
+                                .accessibilityElement(children: .ignore)
+                                .accessibilityLabel("End Time")
+                                .accessibilityValue(Self.longDateFormatter.string(from: end))
                     }
-                            .accessibilityElement(children: .combine)
+                    if
+                            let duration = entry.interval.duration,
+                            let durationString = Self.positionalDateComponentsFormatter.string(from: duration),
+                            entry.end != nil {
+                        HStack {
+                            Label("Duration", systemImage: "hourglass")
+                            Spacer()
+                            Text(durationString)
+                        }
+                                .accessibilityElement(children: .combine)
+                    }
                 }
             }
-            if let project = entry.project {
+            if let project = entry?.project {
                 Section(header: Text("Project")) {
                     ProjectView(project: project)
                 }
             }
-            if !entry.tags.isEmpty {
+            if let tags = entry?.tags, !tags.isEmpty {
                 Section(header: Text("Tags")) {
-                    TagsView(tags: AnyRandomAccessCollection(entry.tags.sorted(by: \.path)))
+                    TagsView(tags: AnyRandomAccessCollection(tags.sorted(by: \.path)))
                 }
             }
-            if let history = entry.project?.entries, !history.isEmpty {
+            if let history = entry?.project?.entries, !history.isEmpty {
                 Section(header: Text("History")) {
                     EntriesView(entries: AnyRandomAccessCollection(history.sorted(by: \.start)))
                 }
             }
         }
-                .navigationTitle(entry.name)
+                .navigationTitle(entry?.name ?? "")
                 .toolbar {
                     Button("Edit") {
                         isPresentingEditView = true
                     }
                 }
-                .modal(env, title: entry.name, isPresented: $isPresentingEditView) {
-                    EntryDetailEditView(entry: $entry)
+                .modal(env, title: entry?.name, isPresented: $isPresentingEditView) {
+                    EntryDetailEditView(entry: entry)
                 }
     }
 
@@ -153,8 +155,7 @@ struct EntryDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             try! EntryDetailView(
-                    entry: .constant(
-                            Set(moc.fetch(Entry.makeFetchRequest())).first { $0.name == "Take over the world" }!))
+                    entry: Set(moc.fetch(Entry.makeFetchRequest())).first { $0.name == "Take over the world" })
                     .environmentObject(env)
         }
     }

@@ -56,14 +56,7 @@ struct ContentView: View {
                             .foregroundColor(env.theme.foregroundColor)
                 }
                 .modal(env, title: entryTimer.entry?.name, isPresented: $isPresentingEditView) {
-                    if let entry = Binding<Entry>($entryTimer.entry) {
-                        EntryDetailEditView(entry: entry)
-                    } else {
-                        NoContentView(
-                                title: "There Is Nothing Here",
-                                headline: "No Entry Is Running",
-                                caption: "Please start a new entry to begin editing.")
-                    }
+                    EntryDetailEditView(entry: entryTimer.entry)
                 }
     }
 

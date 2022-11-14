@@ -28,7 +28,7 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     ///     - entity:
     ///     - content:
     ///
-    init<Content: View>(entity: Binding<Entity?>, @ViewBuilder content: @escaping () -> Content) {
+    init<Content: View>(entity: Binding<ManagedEntity<Entity>>, @ViewBuilder content: @escaping () -> Content) {
         _entity = entity
         self.content = { AnyView(content()) }
     }
@@ -39,17 +39,18 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     ///
     /// - Todo: Document
     ///
-    @Binding var entity: Entity?
+    @Binding @ManagedEntity var entity: Entity?
 
     var body: some View {
         NavigationLink(
                 destination: TreeView(
                         entity: Binding(
-                                get: { entity },
+                                get: { _entity.wrappedValue },
                                 set: { newValue in
-                                    entity = newValue
+                                    _entity.wrappedValue = newValue
                                     isPresentingTreePicker = false
-                                }))
+                                })
+                )
                         .navigationBarTitle(Entity.entityName),
                 isActive: $isPresentingTreePicker) {
             content()
@@ -80,12 +81,12 @@ class TreePicker_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        let project: Binding<Project?>
-                = try! .constant(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!)
+        let project: Binding<ManagedEntity<Project>>
+                = try! .constant(ManagedEntity(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }))
         NavigationView {
             List {
                 TreePicker(entity: project) {
-                    ProjectView(project: project.wrappedValue)
+                    ProjectView(project: project.wrappedValue.wrappedValue)
                 }
             }
         }

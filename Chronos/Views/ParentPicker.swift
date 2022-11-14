@@ -28,7 +28,7 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
     ///     - entity:
     ///     - content:
     ///
-    init<Content: View>(entity: Binding<Entity>, @ViewBuilder content: @escaping () -> Content) {
+    init<Content: View>(entity: Binding<ManagedEntity<Entity>>, @ViewBuilder content: @escaping () -> Content) {
         _entity = entity
         self.content = { AnyView(content()) }
     }
@@ -39,16 +39,16 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
     ///
     /// - Todo: Document.
     ///
-    @Binding var entity: Entity
+    @Binding @ManagedEntity var entity: Entity?
 
     var body: some View {
         TreePicker(
                 entity: Binding(
-                        get: { entity.parent },
+                        get: { ManagedEntity(entity?.parent) },
                         set: { newValue in
                             // If the new parent is descended from a child of this Entity, move the child to the root
                             // level, to resolve the circle.
-                            if let newValue = newValue {
+                            if let newValue = newValue.wrappedValue {
                                 var parent = newValue
                                 while let grandparent = parent.parent {
                                     if grandparent == entity {
@@ -60,9 +60,8 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
                             }
 
                             // If trying to make something its own parent, outright ignore the change.
-                            if newValue != entity {
-                                entity.parent = newValue
-                            }
+                            guard newValue.wrappedValue != entity else { return }
+                            entity?.parent = newValue.wrappedValue
                         })) {
             content()
         }
@@ -90,12 +89,12 @@ class ParentPicker_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        let project: Binding<Project>
-                = try! .constant(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!)
+        let project: Binding<ManagedEntity<Project>>
+                = try! .constant(ManagedEntity(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }))
         NavigationView {
             List {
                 ParentPicker(entity: project) {
-                    ProjectView(project: project.wrappedValue.parent)
+                    ProjectView(project: project.wrappedValue.wrappedValue?.parent)
                 }
             }
         }

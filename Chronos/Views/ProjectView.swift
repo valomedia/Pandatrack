@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftUI
-import ObservedOptionalObject
 
 
 // MARK: ProjectView
@@ -23,7 +22,7 @@ struct ProjectView: View {
 
     /// The Project being shown by this View.
     ///
-    @ObservedOptionalObject var project: Project?
+    @ObservedObject @ManagedEntity var project: Project?
 
     var body: some View {
         VStack {

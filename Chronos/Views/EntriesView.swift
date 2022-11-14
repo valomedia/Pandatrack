@@ -27,7 +27,7 @@ struct EntriesView: View {
 
     var body: some View {
         ForEach(entries) { entry in
-            NavigationLink(destination: EntryDetailView(entry: .constant(entry))) {
+            NavigationLink(destination: EntryDetailView(entry: entry)) {
                 EntryView(entry: entry)
             }
                     .listRowBackground(entry.theme.backgroundColor)

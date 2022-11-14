@@ -54,7 +54,10 @@ struct EntryTimerView: View {
                         .accessibilityAddTraits(.isHeader)
                 Spacer()
                 HStack {
-                    Button(action: editAction) {
+                    Button(action: {
+                        if entryTimer.entry == nil { env.startEntry() }
+                        editAction()
+                    }) {
                         Image(systemName: "slider.horizontal.3")
                     }
                             .foregroundColor(env.theme.foregroundColor)

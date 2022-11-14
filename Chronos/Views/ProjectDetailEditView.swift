@@ -22,24 +22,26 @@ struct ProjectDetailEditView: View {
 
     /// The Project being modified.
     ///
-    @Binding var project: Project
+    @Binding @ManagedEntity var project: Project?
 
     var body: some View {
-        Form {
+        Form(content: {
             Section("Project") {
-                HStack {
-                    Label("Name", systemImage: "at")
-                    TextField("Project Name", text: $project.name)
-                            .multilineTextAlignment(.trailing)
+                if let _project = Binding<Project>($project.entity) {
+                    HStack {
+                        Label("Name", systemImage: "at")
+                        TextField("Project Name", text: _project.name)
+                                .multilineTextAlignment(.trailing)
+                    }
+                    ThemePicker(selection: $project.entity[\.theme])
                 }
-                ThemePicker(selection: $project.theme)
             }
             Section("Folder") {
                 ParentPicker<Project>(entity: $project) {
-                    ProjectView(project: project.parent)
+                    ProjectView(project: project?.parent)
                 }
             }
-        }
+        })
     }
 
     @FetchRequest()
@@ -65,7 +67,8 @@ class ProjectDetailEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             try! ProjectDetailEditView(
-                    project: .constant(moc.fetch(Project.makeFetchRequest()).first {$0.name == "ACME"}!))
+                    project: .constant(ManagedEntity(moc.fetch(Project.makeFetchRequest()).first {$0.name == "ACME"}))
+            )
                     .environment(\.managedObjectContext, moc)
         }
     }
