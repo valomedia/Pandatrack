@@ -51,6 +51,11 @@ import Combine
     ///
     /// - Todo: Document.
     ///
+    var entity: Wrapped? {
+        get { wrappedValue }
+        set { wrappedValue = newValue }
+    }
+
     var wrappedValue: Wrapped? {
         get {
             _wrappedValue?.primitiveId.flatMap { _ in _wrappedValue }
