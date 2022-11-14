@@ -54,7 +54,7 @@ struct EntryDetailView: View {
 
     /// The Entry being shown.
     ///
-    @State @ManagedEntity var entry: Entry?
+    @ObservedObject @ManagedEntity var entry: Entry?
 
     var body: some View {
         List {
@@ -120,6 +120,15 @@ struct EntryDetailView: View {
                     EntriesView(entries: AnyRandomAccessCollection(history.sorted(by: \.start).reversed()))
                 }
             }
+            Section {
+                Button(role: .destructive, action: { isPresentingConfirmationDialog = true }) {
+                    HStack {
+                        Spacer()
+                        Text("Delete Entry")
+                        Spacer()
+                    }
+                }
+            }
         }
                 .navigationTitle(entry?.name ?? "")
                 .toolbar {
@@ -130,11 +139,22 @@ struct EntryDetailView: View {
                 .modal(entry?.name, isPresented: $isPresentingEditView) {
                     EntryDetailEditView(entry: entry)
                 }
+                .confirmationDialog(
+                        "Are you sure you want to delete this Entry?",
+                        isPresented: $isPresentingConfirmationDialog,
+                        titleVisibility: .visible
+                ) {
+                    Button("Delete Entry", role: .destructive) { entry.map(moc.delete) }
+                }
     }
 
     @EnvironmentObject private var env: ChronosEnvironment
 
     @State private var isPresentingEditView = false
+    @State private var isPresentingConfirmationDialog = false
+
+    @Environment(\.managedObjectContext)
+    private var moc
 
 }
 
@@ -156,6 +176,7 @@ struct EntryDetailView_Previews: PreviewProvider {
         NavigationView {
             try! EntryDetailView(
                     entry: Set(moc.fetch(Entry.makeFetchRequest())).first { $0.name == "Take over the world" })
+                    .environment(\.managedObjectContext, moc)
                     .environmentObject(env)
         }
     }
