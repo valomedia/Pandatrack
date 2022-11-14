@@ -24,15 +24,9 @@ extension Binding {
     ///     - right:
     /// - Returns:
     ///
-    static func ??<Wrapped>(left: Binding<Value>, right: @escaping @autoclosure () -> Value) -> Binding<Value>
-            where Value == Optional<Wrapped> {
-        Binding(
-                get: {
-                    left.wrappedValue ?? right()
-                },
-                set: { newValue in
-                    left.wrappedValue = newValue
-                })
+    static func ??<Type>(left: Binding<Value>, right: @escaping @autoclosure () -> Type) -> Binding<Type>
+            where Value == Type? {
+        Binding<Type>(get: { left.wrappedValue ?? right() }, set: { newValue in left.wrappedValue = newValue })
     }
 
 }
