@@ -79,9 +79,11 @@ class ChronosEnvironment: ObservableObject {
     /// confirmed, or discarded.
     ///
     /// - Todo: Exception handling
+    /// - Returns: A DispatchWorkItem that will do the saving, or nil, if waitingForConfirmation.
     ///
-    func save() {
-        guard !waitingForConfirmation else { return }
+    @discardableResult
+    func save() -> DispatchWorkItem? {
+        guard !waitingForConfirmation else { return nil }
         let scheduledSaveAction = DispatchWorkItem { [weak self] in
             do {
                 try self?.ctx.save()
@@ -94,6 +96,7 @@ class ChronosEnvironment: ObservableObject {
         self.scheduledSaveAction?.cancel()
         self.scheduledSaveAction = scheduledSaveAction
         DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: scheduledSaveAction)
+        return scheduledSaveAction
     }
 
     /// Waits for confirmation before saving any further changes.
@@ -104,8 +107,8 @@ class ChronosEnvironment: ObservableObject {
     /// - Todo: Exception handling
     ///
     func waitForConfirmation() {
+        save()?.perform()
         waitingForConfirmation = true
-        scheduledSaveAction?.perform()
     }
 
     /// Confirm changes.
