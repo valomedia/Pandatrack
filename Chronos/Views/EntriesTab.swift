@@ -37,7 +37,11 @@ struct EntriesTab: View {
                                      """)
                 } else {
                     List {
-                        EntriesView(entries: AnyRandomAccessCollection(entries))
+                        ForEach(entries) { section in
+                            Section(section.id) {
+                                EntriesView(entries: AnyRandomAccessCollection(section))
+                            }
+                        }
                     }
                 }
             }
@@ -57,11 +61,12 @@ struct EntriesTab: View {
     ///
     @State private var isPresentingEditView = false
 
-    @FetchRequest(
+    @SectionedFetchRequest(
+            sectionIdentifier: \.day,
             sortDescriptors: [SortDescriptor(\.start, order: .reverse)],
             predicate: NSPredicate(format: "end != nil"),
             animation: .default)
-    private var entries: FetchedResults<Entry>
+    private var entries: SectionedFetchResults<String, Entry>
 
     @EnvironmentObject private var env: ChronosEnvironment
 

@@ -19,6 +19,16 @@ import CoreData
 @objc(Entry)
 class Entry: NSManagedObject, Item {
 
+    // MARK: - Static properties
+
+    private static let relativeDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .none
+        formatter.doesRelativeDateFormatting = true
+        return formatter
+    }()
+
     // MARK: - Life cycle methods
 
     /// Undocumented.
@@ -109,7 +119,7 @@ class Entry: NSManagedObject, Item {
     ///
     /// - Todo: Document.
     ///
-    public var running: Bool {
+    @objc public var running: Bool {
         end == nil
     }
 
@@ -119,6 +129,14 @@ class Entry: NSManagedObject, Item {
     ///
     public var theme: Theme {
         project?.resolveTheme() ?? Theme.none
+    }
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    @objc public var day: String {
+        Self.relativeDateFormatter.string(from: start)
     }
 
 }
