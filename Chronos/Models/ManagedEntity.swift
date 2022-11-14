@@ -61,6 +61,7 @@ import Combine
             _wrappedValue?.primitiveId.flatMap { _ in _wrappedValue }
         }
         set {
+            self.objectWillChange.send()
             _wrappedValue = newValue
             anyCancellable?.cancel()
             anyCancellable = _wrappedValue?.objectWillChange.sink { [weak self] in
@@ -68,7 +69,7 @@ import Combine
             }
         }
     }
-    @Published private var _wrappedValue: Wrapped?
+    private var _wrappedValue: Wrapped?
 
     var projectedValue: ManagedEntity<Wrapped> { self }
 
