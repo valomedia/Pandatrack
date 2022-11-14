@@ -16,7 +16,7 @@ import Algorithms
 ///
 /// - Todo: Document.
 ///
-protocol Node: Entity, Item {
+protocol Node: Entity, Item, Comparable {
 
     // MARK: - Static properties
 
@@ -62,6 +62,12 @@ extension Node {
     ///
     var path: String {
         [parent?.path, name].compacted().joined(separator: Self.pathSeparator)
+    }
+
+    // MARK: + Comparable
+
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.path < rhs.path
     }
 
 }

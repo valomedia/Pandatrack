@@ -17,27 +17,22 @@ import Combine
 ///
 /// - Todo: Document.
 ///
-@propertyWrapper class ManagedEntity<Wrapped: NSManagedObject>: ObservableObject, ExpressibleByNilLiteral {
+@propertyWrapper
+class ManagedEntity<EntityType: NSManagedObject>: ObservableObject, ExpressibleByNilLiteral, Hashable, Identifiable {
+
+    // MARK: - Class methods
+
+    static func ==(lhs: ManagedEntity<EntityType>, rhs: ManagedEntity<EntityType>) -> Bool {
+        lhs.wrappedValue == rhs.wrappedValue
+    }
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - wrappedValue:
-    ///
-    init(wrappedValue: Wrapped?) {
+    init(wrappedValue: EntityType?) {
         self.wrappedValue = wrappedValue
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - wrappedValue:
-    ///
-    convenience init(_ wrappedValue: Wrapped?) {
+    convenience init(_ wrappedValue: EntityType?) {
         self.init(wrappedValue: wrappedValue)
     }
 
@@ -51,12 +46,12 @@ import Combine
     ///
     /// - Todo: Document.
     ///
-    var entity: Wrapped? {
+    var entity: EntityType? {
         get { wrappedValue }
         set { wrappedValue = newValue }
     }
 
-    var wrappedValue: Wrapped? {
+    var wrappedValue: EntityType? {
         get {
             _wrappedValue?.isFault.else(_wrappedValue)
         }
@@ -69,9 +64,9 @@ import Combine
             }
         }
     }
-    private var _wrappedValue: Wrapped?
+    private var _wrappedValue: EntityType?
 
-    var projectedValue: ManagedEntity<Wrapped> { self }
+    var projectedValue: ManagedEntity<EntityType> { self }
 
     private var anyCancellable: AnyCancellable? = nil
 
@@ -81,9 +76,23 @@ import Combine
     ///
     /// - Todo: Document.
     ///
-    subscript<Value: NSManagedObject & Entity>(_ keyPath: WritableKeyPath<Wrapped, Value?>) -> ManagedEntity<Value> {
+    subscript<Value: NSManagedObject & Entity>(_ keyPath: WritableKeyPath<EntityType, Value?>) -> ManagedEntity<Value> {
         get { ManagedEntity<Value>(wrappedValue?[keyPath: keyPath]) }
         set { wrappedValue?[keyPath: keyPath] = newValue.wrappedValue }
+    }
+
+    func hash(into hasher: inout Hasher) {
+        wrappedValue.hash(into: &hasher)
+    }
+
+}
+
+extension ManagedEntity: Comparable where EntityType: Comparable {
+
+    // MARK: + Comparable
+
+    static func <(lhs: ManagedEntity<EntityType>, rhs: ManagedEntity<EntityType>) -> Bool {
+        lhs.wrappedValue < rhs.wrappedValue
     }
 
 }
