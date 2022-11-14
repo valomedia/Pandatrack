@@ -74,4 +74,36 @@ import Combine
 
     private var anyCancellable: AnyCancellable? = nil
 
+    // MARK: - Methods
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Todo: Remove code duplication.
+    ///
+    subscript<Value: NSManagedObject & Entity>(_ keyPath: WritableKeyPath<Wrapped, Value>) -> ManagedEntity<Value> {
+        get {
+            ManagedEntity<Value>(wrappedValue?[keyPath: keyPath])
+        }
+        set {
+            guard let wrappedValue = newValue.wrappedValue else { return }
+            self.wrappedValue?[keyPath: keyPath] = wrappedValue
+        }
+    }
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Todo: Remove code duplication.
+    ///
+    subscript<Value: NSManagedObject & Entity>(_ keyPath: WritableKeyPath<Wrapped, Value?>) -> ManagedEntity<Value> {
+        get {
+            ManagedEntity<Value>(wrappedValue?[keyPath: keyPath])
+        }
+        set {
+            guard let wrappedValue = newValue.wrappedValue else { return }
+            self.wrappedValue?[keyPath: keyPath] = wrappedValue
+        }
+    }
+
 }
