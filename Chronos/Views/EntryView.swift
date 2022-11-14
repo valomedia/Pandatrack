@@ -23,26 +23,29 @@ struct EntryView: View {
 
     /// The Entry being shown.
     ///
-    @ObservedObject
-    var entry: Entry
+    @ObservedObject @ManagedEntity var entry: Entry?
 
     var body: some View {
-        CardView(
-                title: entry.name,
-                theme: entry.theme,
-                labels: (
-                        (Label(entry.project?.name ?? "No Project", systemImage: "at"),
-                                Label(
-                                        DateComponentsFormatter.briefTimeFormatter.string(from: entry.interval.duration)
-                                                ?? "",
-                                        systemImage: "hourglass")),
-                        (Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
-                                Label(
-                                        RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "",
-                                        systemImage: "clock"))))
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel("Entry")
-                .accessibilityValue(entry.name)
+        if let entry = entry {
+            CardView(
+                    title: entry.name,
+                    theme: entry.theme,
+                    labels: (
+                            (Label(entry.project?.name ?? "No Project", systemImage: "at"),
+                                    Label(
+                                            DateComponentsFormatter.briefTimeFormatter.string(from: entry.interval.duration)
+                                                    ?? "",
+                                            systemImage: "hourglass")),
+                            (Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
+                                    Label(
+                                            RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "",
+                                            systemImage: "clock"))))
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Entry")
+                    .accessibilityValue(entry.name)
+        } else {
+            EmptyView()
+        }
     }
 
 }
