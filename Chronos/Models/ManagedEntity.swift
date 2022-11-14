@@ -17,7 +17,7 @@ import Combine
 ///
 /// - Todo: Document.
 ///
-@propertyWrapper class ManagedEntity<Wrapped: NSManagedObject & Entity>: ObservableObject, ExpressibleByNilLiteral {
+@propertyWrapper class ManagedEntity<Wrapped: NSManagedObject>: ObservableObject, ExpressibleByNilLiteral {
 
     // MARK: - Life cycle methods
 
@@ -58,7 +58,7 @@ import Combine
 
     var wrappedValue: Wrapped? {
         get {
-            _wrappedValue?.primitiveId.flatMap { _ in _wrappedValue }
+            _wrappedValue?.isFault.else(_wrappedValue)
         }
         set {
             self.objectWillChange.send()

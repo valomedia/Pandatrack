@@ -196,7 +196,6 @@ extension {{ entityClassName }}{{ protocol }} {
 
     override func awakeFromInsert() {
         super.awakeFromInsert()
-        primitiveId = UUID()
         primitiveTimestamp = Date()
     }
 

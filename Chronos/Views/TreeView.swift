@@ -40,9 +40,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
         }
         _subtrees = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.name)],
-                predicate: root != nil
-                        ? NSPredicate(format: "parent.id == %@", root!.id as CVarArg)
-                        : NSPredicate(format: "parent == nil")
+                predicate: NSPredicate(format: "parent == %@", root ?? 0 as CVarArg)
         )
     }
 

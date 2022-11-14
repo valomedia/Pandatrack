@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G217" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BuiltinAttributeDeclaration" representedClassName="BuiltinAttributeDeclaration" isAbstract="YES" syncable="YES">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CustomAttributeDeclaration" inverseName="declarations" inverseEntity="CustomAttributeDeclaration"/>
@@ -12,7 +11,6 @@
     </entity>
     <entity name="CurrencyAttributeChoiceRelationship" representedClassName="CurrencyAttributeChoiceRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="CurrencyAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="CurrencyAttributeChoiceDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="currencyAttributeChoiceRelationships" inverseEntity="Project"/>
@@ -29,7 +27,6 @@
     </entity>
     <entity name="CurrencyAttributeListRelationship" representedClassName="CurrencyAttributeListRelationship" syncable="YES">
         <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[CurrencyAttribute]"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyAttributeListDeclaration" inverseName="relationships" inverseEntity="CurrencyAttributeListDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="currencyAttributeListRelationships" inverseEntity="Project"/>
@@ -46,7 +43,6 @@
     </entity>
     <entity name="CurrencyAttributeSingleRelationship" representedClassName="CurrencyAttributeSingleRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="CurrencyAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyAttributeSingleDeclaration" inverseName="relationships" inverseEntity="CurrencyAttributeSingleDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="currencyAttributeRelationships" inverseEntity="Project"/>
@@ -58,7 +54,6 @@
         </uniquenessConstraints>
     </entity>
     <entity name="CustomAttributeDeclaration" representedClassName="CustomAttributeDeclaration" syncable="YES">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="CustomAttributeDeclaration" inverseName="parent" inverseEntity="CustomAttributeDeclaration"/>
@@ -71,7 +66,6 @@
     </entity>
     <entity name="DateAttributeChoiceRelationship" representedClassName="DateAttributeChoiceRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="DateAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="DateAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="DateAttributeChoiceDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="dateAttributeChoiceRelationships" inverseEntity="Project"/>
@@ -88,7 +82,6 @@
     </entity>
     <entity name="DateAttributeListRelationship" representedClassName="DateAttributeListRelationship" syncable="YES">
         <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[DateAttribute]"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="DateAttributeListDeclaration" inverseName="relationships" inverseEntity="DateAttributeListDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="dateAttributeListRelationships" inverseEntity="Project"/>
@@ -105,7 +98,6 @@
     </entity>
     <entity name="DateAttributeSingleRelationship" representedClassName="DateAttributeSingleRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="DateAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="DateAttributeSingleDeclaration" inverseName="relationships" inverseEntity="DateAttributeSingleDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="dateAttributeRelationships" inverseEntity="Project"/>
@@ -118,7 +110,6 @@
     </entity>
     <entity name="Entry" representedClassName="Entry" syncable="YES">
         <attribute name="end" optional="YES" attributeType="Date" valueTransformerName="NSSecureUnarchiveFromV" usesScalarValueType="NO"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="start" attributeType="Date" valueTransformerName="NSSecureUnarchiveFromDataTransformer" usesScalarValueType="NO" customClassName="NSDateInterval"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
@@ -131,7 +122,6 @@
     </entity>
     <entity name="NumberAttributeChoiceRelationship" representedClassName="NumberAttributeChoiceRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="NumberAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="NumberAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="NumberAttributeChoiceDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="numberAttributeChoiceRelationships" inverseEntity="Project"/>
@@ -148,7 +138,6 @@
     </entity>
     <entity name="NumberAttributeListRelationship" representedClassName="NumberAttributeListRelationship" syncable="YES">
         <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[NumberAttribute]"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="NumberAttributeListDeclaration" inverseName="relationships" inverseEntity="NumberAttributeListDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="numberAttributeListRelationships" inverseEntity="Project"/>
@@ -165,7 +154,6 @@
     </entity>
     <entity name="NumberAttributeSingleRelationship" representedClassName="NumberAttributeSingleRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="NumberAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="NumberAttributeSingleDeclaration" inverseName="relationships" inverseEntity="NumberAttributeSingleDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="numberAttributeRelationships" inverseEntity="Project"/>
@@ -182,7 +170,6 @@
     </entity>
     <entity name="PercentageAttributeChoiceRelationship" representedClassName="PercentageAttributeChoiceRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="PercentageAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="PercentageAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="PercentageAttributeChoiceDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="percentageAttributeChoiceRelationships" inverseEntity="Project"/>
@@ -199,7 +186,6 @@
     </entity>
     <entity name="PercentageAttributeListRelationship" representedClassName="PercentageAttributeListRelationship" syncable="YES">
         <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[PercentageAttribute]"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="PercentageAttributeListDeclaration" inverseName="relationships" inverseEntity="PercentageAttributeListDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="percentageAttributeListRelationships" inverseEntity="Project"/>
@@ -216,13 +202,11 @@
     </entity>
     <entity name="PercentageAttributeSingleRelationship" representedClassName="PercentageAttributeSingleRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" minValueString="0" maxValueString="100" customClassName="PercentageAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="PercentageAttributeSingleDeclaration" inverseName="relationships" inverseEntity="PercentageAttributeSingleDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="percentageAttributeRelationships" inverseEntity="Project"/>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" minValueString="1"/>
         <attribute name="theme" optional="YES" attributeType="String" valueTransformerName="" customClassName="Theme">
             <userInfo>
@@ -258,7 +242,6 @@
     </entity>
     <entity name="StringAttributeChoiceRelationship" representedClassName="StringAttributeChoiceRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="StringAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="StringAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="StringAttributeChoiceDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="stringAttributeChoiceRelationships" inverseEntity="Project"/>
@@ -275,7 +258,6 @@
     </entity>
     <entity name="StringAttributeListRelationship" representedClassName="StringAttributeListRelationship" syncable="YES">
         <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[StringAttribute]"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="StringAttributeListDeclaration" inverseName="relationships" inverseEntity="StringAttributeListDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="stringAttributeListRelationships" inverseEntity="Project"/>
@@ -292,7 +274,6 @@
     </entity>
     <entity name="StringAttributeSingleRelationship" representedClassName="StringAttributeSingleRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="StringAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="StringAttributeSingleDeclaration" inverseName="relationships" inverseEntity="StringAttributeSingleDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="stringAttributeRelationships" inverseEntity="Project"/>
@@ -304,7 +285,6 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" minValueString="1"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="Tag" inverseName="parent" inverseEntity="Tag"/>
@@ -317,7 +297,6 @@
     </entity>
     <entity name="URLAttributeChoiceRelationship" representedClassName="URLAttributeChoiceRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="URLAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="URLAttributeChoiceDeclaration" inverseName="relationships" inverseEntity="URLAttributeChoiceDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="urlAttributeChoiceRelationships" inverseEntity="Project"/>
@@ -334,7 +313,6 @@
     </entity>
     <entity name="URLAttributeListRelationship" representedClassName="URLAttributeListRelationship" syncable="YES">
         <attribute name="attributes" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[URLAttribute]"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="URLAttributeListDeclaration" inverseName="relationships" inverseEntity="URLAttributeListDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="urlAttributeListRelationships" inverseEntity="Project"/>
@@ -345,7 +323,6 @@
     </entity>
     <entity name="URLAttributeSingleRelationship" representedClassName="URLAttributeSingleRelationship" syncable="YES">
         <attribute name="attribute" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="URLAttribute"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="declaration" maxCount="1" deletionRule="Nullify" destinationEntity="URLAttributeSingleDeclaration" inverseName="relationships" inverseEntity="URLAttributeSingleDeclaration"/>
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="urlAttributeRelationships" inverseEntity="Project"/>

@@ -16,7 +16,7 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-protocol Entity: Identifiable, Hashable {
+protocol Entity: Hashable {
     associatedtype FetchRequestResultType: NSFetchRequestResult
 
     // MARK: - Static properties
@@ -46,18 +46,6 @@ protocol Entity: Identifiable, Hashable {
     static func makeFetchRequest() -> NSFetchRequest<FetchRequestResultType>
 
     // MARK: - Properties
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    var primitiveId: UUID? { get set }
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    var id: UUID { get set }
 
     /// Undocumented.
     ///
