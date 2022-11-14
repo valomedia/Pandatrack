@@ -33,7 +33,7 @@ struct EntryView: View {
                     labels: (
                             (Label(entry.project?.name ?? "No Project", systemImage: "at"),
                                     Label(
-                                            DateComponentsFormatter.briefTimeFormatter.string(from: entry.interval.duration)
+                                            DateComponentsFormatter.fullTimeFormatter.string(from: entry.interval.duration)
                                                     ?? "",
                                             systemImage: "hourglass")),
                             (Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
