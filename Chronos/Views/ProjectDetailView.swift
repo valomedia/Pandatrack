@@ -34,7 +34,7 @@ struct ProjectDetailView: View {
                         isPresentingEditView = true
                     }
                 }
-                .modal(env, title: project?.name, isPresented: $isPresentingEditView) {
+                .modal(project?.name, isPresented: $isPresentingEditView) {
                     ProjectDetailEditView(project: $project)
                 }
     }

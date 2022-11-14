@@ -127,7 +127,7 @@ struct EntryDetailView: View {
                         isPresentingEditView = true
                     }
                 }
-                .modal(env, title: entry?.name, isPresented: $isPresentingEditView) {
+                .modal(entry?.name, isPresented: $isPresentingEditView) {
                     EntryDetailEditView(entry: entry)
                 }
     }

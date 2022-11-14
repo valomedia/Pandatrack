@@ -55,7 +55,7 @@ struct ContentView: View {
                             .background(env.theme.backgroundColor)
                             .foregroundColor(env.theme.foregroundColor)
                 }
-                .modal(env, title: entryTimer.entry?.name, isPresented: $isPresentingEditView) {
+                .modal(entryTimer.entry?.name, isPresented: $isPresentingEditView) {
                     EntryDetailEditView(entry: entryTimer.entry)
                 }
     }
