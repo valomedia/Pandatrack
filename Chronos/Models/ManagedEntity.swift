@@ -17,7 +17,7 @@ import Combine
 ///
 /// - Todo: Document.
 ///
-@propertyWrapper class ManagedEntity<Wrapped: NSManagedObject & Entity>: ObservableObject {
+@propertyWrapper class ManagedEntity<Wrapped: NSManagedObject & Entity>: ObservableObject, ExpressibleByNilLiteral {
 
     // MARK: - Life cycle methods
 
@@ -39,6 +39,10 @@ import Combine
     ///
     convenience init(_ wrappedValue: Wrapped?) {
         self.init(wrappedValue: wrappedValue)
+    }
+
+    required convenience init(nilLiteral: ()) {
+        self.init(nil)
     }
 
     // MARK: - Properties
