@@ -42,22 +42,8 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     @Binding @ManagedEntity var entity: Entity?
 
     var body: some View {
-        NavigationLink(
-                destination: TreeView(
-                        entity: Binding(
-                                get: { _entity.wrappedValue },
-                                set: { newValue in
-                                    _entity.wrappedValue = newValue
-                                    isPresentingTreePicker = false
-                                })
-                )
-                        .navigationBarTitle(Entity.entityName),
-                isActive: $isPresentingTreePicker) {
-            content()
-        }
+        NavigationLink(destination: TreeView(entity: $entity).navigationBarTitle(Entity.entityName)) { content() }
     }
-
-    @State private var isPresentingTreePicker = false
 
     // MARK: - Methods
 

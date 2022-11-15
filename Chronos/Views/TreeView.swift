@@ -98,7 +98,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                     Wrapper {
                         if (root == nil && content == nil) {
                             Section {
-                                Button(action: { _entity.wrappedValue = ManagedEntity(nil) }) {
+                                Button(action: { select() }) {
                                     Label("Clear \(Entity.entityName)", systemImage: "xmark.circle.fill")
                                 }
                             }
@@ -115,7 +115,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                                     }
                                             .contentShape(Rectangle())
                                             .if(content == nil) { view in
-                                                view.onTapGesture { _entity.wrappedValue = ManagedEntity(node) }
+                                                view.onTapGesture { select(node) }
                                             }
                                             .ifNotNil(content) { label, destination in
                                                 NavigationLink(destination: destination(node)) { label }
@@ -140,6 +140,15 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
 
     @FetchRequest private var subtrees: FetchedResults<Entity>
 
+    // MARK: - Methods
+
+    @Environment(\.dismiss)
+    private var dismiss
+
+    private func select(_ entity: Entity? = nil) {
+        _entity.wrappedValue = ManagedEntity(entity)
+        dismiss()
+    }
 }
 
 
