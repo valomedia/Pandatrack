@@ -104,6 +104,7 @@ struct EntryDetailView: View {
                                 .accessibilityElement(children: .combine)
                     }
                 }
+                        .onTapGesture { isPresentingEditView = true }
             }
             Section(header: Text("Project")) {
                 EntryProjectEditView(project: $entry[\.project])
