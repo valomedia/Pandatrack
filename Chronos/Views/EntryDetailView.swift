@@ -105,15 +105,11 @@ struct EntryDetailView: View {
                     }
                 }
             }
-            if let project = entry?.project {
-                Section(header: Text("Project")) {
-                    ProjectView(project: project)
-                }
+            Section(header: Text("Project")) {
+                EntryProjectEditView(project: $entry[\.project])
             }
-            if let tags = entry?.tags, !tags.isEmpty {
-                Section(header: Text("Tags")) {
-                    TagsView(tags: AnyRandomAccessCollection(tags.sorted(by: \.path)))
-                }
+            Section(header: Text("Tags")) {
+                EntryTagsEditView(tags: $entry.entity[\.tags] ?? [])
             }
             if let history = entry?.project?.entries, !history.isEmpty {
                 Section(header: Text("History")) {
