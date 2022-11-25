@@ -23,7 +23,7 @@ struct EntriesView: View {
 
     /// The Entries being shown by this View.
     ///
-    let entries: AnyRandomAccessCollection<Entry>
+    @ManagedEntities var entries: AnyRandomAccessCollection<Entry>
 
     var body: some View {
         ForEach(entries) { entry in
@@ -67,8 +67,11 @@ class EntriesView_Previews: PreviewProvider {
         NavigationView {
             List {
                 try! EntriesView(
-                        entries: AnyRandomAccessCollection(
-                                moc.fetch(Entry.makeFetchRequest()).filter({ $0.end != nil }).sorted(by: \.start)))
+                        entries: ManagedEntities(
+                                AnyRandomAccessCollection(
+                                        moc.fetch(Entry.makeFetchRequest())
+                                                .filter { $0.end != nil }
+                                                .sorted(by: \.start))))
                         .environment(\.managedObjectContext, moc)
                         .environmentObject(env)
             }

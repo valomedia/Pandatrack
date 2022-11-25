@@ -39,7 +39,7 @@ struct EntriesTab: View {
                     List {
                         ForEach(entries) { section in
                             Section(section.id) {
-                                EntriesView(entries: AnyRandomAccessCollection(section))
+                                EntriesView(entries: ManagedEntities(AnyRandomAccessCollection(section)))
                             }
                         }
                     }

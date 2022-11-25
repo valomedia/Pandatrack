@@ -107,6 +107,7 @@
 		E9E97874B190778B39275B84 /* ChronosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97674D533CCC5728BB87B /* ChronosApp.swift */; };
 		E9E97888B302BA018FE7A040 /* Binding+map.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9715F8D6AF0D49A5F6114 /* Binding+map.swift */; };
 		E9E978BB3C43BC01E4329EFF /* StringAttributeSingleDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E974689F5B0AA127E631D6 /* StringAttributeSingleDeclaration+CoreDataClass.swift */; };
+		E9E978C4BFA12CD74DC6358F /* ManagedEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E978AE106D15ADC94B7182 /* ManagedEntities.swift */; };
 		E9E978F3BDD4F1F77A62B473 /* CustomAttributeDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97BD6D4E7CD4773EE9557 /* CustomAttributeDeclaration+CoreDataClass.swift */; };
 		E9E9790C61CF4BB4F27F9111 /* StringAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97A86AE87113996DA28B4 /* StringAttribute.swift */; };
 		E9E97931F28B5455D849B2A0 /* CurrencyAttributeChoiceRelationship+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97A3F011ACE7F93F0355A /* CurrencyAttributeChoiceRelationship+CoreDataClass.swift */; };
@@ -296,6 +297,7 @@
 		E9E9789195C48D7D4753E638 /* CurrencyAttributeListRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrencyAttributeListRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E97899C875E85AF62E1FB1 /* PercentageAttributeListRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PercentageAttributeListRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E978A9CB29B9E6028FE5AB /* BuiltinAttributeDeclaration+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BuiltinAttributeDeclaration+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E9E978AE106D15ADC94B7182 /* ManagedEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedEntities.swift; sourceTree = "<group>"; };
 		E9E978BB3FA00ECABDAA2138 /* DateInterval+yesterday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateInterval+yesterday.swift"; sourceTree = "<group>"; };
 		E9E978BEA1961FD3029535E1 /* DateAttributeSingleRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateAttributeSingleRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E978CC49F166056076DBE6 /* OrderedSetBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedSetBuilder.swift; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 				E9E97C9D9F6CDEA7956407EC /* Tag+CoreDataClass.swift */,
 				E9E973E3024557C05E5A9AB5 /* NSManagedObject+Identifiable.swift */,
 				E9E9743887110ABAB64F6437 /* Sorted.swift */,
+				E9E978AE106D15ADC94B7182 /* ManagedEntities.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1034,6 +1037,7 @@
 				E9E971FDB2F15E3537771274 /* NSManagedObject+Identifiable.swift in Sources */,
 				E9E97C63F6F1B3B6864523BE /* Sorted.swift in Sources */,
 				E9E97F91F64DC73145D0689C /* Optional+Comparable.swift in Sources */,
+				E9E978C4BFA12CD74DC6358F /* ManagedEntities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

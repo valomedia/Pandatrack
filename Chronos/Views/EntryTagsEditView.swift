@@ -18,11 +18,20 @@ import SwiftUI
 ///
 struct EntryTagsEditView: View {
 
+    // MARK: - Life cycle methods
+
+    init(tags: Binding<Set<Tag>>) {
+        _tags = Binding(
+                get: { ManagedEntities(AnyRandomAccessCollection(tags.wrappedValue.map{ $0 })) },
+                set: { newValue in tags.wrappedValue = Set(newValue.wrappedValue) }
+        )
+    }
+
     // MARK: - Properties
 
     /// The Set of Tags being edited.
     ///
-    @Binding var tags: Set<Tag>
+    @Binding @ManagedEntities var tags: AnyRandomAccessCollection<Tag>
 
     var body: some View {
         ForEach(tags.sorted(by: \.path)) { tag in
@@ -60,7 +69,7 @@ struct EntryTagsEditView: View {
             guard newTagPath != "" else { return }
             let tag = Tag.build(moc, fromPath: newTagPath)
             newTagPath = ""
-            tags.insert(tag)
+            tags = AnyRandomAccessCollection(tags + [tag])
         }
     }
 
