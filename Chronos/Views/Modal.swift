@@ -58,7 +58,7 @@ struct Modal<Content: View, S: StringProtocol>: View {
 
     @EnvironmentObject private var env: ChronosEnvironment
 
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss)
+    private var dismiss
 
-    // MARK: - Methods
 }

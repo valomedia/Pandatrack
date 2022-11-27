@@ -23,7 +23,7 @@ struct EntryView: View {
 
     /// The Entry being shown.
     ///
-    @ObservedObject @ManagedEntity var entry: Entry?
+    @ObservedObject @ManagedEntity var entry: CompletedEntry?
 
     var body: some View {
         if let entry = entry {
@@ -61,12 +61,8 @@ struct EntryView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
-        try! EntryView(entry: Set(moc.fetch(Entry.makeFetchRequest())).first { $0.name == "Take over the world" }!)
+        try! EntryView(entry: Set(moc.fetch(CompletedEntry.makeFetchRequest())).first { $0.name == "Take over the world" }!)
                 .previewLayout(.fixed(width: 400, height: 60))
     }
 }

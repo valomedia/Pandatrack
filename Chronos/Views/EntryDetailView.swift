@@ -54,19 +54,19 @@ struct EntryDetailView: View {
 
     /// The Entry being shown.
     ///
-    @ObservedObject @ManagedEntity var entry: Entry?
+    @ObservedObject @ManagedEntity var entry: CompletedEntry?
 
     var body: some View {
         List {
             if let entry = entry {
                 Section(header: Text("Time Entry")) {
-                    Button(action: { env.startEntry(continueFrom: entry) }) {
+                    Button(action: { entryTimer.track(continueFrom: entry) }) {
                         HStack {
                             Label("Continue", systemImage: "timer")
                                     .font(.headline)
                                     .foregroundColor(.accentColor)
                             Spacer()
-                            Text(RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "")
+                            Text(RelativeDateTimeFormatter.formatter.string(for: entry.start) ?? "")
                                     .accessibilityHidden(true)
                             Image(systemName: "play.fill")
                                     .padding(.leading)
@@ -82,27 +82,20 @@ struct EntryDetailView: View {
                             .accessibilityElement(children: .ignore)
                             .accessibilityLabel("Start Time")
                             .accessibilityValue(Self.longDateFormatter.string(from: entry.start))
-                    if let end = entry.end {
-                        HStack {
-                            Label("End Time", systemImage: "clock")
-                            Spacer()
-                            Text(Self.shortDateFormatter.string(from: end))
-                        }
-                                .accessibilityElement(children: .ignore)
-                                .accessibilityLabel("End Time")
-                                .accessibilityValue(Self.longDateFormatter.string(from: end))
+                    HStack {
+                        Label("End Time", systemImage: "clock")
+                        Spacer()
+                        Text(Self.shortDateFormatter.string(from: entry.end))
                     }
-                    if
-                            let duration = entry.interval.duration,
-                            let durationString = Self.positionalDateComponentsFormatter.string(from: duration),
-                            entry.end != nil {
-                        HStack {
-                            Label("Duration", systemImage: "hourglass")
-                            Spacer()
-                            Text(durationString)
-                        }
-                                .accessibilityElement(children: .combine)
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel("End Time")
+                            .accessibilityValue(Self.longDateFormatter.string(from: entry.end))
+                    HStack {
+                        Label("Duration", systemImage: "hourglass")
+                        Spacer()
+                        Text(Self.positionalDateComponentsFormatter.string(from: entry.interval.duration) ?? "")
                     }
+                            .accessibilityElement(children: .combine)
                 }
                         .onTapGesture { isPresentingEditView = true }
             }
@@ -112,7 +105,9 @@ struct EntryDetailView: View {
             Section(header: Text("Tags")) {
                 EntryTagsEditView(tags: $entry.entity[\.tags] ?? [])
             }
-            if let history = entry?.project?.entries, !history.isEmpty {
+            if
+                    let history = entry?.project?.entries.map({ entry in entry as? CompletedEntry }).compacted(),
+                    !history.isEmpty {
                 Section(header: Text("History")) {
                     EntriesView(
                             entries: ManagedEntities(AnyRandomAccessCollection(history.sorted(by: \.start).reversed())))
@@ -146,7 +141,7 @@ struct EntryDetailView: View {
                 }
     }
 
-    @EnvironmentObject private var env: ChronosEnvironment
+    @EnvironmentObject private var entryTimer: EntryTimer
 
     @State private var isPresentingEditView = false
     @State private var isPresentingConfirmationDialog = false
@@ -173,7 +168,7 @@ struct EntryDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             try! EntryDetailView(
-                    entry: Set(moc.fetch(Entry.makeFetchRequest())).first { $0.name == "Take over the world" })
+                    entry: Set(moc.fetch(CompletedEntry.makeFetchRequest())).first { $0.name == "Take over the world" })
                     .environment(\.managedObjectContext, moc)
                     .environmentObject(env)
         }

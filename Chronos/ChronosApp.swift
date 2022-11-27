@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 import SwiftUI
 
 
@@ -38,25 +39,11 @@ struct ChronosApp: App {
     var body: some Scene {
         WindowGroup {
             #if DEBUG && targetEnvironment(simulator)
-            ContentView_Previews.previews
+            ChronosView_Previews.previews
             #else
             ChronosView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    .environmentObject(chronosEnvironment)
             #endif
         }
     }
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    let persistenceController = PersistenceController.shared
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    @StateObject private var chronosEnvironment = ChronosEnvironment(PersistenceController.shared.container.viewContext)
 
 }

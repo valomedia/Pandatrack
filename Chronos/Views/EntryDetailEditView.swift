@@ -40,17 +40,21 @@ struct EntryDetailEditView: View {
                 if let entry = entry, let _entry = Binding<Entry>($entry.entity) {
                     TextField("Name", text: _entry.name)
                             .multilineTextAlignment(.leading)
-                    DatePicker("Start", selection: _entry.interval.start, displayedComponents: [.date, .hourAndMinute])
-                    if entry.end != nil {
-                        DatePicker("End", selection: _entry.interval.end, displayedComponents: [.date, .hourAndMinute])
+                    DatePicker("Start", selection: _entry.start, displayedComponents: [.date, .hourAndMinute])
+                    if let _entry = Binding<CompletedEntry>(
+                            Binding<CompletedEntry?>(
+                                    get: { entry as? CompletedEntry },
+                                    set: { newValue in self.entry = newValue })
+                    ) {
+                        DatePicker("End", selection: _entry.end, displayedComponents: [.date, .hourAndMinute])
                         HStack {
-                            Slider(value: _entry.interval.duration, in: 5 * 60...4 * 60 * 60, step: 5 * 60)
+                            Slider(value: _entry.duration, in: 5 * 60...4 * 60 * 60, step: 5 * 60)
                             Spacer()
                             Text(
                                     String(
                                             format: "%dh %02dm",
-                                            Int(entry.interval.duration / 60 / 60),
-                                            Int(entry.interval.duration) / 60 % 60))
+                                            Int(entry.duration / 60 / 60),
+                                            Int(entry.duration) / 60 % 60))
                                     .font(.system(.body, design: .monospaced))
                         }
                                 .accessibilityHidden(true)

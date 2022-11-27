@@ -22,9 +22,7 @@ class BuiltinAttributeDeclaration: NSManagedObject, AttributeDeclaration {
     // MARK: - Life cycle methods
 
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
-        guard !entity.isAbstract else {
-            fatalError("init(entity:insertInto:) has not been implemented")
-        }
+        guard !entity.isAbstract else { fatalError("init(entity:insertInto:) has not been implemented") }
         super.init(entity: entity, insertInto: context)
     }
 

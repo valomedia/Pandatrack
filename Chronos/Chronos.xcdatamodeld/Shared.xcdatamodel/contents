@@ -5,6 +5,9 @@
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CustomAttributeDeclaration" inverseName="declarations" inverseEntity="CustomAttributeDeclaration"/>
     </entity>
+    <entity name="CompletedEntry" representedClassName="CompletedEntry" parentEntity="Entry" syncable="YES">
+        <attribute name="end" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <entity name="CurrencyAttributeChoiceDeclaration" representedClassName="CurrencyAttributeChoiceDeclaration" parentEntity="BuiltinAttributeDeclaration" syncable="YES">
         <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[CurrencyAttribute]"/>
         <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyAttributeChoiceRelationship" inverseName="declaration" inverseEntity="CurrencyAttributeChoiceRelationship"/>
@@ -108,8 +111,7 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="Entry" representedClassName="Entry" syncable="YES">
-        <attribute name="end" optional="YES" attributeType="Date" valueTransformerName="NSSecureUnarchiveFromV" usesScalarValueType="NO"/>
+    <entity name="Entry" representedClassName="Entry" isAbstract="YES" syncable="YES">
         <attribute name="name" attributeType="String"/>
         <attribute name="start" attributeType="Date" valueTransformerName="NSSecureUnarchiveFromDataTransformer" usesScalarValueType="NO" customClassName="NSDateInterval"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
@@ -236,6 +238,7 @@
         <relationship name="urlAttributeListRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeListRelationship" inverseName="source" inverseEntity="URLAttributeListRelationship"/>
         <relationship name="urlAttributeRelationships" toMany="YES" deletionRule="Cascade" destinationEntity="URLAttributeSingleRelationship" inverseName="source" inverseEntity="URLAttributeSingleRelationship"/>
     </entity>
+    <entity name="RunningEntry" representedClassName="RunningEntry" parentEntity="Entry" syncable="YES"/>
     <entity name="StringAttributeChoiceDeclaration" representedClassName="StringAttributeChoiceDeclaration" parentEntity="BuiltinAttributeDeclaration" syncable="YES">
         <attribute name="choices" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[StringAttribute]"/>
         <relationship name="relationships" toMany="YES" deletionRule="Cascade" destinationEntity="StringAttributeChoiceRelationship" inverseName="declaration" inverseEntity="StringAttributeChoiceRelationship"/>

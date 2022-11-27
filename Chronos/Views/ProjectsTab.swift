@@ -22,10 +22,7 @@ struct ProjectsTab: View {
 
     var body: some View {
         NavigationView {
-            TreeView<Project> { project in
-                ProjectDetailView(project: project)
-            }
-                .navigationBarTitle("Projects")
+            TreeView<Project> { project in ProjectDetailView(project: project) }.navigationBarTitle("Projects")
         }
     }
 
@@ -43,9 +40,7 @@ class ProjectsTab_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        ProjectsTab()
-                .environment(\.managedObjectContext, moc)
-                .environmentObject(env)
+        ProjectsTab().environment(\.managedObjectContext, moc)
     }
 
 }

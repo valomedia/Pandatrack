@@ -96,9 +96,9 @@ class ParentPicker_Previews: PreviewProvider {
                 ParentPicker(entity: project) {
                     ProjectView(project: project.wrappedValue.wrappedValue?.parent)
                 }
+                        .environment(\.managedObjectContext, moc)
             }
         }
-                .environment(\.managedObjectContext, moc)
     }
 
 }

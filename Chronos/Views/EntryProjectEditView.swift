@@ -60,7 +60,6 @@ class EntryProjectEditView_Previews: PreviewProvider {
                         project: .constant(
                                 ManagedEntity(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }))
                 )
-                        .environment(\.managedObjectContext, moc)
             }
         }
     }

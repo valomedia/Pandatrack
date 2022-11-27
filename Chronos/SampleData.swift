@@ -12,7 +12,7 @@ import CoreData
 
 // MARK: Entry
 
-extension Entry {
+extension CompletedEntry {
 
     // MARK: + sampleData
 
@@ -24,21 +24,21 @@ extension Entry {
     ///     - projects:
     ///     - tags:
     @discardableResult
-    @SetBuilder<Entry>
-    static func sampleData(for context: NSManagedObjectContext) throws -> Set<Entry> {
+    @SetBuilder<CompletedEntry>
+    static func sampleData(for context: NSManagedObjectContext) throws -> Set<CompletedEntry> {
         let projects = try Set(context.fetch(Project.makeFetchRequest()))
         let tags = try Set(context.fetch(Tag.makeFetchRequest()))
 
         let theDayBefore = Calendar.current.date(byAdding: .day, value: -1, to: Date.yesterday)!
 
-        Entry(
+        CompletedEntry(
                 context,
                 name: "Thingamaboob development",
                 interval: DateInterval(
                         start: Calendar.current.date(bySettingHour: 09, minute: 00, second: 00, of: theDayBefore)!,
                         end:   Calendar.current.date(bySettingHour: 12, minute: 00, second: 00, of: theDayBefore)!),
                 project: projects.first { $0.name == "Transmogrifier"})
-        Entry(
+        CompletedEntry(
                 context,
                 name: "Work on top secret gizmo",
                 interval: DateInterval(
@@ -46,7 +46,7 @@ extension Entry {
                         end:   Calendar.current.date(bySettingHour: 15, minute: 00, second: 00, of: theDayBefore)!),
                 project: projects.first { $0.name == "Transmogrifier" },
                 tags: tags.filter { $0.name == "Secret" })
-        Entry(
+        CompletedEntry(
                 context,
                 name: "Conference call",
                 interval: DateInterval(
@@ -54,7 +54,7 @@ extension Entry {
                         end:   Calendar.current.date(bySettingHour: 16, minute: 45, second: 00, of: theDayBefore)!),
                 project: projects.first { $0.name == "Tailspin Toys" },
                 tags: tags.filter { $0.name == "Client Work" })
-        Entry(
+        CompletedEntry(
                 context,
                 name: "Meeting of the secret illuminati",
                 interval: DateInterval(
@@ -62,7 +62,7 @@ extension Entry {
                         end:   Calendar.current.date(bySettingHour: 22, minute: 30, second: 00, of: theDayBefore)!),
                 project: projects.first { $0.name == "Froobnicator" },
                 tags: tags.filter { $0.name == "Secret" })
-        Entry(
+        CompletedEntry(
                 context,
                 name: "Conference call",
                 interval: DateInterval(
@@ -70,14 +70,14 @@ extension Entry {
                         end:   Calendar.current.date(bySettingHour: 11, minute: 00, second: 00, of: Date.yesterday)!),
                 project: projects.first { $0.name == "Froobnicator" },
                 tags: tags.filter { $0.name == "Secret" || $0.name == "Client Work" })
-        Entry(
+        CompletedEntry(
                 context,
                 name: "Start development",
                 interval: DateInterval(
                         start: Calendar.current.date(bySettingHour: 11, minute: 00, second: 00, of: Date.yesterday)!,
                         end:   Calendar.current.date(bySettingHour: 13, minute: 00, second: 00, of: Date.yesterday)!),
                 project: projects.first { $0.name == "Chronos" })
-        Entry(
+        CompletedEntry(
                 context,
                 name: "Touch base",
                 interval: DateInterval(
@@ -85,7 +85,7 @@ extension Entry {
                         end:   Calendar.current.date(bySettingHour: 14, minute: 15, second: 00, of: Date.yesterday)!),
                 project: projects.first { $0.name == "Tailspin Toys" },
                 tags: tags.filter { $0.name == "Client Work" })
-        Entry(
+        CompletedEntry(
                 context,
                 name: "Take over the world",
                 interval: DateInterval(

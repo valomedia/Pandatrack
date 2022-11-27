@@ -94,10 +94,7 @@ struct TagsEditView_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            List {
-                try! EntryTagsEditView(tags: .constant(Set(moc.fetch(Tag.makeFetchRequest()))))
-                        .environment(\.managedObjectContext, moc)
-            }
+            List { try! EntryTagsEditView(tags: .constant(Set(moc.fetch(Tag.makeFetchRequest())))) }
         }
     }
 

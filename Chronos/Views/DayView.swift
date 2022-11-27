@@ -36,11 +36,8 @@ struct DayView: View {
             predicate = NSPredicate(format: "start > %@ && end < %@", day.start as NSDate, day.end as NSDate)
         } else {
             predicate = NSPredicate(format: "start > %@", Date.today as NSDate)
-
-            // If we are showing today, we need to observe the EntryTimer.
-            _entryTimer = ObservedOptionalObject<EntryTimer>(initialValue: EntryTimer.shared)
         }
-        _entries = FetchRequest<Entry>(sortDescriptors: [SortDescriptor(\.start)], predicate: predicate)
+        _entries = FetchRequest<CompletedEntry>(sortDescriptors: [SortDescriptor(\.start)], predicate: predicate)
     }
 
     // MARK: - Properties
@@ -58,7 +55,7 @@ struct DayView: View {
                                         .accessibilityLabel("Total time tracked")
                                         .accessibilityValue($1)
                             }
-                            .foregroundStyle(env.theme.foregroundColor)
+                            .foregroundStyle(entryTimer.theme.foregroundColor)
                 }
                 .overlay {
                     ForEach(entries) { entry in
@@ -74,11 +71,11 @@ struct DayView: View {
     ///
     /// This gets all time entries that started after the start of the day and ended before the day.
     ///
-    @FetchRequest private var entries: FetchedResults<Entry>
+    @FetchRequest private var entries: FetchedResults<CompletedEntry>
 
-    @EnvironmentObject private var env: ChronosEnvironment
-
-    @ObservedOptionalObject private var entryTimer: EntryTimer?
+    // This will cause the View to repaint every second while an Entry is running, which is really only necessary for
+    // the TodayView, but there doesn't seem to be a trivial way to optionally depend on an EnvironmentObject.
+    @EnvironmentObject private var entryTimer: EntryTimer
 
     private let day: DateInterval
 
@@ -97,9 +94,9 @@ class DayView_Previews: PreviewProvider {
 
     static var previews: some View {
         DayView(DateInterval.yesterday)
-                .environmentObject(env)
+                .environmentObject(entryTimer)
                 .environment(\.managedObjectContext, moc)
-                .background(env.theme.backgroundColor)
+                .background(entryTimer.theme.backgroundColor)
                 .previewLayout(.sizeThatFits)
     }
 

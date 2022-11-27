@@ -18,17 +18,34 @@ class EntryTimer: ObservableObject {
 
     // MARK: - Static properties
 
-    /// The EntryTimer singleton instance.
+    /// Undocumented.
     ///
-    static var shared = EntryTimer()
+    /// - Todo: Document.
+    ///
+    static let preview: EntryTimer? = {
+        let moc = PersistenceController.preview?.container.viewContext
+        let entryTimer = moc.map(EntryTimer.init)
+        return entryTimer
+    }()
 
     // MARK: - Life cycle methods
 
-    fileprivate init() {
-        zero()
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters
+    ///     - moc:
+    ///
+    init(_ moc: NSManagedObjectContext) {
+        self.moc = moc
+        reset()
     }
 
     // MARK: - Properties
+
+    /// The Theme to use.
+    ///
+    var theme: Theme { runningEntry?.theme ?? Theme.none }
 
     /// The PomodoroTimer for this entry.
     ///
@@ -60,15 +77,21 @@ class EntryTimer: ObservableObject {
     /// This will reflect whether the timer is currently active. This only shows whether the EntryTimer is currently
     /// updating its fields and notifying subscribers once per second. It has nothing to do with the state of the
     /// actual Entry. In order to figure out whether the EntryTimer is currently tracking an Entry, check whether
-    /// `entry` is set.
+    /// `runningEntry` is set.
     ///
     @Published var timerStopped = true
 
     /// The Entry that is running.
     ///
-    @Published var entry: Entry?
+    var runningEntry: RunningEntry? {
+        get { ManagedEntity(_runningEntry).entity }
+        set { _runningEntry = newValue }
+    }
+    @Published private var _runningEntry: RunningEntry?
 
+    private let moc: NSManagedObjectContext
     private let frequency = 1.0 / 60.0
+
     private var timer: Timer?
 
     // MARK: - Methods
@@ -76,18 +99,23 @@ class EntryTimer: ObservableObject {
     /// Start a given Entry.
     ///
     /// This will stop the current Entry if one is running, removing it from the context if it was unnamed and start
-    /// tracking the given Entry.
+    /// tracking the given Entry. Undo management will be temporarily paused while creating the Entry, to make sure no
+    /// undo operation is created, since undoing changes is not supposed to mess with the running Entry. For this
+    /// reason the Entry is passed as an autoclosure. It is imperative that the Entry only be created upon evaluation
+    /// of the closure!
     ///
     /// - Parameters:
-    ///     - entry: The Entry to start tracking.
-    /// - Returns: The EntryTimer
+    ///     - context: The NSManagedObjectContext (used for undo-management).
+    ///     - entry: A closure that will create the Entry to track.
+    /// - Returns: The new Entry
     ///
-    @discardableResult func track(_ entry: Entry) -> EntryTimer {
+    @discardableResult func track(_ entry: @autoclosure () -> RunningEntry?) -> RunningEntry {
         reset()
-        self.entry = entry
-        pomodoroTimer = PomodoroTimer(startDate: entry.start)
+        let newEntry = moc.noUndo(entry) ?? moc.noUndo { RunningEntry(moc) }
+        runningEntry = newEntry
+        pomodoroTimer = PomodoroTimer(startDate: newEntry.start)
         update()
-        return self
+        return newEntry
     }
 
     /// Start a new Entry.
@@ -97,21 +125,19 @@ class EntryTimer: ObservableObject {
     ///
     /// - Todo: Document.
     /// - Parameters:
-    ///     - context:
     ///     - name:
     ///     - start:
     ///     - project:
     ///     - tags:
-    /// - Returns: The EntryTimer
+    /// - Returns: The new Entry
     ///
     @discardableResult func track(
-            _ context: NSManagedObjectContext,
             name: String? = nil,
             start: Date? = nil,
             project: Project? = nil,
             tags: Set<Tag>? = nil
-    ) -> EntryTimer {
-        track(Entry(context, name: name, start: start, project: project, tags: tags))
+    ) -> RunningEntry {
+        track(RunningEntry(moc, name: name, start: start, project: project, tags: tags))
     }
 
     /// Continue a given Entry.
@@ -120,24 +146,32 @@ class EntryTimer: ObservableObject {
     /// tracking.
     ///
     /// - Parameters:
-    ///     - context: The NSManagedObjectContext to add the new Entry to
     ///     - entry: The Entry to continue
-    /// - Returns: The EntryTimer
+    /// - Returns: The new Entry
     ///
-    @discardableResult func track(_ context: NSManagedObjectContext, continueFrom entry: Entry) -> EntryTimer {
-        track(Entry(context, continueFrom: entry))
+    @discardableResult func track(continueFrom entry: CompletedEntry) -> RunningEntry {
+        track(RunningEntry(moc, continueFrom: entry))
     }
 
     /// Reset this EntryTimer.
     ///
     /// This will stop the Entry and reset the clock to zero for the next entry.
     ///
-    /// - Returns: The EntryTimer
+    /// - Returns: The stopped entry, if any.
     ///
-    @discardableResult func reset() -> EntryTimer {
-        entry?.end = Date()
-        zero()
-        return self
+    @discardableResult func reset() -> CompletedEntry? {
+        guard let runningEntry = runningEntry else { return nil }
+        defer {
+            secondsElapsed = 0
+            minutesElapsed = 0
+            hoursElapsed = 0
+            timeElapsedString = "00:00:00"
+            timeElapsedAccessibilityLabel = "0 hours, 0 minutes, and 0 seconds"
+            pomodoroTimer = nil
+            moc.noUndo { moc.delete(runningEntry) }
+        }
+
+        return CompletedEntry(moc, from: runningEntry)
     }
 
     /// Either start of stop the timer if needed.
@@ -182,11 +216,9 @@ class EntryTimer: ObservableObject {
     }
 
     private func update() {
-        guard let entry = entry else {
-            return
-        }
+        guard let runningEntry = runningEntry else { return }
 
-        let secondsElapsed = Int(Date().timeIntervalSince1970 - entry.start.timeIntervalSince1970)
+        let secondsElapsed = Int(runningEntry.duration)
         self.secondsElapsed = secondsElapsed
 
         let minutesElapsed = secondsElapsed / 60
@@ -201,16 +233,6 @@ class EntryTimer: ObservableObject {
 
         timeElapsedString = String(format: "%02d:%02d:%02d", hh, mm, ss)
         timeElapsedAccessibilityLabel = "\(hh) hours, \(mm) minutes, and \(ss) seconds"
-    }
-
-    private func zero() {
-        secondsElapsed = 0
-        minutesElapsed = 0
-        hoursElapsed = 0
-        timeElapsedString = "00:00:00"
-        timeElapsedAccessibilityLabel = "0 hours, 0 minutes, and 0 seconds"
-        pomodoroTimer = nil
-        entry = nil
     }
 
 }

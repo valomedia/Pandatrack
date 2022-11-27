@@ -34,7 +34,7 @@ struct PersistenceController {
             // are only reached when running in DEBUG mode on the simulator, I feel like we can get away with it.
             Project.sampleData(for: viewContext)
             Tag.sampleData(for: viewContext)
-            try Entry.sampleData(for: viewContext)
+            try CompletedEntry.sampleData(for: viewContext)
             try viewContext.save()
         } catch let error as NSError {
             fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -64,11 +64,9 @@ struct PersistenceController {
     /// - Parameters:
     ///     - inMemory:
     ///
-    init(inMemory: Bool = false) {
+    private init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Chronos")
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
+        if inMemory { container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null") }
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {

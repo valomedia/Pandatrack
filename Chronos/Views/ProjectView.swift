@@ -72,9 +72,7 @@ class ProjectView_Previews: PreviewProvider {
     ///
     static var previews: some View {
         NavigationView {
-            List {
-                try! ProjectView(project: moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!)
-            }
+            List { try! ProjectView(project: moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!) }
         }
     }
 

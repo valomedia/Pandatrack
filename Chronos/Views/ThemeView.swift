@@ -53,8 +53,7 @@ struct ThemeView_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        ThemeView(theme: .yellow)
-                .previewLayout(.sizeThatFits)
+        ThemeView(theme: .yellow).previewLayout(.sizeThatFits)
     }
 
 }

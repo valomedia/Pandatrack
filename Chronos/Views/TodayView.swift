@@ -21,17 +21,13 @@ struct TodayView: View {
 
     // MARK: - Properties
 
-    /// The EntryTimer being shown.
-    ///
-    @ObservedObject var entryTimer = EntryTimer.shared
-
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16.0)
-                    .fill(env.theme.backgroundColor)
+                    .fill(entryTimer.theme.backgroundColor)
             VStack {
                 if let pomodoroTimer = entryTimer.pomodoroTimer {
-                    PomodoroTimerView(pomodoroTimer: pomodoroTimer, theme: env.theme)
+                    PomodoroTimerView(pomodoroTimer: pomodoroTimer, theme: entryTimer.theme)
                 }
                 Spacer()
                 Text("Today")
@@ -43,14 +39,14 @@ struct TodayView: View {
             }
         }
                 .padding()
-                .foregroundColor(env.theme.foregroundColor)
+                .foregroundColor(entryTimer.theme.foregroundColor)
                 .navigationBarTitleDisplayMode(.inline)
     }
 
     @Environment(\.managedObjectContext)
     private var moc
 
-    @EnvironmentObject private var env: ChronosEnvironment
+    @EnvironmentObject private var entryTimer: EntryTimer
 
     // MARK: - Functions
 
@@ -77,9 +73,9 @@ struct TodayView_Previews: PreviewProvider {
     ///
     static var previews: some View {
         TodayView(editAction: {})
-                .environmentObject(env)
+                .environmentObject(entryTimer)
                 .environment(\.managedObjectContext, moc)
-                .background(env.theme.backgroundColor)
+                .background(entryTimer.theme.backgroundColor)
                 .previewLayout(.sizeThatFits)
     }
 

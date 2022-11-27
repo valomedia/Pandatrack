@@ -37,11 +37,6 @@ struct EntryTimerView: View {
 
     // MARK: - Properties
 
-    /// The EntryTimer being shown.
-    ///
-    @ObservedObject
-    var entryTimer = EntryTimer.shared
-
     /// A function to call to start editing the current Entry.
     ///
     let editAction: ()->Void
@@ -49,35 +44,35 @@ struct EntryTimerView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(entryTimer.entry?.name ?? "Not Tracking")
+                Text(entryTimer.runningEntry?.name ?? "Not Tracking")
                         .font(.headline)
                         .accessibilityAddTraits(.isHeader)
                 Spacer()
                 HStack {
                     Button(action: {
-                        if entryTimer.entry == nil { env.startEntry() }
+                        if entryTimer.runningEntry == nil { entryTimer.track() }
                         editAction()
                     }) {
                         Image(systemName: "slider.horizontal.3")
                     }
-                            .foregroundColor(env.theme.foregroundColor)
+                            .foregroundColor(entryTimer.theme.foregroundColor)
                             .accessibilityLabel("Edit running timer")
-                    if entryTimer.entry != nil {
+                    if entryTimer.runningEntry != nil {
                         // Have to wrap the function in a lambda, because Swift is picky about unused return values.
-                        Button(action: { env.stopEntry() }) {
+                        Button(action: { entryTimer.reset() }) {
                             Image(systemName: "stop.fill")
                         }
-                                .foregroundColor(env.theme.foregroundColor)
+                                .foregroundColor(entryTimer.theme.foregroundColor)
                                 .accessibilityLabel("Stop timer")
                         // Have to wrap the function in a lambda, because Swift is picky about unused return values.
-                        Button(action: { env.startEntry() }) {
+                        Button(action: { entryTimer.track() }) {
                             Image(systemName: "forward.end.fill")
                         }
-                                .foregroundColor(env.theme.foregroundColor)
+                                .foregroundColor(entryTimer.theme.foregroundColor)
                                 .accessibilityLabel("Stop timer and start new timer")
                     } else {
                         // Have to wrap the function in a lambda, because Swift is picky about unused return values.
-                        Button(action: { env.startEntry() }) {
+                        Button(action: { entryTimer.track() }) {
                             Image(systemName: "play.fill")
                         }
                                 .accessibilityLabel("Start timer")
@@ -88,10 +83,10 @@ struct EntryTimerView: View {
             Spacer()
             VStack {
                 HStack {
-                    Label(entryTimer.entry?.project?.name ?? "No Project", systemImage: "at")
+                    Label(entryTimer.runningEntry?.project?.name ?? "No Project", systemImage: "at")
                             .labelStyle(.leadingIcon)
                             .accessibilityLabel("Project")
-                            .accessibilityValue(entryTimer.entry?.project?.name ?? "None")
+                            .accessibilityValue(entryTimer.runningEntry?.project?.name ?? "None")
                     Spacer()
                     if
                             let timeElapsedString = entryTimer.timeElapsedString,
@@ -105,18 +100,18 @@ struct EntryTimerView: View {
                         .font(.caption)
                 Spacer()
                 HStack {
-                    Label(entryTimer.entry?.project?.parent?.name ?? "", systemImage: "folder")
+                    Label(entryTimer.runningEntry?.project?.parent?.name ?? "", systemImage: "folder")
                             .labelStyle(.leadingIcon)
-                            .ifNotNil(entryTimer.entry?.project?.parent?.name) {
+                            .ifNotNil(entryTimer.runningEntry?.project?.parent?.name) {
                                 $0
                                         .accessibilityLabel("Folder")
                                         .accessibilityValue($1)
                             }
-                            .if(entryTimer.entry?.project?.parent == nil) {
+                            .if(entryTimer.runningEntry?.project?.parent == nil) {
                                 $0.accessibilityHidden(true)
                             }
                     Spacer()
-                    if let start = entryTimer.entry?.start {
+                    if let start = entryTimer.runningEntry?.start {
                         Label(Self.shortTimeDateFormatter.string(from: start), systemImage: "clock")
                                 .labelStyle(.trailingIcon)
                                 .accessibilityLabel("Running since")
@@ -128,12 +123,11 @@ struct EntryTimerView: View {
         }
                 .frame(height: 60)
                 .padding()
-                .background(env.theme.backgroundColor)
-                .foregroundColor(env.theme.foregroundColor)
+                .background(entryTimer.theme.backgroundColor)
+                .foregroundColor(entryTimer.theme.foregroundColor)
     }
 
-    @EnvironmentObject
-    private var env: ChronosEnvironment
+    @EnvironmentObject private var entryTimer: EntryTimer
 
 }
 
@@ -154,7 +148,7 @@ struct EntryTimerView_Previews: PreviewProvider {
     ///
     static var previews: some View {
         EntryTimerView(editAction: {})
-                .environmentObject(env)
+                .environmentObject(entryTimer)
                 .previewLayout(.sizeThatFits)
     }
 

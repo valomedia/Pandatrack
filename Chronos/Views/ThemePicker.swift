@@ -57,9 +57,7 @@ struct ThemePicker_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             Form {
-                List {
-                    ThemePicker(selection: .constant(.teal))
-                }
+                List { ThemePicker(selection: .constant(.teal)) }
             }
         }
     }

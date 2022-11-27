@@ -41,8 +41,6 @@ struct ProjectDetailView: View {
 
     @State private var isPresentingEditView = false
 
-    @EnvironmentObject private var env: ChronosEnvironment
-
 }
 
 
@@ -59,7 +57,6 @@ class ProjectDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             try! ProjectDetailView(project: moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" })
-                    .environmentObject(env)
         }
     }
 

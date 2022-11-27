@@ -37,7 +37,7 @@ final class Project: NSManagedObject, Tree {
             _ moc: NSManagedObjectContext,
             name: String,
             theme: Theme? = nil,
-            entries: Set<Entry>? = nil,
+            entries: Set<CompletedEntry>? = nil,
             parent: Project? = nil,
             @SetBuilder<Project> _ children: () -> Set<Project>? = { nil }) {
         self.init(entity: Self.entity(in: moc)!, insertInto: moc)

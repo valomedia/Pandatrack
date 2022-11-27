@@ -27,36 +27,40 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView {
-            VStack(spacing: 0) {
-                EntriesTab()
-                entryTimerView
+        NavigationView {
+            TabView {
+                VStack(spacing: 0) {
+                    EntriesTab()
+                    entryTimerView
+                }
+                        .tabItem {
+                            Label("Entries", systemImage: "timer")
+                        }
+                VStack(spacing: 0) {
+                    ProjectsTab()
+                    entryTimerView
+                }
+                        .tabItem {
+                            Label("Projects", systemImage: "at")
+                        }
             }
-                    .tabItem {
-                        Label("Entries", systemImage: "timer")
+                    .onAppear(perform: entryTimer.startTimer)
+                    .onDisappear(perform: entryTimer.stopTimer)
+                    .sheet(isPresented: $isPresentingTodayView) {
+                        TodayView(editAction: editAction)
+                                .background(entryTimer.theme.backgroundColor)
+                                .foregroundColor(entryTimer.theme.foregroundColor)
                     }
-            VStack(spacing: 0) {
-                ProjectsTab()
-                entryTimerView
-            }
-                    .tabItem {
-                        Label("Projects", systemImage: "at")
+                    .modal(entryTimer.runningEntry?.name, isPresented: $isPresentingEditView) {
+                        EntryDetailEditView(entry: entryTimer.runningEntry)
                     }
         }
-                .onAppear(perform: entryTimer.startTimer)
-                .onDisappear(perform: entryTimer.stopTimer)
-                .onChange(of: phase) { phase in
-                    if phase == .inactive {
-                        env.save()
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button(action: env.undo) { Image(systemName: "arrow.uturn.backward") }.enabled(env.canUndo)
+                        Button(action: env.redo) { Image(systemName: "arrow.uturn.forward") }.enabled(env.canRedo)
+                        Spacer()
                     }
-                }
-                .sheet(isPresented: $isPresentingTodayView) {
-                    TodayView(editAction: editAction)
-                            .background(env.theme.backgroundColor)
-                            .foregroundColor(env.theme.foregroundColor)
-                }
-                .modal(entryTimer.entry?.name, isPresented: $isPresentingEditView) {
-                    EntryDetailEditView(entry: entryTimer.entry)
                 }
     }
 
@@ -68,14 +72,8 @@ struct ContentView: View {
     ///
     @State private var isPresentingEditView = false
 
-    /// The timer for the currently running entry.
-    ///
-    @ObservedObject private var entryTimer = EntryTimer.shared
-
     @EnvironmentObject private var env: ChronosEnvironment
-
-    @Environment(\.scenePhase)
-    private var phase
+    @EnvironmentObject private var entryTimer: EntryTimer
 
     @Environment(\.managedObjectContext)
     private var moc
@@ -108,6 +106,7 @@ class ContentView_Previews: PreviewProvider {
         ContentView()
                 .environment(\.managedObjectContext, moc)
                 .environmentObject(env)
+                .environmentObject(entryTimer)
     }
 
 }

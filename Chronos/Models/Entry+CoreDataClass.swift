@@ -31,96 +31,28 @@ class Entry: NSManagedObject, Item {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - context:
-    ///     - name:
-    ///     - start:
-    ///     - end:
-    ///     - project:
-    ///     - tags:
-    ///
-    convenience init(
-            _ context: NSManagedObjectContext,
-            name: String? = nil,
-            start: Date? = nil,
-            end: Date? = nil,
-            project: Project? = nil,
-            tags: Set<Tag>? = nil
-    ) {
-        self.init(entity: Self.entity(in: context)!, insertInto: context)
-        primitiveName = name ?? ""
-        primitiveStart = start ?? Date()
-        primitiveEnd = end
-
-        if let project = project {
-            self.project = project
-        }
-
-        if let tags = tags {
-            self.tags = tags
-        }
-    }
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - context:
-    ///     - name:
-    ///     - interval:
-    ///     - project:
-    ///     - tags:
-    ///
-    convenience init(
-            _ context: NSManagedObjectContext,
-            name: String?,
-            interval: DateInterval?,
-            project: Project? = nil,
-            tags: Set<Tag>? = nil
-    ) {
-        self.init(context, name: name, start: interval?.start, end: interval?.end, project: project, tags: tags)
-    }
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - context:
-    ///     - entry:
-    ///
-    convenience init(_ context: NSManagedObjectContext, continueFrom entry: Entry) {
-        self.init(context, name: entry.name, start: Date(), project: entry.project, tags: entry.tags)
-    }
-
-    private override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        guard !entity.isAbstract else { fatalError("init(entity:insertInto:) has not been implemented") }
         super.init(entity: entity, insertInto: context)
     }
 
     // MARK: - Properties
 
-    /// Undocumented.
+    ////// Undocumented.
     ///
     /// - Todo: Document.
     ///
     public var interval: DateInterval {
-        get {
-            DateInterval(start: start, end: end ?? Date())
-        }
-        set {
-            start = newValue.start
-            end = newValue.end
-        }
+        DateInterval(start: start, end: Date())
     }
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    @objc public var running: Bool {
-        end == nil
+    public var duration: TimeInterval {
+        get { interval.duration }
+        set { start = Date() - newValue }
     }
 
     /// Undocumented.

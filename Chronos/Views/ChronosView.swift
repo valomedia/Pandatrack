@@ -23,20 +23,25 @@ struct ChronosView: View {
 
     var body: some View {
         ContentView()
-                .sheet(item: $env.errorWrapper) { wrapper in
-                    ErrorView(errorWrapper: wrapper)
+                .sheet(item: $env.errorWrapper) { wrapper in ErrorView(errorWrapper: wrapper) }
+                .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+                .environmentObject(env)
+                .environmentObject(entryTimer)
+                .onAppear { PersistenceController.shared.container.viewContext.undoManager = env.undoManager }
+                .onChange(of: phase) { phase in
+                    if phase == .inactive { env.save() }
                 }
     }
 
-    /// The timer for the currently running entry.
-    ///
-    @ObservedObject private var entryTimer = EntryTimer.shared
+    @Environment(\.scenePhase)
+    private var phase
 
-    @EnvironmentObject private var env: ChronosEnvironment
+    @StateObject private var env = ChronosEnvironment(PersistenceController.shared.container.viewContext)
+    @StateObject private var entryTimer = EntryTimer(PersistenceController.shared.container.viewContext)
 
 }
 
-// MARK: ContentView_Previews
+// MARK: ChronosView_Previews
 
 /// Undocumented.
 ///
@@ -46,11 +51,7 @@ class ChronosView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    static var previews: some View {
-        ChronosView()
-                .environment(\.managedObjectContext, moc)
-                .environmentObject(env)
-    }
+    static var previews: some View { ChronosView() }
 
     // MARK: - Methods
 
