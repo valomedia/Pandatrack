@@ -105,14 +105,6 @@ struct EntryDetailView: View {
             Section(header: Text("Tags")) {
                 EntryTagsEditView(tags: $entry.entity[\.tags] ?? [])
             }
-            if
-                    let history = entry?.project?.entries.map({ entry in entry as? CompletedEntry }).compacted(),
-                    !history.isEmpty {
-                Section(header: Text("History")) {
-                    EntriesView(
-                            entries: ManagedEntities(AnyRandomAccessCollection(history.sorted(by: \.start).reversed())))
-                }
-            }
             Section {
                 Button(role: .destructive, action: { isPresentingConfirmationDialog = true }) {
                     HStack {
