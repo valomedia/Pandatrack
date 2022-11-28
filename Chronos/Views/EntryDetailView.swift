@@ -143,20 +143,13 @@ struct EntryDetailView: View {
 
 }
 
+
 // MARK: EntryDetailView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
-struct EntryDetailView_Previews: PreviewProvider {
+class EntryDetailView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         NavigationView {
             try! EntryDetailView(
