@@ -19,6 +19,17 @@ import CoreData
 ///
 struct TreeView<Entity: NSManagedObject & Tree>: View {
 
+    // MARK: - Static properties
+
+    /// How long to wait to dismiss() the TreeView, after the user has made a selection.
+    ///
+    /// When the TreeView is displaying a Tree of Entities for the user to chose from, selecting an Entity will show the
+    /// selection tick mark moving to the new Entity, followed by the TreeView dismissing itself. There is a short delay
+    /// before the dismissal, to allow the user to visually register, that the change has been made.  This constant sets
+    /// the length of that delay (in seconds).
+    ///
+    let dismissDelay = 0.1
+
     // MARK: - Life cycle methods
 
     /// Undocumented.
@@ -147,7 +158,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
 
     private func select(_ entity: Entity? = nil) {
         _entity.wrappedValue = ManagedEntity(entity)
-        dismiss()
+        DispatchQueue.main.asyncAfter(deadline: .now()+dismissDelay, execute: dismiss.callAsFunction)
     }
 }
 
