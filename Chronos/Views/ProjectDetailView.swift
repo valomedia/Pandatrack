@@ -26,13 +26,13 @@ struct ProjectDetailView: View {
 
     var body: some View {
         List {
-            ProjectView(project: project)
+            Section { ProjectView(project: project) }
+                    .contentShape(Rectangle())
+                    .onTapGesture { isPresentingEditView = true }
         }
                 .navigationTitle(project?.name ?? "")
                 .toolbar {
-                    Button("Edit") {
-                        isPresentingEditView = true
-                    }
+                    Button("Edit") { isPresentingEditView = true }
                 }
                 .modal(project?.name, isPresented: $isPresentingEditView) {
                     ProjectDetailEditView(project: project)
