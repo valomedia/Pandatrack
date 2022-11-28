@@ -19,6 +19,14 @@ import CoreData
 ///
 struct ChronosView: View {
 
+    // MARK: - Life cycle methods
+
+    init() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+    }
+
     // MARK: - Properties
 
     var body: some View {
