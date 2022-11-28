@@ -114,7 +114,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                                 }
                             }
                         }
-                        Section(header: Text(root?.path ?? Entity.pathSeparator)) {
+                        Section(header: Text(root?.path ?? "")) {
                             ForEach(subtrees) { node in
                                     HStack {
                                         Label(node.name, systemImage: "arrow.turn.down.right")
