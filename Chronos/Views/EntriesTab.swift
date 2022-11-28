@@ -57,7 +57,7 @@ struct EntriesTab: View {
     ///
     @State @ManagedEntity private var newEntry: CompletedEntry?
 
-    /// Whether the sheet showing the EntryTimerDetailEditView is visible.
+    /// Whether the sheet showing the EntryDetailEditView is visible.
     ///
     @State private var isPresentingEditView = false
 
