@@ -29,6 +29,17 @@ struct ProjectDetailView: View {
             Section { ProjectView(project: project) }
                     .contentShape(Rectangle())
                     .onTapGesture { isPresentingEditView = true }
+            Section {
+                DeleteButton(
+                        buttonText: "Delete Project",
+                        confirmationQuestion: "Do you really want to delete this Project?",
+                        supplementalMessage: """
+                                             This will remove the project and all subprojects along with their \
+                                             respective entries.
+                                             """) {
+                    project.map(moc.delete)
+                }
+            }
             if let history = project?.entries.map({ entry in entry as? CompletedEntry }).compacted(), !history.isEmpty {
                 Section(header: Text("History")) {
                     EntriesView(
@@ -47,6 +58,9 @@ struct ProjectDetailView: View {
 
     @State private var isPresentingEditView = false
 
+    @Environment(\.managedObjectContext)
+    private var moc
+
 }
 
 
@@ -63,6 +77,7 @@ class ProjectDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             try! ProjectDetailView(project: moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" })
+                    .environment(\.managedObjectContext, moc)
         }
     }
 

@@ -160,6 +160,7 @@
 		E9E97DEAF8F269FA697EBFB3 /* AttributeListValueRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97550674F2E9E4AB630AE /* AttributeListValueRelationship.swift */; };
 		E9E97DF63D64439B9A7BE803 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97B0A78797C7850238358 /* Item.swift */; };
 		E9E97E11658668D60FA480E3 /* ChronosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97F8CACE703D08C017615 /* ChronosUITestsLaunchTests.swift */; };
+		E9E97E2139A68873D3292DCD /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9728DD42B2FA310884FB8 /* DeleteButton.swift */; };
 		E9E97E37E6DE5D0F3E731C41 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97FAA39E5E9D6E5C0D35D /* Entity.swift */; };
 		E9E97E4262597BF17F1086F8 /* URLAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E979F8BD63253DDB9CEEDF /* URLAttribute.swift */; };
 		E9E97E6C2AA836FE47F49A24 /* View+ifNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97BE09498AD78748525F8 /* View+ifNotNil.swift */; };
@@ -228,6 +229,7 @@
 		E9E97240607C6B95BBDD6FD7 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		E9E9724FA8B178142F836E9F /* URLAttributeChoiceRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLAttributeChoiceRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E97262FA9E2EAD79D2914F /* Optional+Comparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Comparable.swift"; sourceTree = "<group>"; };
+		E9E9728DD42B2FA310884FB8 /* DeleteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		E9E972B38BAFC3E3CEE517E3 /* BuiltinAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuiltinAttribute.swift; sourceTree = "<group>"; };
 		E9E972B4DA29AF5E9AF58850 /* NumberAttributeListRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberAttributeListRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E97317E6C2F69615127A9A /* PreviewProvider+moc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PreviewProvider+moc.swift"; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 				E9E979EC78C97802136E3B9E /* EntriesTab.swift */,
 				E9E97223ECC850C3B7EB8983 /* Modal.swift */,
 				E9E9721C430A1D94B5D5AEDB /* View+enabled.swift */,
+				E9E9728DD42B2FA310884FB8 /* DeleteButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1048,6 +1051,7 @@
 				E9E97555DD1CB540ED4752C5 /* Entry+CoreDataClass.swift in Sources */,
 				E9E973D98807996B65947171 /* RunningEntry+CoreDataClass.swift in Sources */,
 				E9E973C818D026A5B68845BE /* NotificationCenter+addObserver.swift in Sources */,
+				E9E97E2139A68873D3292DCD /* DeleteButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -106,12 +106,10 @@ struct EntryDetailView: View {
                 EntryTagsEditView(tags: $entry.entity[\.tags] ?? [])
             }
             Section {
-                Button(role: .destructive, action: { isPresentingConfirmationDialog = true }) {
-                    HStack {
-                        Spacer()
-                        Text("Delete Entry")
-                        Spacer()
-                    }
+                DeleteButton(
+                        buttonText: "Delete Entry",
+                        confirmationQuestion: "Are you sure you want to delete this Entry?") {
+                    entry.map(moc.delete)
                 }
             }
         }
@@ -124,19 +122,11 @@ struct EntryDetailView: View {
                 .modal(entry?.name, isPresented: $isPresentingEditView) {
                     EntryDetailEditView(entry: entry)
                 }
-                .confirmationDialog(
-                        "Are you sure you want to delete this Entry?",
-                        isPresented: $isPresentingConfirmationDialog,
-                        titleVisibility: .visible
-                ) {
-                    Button("Delete Entry", role: .destructive) { entry.map(moc.delete) }
-                }
     }
 
     @EnvironmentObject private var entryTimer: EntryTimer
 
     @State private var isPresentingEditView = false
-    @State private var isPresentingConfirmationDialog = false
 
     @Environment(\.managedObjectContext)
     private var moc
