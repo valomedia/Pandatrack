@@ -23,13 +23,12 @@ struct EntriesView: View {
 
     /// The Entries being shown by this View.
     ///
-    @ManagedEntities var entries: AnyRandomAccessCollection<CompletedEntry>
+    @ObservedObject @ManagedEntities var entries: AnyRandomAccessCollection<CompletedEntry>
 
     var body: some View {
         ForEach(entries) { entry in
-            NavigationLink(destination: EntryDetailView(entry: entry)) {
-                EntryView(entry: entry)
-            }
+            NavigationLink(destination: EntryDetailView(entry: entry)) { EntryView(entry: entry) }
+                    .foregroundColor(entry.theme.foregroundColor)
                     .listRowBackground(entry.theme.backgroundColor)
         }
                 .onDelete(perform: deleteEntries)
@@ -65,10 +64,8 @@ class EntriesView_Previews: PreviewProvider {
         NavigationView {
             List {
                 try! EntriesView(
-                        entries: ManagedEntities(
-                                AnyRandomAccessCollection(
-                                        moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
-                        )
+                        entries: AnyRandomAccessCollection(
+                                moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
                 )
                         .environment(\.managedObjectContext, moc)
                         .environmentObject(entryTimer)

@@ -18,6 +18,22 @@ import SwiftUI
 ///
 struct ProjectDetailView: View {
 
+    // MARK: - Life cycle methods
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - project:
+    ///
+    init(project: Project?) {
+        self._entries = FetchRequest(
+                sortDescriptors: [SortDescriptor(\.start, order: .reverse)],
+                predicate: NSPredicate(format: "project == %@", project ?? 0 as CVarArg)
+        )
+        self.project = project
+    }
+
     // MARK: - Properties
 
     /// The Project being shown by this View.
@@ -40,11 +56,8 @@ struct ProjectDetailView: View {
                     project.map(moc.delete)
                 }
             }
-            if let history = project?.entries.map({ entry in entry as? CompletedEntry }).compacted(), !history.isEmpty {
-                Section(header: Text("History")) {
-                    EntriesView(
-                            entries: ManagedEntities(AnyRandomAccessCollection(history.sorted(by: \.start).reversed())))
-                }
+            if !entries.isEmpty {
+                Section(header: Text("Entries")) { EntriesView(entries: AnyRandomAccessCollection(entries)) }
             }
         }
                 .navigationTitle(project?.name ?? "")
@@ -60,6 +73,8 @@ struct ProjectDetailView: View {
 
     @Environment(\.managedObjectContext)
     private var moc
+
+    @FetchRequest private var entries: FetchedResults<CompletedEntry>
 
 }
 

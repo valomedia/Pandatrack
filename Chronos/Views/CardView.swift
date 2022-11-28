@@ -30,12 +30,6 @@ struct CardView: View {
     ///
     /// - Todo: Document.
     ///
-    let theme: Theme
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let labels: (
             (Label<Text, Image>, Label<Text, Image>),
             (Label<Text, Image>, Label<Text, Image>)
@@ -43,7 +37,7 @@ struct CardView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title).font(.headline).accessibilityAddTraits(.isHeader)
+            Text(title).font(.headline)
             Spacer()
             HStack {
                 labels.0.0.labelStyle(.leadingIcon)
@@ -57,7 +51,6 @@ struct CardView: View {
             }.font(.caption)
         }
                 .padding()
-                .foregroundColor(theme.foregroundColor)
     }
 }
 
@@ -75,13 +68,13 @@ class CardView_Previews: PreviewProvider {
     static var previews: some View {
         CardView(
                 title: "Hello, World!",
-                theme: .yellow,
                 labels: (
                         (Label("Label 1", systemImage: "1.circle.fill"),
                                 Label("Label 2", systemImage: "2.circle.fill")),
                         (Label("Label 3", systemImage: "3.circle.fill"),
                                 Label("Label 4", systemImage: "4.circle.fill"))))
                 .background(Theme.yellow.backgroundColor)
+                .foregroundColor(Theme.yellow.foregroundColor)
                 .previewLayout(.fixed(width: 400, height: 60))
     }
 

@@ -29,7 +29,6 @@ struct EntryView: View {
         if let entry = entry {
             CardView(
                     title: entry.name,
-                    theme: entry.theme,
                     labels: (
                             (Label(entry.project?.name ?? "No Project", systemImage: "at"),
                                     Label(
