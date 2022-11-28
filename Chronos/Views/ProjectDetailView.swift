@@ -29,6 +29,12 @@ struct ProjectDetailView: View {
             Section { ProjectView(project: project) }
                     .contentShape(Rectangle())
                     .onTapGesture { isPresentingEditView = true }
+            if let history = project?.entries.map({ entry in entry as? CompletedEntry }).compacted(), !history.isEmpty {
+                Section(header: Text("History")) {
+                    EntriesView(
+                            entries: ManagedEntities(AnyRandomAccessCollection(history.sorted(by: \.start).reversed())))
+                }
+            }
         }
                 .navigationTitle(project?.name ?? "")
                 .toolbar {
