@@ -22,9 +22,25 @@ struct ProjectsTab: View {
 
     var body: some View {
         NavigationView {
-            TreeView<Project> { project in ProjectDetailView(project: project) }.navigationBarTitle("Projects")
+            TreeView<Project> { project in ProjectDetailView(project: project) }
+                    .navigationTitle("Projects")
+                    .floatingActionButton { isPresentingEditView = true }
+                    .modal("New Project", isPresented: $isPresentingEditView, onOpen: { newProject = Project(moc) }) {
+                        ProjectDetailEditView(project: newProject)
+                    }
         }
     }
+
+    /// The new Project being created, if any.
+    ///
+    @State @ManagedEntity private var newProject: Project?
+
+    /// Whether the sheet showing the ProjectDetailEditView is visible.
+    ///
+    @State private var isPresentingEditView = false
+
+    @Environment(\.managedObjectContext)
+    private var moc
 
 }
 

@@ -22,6 +22,8 @@ extension View {
     /// - Parameters:
     ///   - title:
     ///   - isPresented:
+    ///   - onOpen:
+    ///   - onClose:
     ///   - content:
     /// - Returns:
     ///
@@ -29,9 +31,11 @@ extension View {
     func modal<Content: View, S: StringProtocol>(
             _ title: S? = nil,
             isPresented: Binding<Bool>,
+            onOpen: (() -> Void)? = nil,
+            onClose: (() -> Void)? = nil,
             @ViewBuilder content: @escaping () -> Content
     ) -> some View {
-        self.sheet(isPresented: isPresented) { Modal(title, content: content) }
+        self.sheet(isPresented: isPresented) { Modal(title, onOpen: onOpen, onClose: onClose, content: content) }
     }
 
 }

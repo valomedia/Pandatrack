@@ -22,7 +22,7 @@ struct ProjectDetailEditView: View {
 
     /// The Project being modified.
     ///
-    @Binding @ManagedEntity var project: Project?
+    @ObservedObject @ManagedEntity var project: Project?
 
     var body: some View {
         Form(content: {
@@ -37,7 +37,7 @@ struct ProjectDetailEditView: View {
                 }
             }
             Section("Folder") {
-                ParentPicker<Project>(entity: $project) {
+                ParentPicker<Project>(entity: project) {
                     ProjectView(project: project?.parent)
                 }
             }
@@ -66,9 +66,7 @@ class ProjectDetailEditView_Previews: PreviewProvider {
     ///
     static var previews: some View {
         NavigationView {
-            try! ProjectDetailEditView(
-                    project: .constant(ManagedEntity(moc.fetch(Project.makeFetchRequest()).first {$0.name == "ACME"}))
-            )
+            try! ProjectDetailEditView(project: moc.fetch(Project.makeFetchRequest()).first {$0.name == "ACME"})
                     .environment(\.managedObjectContext, moc)
         }
     }

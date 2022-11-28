@@ -35,13 +35,13 @@ final class Project: NSManagedObject, Tree {
     ///
     convenience init(
             _ moc: NSManagedObjectContext,
-            name: String,
+            name: String? = nil,
             theme: Theme? = nil,
             entries: Set<CompletedEntry>? = nil,
             parent: Project? = nil,
             @SetBuilder<Project> _ children: () -> Set<Project>? = { nil }) {
         self.init(entity: Self.entity(in: moc)!, insertInto: moc)
-        primitiveName = name
+        primitiveName = name ?? ""
         primitiveTheme = theme
 
         if let entries = entries {

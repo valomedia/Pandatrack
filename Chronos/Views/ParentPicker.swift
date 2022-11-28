@@ -28,8 +28,8 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
     ///     - entity:
     ///     - content:
     ///
-    init<Content: View>(entity: Binding<ManagedEntity<Entity>>, @ViewBuilder content: @escaping () -> Content) {
-        _entity = entity
+    init<Content: View>(entity: Entity?, @ViewBuilder content: @escaping () -> Content) {
+        self.entity = entity
         self.content = { AnyView(content()) }
     }
 
@@ -39,7 +39,7 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
     ///
     /// - Todo: Document.
     ///
-    @Binding @ManagedEntity var entity: Entity?
+    @ObservedObject @ManagedEntity var entity: Entity?
 
     var body: some View {
         TreePicker(
@@ -89,13 +89,10 @@ class ParentPicker_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        let project: Binding<ManagedEntity<Project>>
-                = try! .constant(ManagedEntity(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }))
+        let project: Project? = try! moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }
         NavigationView {
             List {
-                ParentPicker(entity: project) {
-                    ProjectView(project: project.wrappedValue.wrappedValue?.parent)
-                }
+                ParentPicker(entity: project) { ProjectView(project: project?.parent) }
                         .environment(\.managedObjectContext, moc)
             }
         }

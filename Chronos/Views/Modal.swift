@@ -24,9 +24,15 @@ struct Modal<Content: View, S: StringProtocol>: View {
 
     // MARK: - Life cycle methods
 
-    init(_ title: S? = nil, @ViewBuilder content: @escaping () -> Content) {
+    init(
+            _ title: S? = nil,
+            onOpen: (() -> Void)? = nil,
+            onClose: (() -> Void)? = nil,
+            @ViewBuilder content: @escaping () -> Content) {
         self.title = title ?? ""
         self.content = content
+        self.onOpen = onOpen ?? {}
+        self.onClose = onClose ?? {}
     }
 
     // MARK: - Properties
@@ -50,6 +56,8 @@ struct Modal<Content: View, S: StringProtocol>: View {
                     }
         }
                 .onAppear(perform: env.waitForConfirmation)
+                .onAppear(perform: onOpen)
+                .onDisappear(perform: onClose)
                 .onDisappear(perform: env.discardChanges)
     }
 
@@ -60,5 +68,10 @@ struct Modal<Content: View, S: StringProtocol>: View {
 
     @Environment(\.dismiss)
     private var dismiss
+
+    // MARK: - Methods
+
+    private let onOpen: () -> Void
+    private let onClose: () -> Void
 
 }

@@ -35,7 +35,7 @@ struct ProjectDetailView: View {
                     }
                 }
                 .modal(project?.name, isPresented: $isPresentingEditView) {
-                    ProjectDetailEditView(project: $project)
+                    ProjectDetailEditView(project: project)
                 }
     }
 

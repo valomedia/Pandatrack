@@ -46,8 +46,8 @@ struct EntriesTab: View {
                 }
             }
                     .navigationTitle("Time Entries")
-                    .floatingActionButton(action: createAction)
-                    .modal("New Entry", isPresented: $isPresentingEditView) {
+                    .floatingActionButton { isPresentingEditView = true }
+                    .modal("New Entry", isPresented: $isPresentingEditView, onOpen: { newEntry = CompletedEntry(moc)}) {
                         EntryDetailEditView(entry: newEntry)
                     }
         }
@@ -70,13 +70,6 @@ struct EntriesTab: View {
 
     @Environment(\.managedObjectContext)
     private var moc
-
-    // MARK: - Methods
-
-    private func createAction() {
-        isPresentingEditView = true
-        newEntry = CompletedEntry(moc)
-    }
 
 }
 

@@ -67,9 +67,9 @@ class EntriesView_Previews: PreviewProvider {
                 try! EntriesView(
                         entries: ManagedEntities(
                                 AnyRandomAccessCollection(
-                                        moc.fetch(CompletedEntry.makeFetchRequest())
-                                                .filter { $0.end != nil }
-                                                .sorted(by: \.start))))
+                                        moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
+                        )
+                )
                         .environment(\.managedObjectContext, moc)
                         .environmentObject(entryTimer)
             }
