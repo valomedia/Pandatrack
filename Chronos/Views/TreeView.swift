@@ -38,11 +38,13 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     /// - Parameters:
     ///     - entity:
     ///     - root:
+    ///     - search:
     ///     - content:
     ///
     private init<Content: View>(
             entity: Binding<ManagedEntity<Entity>>?,
             root: Entity?,
+            search: Binding<String>? = nil,
             content: ((Entity?) -> Content)?) {
         _entity = entity ?? .constant(nil)
         self.root = root
@@ -53,6 +55,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                 sortDescriptors: [SortDescriptor(\.name)],
                 predicate: NSPredicate(format: "parent == %@", root ?? 0 as CVarArg)
         )
+        _searchBinding = search
     }
 
     /// Undocumented.
@@ -86,6 +89,11 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///
     @Binding @ManagedEntity var entity: Entity?
 
+    /// The binding for the current search term.
+    ///
+    var searchBinding: Binding<String> { _searchBinding ?? $searchState }
+    private var _searchBinding: Binding<String>? = nil
+
     /// Undocumented.
     ///
     /// - Todo: Document
@@ -114,8 +122,9 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                                 }
                             }
                         }
-                        Section(header: Text(root?.path ?? "")) {
-                            ForEach(subtrees) { node in
+                        if let subtrees = subtrees.filter { ($0.path.range(of: searchBinding.wrappedValue, options: .caseInsensitive) != nil) || searchBinding.wrappedValue.isEmpty }, !subtrees.isEmpty {
+                            Section(header: Text(root?.path ?? "")) {
+                                ForEach(subtrees) { node in
                                     HStack {
                                         Label(node.name, systemImage: "arrow.turn.down.right")
                                         Spacer()
@@ -126,21 +135,27 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                                     }
                                             .contentShape(Rectangle())
                                             .if(content == nil) { view in
-                                                view.onTapGesture { select(node) }
+                                                view.onTapGesture {
+                                                    select(node)
+                                                }
                                             }
                                             .ifNotNil(content) { label, destination in
-                                                NavigationLink(destination: destination(node)) { label }
+                                                NavigationLink(destination: destination(node)) {
+                                                    label
+                                                }
                                             }
+                                }
                             }
                         }
+
                         ForEach(subtrees) { subtree in
                             if (!subtree.children.isEmpty) {
-                                TreeView(entity: $entity, root: subtree, content: content)
+                                TreeView(entity: $entity, root: subtree, search: searchBinding, content: content)
                             }
                         }
                     }
                             .if(root == nil) { content in
-                                List { content }
+                                List { content }.searchable(text: searchBinding)
                             }
                 }
             }
@@ -150,6 +165,9 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     private var moc
 
     @FetchRequest private var subtrees: FetchedResults<Entity>
+
+    @State(initialValue: "")
+    private var searchState: String
 
     // MARK: - Methods
 
