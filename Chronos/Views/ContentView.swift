@@ -43,6 +43,13 @@ struct ContentView: View {
                         .tabItem {
                             Label("Projects", systemImage: "at")
                         }
+                VStack(spacing: 0) {
+                    TagsTab()
+                    entryTimerView
+                }
+                        .tabItem {
+                            Label("Tags", systemImage: "number")
+                        }
             }
                     .onAppear(perform: entryTimer.startTimer)
                     .onDisappear(perform: entryTimer.stopTimer)

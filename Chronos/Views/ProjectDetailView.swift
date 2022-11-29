@@ -29,8 +29,7 @@ struct ProjectDetailView: View {
     init(project: Project?) {
         self._entries = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.start, order: .reverse)],
-                predicate: NSPredicate(format: "project == %@", project ?? 0 as CVarArg)
-        )
+                predicate: NSPredicate(format: "project == %@", project ?? 0 as CVarArg))
         self.project = project
     }
 

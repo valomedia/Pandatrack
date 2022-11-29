@@ -22,12 +22,10 @@ struct TagsView: View {
 
     /// The Tags being shown by this View.
     ///
-    @ManagedEntities var tags: AnyRandomAccessCollection<Tag>
+    @ObservedObject @ManagedEntities var tags: AnyRandomAccessCollection<Tag>
 
     var body: some View {
-        ForEach(tags) { tag in
-            Label(tag.path, systemImage: "number")
-        }
+        ForEach(tags) { tag in TagView(tag: tag) }
     }
 
 }
@@ -45,9 +43,7 @@ class TagsView_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            List {
-                try! TagsView(tags: ManagedEntities(AnyRandomAccessCollection(moc.fetch(Tag.makeFetchRequest()))))
-            }
+            List { try! TagsView(tags: AnyRandomAccessCollection(moc.fetch(Tag.makeFetchRequest()))) }
         }
     }
 
