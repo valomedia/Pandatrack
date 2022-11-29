@@ -39,12 +39,20 @@ struct EntriesTab: View {
                     List {
                         ForEach(entries) { section in
                             Section(section.id) {
-                                EntriesView(entries: AnyRandomAccessCollection(section))
+                                EntriesView(
+                                        entries: AnyRandomAccessCollection(
+                                                section.filter {
+                                                    ($0.name.range(of: search, options: .caseInsensitive) != nil)
+                                                            || search.isEmpty
+                                                }
+                                        )
+                                )
                             }
                         }
                     }
                 }
             }
+                    .searchable(text: $search)
                     .navigationTitle("Time Entries")
                     .floatingActionButton { isPresentingEditView = true }
                     .modal("New Entry", isPresented: $isPresentingEditView, onOpen: { newEntry = CompletedEntry(moc)}) {
@@ -60,6 +68,10 @@ struct EntriesTab: View {
     /// Whether the sheet showing the EntryDetailEditView is visible.
     ///
     @State private var isPresentingEditView = false
+
+    /// The current search term.
+    ///
+    @State private var search = ""
 
     @SectionedFetchRequest(
             sectionIdentifier: \.day,
