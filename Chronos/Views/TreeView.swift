@@ -122,9 +122,9 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                                 }
                             }
                         }
-                        if let subtrees = subtrees.filter { ($0.path.range(of: searchBinding.wrappedValue, options: .caseInsensitive) != nil) || searchBinding.wrappedValue.isEmpty }, !subtrees.isEmpty {
+                        if !filteredSubtrees.isEmpty {
                             Section(header: Text(root?.path ?? "")) {
-                                ForEach(subtrees) { node in
+                                ForEach(filteredSubtrees) { node in
                                     HStack {
                                         Label(node.name, systemImage: "arrow.turn.down.right")
                                         Spacer()
@@ -165,6 +165,13 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     private var moc
 
     @FetchRequest private var subtrees: FetchedResults<Entity>
+
+    private var filteredSubtrees: [Entity] {
+        subtrees.filter {
+            ($0.path.range(of: searchBinding.wrappedValue, options: .caseInsensitive) != nil)
+                    || searchBinding.wrappedValue.isEmpty
+        }
+    }
 
     @State(initialValue: "")
     private var searchState: String
