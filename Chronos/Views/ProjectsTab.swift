@@ -24,8 +24,8 @@ struct ProjectsTab: View {
         NavigationView {
             TreeView<Project> { project in ProjectDetailView(project: project) }
                     .navigationTitle("Projects")
-                    .floatingActionButton { isPresentingEditView = true }
-                    .modal("New Project", isPresented: $isPresentingEditView, onOpen: { newProject = Project(moc) }) {
+                    .floatingActionButton { isPresentingNewProject = true }
+                    .modal("New Project", isPresented: $isPresentingNewProject, onOpen: { newProject = Project(moc) }) {
                         ProjectDetailEditView(project: newProject)
                     }
         }
@@ -37,7 +37,7 @@ struct ProjectsTab: View {
 
     /// Whether the sheet showing the ProjectDetailEditView is visible.
     ///
-    @State private var isPresentingEditView = false
+    @State private var isPresentingNewProject = false
 
     @Environment(\.managedObjectContext)
     private var moc

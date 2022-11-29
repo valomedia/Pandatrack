@@ -28,14 +28,26 @@ struct TagsTab: View {
 
     var body: some View {
         NavigationView {
-            TreeView<Tag> { tag in TagDetailView(tag: tag) }.navigationBarTitle("Tags")
+            TreeView<Tag> { tag in TagDetailView(tag: tag) }
+                    .navigationTitle("Tags")
+                    .floatingActionButton { isPresentingNewTag = true }
+                    .modal("New Tab", isPresented: $isPresentingNewTag, onOpen: { newTag = Tag(moc) }) {
+                        TagDetailView(tag: newTag)
+                    }
         }
     }
+
+    /// The new Tag being created, if any.
+    ///
+    @State @ManagedEntity private var newTag: Tag?
+
+    /// Whether the sheet showing the TagDetailView is currently visible.
+    ///
+    @State private var isPresentingNewTag = false
 
     @Environment(\.managedObjectContext)
     private var moc
 
-    // MARK: - Methods
 }
 
 

@@ -41,34 +41,56 @@ struct TagDetailView: View {
 
     /// The Tag being shown by this View.
     ///
-    @State @ManagedEntity var tag: Tag?
+    @ObservedObject @ManagedEntity var tag: Tag?
 
     var body: some View {
-        List {
-            Section { TagView(tag: tag) }
-            Section {
-                DeleteButton(
-                        buttonText: "Delete Tag",
-                        confirmationQuestion: "Do you really want to delete this tag?",
-                        supplementalMessage: """
-                                             This tag will be removed along with any subtags.  The tags will be \
-                                             removed from their respective entries, but the entries themselves will \
-                                             remain.
-                                             """) {
-                    tag.map(moc.delete)
-                }
+        if let tag, let _tag = Binding<Tag>($tag.entity) {
+                List {
+                    Section {
+                        HStack {
+                            Label("Name", systemImage: "number")
+                            TextField("Tag Name", text: _tag.name)
+                                    .multilineTextAlignment(.trailing)
+                                    .onChange(of: tag.name) { newValue in
+                                        tag.name = newValue.replacingOccurrences(of: "/", with: "")
+                                    }
+                        }
+                        ParentPicker<Tag>(entity: tag) {
+                            ParentView(entity: tag.parent)
+                        }
+                    }
+                    Section {
+                        DeleteButton(
+                                buttonText: "Delete Tag",
+                                confirmationQuestion: "Do you really want to delete this tag?",
+                                supplementalMessage: """
+                                                     This tag will be removed along with any subtags.  The tags will \
+                                                     be removed from their respective entries, but the entries \
+                                                     themselves will remain.
+                                                     """) {
+                            moc.delete(tag)
+                            dismiss()
+                        }
+                    }
+                    if !entries.isEmpty {
+                        Section("Entries") {
+                            EntriesView(entries: AnyRandomAccessCollection(entries))
+                        }
+                    }
             }
-            if !entries.isEmpty {
-                Section(header: Text("Entries")) { EntriesView(entries: AnyRandomAccessCollection(entries)) }
-            }
+                    .navigationBarTitle(tag.name)
+        } else {
+            EmptyView()
         }
-                .navigationBarTitle(tag?.name ?? "")
     }
 
     @FetchRequest private var entries: FetchedResults<CompletedEntry>
 
     @Environment(\.managedObjectContext)
     private var moc
+
+    @Environment(\.dismiss)
+    private var dismiss
 
 }
 

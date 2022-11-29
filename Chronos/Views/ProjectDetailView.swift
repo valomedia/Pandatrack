@@ -37,7 +37,7 @@ struct ProjectDetailView: View {
 
     /// The Project being shown by this View.
     ///
-    @State @ManagedEntity var project: Project?
+    @ObservedObject @ManagedEntity var project: Project?
 
     var body: some View {
         List {
@@ -56,7 +56,7 @@ struct ProjectDetailView: View {
                 }
             }
             if !entries.isEmpty {
-                Section(header: Text("Entries")) { EntriesView(entries: AnyRandomAccessCollection(entries)) }
+                Section("Entries") { EntriesView(entries: AnyRandomAccessCollection(entries)) }
             }
         }
                 .navigationTitle(project?.name ?? "")

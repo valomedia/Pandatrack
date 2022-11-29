@@ -33,12 +33,12 @@ final class Tag: NSManagedObject, Tree {
     ///
     convenience init(
             _ moc: NSManagedObjectContext,
-            name: String,
+            name: String? = nil,
             entries: Set<CompletedEntry>? = nil,
             parent: Tag? = nil,
             @SetBuilder<Tag> _ children: () -> Set<Tag>? = { nil }) {
         self.init(entity: Self.entity(in: moc)!, insertInto: moc)
-        primitiveName = name
+        primitiveName = name ?? ""
 
         if let entries = entries {
             self.entries = entries

@@ -62,7 +62,9 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
                             // If trying to make something its own parent, outright ignore the change.
                             guard newValue.wrappedValue != entity else { return }
                             entity?.parent = newValue.wrappedValue
-                        })) {
+                        }),
+                title: "Folder"
+        ) {
             content()
         }
     }

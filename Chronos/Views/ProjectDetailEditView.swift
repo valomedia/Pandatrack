@@ -25,23 +25,19 @@ struct ProjectDetailEditView: View {
     @ObservedObject @ManagedEntity var project: Project?
 
     var body: some View {
-        Form(content: {
-            Section("Project") {
-                if let _project = Binding<Project>($project.entity) {
-                    HStack {
-                        Label("Name", systemImage: "at")
-                        TextField("Project Name", text: _project.name)
-                                .multilineTextAlignment(.trailing)
-                    }
-                    ThemePicker(selection: $project.entity[\.theme])
+        if let _project = Binding<Project>($project.entity) {
+            Form {
+                HStack {
+                    Label("Name", systemImage: "at")
+                    TextField("Project Name", text: _project.name)
+                            .multilineTextAlignment(.trailing)
                 }
+                ThemePicker(selection: $project.entity[\.theme])
+                ParentPicker<Project>(entity: project) { ParentView(entity: project?.parent) }
             }
-            Section("Folder") {
-                ParentPicker<Project>(entity: project) {
-                    ProjectView(project: project?.parent)
-                }
-            }
-        })
+        } else {
+            EmptyView()
+        }
     }
 
     @FetchRequest()

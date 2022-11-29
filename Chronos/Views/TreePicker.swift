@@ -26,10 +26,15 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     /// - Todo: Document
     /// - Parameters:
     ///     - entity:
+    ///     - title:
     ///     - content:
     ///
-    init<Content: View>(entity: Binding<ManagedEntity<Entity>>, @ViewBuilder content: @escaping () -> Content) {
+    init<Content: View>(
+            entity: Binding<ManagedEntity<Entity>>,
+            title: String = Entity.entityName,
+            @ViewBuilder content: @escaping () -> Content) {
         _entity = entity
+        self.title = title
         self.content = { AnyView(content()) }
     }
 
@@ -40,6 +45,12 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     /// - Todo: Document
     ///
     @Binding @ManagedEntity var entity: Entity?
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document
+    ///
+    let title: String
 
     var body: some View {
         NavigationLink(destination: TreeView(entity: $entity).navigationBarTitle(Entity.entityName)) { content() }

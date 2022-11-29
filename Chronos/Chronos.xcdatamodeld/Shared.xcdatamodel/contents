@@ -288,7 +288,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
-        <attribute name="name" attributeType="String" minValueString="1"/>
+        <attribute name="name" attributeType="String" minValueString="1" regularExpressionString="[^/]+"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="Tag" inverseName="parent" inverseEntity="Tag"/>
         <relationship name="entries" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="tags" inverseEntity="Entry"/>

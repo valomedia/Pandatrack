@@ -34,12 +34,7 @@ struct ProjectView: View {
                     .accessibilityElement(children: .combine)
             if let parent = project?.parent {
                 Divider()
-                HStack {
-                    Label("Folder", systemImage: "folder")
-                    Spacer()
-                    Text(parent.name)
-                }
-                        .accessibilityElement(children: .combine)
+                ParentView(entity: parent)
             }
             if let theme = project?.theme {
                 Divider()

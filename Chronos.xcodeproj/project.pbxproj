@@ -89,6 +89,7 @@
 		E9E976897E7FFA6488302ED4 /* ChronosEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97AD4726A8340DE122424 /* ChronosEnvironment.swift */; };
 		E9E9768A8FA8D254A769E0CD /* EntryDetailEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97840BD897BE5B701CF31 /* EntryDetailEditView.swift */; };
 		E9E976C2C209A507C5F4A821 /* EntriesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E979EC78C97802136E3B9E /* EntriesTab.swift */; };
+		E9E976C39F84A3F686182A0F /* ParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97C6A8F8668DA0DC62B15 /* ParentView.swift */; };
 		E9E976D6A74C4EF7619D893A /* Color+primaryBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97D857F9067F77D02AD51 /* Color+primaryBackground.swift */; };
 		E9E976E2E8C922E192F11A9A /* NumberAttributeListDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97CC4E3D8401E34C11FA5 /* NumberAttributeListDeclaration+CoreDataClass.swift */; };
 		E9E976EDAEA680701FE9ED9D /* PreviewProvider+entryTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97AA914C8AC926DB12FF1 /* PreviewProvider+entryTimer.swift */; };
@@ -324,7 +325,6 @@
 		E9E97899C875E85AF62E1FB1 /* PercentageAttributeListRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PercentageAttributeListRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E978A75F0A2D2D6D5D2AA1 /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
 		E9E978A9CB29B9E6028FE5AB /* BuiltinAttributeDeclaration+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BuiltinAttributeDeclaration+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E9E978AE106D15ADC94B7182 /* ManagedEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedEntities.swift; sourceTree = "<group>"; };
 		E9E978BB3FA00ECABDAA2138 /* DateInterval+yesterday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateInterval+yesterday.swift"; sourceTree = "<group>"; };
 		E9E978BEA1961FD3029535E1 /* DateAttributeSingleRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateAttributeSingleRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E978CC49F166056076DBE6 /* OrderedSetBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedSetBuilder.swift; sourceTree = "<group>"; };
@@ -375,6 +375,7 @@
 		E9E97C18CF3F49BFF76120A5 /* PercentageAttributeListDeclaration+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PercentageAttributeListDeclaration+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E97C4401D640C0B65BF433 /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
 		E9E97C519BBB6B5A8528002E /* StringAttributeSingleRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringAttributeSingleRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E9E97C6A8F8668DA0DC62B15 /* ParentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentView.swift; sourceTree = "<group>"; };
 		E9E97C6B4263A0D14489C150 /* NSManagedObjectContext+noUndo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+noUndo.swift"; sourceTree = "<group>"; };
 		E9E97C7B859B66B31051E372 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		E9E97C9D9F6CDEA7956407EC /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -642,7 +643,6 @@
 				E9E97C9D9F6CDEA7956407EC /* Tag+CoreDataClass.swift */,
 				E9E973E3024557C05E5A9AB5 /* NSManagedObject+Identifiable.swift */,
 				E9E9743887110ABAB64F6437 /* Sorted.swift */,
-				E9E978AE106D15ADC94B7182 /* ManagedEntities.swift */,
 				E9E9755F36F29DEC51C80D55 /* Entry+CoreDataClass.swift */,
 				E9E9710B524CC57F2131487F /* RunningEntry+CoreDataClass.swift */,
 			);
@@ -844,6 +844,7 @@
 				E9E9702402B61A805908F574 /* TagDetailView.swift */,
 				E9E97415F0CA3B882573281D /* ProjectsView.swift */,
 				E9E9745DE9C97934FBB8154C /* TagView.swift */,
+				E9E97C6A8F8668DA0DC62B15 /* ParentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1237,6 +1238,7 @@
 				E9E9760571EDFB4B17464A6C /* TagDetailView.swift in Sources */,
 				E9E9781A98861CF23C979BF2 /* ProjectsView.swift in Sources */,
 				E9E979259E6AB823324209FE /* TagView.swift in Sources */,
+				E9E976C39F84A3F686182A0F /* ParentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

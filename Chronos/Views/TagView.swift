@@ -25,11 +25,7 @@ struct TagView: View {
     @ObservedObject @ManagedEntity var tag: Tag?
 
     var body: some View {
-        if let tag = tag {
-            Label(tag.path, systemImage: "number")
-        } else {
-            EmptyView()
-        }
+        Label(tag?.path ?? "No Tag", systemImage: "number")
     }
 
 }
