@@ -53,7 +53,7 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     let title: String
 
     var body: some View {
-        NavigationLink(destination: TreeView(entity: $entity).navigationBarTitle(Entity.entityName)) { content() }
+        NavigationLink(destination: TreeView(entity: $entity).navigationBarTitle(title)) { content() }
     }
 
     // MARK: - Methods
