@@ -22,7 +22,7 @@ struct TagsView: View {
 
     /// The Tags being shown by this View.
     ///
-    @ObservedObject @ManagedEntities var tags: AnyRandomAccessCollection<Tag>
+    let tags: AnyRandomAccessCollection<Tag>
 
     var body: some View {
         ForEach(tags) { tag in TagView(tag: tag) }

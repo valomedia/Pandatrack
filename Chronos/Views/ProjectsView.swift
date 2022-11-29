@@ -22,7 +22,7 @@ struct ProjectsView: View {
 
     /// The Projects being shown by this View.
     ///
-    @ObservedObject @ManagedEntities var projects: AnyRandomAccessCollection<Project>
+    let projects: AnyRandomAccessCollection<Project>
 
     var body: some View {
         ForEach(projects) { project in ProjectView(project: project) }

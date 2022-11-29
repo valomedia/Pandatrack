@@ -23,7 +23,7 @@ struct EntriesView: View {
 
     /// The Entries being shown by this View.
     ///
-    @ObservedObject @ManagedEntities var entries: AnyRandomAccessCollection<CompletedEntry>
+    let entries: AnyRandomAccessCollection<CompletedEntry>
 
     var body: some View {
         ForEach(entries) { entry in
@@ -36,6 +36,8 @@ struct EntriesView: View {
 
     @Environment(\.managedObjectContext)
     private var moc
+
+    @EnvironmentObject private var env: ChronosEnvironment
 
     // MARK: - Methods
 
@@ -65,10 +67,10 @@ class EntriesView_Previews: PreviewProvider {
             List {
                 try! EntriesView(
                         entries: AnyRandomAccessCollection(
-                                moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
+                                        moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
                 )
                         .environment(\.managedObjectContext, moc)
-                        .environmentObject(entryTimer)
+                        .environmentObject(env)
             }
         }
     }

@@ -136,6 +136,10 @@ struct EntryDetailView: View {
 
 // MARK: EntryDetailView_Previews
 
+/// Undocumented.
+///
+/// - Todo: Document.
+///
 class EntryDetailView_Previews: PreviewProvider {
 
     // MARK: - Static properties
@@ -143,7 +147,8 @@ class EntryDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             try! EntryDetailView(
-                    entry: Set(moc.fetch(CompletedEntry.makeFetchRequest())).first { $0.name == "Take over the world" })
+                    entry: Set(moc.fetch(CompletedEntry.makeFetchRequest())).first { $0.name == "Take over the world" }
+            )
                     .environment(\.managedObjectContext, moc)
                     .environmentObject(env)
         }

@@ -112,7 +112,6 @@
 		E9E97874B190778B39275B84 /* ChronosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97674D533CCC5728BB87B /* ChronosApp.swift */; };
 		E9E97888B302BA018FE7A040 /* Binding+map.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9715F8D6AF0D49A5F6114 /* Binding+map.swift */; };
 		E9E978BB3C43BC01E4329EFF /* StringAttributeSingleDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E974689F5B0AA127E631D6 /* StringAttributeSingleDeclaration+CoreDataClass.swift */; };
-		E9E978C4BFA12CD74DC6358F /* ManagedEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E978AE106D15ADC94B7182 /* ManagedEntities.swift */; };
 		E9E978F3BDD4F1F77A62B473 /* CustomAttributeDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97BD6D4E7CD4773EE9557 /* CustomAttributeDeclaration+CoreDataClass.swift */; };
 		E9E9790C61CF4BB4F27F9111 /* StringAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97A86AE87113996DA28B4 /* StringAttribute.swift */; };
 		E9E979259E6AB823324209FE /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9745DE9C97934FBB8154C /* TagView.swift */; };
@@ -1224,7 +1223,6 @@
 				E9E971FDB2F15E3537771274 /* NSManagedObject+Identifiable.swift in Sources */,
 				E9E97C63F6F1B3B6864523BE /* Sorted.swift in Sources */,
 				E9E97F91F64DC73145D0689C /* Optional+Comparable.swift in Sources */,
-				E9E978C4BFA12CD74DC6358F /* ManagedEntities.swift in Sources */,
 				E9E97BBD795D951027876D88 /* View+enabled.swift in Sources */,
 				E9E9746B5A70DF54DDE72F15 /* PreviewProvider+env.swift in Sources */,
 				E9E97D5F142FD0BCD8BEC7AA /* PreviewProvider+moc.swift in Sources */,

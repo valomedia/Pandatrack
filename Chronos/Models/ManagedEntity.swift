@@ -28,13 +28,17 @@ class ManagedEntity<EntityType: NSManagedObject>: ObservableObject, ExpressibleB
 
     // MARK: - Life cycle methods
 
-    init(_ wrappedValue: EntityType? = nil) {
+    init(wrappedValue: EntityType?) {
         self.wrappedValue = wrappedValue
     }
 
-    convenience init(wrappedValue: EntityType?) { self.init(wrappedValue) }
+    convenience init(_ wrappedValue: EntityType?) {
+        self.init(wrappedValue: wrappedValue)
+    }
 
-    required convenience init(nilLiteral: ()) { self.init() }
+    required convenience init(nilLiteral: ()) {
+        self.init(nil)
+    }
 
     // MARK: - Properties
 
