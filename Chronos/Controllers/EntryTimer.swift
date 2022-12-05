@@ -39,6 +39,13 @@ class EntryTimer: ObservableObject {
     init(_ moc: NSManagedObjectContext) {
         self.moc = moc
         reset()
+
+        // Clean up running entries
+        guard let runningEntries = try? moc.fetch(RunningEntry.makeFetchRequest()).sorted(by: \.start) else { return }
+        let staleRunningEntries = runningEntries.reversed().dropFirst()
+        staleRunningEntries.forEach { _ = CompletedEntry(moc, from: $0) }
+        moc.noUndo { staleRunningEntries.forEach(moc.delete) }
+        if let currentRunningEntry = runningEntries.first { track(currentRunningEntry) }
     }
 
     // MARK: - Properties
