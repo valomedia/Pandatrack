@@ -32,10 +32,7 @@ struct ThemePicker: View {
                     .padding(.trailing)
                     .foregroundColor(.accentColor)
             Picker("Theme", selection: $selection) {
-                ForEach(Theme.allCases) { theme in
-                    ThemeView(theme: theme)
-                            .tag((theme != Theme.none).then(theme))
-                }
+                ForEach(Theme.allCases) { theme in Text(theme.name).tag((theme != Theme.none).then(theme)) }
             }
                     .pickerStyle(.menu)
         }
