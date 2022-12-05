@@ -22,9 +22,7 @@ struct ChronosView: View {
     // MARK: - Life cycle methods
 
     init() {
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.configureWithOpaqueBackground()
-        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        UITabBar.appearance().isHidden = true
     }
 
     // MARK: - Properties

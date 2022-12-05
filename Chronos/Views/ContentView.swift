@@ -19,6 +19,29 @@ import CoreData
 ///
 struct ContentView: View {
 
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    enum Tab: String, TabBarItem {
+        case entries
+        case projects
+        case tags
+
+        var image: Image {
+            switch self {
+            case .entries: return Image(systemName: "timer")
+            case .projects: return Image(systemName: "at")
+            case .tags: return Image(systemName: "number")
+            }
+        }
+
+        var text: Text {
+            Text(rawValue.capitalized)
+        }
+
+    }
+
     // MARK: - Properties
 
     var entryTimerView: some View {
@@ -28,39 +51,36 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            TabView {
-                VStack(spacing: 0) {
-                    EntriesTab()
-                    entryTimerView
+            VStack(spacing: 0) {
+                TabView(selection: $tabBarSelection) {
+                    VStack(spacing: 0) {
+                        EntriesTab()
+                        entryTimerView
+                    }
+                            .tag(Tab.entries)
+                    VStack(spacing: 0) {
+                        ProjectsTab()
+                        entryTimerView
+                    }
+                            .tag(Tab.projects)
+                    VStack(spacing: 0) {
+                        TagsTab()
+                        entryTimerView
+                    }
+                            .tag(Tab.tags)
                 }
-                        .tabItem {
-                            Label("Entries", systemImage: "timer")
+                        .onAppear(perform: entryTimer.startTimer)
+                        .onDisappear(perform: entryTimer.stopTimer)
+                        .sheet(isPresented: $isPresentingTodayView) {
+                            TrackingSheet(editAction: editAction)
+                                    .background(entryTimer.theme.backgroundColor)
+                                    .foregroundColor(entryTimer.theme.foregroundColor)
                         }
-                VStack(spacing: 0) {
-                    ProjectsTab()
-                    entryTimerView
-                }
-                        .tabItem {
-                            Label("Projects", systemImage: "at")
+                        .modal(entryTimer.runningEntry?.name, isPresented: $isPresentingEditView) {
+                            EntryDetailEditView(entry: entryTimer.runningEntry)
                         }
-                VStack(spacing: 0) {
-                    TagsTab()
-                    entryTimerView
-                }
-                        .tabItem {
-                            Label("Tags", systemImage: "number")
-                        }
+                TabBar(selection: $tabBarSelection)
             }
-                    .onAppear(perform: entryTimer.startTimer)
-                    .onDisappear(perform: entryTimer.stopTimer)
-                    .sheet(isPresented: $isPresentingTodayView) {
-                        TrackingSheet(editAction: editAction)
-                                .background(entryTimer.theme.backgroundColor)
-                                .foregroundColor(entryTimer.theme.foregroundColor)
-                    }
-                    .modal(entryTimer.runningEntry?.name, isPresented: $isPresentingEditView) {
-                        EntryDetailEditView(entry: entryTimer.runningEntry)
-                    }
         }
                 .toolbar {
                     ToolbarItemGroup(placement: .bottomBar) {
@@ -78,6 +98,10 @@ struct ContentView: View {
     /// Whether the sheet showing the EntryTimerDetailEditView is visible.
     ///
     @State private var isPresentingEditView = false
+
+    /// The currently selected tab.
+    ///
+    @State private var tabBarSelection: ContentView.Tab = .entries
 
     @EnvironmentObject private var env: ChronosEnvironment
     @EnvironmentObject private var entryTimer: EntryTimer
