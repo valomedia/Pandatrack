@@ -18,10 +18,6 @@ import SwiftUI
 ///
 struct FloatingActionButton: View {
 
-    // MARK: - Static properties
-
-    // MARK: - Static methods
-
     // MARK: - Life cycle methods
 
     /// Undocumented.
@@ -53,7 +49,6 @@ struct FloatingActionButton: View {
                 .buttonStyle(.plain)
                 .colorInvert()
                 .background(Circle().fill(Color.accentColor))
-                .shadow(radius: 2, x: 1, y: 1)
                 .padding()
     }
 
