@@ -160,17 +160,18 @@ class EntryTimer: ObservableObject {
     /// - Returns: The stopped entry, if any.
     ///
     @discardableResult func reset() -> CompletedEntry? {
-        guard let runningEntry = runningEntry else { return nil }
         defer {
+            moc.noUndo { runningEntry.map(moc.delete) }
             secondsElapsed = 0
             minutesElapsed = 0
             hoursElapsed = 0
             timeElapsedString = "00:00:00"
             timeElapsedAccessibilityLabel = "0 hours, 0 minutes, and 0 seconds"
             pomodoroTimer = nil
-            moc.noUndo { moc.delete(runningEntry) }
+            runningEntry = nil
         }
 
+        guard let runningEntry = runningEntry else { return nil }
         return CompletedEntry(moc, from: runningEntry)
     }
 
