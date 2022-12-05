@@ -44,27 +44,34 @@ struct DayView: View {
 
     var body: some View {
         let totalTime = entries.map(\.interval.duration).sum()
-        Circle()
-                .strokeBorder(lineWidth: 24)
-                .overlay {
-                    Text(DateComponentsFormatter.briefTimeFormatter.string(from: totalTime) ?? "")
-                            .accessibility(hidden: true)
-                            .ifNotNil(DateComponentsFormatter.fullTimeFormatter.string(from: totalTime)) {
-                                $0
-                                        .accessibility(hidden: false)
-                                        .accessibilityLabel("Total time tracked")
-                                        .accessibilityValue($1)
-                            }
-                            .foregroundStyle(entryTimer.theme.foregroundColor)
-                }
-                .overlay {
-                    ForEach(entries) { entry in
-                        DateIntervalArc(interval: entry.interval, in: day, lineWidth: 24)
-                                .rotation(Angle(degrees: 90))
-                                .stroke(entry.theme.backgroundColor, lineWidth: 12)
+        VStack {
+            Text(DateFormatter.fullRelativeDateFormatter.string(from: day.start))
+                    .frame(alignment: .center)
+                    .padding([.top, .horizontal])
+                    .font(.largeTitle)
+            Circle()
+                    .strokeBorder(lineWidth: 24)
+                    .overlay {
+                        Text(DateComponentsFormatter.briefTimeFormatter.string(from: totalTime) ?? "")
+                                .accessibility(hidden: true)
+                                .ifNotNil(DateComponentsFormatter.fullTimeFormatter.string(from: totalTime)) {
+                                    $0
+                                            .accessibility(hidden: false)
+                                            .accessibilityLabel("Total time tracked")
+                                            .accessibilityValue($1)
+                                }
+                                .foregroundStyle(entryTimer.theme.foregroundColor)
                     }
-                }
-                .padding(.horizontal)
+                    .overlay {
+                        ForEach(entries) { entry in
+                            DateIntervalArc(interval: entry.interval, in: day, lineWidth: 24)
+                                    .rotation(Angle(degrees: 90))
+                                    .stroke(entry.theme.backgroundColor, lineWidth: 12)
+                        }
+                    }
+                    .padding([.bottom, .horizontal])
+        }
+                .padding()
     }
 
     /// The day's time entries.

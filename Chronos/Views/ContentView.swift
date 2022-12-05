@@ -54,7 +54,7 @@ struct ContentView: View {
                     .onAppear(perform: entryTimer.startTimer)
                     .onDisappear(perform: entryTimer.stopTimer)
                     .sheet(isPresented: $isPresentingTodayView) {
-                        TodayView(editAction: editAction)
+                        TrackingSheet(editAction: editAction)
                                 .background(entryTimer.theme.backgroundColor)
                                 .foregroundColor(entryTimer.theme.foregroundColor)
                     }

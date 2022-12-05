@@ -68,7 +68,7 @@ class Entry: NSManagedObject, Item {
     /// - Todo: Document.
     ///
     @objc public var day: String {
-        Self.relativeDateFormatter.string(from: start)
+        DateFormatter.fullRelativeDateFormatter.string(from: start)
     }
 
 }

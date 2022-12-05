@@ -8,6 +8,8 @@
 
 import Foundation
 import SwiftUI
+import ObservedOptionalObject
+
 
 // MARK: PomodoroTimerView
 
@@ -23,7 +25,7 @@ struct PomodoroTimerView: View {
     ///
     /// - Todo: Document.
     ///
-    @StateObject var pomodoroTimer: PomodoroTimer
+    @ObservedOptionalObject var pomodoroTimer: PomodoroTimer?
 
     /// Undocumented
     ///
@@ -36,30 +38,40 @@ struct PomodoroTimerView: View {
             Text("Pomodoro Timer")
                     .frame(alignment: .center)
                     .font(.headline)
-            ProgressView(value: Double(pomodoroTimer.secondsElapsed), total: Double(pomodoroTimer.totalSeconds))
+            ProgressView(
+                    value: Double(pomodoroTimer?.secondsElapsed ?? 0),
+                    total: Double(pomodoroTimer?.totalSeconds ?? 1)
+            )
                     .progressViewStyle(PomodoroProgressViewStyle(theme: theme))
             HStack {
                 VStack(alignment: .leading) {
                     Text("Minutes Elapsed")
                             .font(.caption)
-                    Label("\(pomodoroTimer.minutesElapsed)", systemImage: "hourglass.bottomhalf.fill")
+                    Label(
+                            (pomodoroTimer?.minutesElapsed).map(String.init) ?? "",
+                            systemImage: "hourglass.bottomhalf.fill"
+                    )
                             .labelStyle(.leadingIcon)
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
                     Text("Minutes Remaining")
                             .font(.caption)
-                    Label("\(pomodoroTimer.minutesRemaining)", systemImage: "hourglass.tophalf.fill")
+                    Label(
+                            (pomodoroTimer?.minutesRemaining).map(String.init) ?? "",
+                            systemImage: "hourglass.tophalf.fill"
+                    )
                             .labelStyle(.trailingIcon)
                 }
             }
         }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("Time remaining")
-                .accessibilityValue("\(pomodoroTimer.minutesRemaining) minutes")
-                .padding([.top, .horizontal])
-                .onAppear { pomodoroTimer.startTimer() }
-                .onDisappear { pomodoroTimer.stopTimer() }
+                .ifNotNil(pomodoroTimer) { $0.accessibilityValue("\($1.minutesRemaining) minutes") }
+                .accessibilityHidden(pomodoroTimer == nil)
+                .padding()
+                .onAppear { pomodoroTimer?.startTimer() }
+                .onDisappear { pomodoroTimer?.stopTimer() }
     }
 
 }

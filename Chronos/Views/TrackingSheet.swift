@@ -1,5 +1,5 @@
 //
-//  TodayView.swift
+//  TrackungSheet.swift
 //  Chronos
 //
 //  Created by Jean-Pierre Höhmann on 2022-09-22.
@@ -11,13 +11,13 @@ import SwiftUI
 import CoreData
 
 
-// MARK: TodayView
+// MARK: TrackingSheet
 
 /// Undocumented.
 ///
 /// - Todo: Document.
 ///
-struct TodayView: View {
+struct TrackingSheet: View {
 
     // MARK: - Properties
 
@@ -26,22 +26,20 @@ struct TodayView: View {
             RoundedRectangle(cornerRadius: 16.0)
                     .fill(entryTimer.theme.backgroundColor)
             VStack {
-                if let pomodoroTimer = entryTimer.pomodoroTimer {
-                    PomodoroTimerView(pomodoroTimer: pomodoroTimer, theme: entryTimer.theme)
+                PomodoroTimerView(pomodoroTimer: entryTimer.pomodoroTimer, theme: entryTimer.theme)
+                TabView(selection: $tabViewSelection) {
+                    DayView(DateInterval.yesterday).tag(DateInterval.yesterday)
+                    DayView(DateInterval.today).tag(DateInterval.today)
                 }
-                Spacer()
-                Text("Today")
-                        .frame(alignment: .center)
-                        .font(.largeTitle)
-                DayView()
-                Spacer()
+                        .tabViewStyle(PageTabViewStyle())
                 EntryTimerView(editAction: editAction)
             }
         }
-                .padding()
                 .foregroundColor(entryTimer.theme.foregroundColor)
                 .navigationBarTitleDisplayMode(.inline)
     }
+
+    @State private var tabViewSelection = DateInterval.today
 
     @Environment(\.managedObjectContext)
     private var moc
@@ -57,13 +55,13 @@ struct TodayView: View {
 }
 
 
-// MARK: TodayView_Previews
+// MARK: TrackingSheet_Previews
 
 /// Undocumented.
 ///
 /// - Todo: Document.
 ///
-struct TodayView_Previews: PreviewProvider {
+struct TrackingSheet_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
@@ -72,7 +70,7 @@ struct TodayView_Previews: PreviewProvider {
     /// - Todo: Document.
     ///
     static var previews: some View {
-        TodayView(editAction: {})
+        TrackingSheet(editAction: {})
                 .environmentObject(entryTimer)
                 .environment(\.managedObjectContext, moc)
                 .background(entryTimer.theme.backgroundColor)
