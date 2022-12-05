@@ -1384,7 +1384,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.Chronos;
 				PRODUCT_NAME = Chronos;
 				SDKROOT = iphoneos;
@@ -1470,7 +1470,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.2;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.Chronos;
 				PRODUCT_NAME = Chronos;
 				SDKROOT = iphoneos;
