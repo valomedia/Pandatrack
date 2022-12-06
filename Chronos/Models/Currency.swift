@@ -26,7 +26,7 @@ struct Currency: Codable, CustomStringConvertible {
     ///     - amount:
     ///     - code:
     ///
-    init(_ amount: Decimal, code: String = Locale.current.currencyCode ?? "USD") {
+    init(_ amount: Decimal, code: String = Locale.current.currency?.identifier ?? "USD") {
         self.amount = amount
         self.code = code
     }
