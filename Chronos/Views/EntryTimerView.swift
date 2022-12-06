@@ -102,21 +102,28 @@ struct EntryTimerView: View {
                 HStack {
                     Label(entryTimer.runningEntry?.project?.parent?.name ?? "", systemImage: "folder")
                             .labelStyle(.leadingIcon)
-                            .ifNotNil(entryTimer.runningEntry?.project?.parent?.name) {
-                                $0
+                            .ifNotNil(entryTimer.runningEntry?.project?.parent) { view, folder in
+                                view
                                         .accessibilityLabel("Folder")
-                                        .accessibilityValue($1)
+                                        .accessibilityValue(folder.name)
                             }
-                            .if(entryTimer.runningEntry?.project?.parent == nil) {
-                                $0.accessibilityHidden(true)
+                            .if(entryTimer.runningEntry?.project?.parent == nil) { view in
+                                view.accessibilityHidden(true)
                             }
                     Spacer()
-                    if let start = entryTimer.runningEntry?.start {
-                        Label(Self.shortTimeDateFormatter.string(from: start), systemImage: "clock")
-                                .labelStyle(.trailingIcon)
-                                .accessibilityLabel("Running since")
-                                .accessibilityValue(Self.longTimeDateFormatter.string(from: start))
-                    }
+                    Label(
+                            (entryTimer.runningEntry?.start).map(Self.shortTimeDateFormatter.string(from:)) ?? "",
+                            systemImage: "clock"
+                    )
+                            .labelStyle(.trailingIcon)
+                            .ifNotNil(entryTimer.runningEntry) { view, entry in
+                                view
+                                        .accessibilityLabel("Running since")
+                                        .accessibilityValue(Self.longTimeDateFormatter.string(from: entry.start))
+                            }
+                            .if(entryTimer.runningEntry == nil) { view in
+                                view.accessibilityHidden(true)
+                            }
                 }
                         .font(.caption)
             }
