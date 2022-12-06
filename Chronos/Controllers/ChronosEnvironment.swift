@@ -80,6 +80,10 @@ class ChronosEnvironment: ObservableObject {
     ///
     @Published var canRedo = false
 
+    /// The string representation of whatever the user is currently looking at, for sharing.
+    ///
+    @Published var shareString: String? = nil
+
     private var moc: NSManagedObjectContext
 
     // MARK: - Methods

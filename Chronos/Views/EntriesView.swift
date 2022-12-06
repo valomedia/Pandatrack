@@ -32,12 +32,30 @@ struct EntriesView: View {
                     .listRowBackground(entry.theme.backgroundColor)
         }
                 .onDelete(perform: deleteEntries)
+                .onAppear { env.shareString = shareString }
+                .onDisappear { env.shareString = nil }
     }
 
     @Environment(\.managedObjectContext)
     private var moc
 
     @EnvironmentObject private var env: ChronosEnvironment
+
+    private var shareString: String {
+        "start,end,name,project"
+                + entries
+                        .map { entry in
+                            [
+                                ISO8601DateFormatter.formatter.string(from: entry.start),
+                                ISO8601DateFormatter.formatter.string(from: entry.end),
+                                entry.name,
+                                entry.project?.path ?? ""
+                            ]
+                                    .map { "\"" + $0.replacingOccurrences(of: "\"", with: "\"\"") + "\"" }
+                                    .joined(separator: ",")
+                        }
+                        .joined(separator: "\n")
+    }
 
     // MARK: - Methods
 

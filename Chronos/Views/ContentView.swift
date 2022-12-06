@@ -87,6 +87,8 @@ struct ContentView: View {
                         Button(action: env.undo) { Image(systemName: "arrow.uturn.backward") }.enabled(env.canUndo)
                         Button(action: env.redo) { Image(systemName: "arrow.uturn.forward") }.enabled(env.canRedo)
                         Spacer()
+                        ShareLink(item: env.shareString ?? "").enabled(env.shareString != nil)
+                        Spacer()
                     }
                 }
     }
