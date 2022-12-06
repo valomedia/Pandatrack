@@ -60,7 +60,6 @@ struct DayView: View {
                                             .accessibilityLabel("Total time tracked")
                                             .accessibilityValue($1)
                                 }
-                                .foregroundStyle(entryTimer.theme.foregroundColor)
                     }
                     .overlay {
                         ForEach(entries) { entry in
@@ -80,10 +79,6 @@ struct DayView: View {
     ///
     @FetchRequest private var entries: FetchedResults<CompletedEntry>
 
-    // This will cause the View to repaint every second while an Entry is running, which is really only necessary for
-    // the TodayView, but there doesn't seem to be a trivial way to optionally depend on an EnvironmentObject.
-    @EnvironmentObject private var entryTimer: EntryTimer
-
     private let day: DateInterval
 
 }
@@ -101,7 +96,6 @@ class DayView_Previews: PreviewProvider {
 
     static var previews: some View {
         DayView(DateInterval.yesterday)
-                .environmentObject(entryTimer)
                 .environment(\.managedObjectContext, moc)
                 .background(entryTimer.theme.backgroundColor)
                 .previewLayout(.sizeThatFits)
