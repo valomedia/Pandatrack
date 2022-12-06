@@ -42,7 +42,7 @@ struct EntriesView: View {
     @EnvironmentObject private var env: ChronosEnvironment
 
     private var shareString: String {
-        "start,end,name,project"
+        "start,end,name,project\n"
                 + entries
                         .map { entry in
                             [
