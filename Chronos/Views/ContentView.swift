@@ -23,7 +23,7 @@ struct ContentView: View {
     ///
     /// - Todo: Document.
     ///
-    enum Tab: String, TabBarItem {
+    enum Tab: String, TabBarTab {
         case entries
         case projects
         case tags

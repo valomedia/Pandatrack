@@ -1,5 +1,5 @@
 //
-//  TabBarItem.swift
+//  TabBarTab.swift
 //  Chronos
 //
 //  Created by Jean-Pierre Höhmann on 2022-12-05.
@@ -16,7 +16,7 @@ import SwiftUI
 ///
 /// - Todo: Document.
 ///
-protocol TabBarItem: RawRepresentable, CaseIterable, Identifiable, Hashable
+protocol TabBarTab: RawRepresentable, CaseIterable, Identifiable, Hashable
         where RawValue: Hashable, AllCases == Array<Self> {
 
     // MARK: - Properties
@@ -35,7 +35,7 @@ protocol TabBarItem: RawRepresentable, CaseIterable, Identifiable, Hashable
 
 }
 
-extension TabBarItem {
+extension TabBarTab {
 
     // MARK: + id
 

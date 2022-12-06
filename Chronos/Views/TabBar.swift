@@ -16,7 +16,7 @@ import SwiftUI
 ///
 /// - Todo: Document.
 ///
-struct TabBar<Tab: TabBarItem>: View {
+struct TabBar<Tab: TabBarTab>: View {
 
     // MARK: - Properties
 
@@ -48,7 +48,7 @@ struct TabBar<Tab: TabBarItem>: View {
 
 class TabBar_Previews: PreviewProvider {
 
-    enum Tab: String, TabBarItem {
+    enum Tab: String, TabBarTab {
         case foo
         case bar
         case baz
