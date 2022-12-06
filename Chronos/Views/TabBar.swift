@@ -18,12 +18,6 @@ import SwiftUI
 ///
 struct TabBar<Tab: TabBarItem>: View {
 
-    // MARK: - Static properties
-
-    // MARK: - Static methods
-
-    // MARK: - Life cycle methods
-
     // MARK: - Properties
 
     var body: some View {
@@ -46,5 +40,37 @@ struct TabBar<Tab: TabBarItem>: View {
     }
 
     @Binding var selection: Tab
+
+}
+
+
+// MARK: TabBar_Previews
+
+class TabBar_Previews: PreviewProvider {
+
+    enum Tab: String, TabBarItem {
+        case foo
+        case bar
+        case baz
+
+        var image: Image {
+            switch self {
+            case .foo: return Image(systemName: "a.circle")
+            case .bar: return Image(systemName: "b.circle")
+            case .baz: return Image(systemName: "c.circle")
+            }
+        }
+
+        var text: Text {
+            Text(rawValue.capitalized)
+        }
+
+    }
+
+    // MARK: - Static properties
+
+    static var previews: some View {
+        TabBar(selection: .constant(Tab.foo)).previewLayout(.sizeThatFits)
+    }
 
 }
