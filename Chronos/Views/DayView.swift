@@ -35,7 +35,7 @@ struct DayView: View {
         if let day = day {
             predicate = NSPredicate(format: "start > %@ && end < %@", day.start as NSDate, day.end as NSDate)
         } else {
-            predicate = NSPredicate(format: "start > %@", Date.today as NSDate)
+            predicate = NSPredicate(format: "start > %@", Date.startOfToday as NSDate)
         }
         _entries = FetchRequest<CompletedEntry>(sortDescriptors: [SortDescriptor(\.start)], predicate: predicate)
     }

@@ -20,7 +20,7 @@ extension DateInterval {
     /// - Todo: Document
     ///
     static var today: DateInterval {
-        DateInterval(start: Date.today, end: Date.tomorrow)
+        DateInterval(start: Date.startOfToday, end: Date.endOfToday)
     }
 
 }

@@ -27,12 +27,14 @@ struct ContentView: View {
         case entries
         case projects
         case tags
+        case reports
 
         var image: Image {
             switch self {
             case .entries: return Image(systemName: "timer")
             case .projects: return Image(systemName: "at")
             case .tags: return Image(systemName: "number")
+            case .reports: return Image(systemName: "list.clipboard")
             }
         }
 
@@ -68,6 +70,11 @@ struct ContentView: View {
                         entryTimerView
                     }
                             .tag(Tab.tags)
+                    VStack(spacing: 0) {
+                        ReportsTab()
+                        entryTimerView
+                    }
+                            .tag(Tab.reports)
                 }
                         .onAppear(perform: entryTimer.startTimer)
                         .onDisappear(perform: entryTimer.stopTimer)

@@ -24,26 +24,34 @@ struct ProjectView: View {
     ///
     @ObservedObject @ManagedEntity var project: Project?
 
+    /// Whether to show the compact version of this View.
+    ///
+    var compact = false
+
     var body: some View {
-        VStack {
-            HStack {
-                Label("Project", systemImage: "at")
-                Spacer()
-                Text(project?.name ?? "No Project")
-            }
-                    .accessibilityElement(children: .combine)
-            if let parent = project?.parent {
-                Divider()
-                ParentView(entity: parent)
-            }
-            if let theme = project?.theme {
-                Divider()
+        if compact {
+            Label(project?.path ?? "No Project", systemImage: "at")
+        } else {
+            VStack {
                 HStack {
-                    Label("Theme", systemImage: "paintpalette")
+                    Label("Project", systemImage: "at")
                     Spacer()
-                    ThemeView(theme: theme)
+                    Text(project?.name ?? "No Project")
                 }
                         .accessibilityElement(children: .combine)
+                if let parent = project?.parent {
+                    Divider()
+                    ParentView(entity: parent)
+                }
+                if let theme = project?.theme {
+                    Divider()
+                    HStack {
+                        Label("Theme", systemImage: "paintpalette")
+                        Spacer()
+                        ThemeView(theme: theme)
+                    }
+                            .accessibilityElement(children: .combine)
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  Date+yesterday.swift
+//  Date+endOfToday.swift
 //  Chronos
 //
 //  Created by Jean-Pierre Höhmann on 2022-10-11.
@@ -12,14 +12,14 @@ import Foundation
 
 extension Date {
 
-    // MARK: + yesterday
+    // MARK: + endOfToday
 
     /// Undocumented.
     ///
     /// - Todo: Document
     ///
-    static var yesterday: Date {
-        Calendar.current.date(byAdding: .day, value: -1, to: Date.today) ?? Date.today - 24 * 60 * 60
+    static var endOfToday: Date {
+        .startOfTomorrow - 1
     }
 
 }
