@@ -209,7 +209,7 @@
         <relationship name="source" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="percentageAttributeRelationships" inverseEntity="Project"/>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
-        <attribute name="name" attributeType="String" minValueString="1"/>
+        <attribute name="name" attributeType="String" minValueString="1" regularExpressionString="[^/]+"/>
         <attribute name="theme" optional="YES" attributeType="String" valueTransformerName="" customClassName="Theme">
             <userInfo>
                 <entry key="RawType" value="Theme"/>

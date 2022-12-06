@@ -52,7 +52,7 @@ struct TagDetailView: View {
                             TextField("Tag Name", text: _tag.name)
                                     .multilineTextAlignment(.trailing)
                                     .onChange(of: tag.name) { newValue in
-                                        tag.name = newValue.replacingOccurrences(of: "/", with: "")
+                                        tag.name = newValue.replacingOccurrences(of: Tag.pathSeparator, with: "")
                                     }
                         }
                         ParentPicker<Tag>(entity: tag) {

@@ -31,6 +31,9 @@ struct ProjectDetailEditView: View {
                     Label("Name", systemImage: "at")
                     TextField("Project Name", text: _project.name)
                             .multilineTextAlignment(.trailing)
+                            .onChange(of: project?.name ?? "") { newValue in
+                                project?.name = newValue.replacingOccurrences(of: Project.pathSeparator, with: "")
+                            }
                 }
                 ThemePicker(selection: $project.entity[\.theme])
                 ParentPicker<Project>(entity: project) { ParentView(entity: project?.parent) }
