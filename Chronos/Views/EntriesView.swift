@@ -17,7 +17,7 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-struct EntriesView<Header: View>: View {
+struct EntriesView: View {
 
     // MARK: - Life cycle methods
 
@@ -25,21 +25,25 @@ struct EntriesView<Header: View>: View {
     ///
     /// - Todo: Document
     /// - Parameters:
-    ///     - entries:
-    ///     - isPrimaryContentForSharing:
     ///     - header:
+    ///     - entries:
+    ///     - isPrimaryContent:
     ///
     init(
+            _ header: String = "Entries",
             entries: AnyRandomAccessCollection<CompletedEntry>,
-            isPrimaryContentForSharing: Bool? = nil,
-            @ViewBuilder header: @escaping () -> Header
+            isPrimaryContent: Bool? = nil
     ) {
         self.entries = entries
-        self.isPrimaryContentForSharing = isPrimaryContentForSharing ?? false
+        self.isPrimaryContentForSharing = isPrimaryContent ?? false
         self.header = header
     }
 
     // MARK: - Properties
+
+    /// The Content for the Section footer.
+    ///
+    let header: String
 
     /// The Entries being shown by this View.
     ///
@@ -60,7 +64,7 @@ struct EntriesView<Header: View>: View {
             }
                     .onDelete(perform: deleteEntries)
         } header: {
-            header()
+            Text(header)
         } footer: {
             HStack {
                 Spacer()
@@ -99,32 +103,12 @@ struct EntriesView<Header: View>: View {
 
     // MARK: - Methods
 
-    /// The Content for the Section footer.
-    ///
-    let header: () -> Header
-
     private func deleteEntries(offsets: IndexSet) {
         withAnimation {
             offsets
                     .map { entries[AnyIndex($0)] }
                     .forEach(moc.delete)
         }
-    }
-
-}
-
-extension EntriesView where Header == EmptyView {
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    /// - Parameters:
-    ///     - entries:
-    ///     - isPrimaryContentForSharing:
-    ///     - header:
-    ///
-    init(entries: AnyRandomAccessCollection<CompletedEntry>, isPrimaryContentForSharing: Bool? = nil) {
-        self.init(entries: entries, isPrimaryContentForSharing: isPrimaryContentForSharing, header: EmptyView.init)
     }
 
 }
@@ -144,6 +128,7 @@ class EntriesView_Previews: PreviewProvider {
         NavigationView {
             List {
                 try! EntriesView(
+                        "Entries",
                         entries: AnyRandomAccessCollection(
                                         moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
                 )

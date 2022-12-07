@@ -39,15 +39,14 @@ struct EntriesTab: View {
                     List {
                         ForEach(entries) { section in
                             EntriesView(
+                                    section != entries.first ? section.id : "Recent",
                                     entries: AnyRandomAccessCollection(
                                             section.filter {
                                                 ($0.name.range(of: search, options: .caseInsensitive) != nil)
                                                         || search.isEmpty
                                             }
                                     )
-                            ) {
-                                Text(section != entries.first ? section.id : "Recent")
-                            }
+                            )
                         }
                     }
                 }

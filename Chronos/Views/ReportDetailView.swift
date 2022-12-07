@@ -27,7 +27,7 @@ struct ReportDetailView: View {
     var entries: [CompletedEntry]
 
     var body: some View {
-        EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true) { Text("Results") }
+        EntriesView("Results", entries: AnyRandomAccessCollection(entries), isPrimaryContent: true)
     }
 
 }
