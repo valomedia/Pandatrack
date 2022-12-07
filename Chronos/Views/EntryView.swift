@@ -30,15 +30,11 @@ struct EntryView: View {
             CardView(
                     title: entry.name,
                     labels: (
-                            (Label(entry.project?.name ?? "No Project", systemImage: "at"),
-                                    Label(
-                                            DateComponentsFormatter.fullTimeFormatter.string(from: entry.interval.duration)
-                                                    ?? "",
-                                            systemImage: "hourglass")),
-                            (Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
-                                    Label(
-                                            RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "",
-                                            systemImage: "clock"))))
+                            Label(entry.project?.name ?? "No Project", systemImage: "at"),
+                            Label(DateComponentsFormatter.fullTimeFormatter.string(from: entry.duration) ?? "", systemImage: "hourglass"),
+                            Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
+                            Label(RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "", systemImage: "clock"))
+            )
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Entry")
                     .accessibilityValue(entry.name)

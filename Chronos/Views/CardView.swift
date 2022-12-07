@@ -30,24 +30,21 @@ struct CardView: View {
     ///
     /// - Todo: Document.
     ///
-    let labels: (
-            (Label<Text, Image>, Label<Text, Image>),
-            (Label<Text, Image>, Label<Text, Image>)
-    )
+    let labels: (Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?)
 
     var body: some View {
         VStack(alignment: .leading) {
             Text(title).font(.headline)
             Spacer()
             HStack {
-                labels.0.0.labelStyle(.leadingIcon)
+                labels.0.labelStyle(.leadingIcon)
                 Spacer()
-                labels.0.1.labelStyle(.trailingIcon)
+                labels.1.labelStyle(.trailingIcon)
             }.font(.caption)
             HStack {
-                labels.1.0.labelStyle(.leadingIcon)
+                labels.2.labelStyle(.leadingIcon)
                 Spacer()
-                labels.1.1.labelStyle(.trailingIcon)
+                labels.3.labelStyle(.trailingIcon)
             }.font(.caption)
         }
                 .padding()
@@ -69,10 +66,11 @@ class CardView_Previews: PreviewProvider {
         CardView(
                 title: "Hello, World!",
                 labels: (
-                        (Label("Label 1", systemImage: "1.circle.fill"),
-                                Label("Label 2", systemImage: "2.circle.fill")),
-                        (Label("Label 3", systemImage: "3.circle.fill"),
-                                Label("Label 4", systemImage: "4.circle.fill"))))
+                        Label("Label 1", systemImage: "1.circle.fill"),
+                        Label("Label 2", systemImage: "2.circle.fill"),
+                        Label("Label 3", systemImage: "3.circle.fill"),
+                        Label("Label 4", systemImage: "4.circle.fill"))
+        )
                 .background(Theme.yellow.backgroundColor)
                 .foregroundColor(Theme.yellow.foregroundColor)
                 .previewLayout(.fixed(width: 400, height: 60))
