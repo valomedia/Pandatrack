@@ -19,6 +19,15 @@ import CoreData
 ///
 struct EntryView: View {
 
+    // MARK: - Static properties
+
+    private static let dateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }()
+
     // MARK: - Properties
 
     /// The Entry being shown.
@@ -31,9 +40,9 @@ struct EntryView: View {
                     title: entry.name,
                     labels: (
                             Label(entry.project?.name ?? "No Project", systemImage: "at"),
-                            Label(DateComponentsFormatter.fullTimeFormatter.string(from: entry.duration) ?? "", systemImage: "hourglass"),
+                            Label(TimeInterval.formatter.string(from: entry.duration) ?? "", systemImage: "hourglass"),
                             Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
-                            Label(RelativeDateTimeFormatter.formatter.string(for: entry.end) ?? "", systemImage: "clock"))
+                            Label(Self.dateFormatter.string(for: entry.start) ?? "", systemImage: "clock"))
             )
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Entry")

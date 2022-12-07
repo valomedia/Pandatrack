@@ -1,5 +1,5 @@
 //
-//  DateComponentsFormatter+fullTimeFormatter.swift
+//  TimeInterval+formatter.swift
 //  Chronos
 //
 //  Created by Jean-Pierre Höhmann on 2022-10-11.
@@ -9,17 +9,17 @@
 import Foundation
 
 
-// MARK: DateCompontentsFormatter
+// MARK: TimeInterval
 
-extension DateComponentsFormatter {
+extension TimeInterval {
 
-    // MARK: + fullTimeFormatter
+    // MARK: + formatter
 
     /// Undocumented.
     ///
     /// - Todo: Document
     ///
-    static let fullTimeFormatter: DateComponentsFormatter = {
+    static let formatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute]
         formatter.unitsStyle = .full

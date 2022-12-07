@@ -38,7 +38,7 @@ struct EntriesTab: View {
                 } else {
                     List {
                         ForEach(entries) { section in
-                            Section(section.id) {
+                            Section(section != entries.first ? section.id : "") {
                                 EntriesView(
                                         entries: AnyRandomAccessCollection(
                                                 section.filter {

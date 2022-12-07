@@ -21,11 +21,10 @@ class Entry: NSManagedObject, Item {
 
     // MARK: - Static properties
 
-    private static let relativeDateFormatter: DateFormatter = {
+    private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
         formatter.timeStyle = .none
-        formatter.doesRelativeDateFormatting = true
         return formatter
     }()
 
@@ -68,7 +67,7 @@ class Entry: NSManagedObject, Item {
     /// - Todo: Document.
     ///
     @objc public var day: String {
-        DateFormatter.fullRelativeDateFormatter.string(from: start)
+        Self.dateFormatter.string(from: start)
     }
 
 }

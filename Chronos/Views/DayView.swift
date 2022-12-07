@@ -20,6 +20,16 @@ import ObservedOptionalObject
 ///
 struct DayView: View {
 
+    // MARK: - Static properties
+
+    private static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .none
+        formatter.doesRelativeDateFormatting = true
+        return formatter
+    }()
+
     // MARK: - Life cycle methods
 
     /// Undocumented
@@ -43,18 +53,18 @@ struct DayView: View {
     // MARK: - Properties
 
     var body: some View {
-        let totalTime = entries.map(\.interval.duration).sum()
+        let totalTime: TimeInterval = entries.map(\.interval.duration).sum()
         VStack {
-            Text(DateFormatter.fullRelativeDateFormatter.string(from: day.start))
+            Text(Self.dateFormatter.string(from: day.start))
                     .frame(alignment: .center)
                     .padding([.top, .horizontal])
                     .font(.largeTitle)
             Circle()
                     .strokeBorder(lineWidth: 24)
                     .overlay {
-                        Text(DateComponentsFormatter.briefTimeFormatter.string(from: totalTime) ?? "")
+                        Text(TimeInterval.formatter.string(from: totalTime) ?? "")
                                 .accessibility(hidden: true)
-                                .ifNotNil(DateComponentsFormatter.fullTimeFormatter.string(from: totalTime)) {
+                                .ifNotNil(TimeInterval.formatter.string(from: totalTime)) {
                                     $0
                                             .accessibility(hidden: false)
                                             .accessibilityLabel("Total time tracked")
