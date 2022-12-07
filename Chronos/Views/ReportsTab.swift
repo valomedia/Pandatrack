@@ -41,9 +41,7 @@ struct ReportsTab: View {
                         TreePicker(entity: $project) { ProjectView(project: project, compact: true) }
                         TreePicker(entity: $tag) { TagView(tag: tag) }
                     }
-                    Section("Results") {
-                        ReportView(interval: interval, project: project, tag: tag)
-                    }
+                    ReportView(interval: interval, project: project, tag: tag)
                 }
             }
                     .navigationTitle("Reports")

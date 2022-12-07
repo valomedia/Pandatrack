@@ -17,7 +17,27 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-struct EntriesView: View {
+struct EntriesView<Header: View>: View {
+
+    // MARK: - Life cycle methods
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document
+    /// - Parameters:
+    ///     - entries:
+    ///     - isPrimaryContentForSharing:
+    ///     - header:
+    ///
+    init(
+            entries: AnyRandomAccessCollection<CompletedEntry>,
+            isPrimaryContentForSharing: Bool? = nil,
+            @ViewBuilder header: @escaping () -> Header
+    ) {
+        self.entries = entries
+        self.isPrimaryContentForSharing = isPrimaryContentForSharing ?? false
+        self.header = header
+    }
 
     // MARK: - Properties
 
@@ -27,20 +47,49 @@ struct EntriesView: View {
 
     /// Whether this EntriesView has the content that should be made available in the main ShareLink.
     ///
-    let sharable : Bool
+    let isPrimaryContentForSharing: Bool
 
     var body: some View {
-        ForEach(entries) { entry in
-            NavigationLink(destination: EntryDetailView(entry: entry)) { EntryView(entry: entry) }
-                    .foregroundColor(entry.theme.foregroundColor)
-                    .listRowBackground(entry.theme.backgroundColor)
+        Section {
+            ForEach(entries) { entry in
+                NavigationLink(destination: EntryDetailView(entry: entry)) {
+                    EntryView(entry: entry)
+                }
+                        .foregroundColor(entry.theme.foregroundColor)
+                        .listRowBackground(entry.theme.backgroundColor)
+            }
+                    .onDelete(perform: deleteEntries)
+        } header: {
+            header()
+        } footer: {
+            HStack {
+                Spacer()
+                ShareLink(item: shareString)
+            }
         }
-                .onDelete(perform: deleteEntries)
-                .if(sharable) { view in
+                .if(isPrimaryContentForSharing) { view in
                     view
                             .onAppear { env.shareString = shareString }
                             .onDisappear { env.shareString = nil }
                 }
+    }
+
+    /// The entries as CSV for sharing.
+    ///
+    private var shareString: String {
+        "start,end,name,project\n"
+                + entries
+                .map { entry in
+                    [
+                        ISO8601DateFormatter.formatter.string(from: entry.start),
+                        ISO8601DateFormatter.formatter.string(from: entry.end),
+                        entry.name,
+                        entry.project?.path ?? ""
+                    ]
+                            .map { "\"" + $0.replacingOccurrences(of: "\"", with: "\"\"") + "\"" }
+                            .joined(separator: ",")
+                }
+                .joined(separator: "\n")
     }
 
     @Environment(\.managedObjectContext)
@@ -48,23 +97,11 @@ struct EntriesView: View {
 
     @EnvironmentObject private var env: ChronosEnvironment
 
-    private var shareString: String {
-        "start,end,name,project\n"
-                + entries
-                        .map { entry in
-                            [
-                                ISO8601DateFormatter.formatter.string(from: entry.start),
-                                ISO8601DateFormatter.formatter.string(from: entry.end),
-                                entry.name,
-                                entry.project?.path ?? ""
-                            ]
-                                    .map { "\"" + $0.replacingOccurrences(of: "\"", with: "\"\"") + "\"" }
-                                    .joined(separator: ",")
-                        }
-                        .joined(separator: "\n")
-    }
-
     // MARK: - Methods
+
+    /// The Content for the Section footer.
+    ///
+    let header: () -> Header
 
     private func deleteEntries(offsets: IndexSet) {
         withAnimation {
@@ -72,6 +109,22 @@ struct EntriesView: View {
                     .map { entries[AnyIndex($0)] }
                     .forEach(moc.delete)
         }
+    }
+
+}
+
+extension EntriesView where Header == EmptyView {
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document
+    /// - Parameters:
+    ///     - entries:
+    ///     - isPrimaryContentForSharing:
+    ///     - header:
+    ///
+    init(entries: AnyRandomAccessCollection<CompletedEntry>, isPrimaryContentForSharing: Bool? = nil) {
+        self.init(entries: entries, isPrimaryContentForSharing: isPrimaryContentForSharing, header: EmptyView.init)
     }
 
 }
@@ -92,8 +145,7 @@ class EntriesView_Previews: PreviewProvider {
             List {
                 try! EntriesView(
                         entries: AnyRandomAccessCollection(
-                                        moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start)),
-                        sharable: false
+                                        moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
                 )
                         .environment(\.managedObjectContext, moc)
                         .environmentObject(env)

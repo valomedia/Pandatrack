@@ -38,16 +38,15 @@ struct EntriesTab: View {
                 } else {
                     List {
                         ForEach(entries) { section in
-                            Section(section != entries.first ? section.id : "") {
-                                EntriesView(
-                                        entries: AnyRandomAccessCollection(
-                                                section.filter {
-                                                    ($0.name.range(of: search, options: .caseInsensitive) != nil)
-                                                            || search.isEmpty
-                                                }
-                                        ),
-                                        sharable: section == entries.first
-                                )
+                            EntriesView(
+                                    entries: AnyRandomAccessCollection(
+                                            section.filter {
+                                                ($0.name.range(of: search, options: .caseInsensitive) != nil)
+                                                        || search.isEmpty
+                                            }
+                                    )
+                            ) {
+                                Text(section != entries.first ? section.id : "")
                             }
                         }
                     }
