@@ -74,7 +74,7 @@ struct TagDetailView: View {
                     }
                     if !entries.isEmpty {
                         Section("Entries") {
-                            EntriesView(entries: AnyRandomAccessCollection(entries))
+                            EntriesView(entries: AnyRandomAccessCollection(entries), sharable: true)
                         }
                     }
             }

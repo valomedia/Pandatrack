@@ -25,6 +25,10 @@ struct EntriesView: View {
     ///
     let entries: AnyRandomAccessCollection<CompletedEntry>
 
+    /// Whether this EntriesView has the content that should be made available in the main ShareLink.
+    ///
+    let sharable : Bool
+
     var body: some View {
         ForEach(entries) { entry in
             NavigationLink(destination: EntryDetailView(entry: entry)) { EntryView(entry: entry) }
@@ -32,8 +36,11 @@ struct EntriesView: View {
                     .listRowBackground(entry.theme.backgroundColor)
         }
                 .onDelete(perform: deleteEntries)
-                .onAppear { env.shareString = shareString }
-                .onDisappear { env.shareString = nil }
+                .if(sharable) { view in
+                    view
+                            .onAppear { env.shareString = shareString }
+                            .onDisappear { env.shareString = nil }
+                }
     }
 
     @Environment(\.managedObjectContext)
@@ -85,7 +92,8 @@ class EntriesView_Previews: PreviewProvider {
             List {
                 try! EntriesView(
                         entries: AnyRandomAccessCollection(
-                                        moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
+                                        moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start)),
+                        sharable: false
                 )
                         .environment(\.managedObjectContext, moc)
                         .environmentObject(env)

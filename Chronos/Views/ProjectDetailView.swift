@@ -56,7 +56,7 @@ struct ProjectDetailView: View {
                 }
             }
             if !entries.isEmpty {
-                Section("Entries") { EntriesView(entries: AnyRandomAccessCollection(entries)) }
+                Section("Entries") { EntriesView(entries: AnyRandomAccessCollection(entries), sharable: true) }
             }
         }
                 .navigationTitle(project?.name ?? "")

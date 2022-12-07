@@ -45,7 +45,8 @@ struct EntriesTab: View {
                                                     ($0.name.range(of: search, options: .caseInsensitive) != nil)
                                                             || search.isEmpty
                                                 }
-                                        )
+                                        ),
+                                        sharable: section == entries.first
                                 )
                             }
                         }
