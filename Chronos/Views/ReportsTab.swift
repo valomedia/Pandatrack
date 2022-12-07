@@ -25,8 +25,16 @@ struct ReportsTab: View {
             VStack {
                 List {
                     Section("Interval") {
-                        DatePicker("Start", selection: $interval.start, displayedComponents: [.date])
-                        DatePicker("End", selection: $interval.end, displayedComponents: [.date])
+                        DatePicker(
+                                "Start",
+                                selection: $interval.start,
+                                in: PartialRangeThrough(interval.end),
+                                displayedComponents: [.date])
+                        DatePicker(
+                                "End",
+                                selection: $interval.end,
+                                in: PartialRangeFrom(interval.start),
+                                displayedComponents: [.date])
                         DateIntervalPicker("Preset", selection: $interval)
                     }
                     Section("Filter") {
