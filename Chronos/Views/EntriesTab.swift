@@ -46,7 +46,7 @@ struct EntriesTab: View {
                                             }
                                     )
                             ) {
-                                Text(section != entries.first ? section.id : "")
+                                Text(section != entries.first ? section.id : "Recent")
                             }
                         }
                     }
