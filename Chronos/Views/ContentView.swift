@@ -47,7 +47,7 @@ struct ContentView: View {
     // MARK: - Properties
 
     var entryTimerView: some View {
-        EntryTimerView(editAction: editAction)
+        EntryTimerView(editAction: editAction, compact: true)
                 .onTapGesture { isPresentingTodayView = true }
     }
 
@@ -72,7 +72,6 @@ struct ContentView: View {
                             .tag(Tab.tags)
                     VStack(spacing: 0) {
                         ReportsTab()
-                        entryTimerView
                     }
                             .tag(Tab.reports)
                 }

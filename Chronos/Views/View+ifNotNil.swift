@@ -25,7 +25,7 @@ extension View {
     ///
     @ViewBuilder
     func ifNotNil<Content: View, Type: Any>(_ optional: @autoclosure () -> Type?, transform: (Self, Type) -> Content)
-            -> some View {
+            -> _ConditionalContent<Content, Self> {
         if let x = optional() {
             transform(self, x)
         } else {

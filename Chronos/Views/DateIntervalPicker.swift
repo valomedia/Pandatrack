@@ -18,38 +18,20 @@ import SwiftUI
 ///
 struct DateIntervalPicker: View {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    enum DateIntervalPresets: String, Identifiable, CustomStringConvertible, CaseIterable {
-        case today = "Today"
-        case yesterday = "Yesterday"
-        case thisWeek = "This Week"
-        case lastWeek = "Last Week"
-        case lastSevenDays = "Last 7 Days"
-        case thisMonth = "This Month"
-        case lastMonth = "Last Month"
-        case lastThirtyDays = "Last 30 Days"
-        case thisYear = "This Year"
-        case lastYear = "Last Year"
+    private enum DateIntervalPresets: String, Identifiable, CustomStringConvertible, CaseIterable {
+        case sevenDays = "7D"
+        case week = "W"
+        case thirtyDays = "30D"
+        case month = "M"
+        case twelveMonths = "12M"
 
-        /// Undocumented.
-        ///
-        /// - Todo: Document.
-        ///
         var interval: DateInterval {
             switch self {
-            case .today: return .today
-            case .yesterday: return .yesterday
-            case .thisWeek: return .thisWeek
-            case .lastWeek: return .lastWeek
-            case .lastSevenDays: return .lastSevenDays
-            case .thisMonth: return .thisMonth
-            case .lastMonth: return .lastMonth
-            case .lastThirtyDays: return .lastThirtyDays
-            case .thisYear: return .thisYear
-            case .lastYear: return .lastYear
+            case .sevenDays: return .sevenDays
+            case .week: return .week
+            case .thirtyDays: return .thirtyDays
+            case .month: return .month
+            case .twelveMonths: return .twelveMonths
             }
         }
 
@@ -58,31 +40,7 @@ struct DateIntervalPicker: View {
 
     }
 
-    // MARK: - Static properties
-
-    // MARK: - Static methods
-
-    // MARK: - Life cycle methods
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - titleKey:
-    ///     - selection:
-    ///
-    init(_ titleKey: LocalizedStringKey, selection: Binding<DateInterval>) {
-        self.titleKey = titleKey
-        _selection = selection
-    }
-
     // MARK: - Properties
-
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
-    var titleKey: LocalizedStringKey
 
     /// Undocumented.
     ///
@@ -91,21 +49,46 @@ struct DateIntervalPicker: View {
     @Binding var selection: DateInterval
 
     var body: some View {
-        Picker(titleKey, selection: $selection) {
-            ForEach(DateIntervalPresets.allCases) { preset in
-                Text(preset.description).tag(preset.interval)
+        HStack {
+            Button {
+                selection.start -= selection.duration + 1
+            } label: {
+                Image(systemName: "chevron.backward")
             }
-            //Text(DateIntervalPresets.today.description).tag(DateIntervalPresets.today.interval)
-            //Text(DateIntervalPresets.yesterday.description).tag(DateIntervalPresets.yesterday.interval)
-            //Text(DateIntervalPresets.thisWeek.description).tag(DateIntervalPresets.thisWeek.interval)
-            //Text(DateIntervalPresets.lastWeek.description).tag(DateIntervalPresets.lastWeek.interval)
-            //Text(DateIntervalPresets.lastSevenDays.description).tag(DateIntervalPresets.lastSevenDays.interval)
-            //Text(DateIntervalPresets.thisMonth.description).tag(DateIntervalPresets.thisMonth.interval)
-            //Text(DateIntervalPresets.lastMonth.description).tag(DateIntervalPresets.lastMonth.interval)
-            //Text(DateIntervalPresets.lastThirtyDays.description).tag(DateIntervalPresets.lastThirtyDays.interval)
-            //Text(DateIntervalPresets.thisYear.description).tag(DateIntervalPresets.thisYear.interval)
-            //Text(DateIntervalPresets.lastYear.description).tag(DateIntervalPresets.lastYear.interval)
+            VStack {
+                HStack {
+                    DatePicker(
+                            "Start",
+                            selection: $selection.start,
+                            in: PartialRangeThrough(selection.end),
+                            displayedComponents: [.date]
+                    )
+                            .labelsHidden()
+                    Spacer()
+                    Text("–")
+                    Spacer()
+                    DatePicker(
+                            "End",
+                            selection: $selection.end,
+                            in: PartialRangeFrom(selection.start),
+                            displayedComponents: [.date]
+                    )
+                            .labelsHidden()
+                }
+                Picker("Interval", selection: $selection) {
+                    ForEach(DateIntervalPresets.allCases) { preset in
+                        Text(preset.description).tag(preset.interval)
+                    }
+                }
+                        .pickerStyle(.segmented)
+            }
+            Button {
+                selection.start += selection.duration + 1
+            } label: {
+                Image(systemName: "chevron.forward")
+            }
         }
+                .padding(.horizontal)
     }
 
 }
@@ -118,7 +101,7 @@ class DateIntervalPicker_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        DateIntervalPicker("Interval", selection: .constant(DateInterval.yesterday)).previewLayout(.sizeThatFits)
+        DateIntervalPicker(selection: .constant(DateInterval.yesterday)).previewLayout(.sizeThatFits)
     }
 
 }

@@ -18,6 +18,20 @@ import SwiftUI
 ///
 struct ProjectView: View {
 
+    // MARK: - Life cycle methods
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - project:
+    ///     - compact:
+    ///
+    init(project: Project?, compact: Bool = false) {
+        self.project = project
+        self.compact = compact
+    }
+
     // MARK: - Properties
 
     /// The Project being shown by this View.
@@ -26,7 +40,7 @@ struct ProjectView: View {
 
     /// Whether to show the compact version of this View.
     ///
-    var compact = false
+    let compact: Bool
 
     var body: some View {
         if compact {

@@ -24,7 +24,8 @@ extension View {
     /// - Returns: Either the original View or the modified View.
     ///
     @ViewBuilder
-    func `if`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content) -> some View {
+    func `if`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content)
+            -> _ConditionalContent<Content, Self> {
         if condition() {
             transform(self)
         } else {

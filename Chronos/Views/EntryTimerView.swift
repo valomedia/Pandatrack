@@ -35,14 +35,32 @@ struct EntryTimerView: View {
         return formatter
     }()
 
+    // MARK: - Life cycle methods
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - editAction:
+    ///     - compact:
+    ///
+    init(editAction: @escaping ()->Void, compact: Bool = false) {
+        self.editAction = editAction
+        self.compact = compact
+    }
+
     // MARK: - Properties
 
     /// A function to call to start editing the current Entry.
     ///
     let editAction: ()->Void
 
+    /// Whether to show a more compact version of this view.
+    ///
+    let compact: Bool
+
     var body: some View {
-        VStack {
+        VStack(spacing: 5) {
             HStack {
                 Text(entryTimer.runningEntry?.name ?? "Not Tracking")
                         .font(.headline)
@@ -80,25 +98,23 @@ struct EntryTimerView: View {
                 }
                         .padding([.leading])
             }
-            Spacer()
-            VStack {
-                HStack {
-                    Label(entryTimer.runningEntry?.project?.name ?? "No Project", systemImage: "at")
-                            .labelStyle(.leadingIcon)
-                            .accessibilityLabel("Project")
-                            .accessibilityValue(entryTimer.runningEntry?.project?.name ?? "None")
-                    Spacer()
-                    if
-                            let timeElapsedString = entryTimer.timeElapsedString,
-                            let timeElapsedAccessibilityLabel = entryTimer.timeElapsedAccessibilityLabel {
-                        Label(timeElapsedString, systemImage: "hourglass")
-                                .labelStyle(.trailingIcon)
-                                .accessibilityLabel("Duration")
-                                .accessibilityValue(timeElapsedAccessibilityLabel)
-                    }
-                }
-                        .font(.caption)
+            HStack {
+                Label(entryTimer.runningEntry?.project?.name ?? "No Project", systemImage: "at")
+                        .labelStyle(.leadingIcon)
+                        .accessibilityLabel("Project")
+                        .accessibilityValue(entryTimer.runningEntry?.project?.name ?? "None")
                 Spacer()
+                if
+                        let timeElapsedString = entryTimer.timeElapsedString,
+                        let timeElapsedAccessibilityLabel = entryTimer.timeElapsedAccessibilityLabel {
+                    Label(timeElapsedString, systemImage: "hourglass")
+                            .labelStyle(.trailingIcon)
+                            .accessibilityLabel("Duration")
+                            .accessibilityValue(timeElapsedAccessibilityLabel)
+                }
+            }
+                    .font(.caption)
+            if (!compact) {
                 HStack {
                     Label(entryTimer.runningEntry?.project?.parent?.name ?? "", systemImage: "folder")
                             .labelStyle(.leadingIcon)
@@ -128,7 +144,6 @@ struct EntryTimerView: View {
                         .font(.caption)
             }
         }
-                .frame(height: 60)
                 .padding()
                 .background(entryTimer.theme.backgroundColor)
                 .foregroundColor(entryTimer.theme.foregroundColor)

@@ -23,34 +23,15 @@ struct ReportsTab: View {
     var body: some View {
         NavigationView {
             VStack {
-                List {
-                    Section("Interval") {
-                        DatePicker(
-                                "Start",
-                                selection: $interval.start,
-                                in: PartialRangeThrough(interval.end),
-                                displayedComponents: [.date])
-                        DatePicker(
-                                "End",
-                                selection: $interval.end,
-                                in: PartialRangeFrom(interval.start),
-                                displayedComponents: [.date])
-                        DateIntervalPicker("Preset", selection: $interval)
-                    }
-                    Section("Filter") {
-                        TreePicker(entity: $project) { ProjectView(project: project, compact: true) }
-                        TreePicker(entity: $tag) { TagView(tag: tag) }
-                    }
-                    ReportView(interval: interval, project: project, tag: tag)
-                }
+                DateIntervalPicker(selection: $interval)
+                ReportView(interval: interval)
             }
                     .navigationTitle("Reports")
+                    .navigationBarTitleDisplayMode(.inline)
         }
     }
 
-    @State private var interval: DateInterval = .yesterday
-    @State @ManagedEntity private var project: Project?
-    @State @ManagedEntity private var tag: Tag?
+    @State private var interval: DateInterval = .sevenDays
 
 }
 
