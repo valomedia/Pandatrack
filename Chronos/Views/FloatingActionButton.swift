@@ -47,10 +47,13 @@ struct FloatingActionButton: View {
                     .padding()
         }
                 .buttonStyle(.plain)
-                .colorInvert()
+                .if(colorScheme == .light) { $0.colorInvert() }
                 .background(Circle().fill(Color.accentColor))
                 .padding()
     }
+
+    @Environment(\.colorScheme)
+    private var colorScheme: ColorScheme
 
     // MARK: - Methods
 
