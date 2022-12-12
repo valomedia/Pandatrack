@@ -22,6 +22,10 @@ struct ChronosApp: App {
 
     // MARK: - Life cycle methods
 
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
     init() {
         #if DEBUG
         var injectionBundlePath = "/Applications/InjectionIII.app/Contents/Resources"
@@ -32,6 +36,9 @@ struct ChronosApp: App {
         #endif
         Bundle(path: injectionBundlePath)?.load()
         #endif
+
+        Settings.versionPreference = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        Settings.buildPreference = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     }
 
     // MARK: - Properties

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Default entry length</string>
+			<key>Key</key>
+			<string>entry_duration_preference</string>
+			<key>Values</key>
+			<array>
+				<integer>5</integer>
+				<integer>10</integer>
+				<integer>15</integer>
+				<integer>20</integer>
+				<integer>30</integer>
+				<integer>45</integer>
+				<integer>60</integer>
+				<integer>90</integer>
+				<integer>120</integer>
+				<integer>180</integer>
+				<integer>240</integer>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>5 minutes</string>
+				<string>10 minutes</string>
+				<string>15 minutes</string>
+				<string>20 minutes</string>
+				<string>30 minutes</string>
+				<string>45 minutes</string>
+				<string>60 minutes</string>
+				<string>90 minutes</string>
+				<string>2 hours</string>
+				<string>3 hours</string>
+				<string>4 hours</string>
+			</array>
+			<key>DefaultValue</key>
+			<integer>60</integer>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Pomodoro length</string>
+			<key>Key</key>
+			<string>pomodoro_duration_preference</string>
+			<key>Values</key>
+			<array>
+				<integer>15</integer>
+				<integer>20</integer>
+				<integer>25</integer>
+				<integer>30</integer>
+				<integer>45</integer>
+				<integer>60</integer>
+				<integer>75</integer>
+				<integer>90</integer>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>15 minutes</string>
+				<string>20 minutes</string>
+				<string>25 minutes</string>
+				<string>30 minutes</string>
+				<string>45 minutes</string>
+				<string>60 minutes</string>
+				<string>75 minutes</string>
+				<string>90 minutes</string>
+			</array>
+			<key>DefaultValue</key>
+			<integer>25</integer>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>APP INFO</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Version</string>
+			<key>Key</key>
+			<string>version_preference</string>
+			<key>DefaultValue</key>
+			<string>0.0.0</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Build</string>
+			<key>Key</key>
+			<string>build_preference</string>
+			<key>DefaultValue</key>
+			<string>0</string>
+		</dict>
+	</array>
+</dict>
+</plist>

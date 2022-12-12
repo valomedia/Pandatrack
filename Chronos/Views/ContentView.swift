@@ -85,6 +85,9 @@ struct ContentView: View {
                         .modal(entryTimer.runningEntry?.name, isPresented: $isPresentingEditView) {
                             EntryDetailEditView(entry: entryTimer.runningEntry)
                         }
+                        .sheet(isPresented: $isPresentingWorkspacesView) {
+                            NavigationView { MissingFeatureView().navigationTitle("Shared Workspaces") }
+                        }
                 TabBar(selection: $tabBarSelection)
             }
         }
@@ -95,6 +98,18 @@ struct ContentView: View {
                         Spacer()
                         ShareLink(item: env.shareString ?? "").enabled(env.shareString != nil)
                         Spacer()
+                        Button {
+                            isPresentingWorkspacesView = true
+                        } label: {
+                            Image(systemName: "person.crop.circle")
+                        }
+                        Button {
+                            if let url = URL(string: UIApplication.openSettingsURLString) {
+                                DispatchQueue.main.async { UIApplication.shared.open(url) }
+                            }
+                        } label: {
+                            Image(systemName: "gear")
+                        }
                     }
                 }
     }
@@ -106,6 +121,10 @@ struct ContentView: View {
     /// Whether the sheet showing the EntryTimerDetailEditView is visible.
     ///
     @State private var isPresentingEditView = false
+
+    /// Whether the sheet showing the WorkspacesView is visible.
+    ///
+    @State private var isPresentingWorkspacesView = false
 
     /// The currently selected tab.
     ///

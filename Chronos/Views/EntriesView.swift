@@ -81,8 +81,10 @@ struct EntriesView: View {
     /// The entries as CSV for sharing.
     ///
     private var shareString: String {
-        "start,end,name,project\n"
-                + entries
+        entries
+                .map(ManagedEntity.init)
+                .map(\.wrappedValue)
+                .compacted()
                 .map { entry in
                     [
                         ISO8601DateFormatter.formatter.string(from: entry.start),

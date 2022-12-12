@@ -14,4 +14,5 @@
 
 $(SRCROOT)/Chronos/Models/Assets+Generated.swift
 $(SRCROOT)/Chronos/Models/CoreData+Generated.swift
+$(SRCROOT)/Chronos/Models/Settings+Generated.swift
 $(SRCROOT)/Chronos/Models/Strings+Generated.swift

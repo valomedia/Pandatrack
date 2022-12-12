@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E14C3D8B29466C7300495826 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E14C3D8A29466C7300495826 /* Settings.bundle */; };
 		E15C0D8A28F620D500309C90 /* ObservedOptionalObject in Frameworks */ = {isa = PBXBuildFile; productRef = E15C0D8928F620D500309C90 /* ObservedOptionalObject */; };
 		E15D0351292F946100B1591D /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = E15D0350292F946100B1591D /* Collections */; };
 		E15D0353292F946100B1591D /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = E15D0352292F946100B1591D /* DequeModule */; };
@@ -121,6 +122,7 @@
 		E9E977164466161F9E608FD3 /* AttributeDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97BDBDB1E86DDEAB314AD /* AttributeDeclaration.swift */; };
 		E9E9771B9C71B1D0FE19C9BB /* Date+startOfNextYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97426F90D95BCD653D745 /* Date+startOfNextYear.swift */; };
 		E9E97744F3F0773863973C83 /* Date+endOfYesterday.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9709E4C172370ABEF70F1 /* Date+endOfYesterday.swift */; };
+		E9E9774C6450E09E9C0A3D11 /* Settings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97A68291516E044D2FC0A /* Settings+Generated.swift */; };
 		E9E977535A36C0E29499C2E8 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9701B3585ADC256B3C072 /* PomodoroTimerView.swift */; };
 		E9E97765182DDE36AAEEE607 /* TreePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E971E5F1D09F0B40710240 /* TreePicker.swift */; };
 		E9E9776597E4A11BE9A422EB /* NumberAttributeChoiceDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97ED3EB4FE0BD2FF3BFB4 /* NumberAttributeChoiceDeclaration+CoreDataClass.swift */; };
@@ -262,6 +264,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E14C3D8A29466C7300495826 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Chronos/Settings.bundle; sourceTree = SOURCE_ROOT; };
 		E9E97015F9546A4230C28822 /* ChronosTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChronosTests.swift; sourceTree = "<group>"; };
 		E9E9701B3585ADC256B3C072 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		E9E9702402B61A805908F574 /* TagDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetailView.swift; sourceTree = "<group>"; };
@@ -290,6 +293,7 @@
 		E9E971DCA3D8DA595D766FAB /* Date+startOfThisWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+startOfThisWeek.swift"; sourceTree = "<group>"; };
 		E9E971E5F1D09F0B40710240 /* TreePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreePicker.swift; sourceTree = "<group>"; };
 		E9E971F19191E66C479EB2D1 /* AttributeReferenceRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributeReferenceRelationship.swift; sourceTree = "<group>"; };
+		E9E97205BE616B70ECC33BAB /* Settings.stencil */ = {isa = PBXFileReference; lastKnownFileType = file.stencil; path = Settings.stencil; sourceTree = "<group>"; };
 		E9E9720F9D33FF6DDBA2B67D /* DateAttributeListDeclaration+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateAttributeListDeclaration+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E9721C430A1D94B5D5AEDB /* View+enabled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+enabled.swift"; sourceTree = "<group>"; };
 		E9E9721EEB1F4094B86BD691 /* Date+endOfLastYear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+endOfLastYear.swift"; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 		E9E97A4EE0F964E3DCB965D6 /* Date+endOfToday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+endOfToday.swift"; sourceTree = "<group>"; };
 		E9E97A5EC61E7282AF23B788 /* TrailingIconLabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailingIconLabelStyle.swift; sourceTree = "<group>"; };
 		E9E97A606C747DAC8037DEFF /* MutableStringAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableStringAttribute.swift; sourceTree = "<group>"; };
+		E9E97A68291516E044D2FC0A /* Settings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+Generated.swift"; sourceTree = "<group>"; };
 		E9E97A7F9AF4397D5580DB1A /* EntryTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryTimer.swift; sourceTree = "<group>"; };
 		E9E97A86AE87113996DA28B4 /* StringAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringAttribute.swift; sourceTree = "<group>"; };
 		E9E97A9186F74C6DF8733E90 /* Date+lastYear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+lastYear.swift"; sourceTree = "<group>"; };
@@ -549,6 +554,7 @@
 				E9E973B7DE5838DA13ED3D22 /* Assets.stencil */,
 				E9E97E7187404D21CAC97205 /* CoreData.stencil */,
 				E9E9764832F575E517F2202A /* Strings.stencil */,
+				E9E97205BE616B70ECC33BAB /* Settings.stencil */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -567,6 +573,7 @@
 				E9E97674D533CCC5728BB87B /* ChronosApp.swift */,
 				E9E979095AE3B2CAAC258BCF /* Assets.xcassets */,
 				E9E97F37D607CE417A672CF9 /* Chronos.xcdatamodeld */,
+				E14C3D8A29466C7300495826 /* Settings.bundle */,
 				E9E9771F27A23063B350C683 /* Models */,
 				E9E97695D49CC0097DC9B5AF /* Resources */,
 				E9E97EAEBACBAB34E2BF6D4A /* Views */,
@@ -678,6 +685,7 @@
 				E9E97144CE8066B4E5280B26 /* ErrorWrapper.swift */,
 				E9E97F7585659BE099A95F1C /* NSManagedObjectContext+noUndo.swift */,
 
+				E9E97A68291516E044D2FC0A /* Settings+Generated.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1018,6 +1026,7 @@
 			files = (
 				E9E97C1DAECDC554835AA8E7 /* Assets.xcassets in Resources */,
 				E9E9753B8046E4D6F4EAAA31 /* Localizable.strings in Resources */,
+				E14C3D8B29466C7300495826 /* Settings.bundle in Resources */,
 				E9E9738B0FDE102D40A4FD28 /* Localizable.strings in Resources */,
 				E9E97782CC6830CFABD21302 /* ding.wav in Resources */,
 			);
@@ -1293,6 +1302,7 @@
 				E9E97CBB3C8C0FA7A6B14A2B /* FetchRequest+init.swift in Sources */,
 				E9E97C8F4F6477A39F2F93C2 /* NSFetchRequest+init.swift in Sources */,
 				E9E9766281469FAF9CE83174 /* NSManagedObjectContext+noUndo.swift in Sources */,
+				E9E9774C6450E09E9C0A3D11 /* Settings+Generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

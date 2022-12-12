@@ -21,7 +21,11 @@ class CompletedEntry: Entry {
 
     // MARK: - Static properties
 
-    static let defaultDuration: TimeInterval = 3600
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    static let defaultDuration: TimeInterval = Double(Settings.entryDurationPreference * 60)
 
     // MARK: - Life cycle methods
 

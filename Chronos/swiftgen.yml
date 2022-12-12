@@ -40,3 +40,12 @@ coredata:
   outputs:
     - templatePath: Templates/CoreData.stencil
       output: Models/CoreData+Generated.swift
+
+# Generate constants for settings
+#
+plist:
+  inputs:
+    - Settings.bundle
+  outputs:
+    - templatePath: Templates/Settings.stencil
+      output: Models/Settings+Generated.swift

@@ -18,12 +18,33 @@ $(SRCROOT)/Chronos/swiftgen.yml
 
 $(SRCROOT)/Chronos/Templates/Assets.stencil
 $(SRCROOT)/Chronos/Templates/CoreData.stencil
+$(SRCROOT)/Chronos/Templates/Settings.stencil
 $(SRCROOT)/Chronos/Templates/Strings.stencil
 
+$(SRCROOT)/Chronos/Assets.xcassets/Contents.json
 $(SRCROOT)/Chronos/Assets.xcassets/AccentColor.colorset/Contents.json
 $(SRCROOT)/Chronos/Assets.xcassets/AppIcon.appiconset/Contents.json
-$(SRCROOT)/Chronos/Assets.xcassets/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/TabBarBackground.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/bubblegum.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/buttercup.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/indigo.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/lavender.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/magenta.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/navy.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/none.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/orange.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/oxblood.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/periwinkle.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/poppy.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/purple.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/seafoam.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/sky.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/tan.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/teal.colorset/Contents.json
+$(SRCROOT)/Chronos/Assets.xcassets/Themes/yellow.colorset/Contents.json
 
 $(SRCROOT)/Chronos/Chronos.xcdatamodeld/Shared.xcdatamodel/contents
 
 $(SRCROOT)/Chronos/Resources/Base.lproj/Localizable.strings
+
+$(SRCROOT)/Chronos/Settings.bundle/Root.plist
