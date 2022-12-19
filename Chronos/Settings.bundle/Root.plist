@@ -78,9 +78,58 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Paper size</string>
+			<key>Key</key>
+			<string>paper_size_preference</string>
+			<key>DefaultValue</key>
+			<array>
+				<integer>595</integer>
+				<integer>842</integer>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>A4</string>
+				<string>Letter</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<array>
+					<integer>595</integer>
+					<integer>842</integer>
+				</array>
+				<array>
+					<integer>612</integer>
+					<integer>792</integer>
+				</array>
+			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>APP INFO</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Name</string>
+			<key>Key</key>
+			<string>name_preference</string>
+			<key>DefaultValue</key>
+			<string>Chronos</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Identifier</string>
+			<key>Key</key>
+			<string>identifier_preference</string>
+			<key>DefaultValue</key>
+			<string>media.valo.chronos</string>
 		</dict>
 		<dict>
 			<key>Type</key>

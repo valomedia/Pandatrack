@@ -67,15 +67,16 @@ import Foundation
 {% macro settingBlock setting metadata %}
     {%- if metadata.type == "Dictionary" -%}
         {%- if setting["Type"] == "PSMultiValueSpecifier" -%}
-            {% call specifierBlock setting["Key"] metadata.properties["DefaultValue"].type setting["DefaultValue"] %}
+            {% call specifierBlock setting["Key"] metadata.properties["DefaultValue"] setting["DefaultValue"] %}
         {%- elif setting["Type"] == "PSToggleSwitchSpecifier" -%}
             {% call specifierBlock setting["Key"] "Bool" setting["DefaultValue"] %}
         {%- elif setting["Type"] == "PSTitleValueSpecifier" -%}
-            {% call specifierBlock setting["Key"] metadata.properties["DefaultValue"].type setting["DefaultValue"] %}
+            {% call specifierBlock setting["Key"] metadata.properties["DefaultValue"] setting["DefaultValue"] %}
         {%- endif -%}
     {%- endif -%}
 {% endmacro %}
-{% macro specifierBlock key type default -%}
+{% macro specifierBlock key metadata default -%}
+    {%- set type %}{% call typeBlock metadata %}{% endset -%}
     {%- set name %}{{ key|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords }}{% endset -%}
     {%- if type == "Int" -%}
         {%- call integerBlock key name default -%}
@@ -83,6 +84,8 @@ import Foundation
         {%- call booleanBlock key name -%}
     {%- elif type == "String" -%}
         {%- call stringBlock key name default -%}
+    {%- elif metadata.type == "Array" -%}
+        {%- call arrayBlock key name type default -%}
     {%- endif -%}
 {%- endmacro %}
 {% macro integerBlock key name default -%}
@@ -138,6 +141,26 @@ import Foundation
     private static var _{{ name }}: String? {
         get {
             UserDefaults.standard.string(forKey: "{{ key }}")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "{{ key }}")
+        }
+    }
+
+{% endmacro %}
+{% macro arrayBlock key name type default %}
+
+    {{ accessModifier }} static var {{ name }}: {{ type }} {
+        get {
+            (_{{ name }} ?? {{ default }}) as! {{ type }}
+        }
+        set {
+            _{{ name }} = newValue
+        }
+    }
+    private static var _{{ name }}: [Any]? {
+        get {
+            UserDefaults.standard.array(forKey: "{{ key }}")
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "{{ key }}")

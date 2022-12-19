@@ -19,6 +19,11 @@ extension ISO8601DateFormatter {
     ///
     /// - Todo: Document.
     ///
-    static let formatter: ISO8601DateFormatter = ISO8601DateFormatter()
+    static let formatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate,.withDashSeparatorInDate]
+        formatter.timeZone = TimeZone.current
+        return formatter
+    }()
 
 }
