@@ -20,14 +20,12 @@ class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
     convenience init(from immutable: NumberAttribute) {
         self.init(immutable.number, id: immutable.id)
+    }
+
+    convenience override init() {
+        self.init(from: NumberAttribute())
     }
 
     required init(_ number: Double, id: UUID) {

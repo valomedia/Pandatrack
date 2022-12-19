@@ -20,14 +20,12 @@ class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
     convenience init(from immutable: URLAttribute) {
         self.init(immutable.url, id: immutable.id)
+    }
+
+    convenience override init() {
+        self.init(from: URLAttribute())
     }
 
     required init(_ url: URL, id: UUID) {

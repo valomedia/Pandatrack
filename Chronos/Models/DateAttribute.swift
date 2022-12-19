@@ -38,14 +38,12 @@ class DateAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
     convenience init(from mutable: MutableDateAttribute) {
         self.init(mutable.date, id: mutable.id)
+    }
+
+    convenience override init() {
+        self.init(Date())
     }
 
     required init(_ date: Date, showTime: Bool = false, id: UUID = UUID()) {

@@ -20,14 +20,12 @@ class MutableDateAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
     convenience init(from immutable: DateAttribute) {
         self.init(immutable.date, showTime: immutable.showTime, id: immutable.id)
+    }
+
+    convenience override init() {
+        self.init(from: DateAttribute())
     }
 
     required init(_ date: Date, showTime: Bool, id: UUID) {

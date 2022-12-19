@@ -31,6 +31,14 @@ struct Currency: Codable, CustomStringConvertible {
         self.code = code
     }
 
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    init() {
+        self.init(0)
+    }
+
     // MARK: Properties
 
     /// Undocumented.

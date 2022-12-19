@@ -37,14 +37,12 @@ class StringAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
     convenience init(from mutable: MutableStringAttribute) {
         self.init(mutable.string, id: mutable.id)
+    }
+
+    convenience override init() {
+        self.init("")
     }
 
     required init(_ string: String, id: UUID = UUID()) {

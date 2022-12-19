@@ -33,14 +33,12 @@ class CurrencyAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
     convenience init(from mutable: MutableCurrencyAttribute) {
         self.init(mutable.currency, id: mutable.id)
+    }
+
+    convenience override init() {
+        self.init(Currency())
     }
 
     required init(_ currency: Currency, id: UUID = UUID()) {

@@ -33,14 +33,12 @@ class URLAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
     convenience init(from mutable: MutableURLAttribute) {
         self.init(mutable.url, id: mutable.id)
+    }
+
+    convenience override init() {
+        self.init(URL(string: ".")!)
     }
 
     required init(_ url: URL, id: UUID = UUID()) {

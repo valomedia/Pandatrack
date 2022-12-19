@@ -20,14 +20,12 @@ class MutableCurrencyAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
     convenience init(from immutable: CurrencyAttribute) {
         self.init(immutable.currency, id: immutable.id)
+    }
+
+    convenience override init() {
+        self.init(from: CurrencyAttribute())
     }
 
     required init(_ currency: Currency, id: UUID) {

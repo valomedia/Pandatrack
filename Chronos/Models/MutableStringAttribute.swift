@@ -20,14 +20,12 @@ class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
     convenience init(from immutable: StringAttribute) {
         self.init(immutable.string, id: immutable.id)
+    }
+
+    convenience override init() {
+        self.init(from: StringAttribute())
     }
 
     required init(_ string: String, id: UUID) {

@@ -20,14 +20,12 @@ class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - immutable:
-    ///
     convenience init(from immutable: PercentageAttribute) {
         self.init(immutable.percentage, id: immutable.id)
+    }
+
+    convenience override init() {
+        self.init(from: PercentageAttribute())
     }
 
     required init(_ percentage: Int, id: UUID) {

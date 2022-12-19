@@ -37,14 +37,12 @@ class PercentageAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - mutable:
-    ///
     convenience init(from mutable: MutablePercentageAttribute) {
         self.init(mutable.percentage, id: mutable.id)
+    }
+
+    convenience override init() {
+        self.init(0)
     }
 
     required init(_ percentage: Int, id: UUID = UUID()) {

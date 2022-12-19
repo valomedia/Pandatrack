@@ -12,6 +12,20 @@
 //
 //
 
+{% macro nilValueFor typeName -%}
+    {%- if typeName == "Int" or typeName == "Float" or typeName == "Double" -%}
+        0
+    {%- elif typeName == "String" -%}
+        ""
+    {%- elif typeName == "Bool" -%}
+        false
+    {%- elif typeName == "URL" -%}
+        URL(string: ".")!
+    {%- else -%}
+        {{ typeName }}()
+    {%- endif -%}
+{%- endmacro %}
+
 // swiftlint:disable all
 
 // swiftlint:disable superfluous_disable_command implicit_return
@@ -96,13 +110,7 @@ extension {{ entityClassName }}{{ protocol }} {
         get {
             willAccessValue(forKey: "{{ attribute.name }}")
             defer { didAccessValue(forKey: "{{ attribute.name }}") }
-            let value = primitive{{ attribute.name|capitalize }}
-            {% if unwrapOptional %}
-            guard let value = value else {
-                fatalError("Could not convert value for key '{{ attribute.name }}' to type '{{ rawType }}'")
-            }
-            {% endif %}
-            return value
+            return primitive{{ attribute.name|capitalize }} {% if unwrapOptional -%} ?? {{ rawType }}()  {%- endif %}
         }
         set {
             willChangeValue(forKey: "{{ attribute.name }}")
@@ -130,13 +138,7 @@ extension {{ entityClassName }}{{ protocol }} {
         get {
             willAccessValue(forKey: "{{ attribute.name }}")
             defer { didAccessValue(forKey: "{{ attribute.name }}") }
-            let value = primitive{{ attribute.name|capitalize }}
-            {% if not attribute.isOptional %}
-            guard let value = value else {
-                fatalError("Value for key '{{ attribute.name }}' was nil when accessed")
-            }
-            {% endif %}
-            return value
+            return primitive{{ attribute.name|capitalize }} {% if not attribute.isOptional -%} ?? {% call nilValueFor attribute.typeName %} {%- endif %}
         }
         set {
             willChangeValue(forKey: "{{ attribute.name }}")
