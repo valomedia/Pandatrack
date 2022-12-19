@@ -21,37 +21,29 @@ struct EntriesView: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    /// - Parameters:
-    ///     - header:
-    ///     - entries:
-    ///     - isPrimaryContent:
-    ///
     init(
-            _ header: String = "Entries",
+            _ header: LocalizedStringKey = "Entries",
             entries: AnyRandomAccessCollection<CompletedEntry>,
-            isPrimaryContent: Bool? = nil
+            isPrimaryContentForSharing: Bool? = nil
     ) {
         self.entries = entries
-        self.isPrimaryContentForSharing = isPrimaryContent ?? false
         self.header = header
+        self.isPrimaryContentForSharing = isPrimaryContentForSharing ?? false
     }
 
     // MARK: - Properties
 
     /// The Content for the Section footer.
     ///
-    let header: String
-
-    /// The Entries being shown by this View.
-    ///
-    let entries: AnyRandomAccessCollection<CompletedEntry>
+    let header: LocalizedStringKey
 
     /// Whether this EntriesView has the content that should be made available in the main ShareLink.
     ///
     let isPrimaryContentForSharing: Bool
+
+    /// The Entries being shown by this View.
+    ///
+    let entries: AnyRandomAccessCollection<CompletedEntry>
 
     var body: some View {
         Section {

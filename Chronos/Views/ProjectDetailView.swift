@@ -55,7 +55,7 @@ struct ProjectDetailView: View {
                     project.map(moc.delete)
                 }
             }
-            if !entries.isEmpty { EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContent: true) }
+            if !entries.isEmpty { EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true) }
         }
                 .navigationTitle(project?.name ?? "")
                 .toolbar {

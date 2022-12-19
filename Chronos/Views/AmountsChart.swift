@@ -21,10 +21,6 @@ struct AmountsChart: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     init(entries: AnyRandomAccessCollection<CompletedEntry>, interval: DateInterval, project: Project? = nil) {
         _subProjects = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.name)],
@@ -37,17 +33,17 @@ struct AmountsChart: View {
 
     // MARK: - Properties
 
-    /// The Entries being shown by this Chart.
-    ///
-    let entries: AnyRandomAccessCollection<CompletedEntry>
-
     /// The DateInterval being shown by this Chart.
     ///
     let interval: DateInterval
 
+    /// The Entries being shown by this Chart.
+    ///
+    let entries: AnyRandomAccessCollection<CompletedEntry>
+
     /// The Project the Chart is filtered by, if any.
     ///
-    @ManagedEntity var project: Project?
+    @ObservedObject @ManagedEntity var project: Project?
 
     var body: some View {
         VStack {

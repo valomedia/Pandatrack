@@ -51,10 +51,6 @@ struct EntryTimerView: View {
 
     // MARK: - Properties
 
-    /// A function to call to start editing the current Entry.
-    ///
-    let editAction: ()->Void
-
     /// Whether to show a more compact version of this view.
     ///
     let compact: Bool
@@ -150,6 +146,12 @@ struct EntryTimerView: View {
     }
 
     @EnvironmentObject private var entryTimer: EntryTimer
+
+    // MARK: - Methods
+
+    /// A function to call to start editing the current Entry.
+    ///
+    let editAction: ()->Void
 
 }
 

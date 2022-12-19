@@ -61,7 +61,7 @@ struct ReportView: View {
             Section {
                 NavigationLink {
                     List {
-                        EntriesView("Results", entries: filteredEntries, isPrimaryContent: true)
+                        EntriesView("Results", entries: filteredEntries, isPrimaryContentForSharing: true)
                     }
                             .navigationTitle("All Matched Entries")
                             .navigationBarTitleDisplayMode(.inline)

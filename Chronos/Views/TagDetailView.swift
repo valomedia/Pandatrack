@@ -73,7 +73,7 @@ struct TagDetailView: View {
                         }
                     }
                     if !entries.isEmpty {
-                        EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContent: true)
+                        EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true)
                     }
             }
                     .navigationBarTitle(tag.name)

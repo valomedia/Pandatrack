@@ -24,7 +24,7 @@ struct PomodoroProgressViewStyle: ProgressViewStyle {
     ///
     /// - Todo: Document.
     ///
-    var theme: Theme
+    let theme: Theme
 
     // MARK: - Methods
 

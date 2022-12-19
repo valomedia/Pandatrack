@@ -47,7 +47,7 @@ struct TimesChart: View {
 
     /// The Project the Chart is filtered by, if any.
     ///
-    @ManagedEntity var project: Project?
+    @ObservedObject @ManagedEntity var project: Project?
 
     var body: some View {
         Wrapper {

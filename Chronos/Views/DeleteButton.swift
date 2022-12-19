@@ -18,11 +18,18 @@ import SwiftUI
 ///
 struct DeleteButton: View {
 
-    // MARK: - Static properties
-
-    // MARK: - Class methods
-
     // MARK: - Life cycle methods
+
+    init(
+            buttonText: LocalizedStringKey,
+            confirmationQuestion: LocalizedStringKey,
+            supplementalMessage: LocalizedStringKey? = nil,
+            action: @escaping () -> Void) {
+        self.buttonText = buttonText
+        self.confirmationQuestion = confirmationQuestion
+        self.supplementalMessage = supplementalMessage
+        self.action = action
+    }
 
     // MARK: - Properties
 
@@ -30,19 +37,19 @@ struct DeleteButton: View {
     ///
     /// - Todo: Document.
     ///
-    var buttonText: LocalizedStringKey
+    let buttonText: LocalizedStringKey
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    var confirmationQuestion: LocalizedStringKey
+    let confirmationQuestion: LocalizedStringKey
 
     /// Undocumented.
     ///
     /// - Todo: Document.
     ///
-    var supplementalMessage: LocalizedStringKey?
+    let supplementalMessage: LocalizedStringKey?
 
     var body: some View {
         Button(role: .destructive, action: { isPresentingConfirmationDialog = true }) {
