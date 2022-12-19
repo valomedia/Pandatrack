@@ -16,7 +16,7 @@ import SwiftUI
 ///
 /// - Todo: Document.
 ///
-enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible, ExpressibleByNilLiteral, Equatable {
+enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible, Equatable {
     case bubblegum
     case buttercup
     case indigo
@@ -35,9 +35,7 @@ enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible
     case yellow
     case none
 
-    // MARK: - Life cycle methods
-
-    init(nilLiteral: ()) {
+    init() {
         self = .none
     }
 

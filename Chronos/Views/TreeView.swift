@@ -46,7 +46,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
             root: Entity?,
             search: Binding<String>? = nil,
             content: ((Entity?) -> Content)?) {
-        _entity = entity ?? .constant(nil)
+        _entity = entity ?? .constant(ManagedEntity())
         self.root = root
         self.content = content.map { content in
             { entity in AnyView(content(entity)) }

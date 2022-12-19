@@ -18,7 +18,7 @@ import Combine
 /// - Todo: Document.
 ///
 @propertyWrapper
-class ManagedEntity<EntityType: NSManagedObject>: ObservableObject, ExpressibleByNilLiteral, Hashable, Identifiable {
+class ManagedEntity<EntityType: NSManagedObject>: ObservableObject, Hashable, Identifiable {
 
     // MARK: - Class methods
 
@@ -36,7 +36,7 @@ class ManagedEntity<EntityType: NSManagedObject>: ObservableObject, ExpressibleB
         self.init(wrappedValue: wrappedValue)
     }
 
-    required convenience init(nilLiteral: ()) {
+    convenience init() {
         self.init(nil)
     }
 
