@@ -63,11 +63,8 @@ struct EntriesView: View {
                 ShareLink(item: shareString)
             }
         }
-                .if(isPrimaryContentForSharing) { view in
-                    view
-                            .onAppear { env.shareString = shareString }
-                            .onDisappear { env.shareString = nil }
-                }
+                .onAppear { env.shareString = isPrimaryContentForSharing ? shareString : env.shareString }
+                .onDisappear { env.shareString = isPrimaryContentForSharing ? nil : env.shareString }
     }
 
     /// The entries as CSV for sharing.
