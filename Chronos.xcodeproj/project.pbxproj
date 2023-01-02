@@ -423,7 +423,7 @@
 		E9E979F8BD63253DDB9CEEDF /* URLAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLAttribute.swift; sourceTree = "<group>"; };
 		E9E97A011AEE13BA955405C6 /* Date+thisWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+thisWeek.swift"; sourceTree = "<group>"; };
 		E9E97A040079A385F819D89E /* TimesChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesChart.swift; sourceTree = "<group>"; };
-		E9E97A0E3BCD9B16EC444870 /* Chronos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chronos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9E97A0E3BCD9B16EC444870 /* Pandatrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pandatrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9E97A1EBFC4099B91D12BB2 /* ProjectDetailEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailEditView.swift; sourceTree = "<group>"; };
 		E9E97A3F011ACE7F93F0355A /* CurrencyAttributeChoiceRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrencyAttributeChoiceRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E97A4EE0F964E3DCB965D6 /* Date+endOfToday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+endOfToday.swift"; sourceTree = "<group>"; };
@@ -547,7 +547,7 @@
 		E9E97064E5A24A1ABC72684B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E9E97A0E3BCD9B16EC444870 /* Chronos.app */,
+				E9E97A0E3BCD9B16EC444870 /* Pandatrack.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -957,7 +957,7 @@
 				E1750BED2947C96000105378 /* OrderedCollections */,
 			);
 			productName = "Chronos (iOS)";
-			productReference = E9E97A0E3BCD9B16EC444870 /* Chronos.app */;
+			productReference = E9E97A0E3BCD9B16EC444870 /* Pandatrack.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1439,7 +1439,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Chronos--iOS--Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = PandaTrack;
+				INFOPLIST_KEY_CFBundleDisplayName = Pandatrack;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1451,7 +1451,7 @@
 				);
 				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.chronos;
-				PRODUCT_NAME = Chronos;
+				PRODUCT_NAME = Pandatrack;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -1529,7 +1529,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Chronos--iOS--Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = PandaTrack;
+				INFOPLIST_KEY_CFBundleDisplayName = Pandatrack;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1541,7 +1541,7 @@
 				);
 				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.chronos;
-				PRODUCT_NAME = Chronos;
+				PRODUCT_NAME = Pandatrack;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
