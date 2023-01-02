@@ -263,6 +263,7 @@
 
 /* Begin PBXFileReference section */
 		E14C3D8A29466C7300495826 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Chronos/Settings.bundle; sourceTree = SOURCE_ROOT; };
+		E1EE0D3029633FB8009371EE /* Chronos--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Chronos--iOS--Info.plist"; sourceTree = "<group>"; };
 		E9E97015F9546A4230C28822 /* ChronosTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChronosTests.swift; sourceTree = "<group>"; };
 		E9E9701B3585ADC256B3C072 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		E9E9702402B61A805908F574 /* TagDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetailView.swift; sourceTree = "<group>"; };
@@ -693,6 +694,7 @@
 		E9E977D591C20B87BADC8590 = {
 			isa = PBXGroup;
 			children = (
+				E1EE0D3029633FB8009371EE /* Chronos--iOS--Info.plist */,
 				E9E97064E5A24A1ABC72684B /* Products */,
 				E9E97618E78DFDB1D2F4F5F1 /* Chronos */,
 				E9E97240607C6B95BBDD6FD7 /* .gitignore */,
@@ -1436,8 +1438,8 @@
 				DEVELOPMENT_TEAM = PKW2VF887G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Chronos--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PandaTrack;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1526,8 +1528,8 @@
 				DEVELOPMENT_TEAM = PKW2VF887G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Chronos--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PandaTrack;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
