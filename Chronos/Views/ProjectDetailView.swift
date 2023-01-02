@@ -26,10 +26,10 @@ struct ProjectDetailView: View {
     /// - Parameters:
     ///     - project:
     ///
-    init(project: Project?) {
+    init(project: Project) {
         self._entries = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.start, order: .reverse)],
-                predicate: NSPredicate(format: "project == %@", project ?? 0 as CVarArg))
+                predicate: NSPredicate(format: "project == %@", project as CVarArg))
         self.project = project
     }
 
@@ -37,7 +37,7 @@ struct ProjectDetailView: View {
 
     /// The Project being shown by this View.
     ///
-    @ObservedObject @ManagedEntity var project: Project?
+    @ObservedObject var project: Project
 
     var body: some View {
         List {
@@ -52,16 +52,16 @@ struct ProjectDetailView: View {
                                              This will remove the project and all subprojects along with their \
                                              respective entries.
                                              """) {
-                    project.map(moc.delete)
+                    moc.delete(project)
                 }
             }
             if !entries.isEmpty { EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true) }
         }
-                .navigationTitle(project?.name ?? "")
+                .navigationTitle(project.name)
                 .toolbar {
                     Button("Edit") { isPresentingEditView = true }
                 }
-                .modal(project?.name, isPresented: $isPresentingEditView) {
+                .modal(project.name, isPresented: $isPresentingEditView) {
                     ProjectDetailEditView(project: project)
                 }
     }
@@ -88,7 +88,7 @@ class ProjectDetailView_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            try! ProjectDetailView(project: moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" })
+            try! ProjectDetailView(project: moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!)
                     .environment(\.managedObjectContext, moc)
         }
     }

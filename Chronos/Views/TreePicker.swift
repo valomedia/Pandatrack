@@ -30,7 +30,7 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     ///     - content:
     ///
     init<Content: View>(
-            entity: Binding<ManagedEntity<Entity>>,
+            entity: Binding<Entity?>,
             title: String = Entity.entityName,
             @ViewBuilder content: @escaping () -> Content) {
         _entity = entity
@@ -44,7 +44,7 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     ///
     /// - Todo: Document
     ///
-    @Binding @ManagedEntity var entity: Entity?
+    @Binding var entity: Entity?
 
     /// Undocumented.
     ///
@@ -78,12 +78,11 @@ class TreePicker_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        let project: Binding<ManagedEntity<Project>>
-                = try! .constant(ManagedEntity(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }))
+        let project = try! Binding.constant(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" })
         NavigationView {
             List {
                 TreePicker(entity: project) {
-                    ProjectView(project: project.wrappedValue.wrappedValue)
+                    ProjectView(project: project.wrappedValue)
                 }
             }
         }

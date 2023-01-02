@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import Charts
+import ObservedOptionalObject
 
 
 // MARK: AmountsChart
@@ -28,7 +29,7 @@ struct AmountsChart: View {
         )
         self.entries = entries
         self.interval = interval
-        self.project = project
+        _project = ObservedOptionalObject(wrappedValue: project)
     }
 
     // MARK: - Properties
@@ -43,7 +44,7 @@ struct AmountsChart: View {
 
     /// The Project the Chart is filtered by, if any.
     ///
-    @ObservedObject @ManagedEntity var project: Project?
+    @ObservedOptionalObject var project: Project?
 
     var body: some View {
         VStack {
@@ -112,7 +113,7 @@ struct AmountsChart: View {
             }
                     .font(.title2)
             Divider()
-            ForEach(subProjects.map(ManagedEntity.init).map(\.wrappedValue).compacted()) { project in
+            ForEach(subProjects) { project in
                 HStack {
                     Text(project.name)
                     Spacer()

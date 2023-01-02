@@ -46,34 +46,14 @@ struct ContentView: View {
 
     // MARK: - Properties
 
-    var entryTimerView: some View {
-        EntryTimerView(editAction: editAction, compact: true)
-                .onTapGesture { isPresentingTodayView = true }
-    }
-
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 TabView(selection: $tabBarSelection) {
-                    VStack(spacing: 0) {
-                        EntriesTab()
-                        entryTimerView
-                    }
-                            .tag(Tab.entries)
-                    VStack(spacing: 0) {
-                        ProjectsTab()
-                        entryTimerView
-                    }
-                            .tag(Tab.projects)
-                    VStack(spacing: 0) {
-                        TagsTab()
-                        entryTimerView
-                    }
-                            .tag(Tab.tags)
-                    VStack(spacing: 0) {
-                        ReportsTab()
-                    }
-                            .tag(Tab.reports)
+                    EntriesTab().tag(Tab.entries)
+                    ProjectsTab().tag(Tab.projects)
+                    TagsTab().tag(Tab.tags)
+                    ReportsTab().tag(Tab.reports)
                 }
                         .onAppear(perform: entryTimer.startTimer)
                         .onDisappear(perform: entryTimer.stopTimer)
@@ -83,11 +63,15 @@ struct ContentView: View {
                                     .foregroundColor(entryTimer.theme.foregroundColor)
                         }
                         .modal(entryTimer.runningEntry?.name, isPresented: $isPresentingEditView) {
-                            EntryDetailEditView(entry: entryTimer.runningEntry)
+                            if let runningEntry = entryTimer.runningEntry {
+                                EntryDetailEditView(entry: runningEntry)
+                            }
                         }
                         .sheet(isPresented: $isPresentingWorkspacesView) {
                             NavigationView { MissingFeatureView().navigationTitle("Shared Workspaces") }
                         }
+                EntryTimerView(editAction: editAction, compact: true)
+                        .onTapGesture { isPresentingTodayView = true }
                 TabBar(selection: $tabBarSelection)
             }
         }

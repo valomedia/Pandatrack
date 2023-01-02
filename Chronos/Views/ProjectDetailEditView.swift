@@ -22,24 +22,20 @@ struct ProjectDetailEditView: View {
 
     /// The Project being modified.
     ///
-    @ObservedObject @ManagedEntity var project: Project?
+    @ObservedObject var project: Project
 
     var body: some View {
-        if let _project = Binding<Project>($project.entity) {
-            Form {
-                HStack {
-                    Label("Name", systemImage: "at")
-                    TextField("Project Name", text: _project.name)
-                            .multilineTextAlignment(.trailing)
-                            .onChange(of: project?.name ?? "") { newValue in
-                                project?.name = newValue.replacingOccurrences(of: Project.pathSeparator, with: "")
-                            }
-                }
-                ThemePicker(selection: $project.entity[\.theme])
-                ParentPicker<Project>(entity: project) { ParentView(entity: project?.parent) }
+        Form {
+            HStack {
+                Label("Name", systemImage: "at")
+                TextField("Project Name", text: $project.name)
+                        .multilineTextAlignment(.trailing)
+                        .onChange(of: project.name) { newValue in
+                            project.name = newValue.replacingOccurrences(of: Project.pathSeparator, with: "")
+                        }
             }
-        } else {
-            EmptyView()
+            ThemePicker(selection: $project.theme)
+            ParentPicker<Project>(entity: project) { ParentView(entity: project.parent) }
         }
     }
 
@@ -65,7 +61,7 @@ class ProjectDetailEditView_Previews: PreviewProvider {
     ///
     static var previews: some View {
         NavigationView {
-            try! ProjectDetailEditView(project: moc.fetch(Project.makeFetchRequest()).first {$0.name == "ACME"})
+            try! ProjectDetailEditView(project: moc.fetch(Project.makeFetchRequest()).first {$0.name == "ACME"}!)
                     .environment(\.managedObjectContext, moc)
         }
     }

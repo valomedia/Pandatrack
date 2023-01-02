@@ -30,10 +30,10 @@ struct TagDetailView: View {
     /// - Parameters:
     ///     - tag:
     ///
-    init(tag: Tag?) {
+    init(tag: Tag) {
         self._entries = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.start, order: .reverse)],
-                predicate: NSPredicate(format: "ANY tags == %@", tag ?? 0 as CVarArg))
+                predicate: NSPredicate(format: "ANY tags == %@", tag as CVarArg))
         self.tag = tag
     }
 
@@ -41,45 +41,41 @@ struct TagDetailView: View {
 
     /// The Tag being shown by this View.
     ///
-    @ObservedObject @ManagedEntity var tag: Tag?
+    @ObservedObject var tag: Tag
 
     var body: some View {
-        if let tag, let _tag = Binding<Tag>($tag.entity) {
-                List {
-                    Section {
-                        HStack {
-                            Label("Name", systemImage: "number")
-                            TextField("Tag Name", text: _tag.name)
-                                    .multilineTextAlignment(.trailing)
-                                    .onChange(of: tag.name) { newValue in
-                                        tag.name = newValue.replacingOccurrences(of: Tag.pathSeparator, with: "")
-                                    }
-                        }
-                        ParentPicker<Tag>(entity: tag) {
-                            ParentView(entity: tag.parent)
-                        }
-                    }
-                    Section {
-                        DeleteButton(
-                                buttonText: "Delete Tag",
-                                confirmationQuestion: "Do you really want to delete this tag?",
-                                supplementalMessage: """
-                                                     This tag will be removed along with any subtags.  The tags will \
-                                                     be removed from their respective entries, but the entries \
-                                                     themselves will remain.
-                                                     """) {
-                            moc.delete(tag)
-                            dismiss()
-                        }
-                    }
-                    if !entries.isEmpty {
-                        EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true)
-                    }
+        List {
+            Section {
+                HStack {
+                    Label("Name", systemImage: "number")
+                    TextField("Tag Name", text: $tag.name)
+                            .multilineTextAlignment(.trailing)
+                            .onChange(of: tag.name) { newValue in
+                                tag.name = newValue.replacingOccurrences(of: Tag.pathSeparator, with: "")
+                            }
+                }
+                ParentPicker<Tag>(entity: tag) {
+                    ParentView(entity: tag.parent)
+                }
             }
-                    .navigationBarTitle(tag.name)
-        } else {
-            EmptyView()
+            Section {
+                DeleteButton(
+                        buttonText: "Delete Tag",
+                        confirmationQuestion: "Do you really want to delete this tag?",
+                        supplementalMessage: """
+                                             This tag will be removed along with any subtags.  The tags will \
+                                             be removed from their respective entries, but the entries \
+                                             themselves will remain.
+                                             """) {
+                    moc.delete(tag)
+                    dismiss()
+                }
+            }
+            if !entries.isEmpty {
+                EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true)
+            }
         }
+                .navigationBarTitle(tag.name)
     }
 
     @FetchRequest private var entries: FetchedResults<CompletedEntry>

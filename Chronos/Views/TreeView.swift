@@ -42,11 +42,11 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///     - content:
     ///
     private init<Content: View>(
-            entity: Binding<ManagedEntity<Entity>>?,
+            entity: Binding<Entity?>?,
             root: Entity?,
             search: Binding<String>? = nil,
-            content: ((Entity?) -> Content)?) {
-        _entity = entity ?? .constant(ManagedEntity())
+            content: ((Entity) -> Content)?) {
+        _entity = entity ?? .constant(nil)
         self.root = root
         self.content = content.map { content in
             { entity in AnyView(content(entity)) }
@@ -68,7 +68,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///
     init<Content: View>(
             root: Entity? = nil,
-            @ViewBuilder content: @escaping (Entity?) -> Content) {
+            @ViewBuilder content: @escaping (Entity) -> Content) {
         self.init(entity: nil, root: root, content: content)
     }
 
@@ -79,15 +79,15 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///     - entity:
     ///     - root:
     ///
-    init(entity: Binding<ManagedEntity<Entity>>, root: Entity? = nil) {
-        self.init(entity: entity, root: root, content: nil as ((Entity?) -> Never)?)
+    init(entity: Binding<Entity?>, root: Entity? = nil) {
+        self.init(entity: entity, root: root, content: nil as ((Entity) -> Never)?)
     }
 
     // MARK: - Properties
 
     /// The binding for the Entity that is selected.
     ///
-    @Binding @ManagedEntity var entity: Entity?
+    @Binding var entity: Entity?
 
     /// The binding for the current search term.
     ///
@@ -104,7 +104,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///
     /// - Todo: Document
     ///
-    let content: ((Entity?) -> AnyView)?
+    let content: ((Entity) -> AnyView)?
 
     var body: some View {
             Wrapper {
@@ -182,7 +182,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     private var dismiss
 
     private func select(_ entity: Entity? = nil) {
-        _entity.wrappedValue = ManagedEntity(entity)
+        self.entity = entity
         DispatchQueue.main.asyncAfter(deadline: .now()+dismissDelay, execute: dismiss.callAsFunction)
     }
 }
@@ -202,8 +202,7 @@ class TreeView_Previews: PreviewProvider {
         Group {
             NavigationView {
                 try! TreeView(
-                        entity: .constant(
-                                ManagedEntity(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }))
+                        entity: .constant(moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" })
                 )
                         .environment(\.managedObjectContext, moc)
             }

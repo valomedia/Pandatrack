@@ -73,20 +73,16 @@ struct EntriesView: View {
     /// The entries as CSV for sharing.
     ///
     private var shareString: String {
-        entries
-                .map(ManagedEntity.init)
-                .map(\.wrappedValue)
-                .compacted()
-                .map { entry in
-                    [
-                        ISO8601DateFormatter.formatter.string(from: entry.start),
-                        ISO8601DateFormatter.formatter.string(from: entry.end),
-                        entry.name,
-                        entry.project?.path ?? ""
-                    ]
-                            .map { "\"" + $0.replacingOccurrences(of: "\"", with: "\"\"") + "\"" }
-                            .joined(separator: ",")
-                }
+        entries.map { entry in
+            [
+                ISO8601DateFormatter.formatter.string(from: entry.start),
+                ISO8601DateFormatter.formatter.string(from: entry.end),
+                entry.name,
+                entry.project?.path ?? ""
+            ]
+                    .map { "\"" + $0.replacingOccurrences(of: "\"", with: "\"\"") + "\"" }
+                    .joined(separator: ",")
+        }
                 .joined(separator: "\n")
     }
 
@@ -98,11 +94,9 @@ struct EntriesView: View {
     // MARK: - Methods
 
     private func deleteEntries(offsets: IndexSet) {
-        withAnimation {
-            offsets
-                    .map { entries[AnyIndex($0)] }
-                    .forEach(moc.delete)
-        }
+        offsets
+                .map { entries[AnyIndex($0)] }
+                .forEach(moc.delete)
     }
 
 }
@@ -124,7 +118,7 @@ class EntriesView_Previews: PreviewProvider {
                 try! EntriesView(
                         "Entries",
                         entries: AnyRandomAccessCollection(
-                                        moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
+                                moc.fetch(CompletedEntry.makeFetchRequest()).sorted(by: \.start))
                 )
                         .environment(\.managedObjectContext, moc)
                         .environmentObject(env)

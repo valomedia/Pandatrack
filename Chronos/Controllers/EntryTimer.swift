@@ -90,11 +90,7 @@ class EntryTimer: ObservableObject {
 
     /// The Entry that is running.
     ///
-    var runningEntry: RunningEntry? {
-        get { ManagedEntity(_runningEntry).entity }
-        set { _runningEntry = newValue }
-    }
-    @Published private var _runningEntry: RunningEntry?
+    @Published var runningEntry: RunningEntry?
 
     private let moc: NSManagedObjectContext
     private let frequency = 1.0 / 60.0

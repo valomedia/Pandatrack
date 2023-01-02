@@ -96,7 +96,6 @@
 		E9E9759F364A243DD4522C24 /* NumberAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9704F8E822546071F4CDF /* NumberAttribute.swift */; };
 		E9E975A00F50DFC91586B53B /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97AEC8ACE5FEC9FACE04E /* Project+CoreDataClass.swift */; };
 		E9E975AB0A157270414468A2 /* NumberAttributeSingleDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E976D713A18301955EB2F6 /* NumberAttributeSingleDeclaration+CoreDataClass.swift */; };
-		E9E975ABB847ACBB73F2B5F1 /* ManagedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97396A7110C5B740D8A34 /* ManagedEntity.swift */; };
 		E9E975DF5C345486CCC112E1 /* SetBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E974ECC396A7656D68543A /* SetBuilder.swift */; };
 		E9E975FAC2D4F3C3F4F3B9EC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9795F50C728A3C7B6421D /* ErrorView.swift */; };
 		E9E9760571EDFB4B17464A6C /* TagDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9702402B61A805908F574 /* TagDetailView.swift */; };
@@ -315,7 +314,6 @@
 		E9E973610401D6A78BDAC572 /* Date+endOfLastWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+endOfLastWeek.swift"; sourceTree = "<group>"; };
 		E9E9736535AF17538C2040ED /* TrackingSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackingSheet.swift; sourceTree = "<group>"; };
 		E9E97370CEC70BF1C2A23529 /* MutableBuiltinAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBuiltinAttribute.swift; sourceTree = "<group>"; };
-		E9E97396A7110C5B740D8A34 /* ManagedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedEntity.swift; sourceTree = "<group>"; };
 		E9E973B580659ADFFAF1C230 /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Localizable.strings; sourceTree = "<group>"; };
 		E9E973B7DE5838DA13ED3D22 /* Assets.stencil */ = {isa = PBXFileReference; lastKnownFileType = file.stencil; path = Assets.stencil; sourceTree = "<group>"; };
 		E9E973CD651400047AB76402 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -637,7 +635,6 @@
 				E9E972B38BAFC3E3CEE517E3 /* BuiltinAttribute.swift */,
 				E9E97370CEC70BF1C2A23529 /* MutableBuiltinAttribute.swift */,
 				E9E97FAA39E5E9D6E5C0D35D /* Entity.swift */,
-				E9E97396A7110C5B740D8A34 /* ManagedEntity.swift */,
 				E9E9751167C4E66724A7A4E5 /* Assets+Generated.swift */,
 				E9E97D9D109401FDB67DE7A4 /* CoreData+Generated.swift */,
 				E9E97088E880AAFB14C6FFDF /* Strings+Generated.swift */,
@@ -1144,7 +1141,6 @@
 				E9E97AACDD42A7BF94B43A43 /* FloatingActionButton.swift in Sources */,
 				E9E97C79B186D143076425C9 /* View+floatingActionButton.swift in Sources */,
 				E9E971737E5ED2CDC138497A /* SampleData.swift in Sources */,
-				E9E975ABB847ACBB73F2B5F1 /* ManagedEntity.swift in Sources */,
 				E9E9751A834F0000AEDC92F7 /* Assets+Generated.swift in Sources */,
 				E9E97F538CD995655775A17D /* CoreData+Generated.swift in Sources */,
 				E9E974D27E7AB8DF24097621 /* Strings+Generated.swift in Sources */,

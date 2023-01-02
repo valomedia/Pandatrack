@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import ObservedOptionalObject
 
 
 // MARK: TagView
@@ -22,7 +23,7 @@ struct TagView: View {
 
     /// The Tag being shown by this View.
     ///
-    @ObservedObject @ManagedEntity var tag: Tag?
+    @ObservedOptionalObject var tag: Tag?
 
     var body: some View {
         Label(tag?.path ?? "No Tag", systemImage: "number")

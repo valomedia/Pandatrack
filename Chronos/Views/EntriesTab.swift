@@ -55,14 +55,14 @@ struct EntriesTab: View {
                     .navigationTitle("Time Entries")
                     .floatingActionButton { isPresentingEditView = true }
                     .modal("New Entry", isPresented: $isPresentingEditView, onOpen: { newEntry = CompletedEntry(moc)}) {
-                        EntryDetailEditView(entry: newEntry)
+                        if let newEntry { EntryDetailEditView(entry: newEntry) }
                     }
         }
     }
 
     /// The new Entry being created, if any.
     ///
-    @State @ManagedEntity private var newEntry: CompletedEntry?
+    @State private var newEntry: CompletedEntry?
 
     /// Whether the sheet showing the EntryDetailEditView is visible.
     ///
@@ -75,7 +75,6 @@ struct EntriesTab: View {
     @SectionedFetchRequest(
             sectionIdentifier: \.day,
             sortDescriptors: [SortDescriptor(\.start, order: .reverse)],
-            predicate: NSPredicate(format: "end != nil"),
             animation: .default)
     private var entries: SectionedFetchResults<String, CompletedEntry>
 

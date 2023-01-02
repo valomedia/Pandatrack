@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import ObservedOptionalObject
 
 
 // MARK: ProjectView
@@ -28,7 +29,7 @@ struct ProjectView: View {
     ///     - compact:
     ///
     init(project: Project?, compact: Bool = false) {
-        self.project = project
+        _project = ObservedOptionalObject(wrappedValue: project)
         self.compact = compact
     }
 
@@ -36,7 +37,7 @@ struct ProjectView: View {
 
     /// The Project being shown by this View.
     ///
-    @ObservedObject @ManagedEntity var project: Project?
+    @ObservedOptionalObject var project: Project?
 
     /// Whether to show the compact version of this View.
     ///

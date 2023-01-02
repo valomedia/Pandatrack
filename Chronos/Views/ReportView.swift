@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import ObservedOptionalObject
 
 
 // MARK: ReportView
@@ -83,8 +84,8 @@ struct ReportView: View {
 
     @FetchRequest private var entries: FetchedResults<CompletedEntry>
 
-    @State @ManagedEntity private var project: Project?
-    @State @ManagedEntity private var tag: Tag?
+    @State private var project: Project?
+    @State private var tag: Tag?
 
     @Environment(\.managedObjectContext)
     private var moc

@@ -32,24 +32,20 @@ struct EntryView: View {
 
     /// The Entry being shown.
     ///
-    @ObservedObject @ManagedEntity var entry: CompletedEntry?
+    @ObservedObject var entry: CompletedEntry
 
     var body: some View {
-        if let entry = entry {
-            CardView(
-                    title: entry.name,
-                    labels: (
-                            Label(entry.project?.name ?? "No Project", systemImage: "at"),
-                            Label(TimeInterval.formatter.string(from: entry.duration) ?? "", systemImage: "hourglass"),
-                            Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
-                            Label(Self.dateFormatter.string(for: entry.start) ?? "", systemImage: "clock"))
-            )
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("Entry")
-                    .accessibilityValue(entry.name)
-        } else {
-            EmptyView()
-        }
+        CardView(
+                title: entry.name,
+                labels: (
+                        Label(entry.project?.name ?? "No Project", systemImage: "at"),
+                        Label(TimeInterval.formatter.string(from: entry.duration) ?? "", systemImage: "hourglass"),
+                        Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
+                        Label(Self.dateFormatter.string(for: entry.start) ?? "", systemImage: "clock"))
+        )
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Entry")
+                .accessibilityValue(entry.name)
     }
 
 }

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import Charts
+import ObservedOptionalObject
 
 
 // MARK: TimesChart
@@ -32,7 +33,7 @@ struct TimesChart: View {
         )
         self.entries = entries
         self.interval = interval
-        self.project = project
+        _project = ObservedOptionalObject(wrappedValue: project)
     }
 
     // MARK: - Properties
@@ -47,7 +48,7 @@ struct TimesChart: View {
 
     /// The Project the Chart is filtered by, if any.
     ///
-    @ObservedObject @ManagedEntity var project: Project?
+    @ObservedOptionalObject var project: Project?
 
     var body: some View {
         Wrapper {

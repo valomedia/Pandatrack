@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import CoreData
+import ObservedOptionalObject
 
 
 // MARK: ParentView
@@ -23,7 +24,7 @@ struct ParentView<Entity: NSManagedObject & Tree>: View {
 
     /// The Entity being shown by this View.
     ///
-    @ObservedObject @ManagedEntity var entity: Entity?
+    @ObservedOptionalObject var entity: Entity?
 
     var body: some View {
         HStack {

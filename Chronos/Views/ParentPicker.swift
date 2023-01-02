@@ -28,7 +28,7 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
     ///     - entity:
     ///     - content:
     ///
-    init<Content: View>(entity: Entity?, @ViewBuilder content: @escaping () -> Content) {
+    init<Content: View>(entity: Entity, @ViewBuilder content: @escaping () -> Content) {
         self.entity = entity
         self.content = { AnyView(content()) }
     }
@@ -39,16 +39,16 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
     ///
     /// - Todo: Document.
     ///
-    @ObservedObject @ManagedEntity var entity: Entity?
+    @ObservedObject var entity: Entity
 
     var body: some View {
         TreePicker(
                 entity: Binding(
-                        get: { ManagedEntity(entity?.parent) },
+                        get: { entity.parent },
                         set: { newValue in
                             // If the new parent is descended from a child of this Entity, move the child to the root
                             // level, to resolve the circle.
-                            if let newValue = newValue.wrappedValue {
+                            if let newValue {
                                 var parent = newValue
                                 while let grandparent = parent.parent {
                                     if grandparent == entity {
@@ -60,8 +60,8 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
                             }
 
                             // If trying to make something its own parent, outright ignore the change.
-                            guard newValue.wrappedValue != entity else { return }
-                            entity?.parent = newValue.wrappedValue
+                            guard newValue != entity else { return }
+                            entity.parent = newValue
                         }),
                 title: "Folder"
         ) {
@@ -91,10 +91,10 @@ class ParentPicker_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        let project: Project? = try! moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }
+        let project: Project = try! moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!
         NavigationView {
             List {
-                ParentPicker(entity: project) { ProjectView(project: project?.parent) }
+                ParentPicker(entity: project) { ProjectView(project: project.parent) }
                         .environment(\.managedObjectContext, moc)
             }
         }

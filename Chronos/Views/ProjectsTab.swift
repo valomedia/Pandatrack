@@ -26,14 +26,16 @@ struct ProjectsTab: View {
                     .navigationTitle("Projects")
                     .floatingActionButton { isPresentingNewProject = true }
                     .modal("New Project", isPresented: $isPresentingNewProject, onOpen: { newProject = Project(moc) }) {
-                        ProjectDetailEditView(project: newProject)
+                        if let newProject {
+                            ProjectDetailEditView(project: newProject)
+                        }
                     }
         }
     }
 
     /// The new Project being created, if any.
     ///
-    @State @ManagedEntity private var newProject: Project?
+    @State private var newProject: Project?
 
     /// Whether the sheet showing the ProjectDetailEditView is visible.
     ///
