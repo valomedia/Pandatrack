@@ -25,16 +25,9 @@ struct EntriesTab: View {
             Wrapper {
                 if entries.isEmpty {
                     NoContentView(
-                            title: "Welcome to Chronos!",
-                            headline: "You Can Begin Tracking Your First Entry Right Away",
-                            caption: """
-                                     Tap the play button on the bottom right to start tracking. You can edit your \
-                                     entry with the edit button to the left of the play button.
-
-                                     Once you are happy with your entry, you can stop it with the stop button, that \
-                                     shows up when an entry is running. Use the next entry button to stop an entry \
-                                     end immediately begin the next one.
-                                     """)
+                            title: "Hi, I‘m Pandy!",
+                            headline: "Nice to meet you.",
+                            image: Image(uiImage: Asset.Images.Pandy.hiImPandy.image))
                 } else {
                     List {
                         ForEach(entries) { section in

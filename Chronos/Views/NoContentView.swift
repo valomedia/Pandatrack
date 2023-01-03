@@ -29,15 +29,11 @@ struct NoContentView: View {
     ///     - headline:
     ///     - caption:
     ///
-    init(
-            image: Image? = nil,
-            title: String = "There is nothing here",
-            headline: String,
-            caption: String) {
-        self.image = image
+    init(title: String = "There is nothing here", headline: String, caption: String? = nil, image: Image? = nil) {
         self.title = title
         self.headline = headline
         self.caption = caption
+        self.image = image
     }
 
     // MARK: - Properties
@@ -64,26 +60,34 @@ struct NoContentView: View {
     ///
     /// - Todo: Document
     ///
-    let caption: String
+    let caption: String?
 
     var body: some View {
         Wrapper {
             VStack {
-                if let image = image {
-                    image
-                }
                 Text(title)
-                        .font(.title)
-                        .padding(.bottom)
+                    .font(.title)
+                    .foregroundColor(.white)
                 Text(headline)
-                        .font(.headline)
-                Text(caption)
-                        .font(.caption)
-                        .padding(.top)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                if let caption {
+                    Text(caption)
+                            .font(.caption)
+                            .padding(.top)
+                }
+                if let image = image {
+                    HStack {
+                        Spacer()
+                        image.resizable().aspectRatio(contentMode: .fit)
+                        Spacer()
+                    }
+                            .padding(.top)
+                }
                 Spacer()
             }
                     .padding()
-                    .background(.ultraThinMaterial)
+                    .background(Color(uiColor: Asset.noContentViewBackgroundColor.color))
                     .cornerRadius(16)
                     .multilineTextAlignment(.center)
         }
