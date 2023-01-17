@@ -163,7 +163,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                         }
 
                         ForEach(subtrees) { subtree in
-                            if (!subtree.children.isEmpty && depth > 1) {
+                            if (!subtree.children.isEmpty && (depth > 1 || !searchBinding.wrappedValue.isEmpty)) {
                                 TreeView(
                                         entity: $entity,
                                         root: subtree,
