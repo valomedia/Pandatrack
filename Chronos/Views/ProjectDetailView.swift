@@ -41,9 +41,7 @@ struct ProjectDetailView: View {
 
     var body: some View {
         List {
-            Section { ProjectView(project: project) }
-                    .contentShape(Rectangle())
-                    .onTapGesture { isPresentingEditView = true }
+            ProjectDetailEditView(project: project)
             Section {
                 DeleteButton(
                         buttonText: "Delete Project",
@@ -61,15 +59,7 @@ struct ProjectDetailView: View {
             }
         }
                 .navigationTitle(project.name)
-                .toolbar {
-                    Button("Edit") { isPresentingEditView = true }
-                }
-                .modal(project.name, isPresented: $isPresentingEditView) {
-                    ProjectDetailEditView(project: project)
-                }
     }
-
-    @State private var isPresentingEditView = false
 
     @Environment(\.managedObjectContext)
     private var moc

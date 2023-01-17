@@ -30,13 +30,12 @@ struct ThemeView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 4)
                     .fill(theme.backgroundColor)
-            Label(theme.name, systemImage: "paintpalette")
+            Text(theme.name)
                     .padding(4)
-                    .labelStyle(.leadingIcon)
                     .padding(.horizontal)
         }
                 .foregroundColor(theme.foregroundColor)
-                .fixedSize(horizontal: true, vertical: true)
+                .fixedSize(horizontal: false, vertical: true)
     }
 
 }

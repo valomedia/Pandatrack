@@ -31,10 +31,23 @@ struct ThemePicker: View {
             Image(systemName: "paintpalette")
                     .padding(.trailing)
                     .foregroundColor(.accentColor)
-            Picker("Theme", selection: $selection) {
-                ForEach(Theme.allCases) { theme in Text(theme.name).tag((theme != Theme.none).then(theme)) }
+            Picker(selection: $selection) {
+                ForEach(Theme.allCases) { theme in
+                    HStack {
+                        // Dummy text to make SwiftUI draw the list item separators all the way across.
+                        Text("")
+                        Spacer()
+                        ThemeView(theme: theme)
+                    }
+                            .tag((theme != Theme.none).then(theme))
+                }
+            } label: {
+                HStack {
+                    Text("Theme")
+                    Spacer()
+                }
             }
-                    .pickerStyle(.menu)
+                    .pickerStyle(.navigationLink)
         }
     }
 

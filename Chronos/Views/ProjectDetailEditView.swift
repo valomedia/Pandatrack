@@ -25,7 +25,6 @@ struct ProjectDetailEditView: View {
     @ObservedObject var project: Project
 
     var body: some View {
-        Form {
             HStack {
                 Label("Name", systemImage: "at")
                 TextField("Project Name", text: $project.name)
@@ -36,7 +35,6 @@ struct ProjectDetailEditView: View {
             }
             ParentPicker<Project>(entity: project) { ParentView(entity: project.parent) }
             ThemePicker(selection: $project.theme)
-        }
     }
 
     @FetchRequest()
@@ -61,8 +59,10 @@ class ProjectDetailEditView_Previews: PreviewProvider {
     ///
     static var previews: some View {
         NavigationView {
-            try! ProjectDetailEditView(project: moc.fetch(Project.makeFetchRequest()).first {$0.name == "ACME"}!)
-                    .environment(\.managedObjectContext, moc)
+            List {
+                try! ProjectDetailEditView(project: moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!)
+                        .environment(\.managedObjectContext, moc)
+            }
         }
     }
 
