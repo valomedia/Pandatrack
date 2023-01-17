@@ -71,15 +71,7 @@ struct TagDetailView: View {
                     dismiss()
                 }
             }
-            if !tag.children.isEmpty {
-                Section("Subtags") {
-                    ForEach(tag.children.sorted(by: \.name)) { tag in
-                        NavigationLink(destination: TagDetailView(tag: tag)) {
-                            Label(tag.name, systemImage: "number")
-                        }
-                    }
-                }
-            }
+            ChildrenView("Subtags", entity: tag) { tag in TagDetailView(tag: tag) }
             if !entries.isEmpty {
                 EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true)
             }

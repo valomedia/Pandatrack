@@ -55,15 +55,7 @@ struct ProjectDetailView: View {
                     moc.delete(project)
                 }
             }
-            if !project.children.isEmpty {
-                Section("Subprojects") {
-                    ForEach(project.children.sorted(by: \.name)) { project in
-                        NavigationLink(destination: ProjectDetailView(project: project)) {
-                            Label(project.name, systemImage: "at")
-                        }
-                    }
-                }
-            }
+            ChildrenView("Subprojects", entity: project) { project in ProjectDetailView(project: project) }
             if !entries.isEmpty {
                 EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true)
             }
