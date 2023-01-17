@@ -28,8 +28,11 @@ struct ThemeView: View {
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 4)
-                    .fill(theme.backgroundColor)
+            if theme == .none {
+                RoundedRectangle(cornerRadius: 4).stroke(theme.foregroundColor)
+            } else {
+                RoundedRectangle(cornerRadius: 4).fill(theme.backgroundColor)
+            }
             Text(theme.name)
                     .padding(4)
                     .padding(.horizontal)
