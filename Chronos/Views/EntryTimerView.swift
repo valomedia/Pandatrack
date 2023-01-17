@@ -81,7 +81,7 @@ struct EntryTimerView: View {
             Button(action: entryTimer.toggle) {
                 Image(systemName: entryTimer.isRunning ? "stop.circle.fill" : "play.circle.fill")
                         .resizable()
-                        .frame(width: 60, height: 60)
+                        .frame(width: 50, height: 50)
             }
                     .foregroundColor(entryTimer.theme.foregroundColor)
                     .accessibilityLabel(entryTimer.isRunning ? "Stop timer" : "Start timer")
