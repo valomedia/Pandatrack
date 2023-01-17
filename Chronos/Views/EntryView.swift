@@ -36,17 +36,26 @@ struct EntryView: View {
 
     var body: some View {
         CardView(
-                title: entry.name,
                 labels: (
                         Label(entry.project?.name ?? "No Project", systemImage: "at"),
                         Label(TimeInterval.formatter.string(from: entry.duration) ?? "", systemImage: "hourglass"),
                         Label(entry.project?.parent?.name ?? "", systemImage: "folder"),
                         Label(Self.dateFormatter.string(for: entry.start) ?? "", systemImage: "clock"))
-        )
+        ) {
+            HStack {
+                Text(entry.name)
+                Spacer()
+                Image(systemName: "play.fill").onTapGesture {
+                    entryTimer.track(continueFrom: entry)
+                }
+            }
+        }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("Entry")
                 .accessibilityValue(entry.name)
     }
+
+    @EnvironmentObject private var entryTimer: EntryTimer
 
 }
 
@@ -62,7 +71,10 @@ struct EntryView_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        try! EntryView(entry: Set(moc.fetch(CompletedEntry.makeFetchRequest())).first { $0.name == "Take over the world" }!)
+        try! EntryView(
+                entry: Set(moc.fetch(CompletedEntry.makeFetchRequest())).first { $0.name == "Take over the world" }!
+        )
+                .environmentObject(entryTimer)
                 .previewLayout(.fixed(width: 400, height: 60))
     }
 }

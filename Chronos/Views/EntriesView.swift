@@ -53,6 +53,14 @@ struct EntriesView: View {
                 }
                         .foregroundColor(entry.theme.foregroundColor)
                         .listRowBackground(entry.theme.backgroundColor)
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                entryTimer.track(continueFrom: entry)
+                            } label: {
+                                Label("Continue", systemImage: "play.fill")
+                            }
+                                    .tint(.green)
+                        }
             }
                     .onDelete(perform: deleteEntries)
         } header: {
@@ -87,6 +95,7 @@ struct EntriesView: View {
     private var moc
 
     @EnvironmentObject private var env: ChronosEnvironment
+    @EnvironmentObject private var entryTimer: EntryTimer
 
     // MARK: - Methods
 
@@ -119,6 +128,7 @@ class EntriesView_Previews: PreviewProvider {
                 )
                         .environment(\.managedObjectContext, moc)
                         .environmentObject(env)
+                        .environmentObject(entryTimer)
             }
         }
     }

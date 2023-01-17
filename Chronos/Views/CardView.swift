@@ -16,15 +16,25 @@ import SwiftUI
 ///
 /// - Todo: Document.
 ///
-struct CardView: View {
+struct CardView<Title: View>: View {
 
-    // MARK: - Properties
+    // MARK: - Life cycle methods
 
     /// Undocumented.
     ///
     /// - Todo: Document.
+    /// - Parameters:
+    ///     - labels:
+    ///     - title:
     ///
-    let title: String
+    init(
+            labels: (Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?),
+            @ViewBuilder title: @escaping () -> Title) {
+        self.labels = labels
+        self.title = title
+    }
+
+    // MARK: - Properties
 
     /// Undocumented.
     ///
@@ -34,7 +44,7 @@ struct CardView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title).font(.headline)
+            title().font(.headline)
             Spacer()
             HStack {
                 labels.0.labelStyle(.leadingIcon)
@@ -49,6 +59,51 @@ struct CardView: View {
         }
                 .padding()
     }
+
+    // MARK: - Methods
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    ///
+    let title: () -> Title
+
+}
+
+// MARK: + init
+
+extension CardView where Title == Text {
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - title:
+    ///     - labels:
+    ///
+    init<S: StringProtocol>(
+            title: S,
+            labels: (Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?)) {
+        self.init(labels: labels) {
+            Text(title)
+        }
+    }
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document.
+    /// - Parameters:
+    ///     - title:
+    ///     - labels:
+    ///
+    init(
+            title: LocalizedStringKey,
+            labels: (Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?)) {
+        self.init(labels: labels) {
+            Text(title)
+        }
+    }
+
 }
 
 

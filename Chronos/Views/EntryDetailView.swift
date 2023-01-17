@@ -59,7 +59,10 @@ struct EntryDetailView: View {
     var body: some View {
         List {
             Section(header: Text("Time Entry")) {
-                Button(action: { entryTimer.track(continueFrom: entry) }) {
+                Button {
+                    entryTimer.track(continueFrom: entry)
+                    dismiss()
+                } label: {
                     HStack {
                         Label("Continue", systemImage: "timer")
                                 .font(.headline)
@@ -128,6 +131,9 @@ struct EntryDetailView: View {
 
     @Environment(\.managedObjectContext)
     private var moc
+
+    @Environment(\.dismiss)
+    private var dismiss
 
 }
 
