@@ -22,7 +22,7 @@ struct ProjectsTab: View {
 
     var body: some View {
         NavigationView {
-            TreeView<Project> { project in ProjectDetailView(project: project) }
+            TreeView<Project>(depth: 2) { project in ProjectDetailView(project: project) }
                     .navigationTitle("Projects")
                     .floatingActionButton { isPresentingNewProject = true }
                     .modal("New Project", isPresented: $isPresentingNewProject, onOpen: { newProject = Project(moc) }) {

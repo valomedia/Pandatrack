@@ -28,7 +28,7 @@ struct TagsTab: View {
 
     var body: some View {
         NavigationView {
-            TreeView<Tag> { tag in TagDetailView(tag: tag) }
+            TreeView<Tag>(depth: 2) { tag in TagDetailView(tag: tag) }
                     .navigationTitle("Tags")
                     .floatingActionButton { isPresentingNewTag = true }
                     .modal("New Tag", isPresented: $isPresentingNewTag, onOpen: { newTag = Tag(moc) }) {

@@ -39,18 +39,21 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///     - entity:
     ///     - root:
     ///     - search:
+    ///     - depth:
     ///     - content:
     ///
     private init<Content: View>(
             entity: Binding<Entity?>?,
             root: Entity?,
             search: Binding<String>? = nil,
+            depth: Int? = nil,
             content: ((Entity) -> Content)?) {
         _entity = entity ?? .constant(nil)
         self.root = root
         self.content = content.map { content in
             { entity in AnyView(content(entity)) }
         }
+        self.depth = depth ?? Int.max
         _subtrees = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.name)],
                 predicate: NSPredicate(format: "parent == %@", root ?? 0 as CVarArg)
@@ -65,11 +68,13 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///     - entity:
     ///     - root:
     ///     - content:
+    ///     - depth:
     ///
     init<Content: View>(
             root: Entity? = nil,
+            depth: Int? = nil,
             @ViewBuilder content: @escaping (Entity) -> Content) {
-        self.init(entity: nil, root: root, content: content)
+        self.init(entity: nil, root: root, depth: depth, content: content)
     }
 
     /// Undocumented.
@@ -78,9 +83,10 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     /// - Parameters:
     ///     - entity:
     ///     - root:
+    ///     - depth:
     ///
-    init(entity: Binding<Entity?>, root: Entity? = nil) {
-        self.init(entity: entity, root: root, content: nil as ((Entity) -> Never)?)
+    init(entity: Binding<Entity?>, root: Entity? = nil, depth: Int? = nil) {
+        self.init(entity: entity, root: root, depth: depth, content: nil as ((Entity) -> Never)?)
     }
 
     // MARK: - Properties
@@ -105,6 +111,12 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     /// - Todo: Document
     ///
     let content: ((Entity) -> AnyView)?
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document
+    ///
+    let depth: Int
 
     var body: some View {
             Wrapper {
@@ -146,16 +158,18 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                                             }
                                 }
                             } header: {
-                                if let root {
-                                    Image(systemName: "folder")
-                                    Text(root.path)
-                                }
+                                if let root { Label(root.path, systemImage: "folder") }
                             }
                         }
 
                         ForEach(subtrees) { subtree in
-                            if (!subtree.children.isEmpty) {
-                                TreeView(entity: $entity, root: subtree, search: searchBinding, content: content)
+                            if (!subtree.children.isEmpty && depth > 1) {
+                                TreeView(
+                                        entity: $entity,
+                                        root: subtree,
+                                        search: searchBinding,
+                                        depth: depth - 1,
+                                        content: content)
                             }
                         }
                     }
