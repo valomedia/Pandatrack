@@ -55,7 +55,18 @@ struct ProjectDetailView: View {
                     moc.delete(project)
                 }
             }
-            if !entries.isEmpty { EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true) }
+            if !project.children.isEmpty {
+                Section("Subprojects") {
+                    ForEach(project.children.sorted(by: \.name)) { project in
+                        NavigationLink(destination: ProjectDetailView(project: project)) {
+                            Label(project.name, systemImage: "at")
+                        }
+                    }
+                }
+            }
+            if !entries.isEmpty {
+                EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true)
+            }
         }
                 .navigationTitle(project.name)
                 .toolbar {
