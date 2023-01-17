@@ -45,6 +45,7 @@ struct EntryTagsEditView: View {
             }
                     .opacity(newTagPath.isEmpty ? 0 : 1)
         }
+                .onDisappear(perform: addTag)
     }
 
     @Environment(\.managedObjectContext)
