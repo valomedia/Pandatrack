@@ -34,8 +34,8 @@ struct ProjectDetailEditView: View {
                             project.name = newValue.replacingOccurrences(of: Project.pathSeparator, with: "")
                         }
             }
-            ThemePicker(selection: $project.theme)
             ParentPicker<Project>(entity: project) { ParentView(entity: project.parent) }
+            ThemePicker(selection: $project.theme)
         }
     }
 
