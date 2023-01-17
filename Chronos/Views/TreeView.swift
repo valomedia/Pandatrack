@@ -123,10 +123,10 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                             }
                         }
                         if !filteredSubtrees.isEmpty {
-                            Section(header: Text(root?.path ?? "")) {
+                            Section {
                                 ForEach(filteredSubtrees) { node in
                                     HStack {
-                                        Label(node.name, systemImage: "arrow.turn.down.right")
+                                        Label(node.name, systemImage: root == nil ? "folder" : "arrow.turn.down.right")
                                         Spacer()
                                         if (entity == node) {
                                             Image(systemName: "checkmark")
@@ -144,6 +144,11 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                                                     label
                                                 }
                                             }
+                                }
+                            } header: {
+                                if let root {
+                                    Image(systemName: "folder")
+                                    Text(root.path)
                                 }
                             }
                         }
