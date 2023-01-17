@@ -59,15 +59,17 @@ struct ReportView: View {
                     TimesChart(entries: filteredEntries, interval: interval, project: project)
                 }
             }
-            Section {
-                NavigationLink {
-                    List {
-                        EntriesView("Results", entries: filteredEntries, isPrimaryContentForSharing: true)
+            if !filteredEntries.isEmpty {
+                Section {
+                    NavigationLink {
+                        List {
+                            EntriesView("Results", entries: filteredEntries, isPrimaryContentForSharing: true)
+                        }
+                                .navigationTitle("All Matched Entries")
+                                .navigationBarTitleDisplayMode(.inline)
+                    } label: {
+                        Label("Show All Entries", systemImage: "list.triangle")
                     }
-                            .navigationTitle("All Matched Entries")
-                            .navigationBarTitleDisplayMode(.inline)
-                } label: {
-                    Label("Show All Entries", systemImage: "list.triangle")
                 }
             }
         }

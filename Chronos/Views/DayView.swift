@@ -83,7 +83,15 @@ struct DayView: View {
                     }
                     .padding()
             List {
-                if !entries.isEmpty {
+                if entries.isEmpty {
+                    NoContentView(
+                            title: "There is nothing here",
+                            headline: "You have not tracked any entries for the selected day",
+                            caption: """
+                                     Once you have added a few entries, you can return here, to see some fancy charts
+                                     about how you spend your time.
+                                     """)
+                } else {
                     ForEach(
                             Dictionary(grouping: entries, by: { $0.project })
                                     .mapValues { value in
