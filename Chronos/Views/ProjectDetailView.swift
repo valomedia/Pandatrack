@@ -53,7 +53,11 @@ struct ProjectDetailView: View {
                     moc.delete(project)
                 }
             }
-            ChildrenView("Subprojects", entity: project) { project in ProjectDetailView(project: project) }
+            ChildrenView(entity: project) { project in
+                ProjectDetailView(project: project)
+            } header: {
+                Label("Subprojects", systemImage: "folder")
+            }
             if !entries.isEmpty {
                 EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true)
             }

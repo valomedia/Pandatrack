@@ -71,7 +71,11 @@ struct TagDetailView: View {
                     dismiss()
                 }
             }
-            ChildrenView("Subtags", entity: tag) { tag in TagDetailView(tag: tag) }
+            ChildrenView(entity: tag) { tag in
+                TagDetailView(tag: tag)
+            } header: {
+                Label("Subtags", systemImage: "folder")
+            }
             if !entries.isEmpty {
                 EntriesView(entries: AnyRandomAccessCollection(entries), isPrimaryContentForSharing: true)
             }
