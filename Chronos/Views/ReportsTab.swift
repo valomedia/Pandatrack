@@ -24,14 +24,18 @@ struct ReportsTab: View {
         NavigationView {
             VStack {
                 DateIntervalPicker(selection: $interval)
-                ReportView(interval: interval)
+                if (Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day == 0) {
+                    DayView(interval: interval)
+                } else {
+                    ReportView(interval: interval)
+                }
             }
                     .navigationTitle("Reports")
                     .navigationBarTitleDisplayMode(.inline)
         }
     }
 
-    @State private var interval: DateInterval = .sevenDays
+    @State private var interval: DateInterval = .today
 
 }
 

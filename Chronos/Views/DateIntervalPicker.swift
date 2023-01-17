@@ -19,6 +19,7 @@ import SwiftUI
 struct DateIntervalPicker: View {
 
     private enum DateIntervalPresets: String, Identifiable, CustomStringConvertible, CaseIterable {
+        case today = "D"
         case sevenDays = "7D"
         case week = "W"
         case thirtyDays = "30D"
@@ -27,6 +28,7 @@ struct DateIntervalPicker: View {
 
         var interval: DateInterval {
             switch self {
+            case .today: return .today
             case .sevenDays: return .sevenDays
             case .week: return .week
             case .thirtyDays: return .thirtyDays

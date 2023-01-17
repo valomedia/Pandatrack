@@ -72,11 +72,11 @@ class EntryTimer: ObservableObject {
 
     /// The elapsed time formatted as hh:mm:ss.
     ///
-    @Published var timeElapsedString: String?
+    @Published var timeElapsedString = ""
 
     /// The elapsed time in words.
     ///
-    @Published var timeElapsedAccessibilityLabel: String?
+    @Published var timeElapsedAccessibilityLabel = ""
 
     /// Whether the Timer is currently running.
     ///
@@ -91,6 +91,12 @@ class EntryTimer: ObservableObject {
     /// The Entry that is running.
     ///
     @Published var runningEntry: RunningEntry?
+
+    /// Whether an entry is running.
+    ///
+    var isRunning: Bool {
+        runningEntry != nil
+    }
 
     private let moc: NSManagedObjectContext
     private let frequency = 1.0 / 60.0
@@ -176,6 +182,14 @@ class EntryTimer: ObservableObject {
 
         guard let runningEntry = runningEntry else { return nil }
         return CompletedEntry(moc, from: runningEntry)
+    }
+
+    /// Toggle this EntryTimer.
+    ///
+    /// This will reset() the EntryTimer, if one running, or track() a blank entry if there is none running.
+    ///
+    func toggle() {
+        _ = runningEntry == nil ? track() : reset()
     }
 
     /// Either start of stop the timer if needed.

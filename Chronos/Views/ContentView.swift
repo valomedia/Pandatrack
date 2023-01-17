@@ -57,11 +57,6 @@ struct ContentView: View {
                 }
                         .onAppear(perform: entryTimer.startTimer)
                         .onDisappear(perform: entryTimer.stopTimer)
-                        .sheet(isPresented: $isPresentingTodayView) {
-                            TrackingSheet(editAction: editAction)
-                                    .background(entryTimer.theme.backgroundColor)
-                                    .foregroundColor(entryTimer.theme.foregroundColor)
-                        }
                         .modal(entryTimer.runningEntry?.name, isPresented: $isPresentingEditView) {
                             if let runningEntry = entryTimer.runningEntry {
                                 EntryDetailEditView(entry: runningEntry)
@@ -70,8 +65,9 @@ struct ContentView: View {
                         .sheet(isPresented: $isPresentingWorkspacesView) {
                             NavigationView { MissingFeatureView().navigationTitle("Shared Workspaces") }
                         }
-                EntryTimerView(editAction: editAction, compact: true)
-                        .onTapGesture { isPresentingTodayView = true }
+                if tabBarSelection != .reports {
+                    EntryTimerView().onTapGesture(perform: editAction)
+                }
                 TabBar(selection: $tabBarSelection)
             }
         }
@@ -98,10 +94,6 @@ struct ContentView: View {
                 }
     }
 
-    /// Whether the sheet showing the full EntryTimerView is visible.
-    ///
-    @State private var isPresentingTodayView = false
-
     /// Whether the sheet showing the EntryTimerDetailEditView is visible.
     ///
     @State private var isPresentingEditView = false
@@ -123,7 +115,9 @@ struct ContentView: View {
     // MARK: - Methods
 
     private func editAction() {
-        isPresentingTodayView = false
+        if !entryTimer.isRunning {
+            entryTimer.track()
+        }
         isPresentingEditView = true
     }
 

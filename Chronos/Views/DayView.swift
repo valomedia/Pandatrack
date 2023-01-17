@@ -30,6 +30,13 @@ struct DayView: View {
         return formatter
     }()
 
+    private static let dateCompontentsFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.unitsStyle = .abbreviated
+        return formatter
+    }()
+
     // MARK: - Life cycle methods
 
     /// Undocumented
@@ -38,7 +45,7 @@ struct DayView: View {
     /// - Parameters
     ///     - day:
     ///
-    init(_ day: DateInterval? = nil) {
+    init(interval day: DateInterval? = nil) {
         self.day = day ?? DateInterval.today
 
         let predicate: NSPredicate
@@ -53,16 +60,12 @@ struct DayView: View {
     // MARK: - Properties
 
     var body: some View {
-        let totalTime: TimeInterval = entries.map(\.interval.duration).sum()
+        let totalTime: TimeInterval = entries.map(\.duration).sum()
         VStack {
-            Text(Self.dateFormatter.string(from: day.start))
-                    .frame(alignment: .center)
-                    .padding([.top, .horizontal])
-                    .font(.largeTitle)
             Circle()
                     .strokeBorder(lineWidth: 24)
                     .overlay {
-                        Text(TimeInterval.formatter.string(from: totalTime) ?? "")
+                        Text(DayView.dateCompontentsFormatter.string(from: totalTime) ?? "")
                                 .accessibility(hidden: true)
                                 .ifNotNil(TimeInterval.formatter.string(from: totalTime)) {
                                     $0
@@ -78,9 +81,69 @@ struct DayView: View {
                                     .stroke(entry.theme.backgroundColor, lineWidth: 12)
                         }
                     }
-                    .padding([.bottom, .horizontal])
+                    .padding()
+            List {
+                if !entries.isEmpty {
+                    ForEach(
+                            Dictionary(grouping: entries, by: { $0.project })
+                                    .mapValues { value in
+                                        (
+                                                entries: AnyRandomAccessCollection(value),
+                                                timeInterval: value.map(\.duration).sum()
+                                        )
+                                    }
+                                    .sorted(by: \.value.timeInterval)
+                                    .reversed()
+                                    .filter { key, _ in key != nil }
+                                    as! [
+                                        (
+                                                key: Project,
+                                                value: (
+                                                        entries: AnyRandomAccessCollection<CompletedEntry>,
+                                                        timeInterval: TimeInterval
+                                                )
+                                        )
+                                    ],
+                            id: \.key
+                    ) { key, value in
+                        let name = key.name
+                        let (entries, timeInterval) = value
+
+                        NavigationLink {
+                            List {
+                                EntriesView(entries: entries, isPrimaryContentForSharing: true)
+                            }
+                                    .navigationTitle(name)
+                                    .navigationBarTitleDisplayMode(.inline)
+                        } label: {
+                            HStack {
+                                Label(name, systemImage: "at")
+                                Spacer()
+                                Text(DayView.dateCompontentsFormatter.string(from: timeInterval) ?? "")
+                            }
+                                    .accessibilityLabel(name)
+                                    .ifNotNil(TimeInterval.formatter.string(from: timeInterval)) {
+                                        $0.accessibilityValue($1)
+                                    }
+                        }
+                    }
+                    NavigationLink {
+                        List {
+                            EntriesView(
+                                    "All Entries",
+                                    entries: AnyRandomAccessCollection(entries),
+                                    isPrimaryContentForSharing: true)
+                        }
+                                .navigationTitle("All Entries")
+                                .navigationBarTitleDisplayMode(.inline)
+                    } label: {
+                        HStack {
+                            Label("All Entries", systemImage: "list.triangle")
+                        }
+                    }
+                }
+            }
         }
-                .padding()
     }
 
     /// The day's time entries.
@@ -105,7 +168,7 @@ class DayView_Previews: PreviewProvider {
     // MARK: - Static properties
 
     static var previews: some View {
-        DayView(DateInterval.yesterday)
+        DayView(interval: .yesterday)
                 .environment(\.managedObjectContext, moc)
                 .background(entryTimer.theme.backgroundColor)
                 .previewLayout(.sizeThatFits)

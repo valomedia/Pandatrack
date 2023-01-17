@@ -48,38 +48,6 @@
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
-			<string>Pomodoro length</string>
-			<key>Key</key>
-			<string>pomodoro_duration_preference</string>
-			<key>Values</key>
-			<array>
-				<integer>15</integer>
-				<integer>20</integer>
-				<integer>25</integer>
-				<integer>30</integer>
-				<integer>45</integer>
-				<integer>60</integer>
-				<integer>75</integer>
-				<integer>90</integer>
-			</array>
-			<key>Titles</key>
-			<array>
-				<string>15 minutes</string>
-				<string>20 minutes</string>
-				<string>25 minutes</string>
-				<string>30 minutes</string>
-				<string>45 minutes</string>
-				<string>60 minutes</string>
-				<string>75 minutes</string>
-				<string>90 minutes</string>
-			</array>
-			<key>DefaultValue</key>
-			<integer>25</integer>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSMultiValueSpecifier</string>
-			<key>Title</key>
 			<string>Paper size</string>
 			<key>Key</key>
 			<string>paper_size_preference</string>
