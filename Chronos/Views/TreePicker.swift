@@ -28,13 +28,16 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     ///     - entity:
     ///     - title:
     ///     - content:
+    ///     - hiddenEntities:
     ///
     init<Content: View>(
             entity: Binding<Entity?>,
             title: String = Entity.entityName,
+            hiddenEntities: [Entity]? = nil,
             @ViewBuilder content: @escaping () -> Content) {
         _entity = entity
         self.title = title
+        self.hiddenEntities = hiddenEntities ?? []
         self.content = { AnyView(content()) }
     }
 
@@ -52,8 +55,18 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
     ///
     let title: String
 
+    /// Undocumented.
+    ///
+    /// - Todo: Document
+    ///
+    let hiddenEntities: [Entity]
+
     var body: some View {
-        NavigationLink(destination: TreeView(entity: $entity).navigationBarTitle(title)) { content() }
+        NavigationLink(
+                destination: TreeView(entity: $entity, hiddenEntities: hiddenEntities).navigationBarTitle(title)
+        ) {
+            content()
+        }
     }
 
     // MARK: - Methods

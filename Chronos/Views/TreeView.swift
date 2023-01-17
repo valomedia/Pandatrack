@@ -40,6 +40,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///     - root:
     ///     - search:
     ///     - depth:
+    ///     - hiddenEntities:
     ///     - content:
     ///
     private init<Content: View>(
@@ -47,6 +48,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
             root: Entity?,
             search: Binding<String>? = nil,
             depth: Int? = nil,
+            hiddenEntities: [Entity]? = nil,
             content: ((Entity) -> Content)?) {
         _entity = entity ?? .constant(nil)
         self.root = root
@@ -54,6 +56,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
             { entity in AnyView(content(entity)) }
         }
         self.depth = depth ?? Int.max
+        self.hiddenEntities = hiddenEntities ?? []
         _subtrees = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.name)],
                 predicate: NSPredicate(format: "parent == %@", root ?? 0 as CVarArg)
@@ -69,12 +72,14 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///     - root:
     ///     - content:
     ///     - depth:
+    ///     - hiddenEntities:
     ///
     init<Content: View>(
             root: Entity? = nil,
             depth: Int? = nil,
+            hiddenEntities: [Entity]? = nil,
             @ViewBuilder content: @escaping (Entity) -> Content) {
-        self.init(entity: nil, root: root, depth: depth, content: content)
+        self.init(entity: nil, root: root, depth: depth, hiddenEntities: hiddenEntities, content: content)
     }
 
     /// Undocumented.
@@ -84,9 +89,15 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     ///     - entity:
     ///     - root:
     ///     - depth:
+    ///     - hiddenEntities:
     ///
-    init(entity: Binding<Entity?>, root: Entity? = nil, depth: Int? = nil) {
-        self.init(entity: entity, root: root, depth: depth, content: nil as ((Entity) -> Never)?)
+    init(entity: Binding<Entity?>, root: Entity? = nil, depth: Int? = nil, hiddenEntities: [Entity]? = nil) {
+        self.init(
+                entity: entity,
+                root: root,
+                depth: depth,
+                hiddenEntities: hiddenEntities,
+                content: nil as ((Entity) -> Never)?)
     }
 
     // MARK: - Properties
@@ -117,6 +128,12 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     /// - Todo: Document
     ///
     let depth: Int
+
+    /// Undocumented.
+    ///
+    /// - Todo: Document
+    ///
+    let hiddenEntities: [Entity]
 
     var body: some View {
             Wrapper {
@@ -169,6 +186,7 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
                                         root: subtree,
                                         search: searchBinding,
                                         depth: depth - 1,
+                                        hiddenEntities: hiddenEntities,
                                         content: content)
                             }
                         }
@@ -186,10 +204,13 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     @FetchRequest private var subtrees: FetchedResults<Entity>
 
     private var filteredSubtrees: [Entity] {
-        subtrees.filter {
-            ($0.path.range(of: searchBinding.wrappedValue, options: .caseInsensitive) != nil)
-                    || searchBinding.wrappedValue.isEmpty
-        }
+        Set(subtrees)
+                .subtracting(hiddenEntities)
+                .filter {
+                    ($0.path.range(of: searchBinding.wrappedValue, options: .caseInsensitive) != nil)
+                            || searchBinding.wrappedValue.isEmpty
+                }
+                .sorted(by: \.name)
     }
 
     @State(initialValue: "")

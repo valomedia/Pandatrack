@@ -59,11 +59,13 @@ struct ParentPicker<Entity: NSManagedObject & Tree>: View {
                                 }
                             }
 
-                            // If trying to make something its own parent, outright ignore the change.
+                            // If trying to make something its own parent, outright ignore the change (it should not be
+                            // possible to actually cause this, since the Entity itself is hidden from the TreePicker).
                             guard newValue != entity else { return }
                             entity.parent = newValue
                         }),
-                title: "Folder"
+                title: "Folder",
+                hiddenEntities: [entity]
         ) {
             content()
         }
