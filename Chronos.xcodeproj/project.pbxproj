@@ -224,7 +224,6 @@
 		E9E97E9B4DBDB6B36E854861 /* Date+startOfThisYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97C0E03F9784E7D5A3459 /* Date+startOfThisYear.swift */; };
 		E9E97E9EB8D46B167C066723 /* ChronosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E977D7ED84730AAA4BCAFF /* ChronosView.swift */; };
 		E9E97EB68E18FCBD0F7F50B1 /* Sequence+compacted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97E9642B495D425388B16 /* Sequence+compacted.swift */; };
-		E9E97EC688B58F2EBA9A3FCF /* ProjectDetailEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97A1EBFC4099B91D12BB2 /* ProjectDetailEditView.swift */; };
 		E9E97EFF36466052D11124E9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E976307C7AB643B67BB35E /* Persistence.swift */; };
 		E9E97F39B59A2634C9DBCEEA /* Bool+else.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E973F9EF6206CCA634A455 /* Bool+else.swift */; };
 		E9E97F3CF74590BCF48B631A /* PercentageAttributeChoiceDeclaration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97F11DF0979944A26493E /* PercentageAttributeChoiceDeclaration+CoreDataClass.swift */; };
@@ -424,7 +423,6 @@
 		E9E97A011AEE13BA955405C6 /* Date+thisWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+thisWeek.swift"; sourceTree = "<group>"; };
 		E9E97A040079A385F819D89E /* TimesChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesChart.swift; sourceTree = "<group>"; };
 		E9E97A0E3BCD9B16EC444870 /* Pandatrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pandatrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9E97A1EBFC4099B91D12BB2 /* ProjectDetailEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailEditView.swift; sourceTree = "<group>"; };
 		E9E97A3F011ACE7F93F0355A /* CurrencyAttributeChoiceRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CurrencyAttributeChoiceRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E97A4EE0F964E3DCB965D6 /* Date+endOfToday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+endOfToday.swift"; sourceTree = "<group>"; };
 		E9E97A5EC61E7282AF23B788 /* TrailingIconLabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailingIconLabelStyle.swift; sourceTree = "<group>"; };
@@ -825,7 +823,6 @@
 				E9E97C6A8F8668DA0DC62B15 /* ParentView.swift */,
 				E9E9780DDD5843DF00AA67B5 /* PomodoroProgressViewStyle.swift */,
 				E9E9701B3585ADC256B3C072 /* PomodoroTimerView.swift */,
-				E9E97A1EBFC4099B91D12BB2 /* ProjectDetailEditView.swift */,
 				E9E9763AE9DEEC15121E451B /* ProjectDetailView.swift */,
 				E9E97ED2C81DE282D83662CB /* ProjectsTab.swift */,
 				E9E97415F0CA3B882573281D /* ProjectsView.swift */,
@@ -1130,7 +1127,6 @@
 				E9E97C305600F65D4CB08430 /* EntryTagsEditView.swift in Sources */,
 				E9E97BD7A551BC76B03F1A29 /* TagsView.swift in Sources */,
 				E9E97D9067D7D9CEF10C9025 /* ProjectView.swift in Sources */,
-				E9E97EC688B58F2EBA9A3FCF /* ProjectDetailEditView.swift in Sources */,
 				E9E9703D1670F75385CA17FC /* TreeView.swift in Sources */,
 				E9E979E628C9388049A7A38A /* EntryProjectEditView.swift in Sources */,
 				E9E976F65FB2212A69D0AF56 /* NoContentView.swift in Sources */,

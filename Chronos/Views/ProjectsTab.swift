@@ -27,7 +27,7 @@ struct ProjectsTab: View {
                     .floatingActionButton { isPresentingNewProject = true }
                     .modal("New Project", isPresented: $isPresentingNewProject, onOpen: { newProject = Project(moc) }) {
                         if let newProject {
-                            ProjectDetailEditView(project: newProject)
+                            ProjectDetailView(project: newProject)
                         }
                     }
         }

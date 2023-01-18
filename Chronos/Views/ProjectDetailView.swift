@@ -41,7 +41,20 @@ struct ProjectDetailView: View {
 
     var body: some View {
         List {
-            ProjectDetailEditView(project: project)
+            Section {
+                HStack {
+                    Label("Name", systemImage: "at")
+                    TextField("Project Name", text: $project.name)
+                            .multilineTextAlignment(.trailing)
+                            .onChange(of: project.name) { newValue in
+                                project.name = newValue.replacingOccurrences(of: Project.pathSeparator, with: "")
+                            }
+                }
+                ParentPicker<Project>(entity: project) {
+                    ParentView(entity: project.parent)
+                }
+                ThemePicker(selection: $project.theme)
+            }
             Section {
                 DeleteButton(
                         buttonText: "Delete Project",

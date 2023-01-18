@@ -61,14 +61,8 @@ struct ProjectView: View {
                 if let theme = project?.theme {
                     Divider()
                     HStack {
-                        Label {
-                            Text("Theme")
-                        } icon: {
-                            Image(systemName: "paintpalette")
-                        }
-                                .padding(.trailing)
-                        ThemeView(theme: theme)
-                                .padding(.leading)
+                        Label("Theme", systemImage: "paintpalette").padding(.trailing)
+                        ThemeView(theme: theme).padding(.leading)
                     }
                             .accessibilityElement(children: .combine)
                 }
