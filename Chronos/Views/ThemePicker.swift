@@ -28,24 +28,23 @@ struct ThemePicker: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "paintpalette")
-                    .padding(.trailing)
-                    .foregroundColor(.accentColor)
             Picker(selection: $selection) {
                 ForEach(Theme.allCases) { theme in
                     HStack {
                         // Dummy text to make SwiftUI draw the list item separators all the way across.
                         Text("")
-                        Spacer()
                         ThemeView(theme: theme)
                     }
                             .tag((theme != Theme.none).then(theme))
                 }
             } label: {
-                HStack {
-                    Text("Theme")
+                Label {
+                    Text("Theme").padding(.leading)
                     Spacer()
+                } icon: {
+                    Image(systemName: "paintpalette").foregroundColor(.accentColor)
                 }
+                        .labelStyle(.titleAndIcon)
             }
                     .pickerStyle(.navigationLink)
         }

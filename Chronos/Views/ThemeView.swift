@@ -27,18 +27,22 @@ struct ThemeView: View {
     let theme: Theme
 
     var body: some View {
-        ZStack {
-            if theme == .none {
-                RoundedRectangle(cornerRadius: 4).stroke(theme.foregroundColor)
-            } else {
-                RoundedRectangle(cornerRadius: 4).fill(theme.backgroundColor)
+        HStack {
+            Label(theme.name, systemImage: "paintpalette").labelStyle(.iconOnly)
+            ZStack {
+                if theme == .none {
+                    RoundedRectangle(cornerRadius: 4).stroke(theme.foregroundColor)
+                } else {
+                    RoundedRectangle(cornerRadius: 4).fill(theme.backgroundColor)
+                }
+                Text(theme.name)
+                        .lineLimit(1)
+                        .padding(4)
+                        .padding(.horizontal)
             }
-            Text(theme.name)
-                    .padding(4)
-                    .padding(.horizontal)
+                    .foregroundColor(theme.foregroundColor)
+                    .fixedSize(horizontal: false, vertical: true)
         }
-                .foregroundColor(theme.foregroundColor)
-                .fixedSize(horizontal: false, vertical: true)
     }
 
 }
