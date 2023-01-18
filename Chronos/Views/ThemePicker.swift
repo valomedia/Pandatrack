@@ -33,14 +33,13 @@ struct ThemePicker: View {
                     HStack {
                         // Dummy text to make SwiftUI draw the list item separators all the way across.
                         Text("")
-                        ThemeView(theme: theme)
+                        ThemeView(theme: theme).padding(.leading)
                     }
                             .tag((theme != Theme.none).then(theme))
                 }
             } label: {
                 Label {
-                    Text("Theme").padding(.leading)
-                    Spacer()
+                    Text("Theme").padding(.horizontal)
                 } icon: {
                     Image(systemName: "paintpalette").foregroundColor(.accentColor)
                 }

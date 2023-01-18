@@ -63,11 +63,12 @@ struct ProjectView: View {
                     HStack {
                         Label {
                             Text("Theme")
-                            Spacer()
                         } icon: {
                             Image(systemName: "paintpalette")
                         }
+                                .padding(.trailing)
                         ThemeView(theme: theme)
+                                .padding(.leading)
                     }
                             .accessibilityElement(children: .combine)
                 }
