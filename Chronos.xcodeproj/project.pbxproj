@@ -220,6 +220,7 @@
 		E9E97E56DB65CFB6D61E2F6E /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97144CE8066B4E5280B26 /* ErrorWrapper.swift */; };
 		E9E97E6C2AA836FE47F49A24 /* View+ifNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97BE09498AD78748525F8 /* View+ifNotNil.swift */; };
 		E9E97E8733CEA017AEF92C1F /* ChronosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97015F9546A4230C28822 /* ChronosTests.swift */; };
+		E9E97E99ECB69CB059E7872C /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97F6C982083D19EB2633C /* KeyboardReadable.swift */; };
 		E9E97E9B4DBDB6B36E854861 /* Date+startOfThisYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97C0E03F9784E7D5A3459 /* Date+startOfThisYear.swift */; };
 		E9E97E9EB8D46B167C066723 /* ChronosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E977D7ED84730AAA4BCAFF /* ChronosView.swift */; };
 		E9E97EB68E18FCBD0F7F50B1 /* Sequence+compacted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97E9642B495D425388B16 /* Sequence+compacted.swift */; };
@@ -499,6 +500,7 @@
 		E9E97F2DDEA276A0734ABA91 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		E9E97F360D9EA0313F512387 /* Date+substractionOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+substractionOperator.swift"; sourceTree = "<group>"; };
 		E9E97F4E533B2C1029706088 /* URLAttributeListDeclaration+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLAttributeListDeclaration+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E9E97F6C982083D19EB2633C /* KeyboardReadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		E9E97F7585659BE099A95F1C /* NSManagedObjectContext+noUndo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+noUndo.swift"; sourceTree = "<group>"; };
 		E9E97F8CACE703D08C017615 /* ChronosUITestsLaunchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChronosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E9E97FAA39E5E9D6E5C0D35D /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 				E9E97CA0DC11D5BE851D45A2 /* FetchRequest+init.swift */,
 				E9E9703E00D6506925565166 /* NSFetchRequest+init.swift */,
 				E9E97D9DE5F6BB01DA97F447 /* ChildrenView.swift */,
+				E9E97F6C982083D19EB2633C /* KeyboardReadable.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1301,6 +1304,7 @@
 				E9E973A44B83B3EEF8D7750F /* DateIntervalFormatter+formatter.swift in Sources */,
 				E9E97EB68E18FCBD0F7F50B1 /* Sequence+compacted.swift in Sources */,
 				E9E97CB2E94CF79A429F181E /* ChildrenView.swift in Sources */,
+				E9E97E99ECB69CB059E7872C /* KeyboardReadable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

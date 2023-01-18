@@ -17,7 +17,7 @@ import CoreData
 ///
 /// - Todo: Document.
 ///
-struct EntryTimerView: View {
+struct EntryTimerView: View, KeyboardReadable {
 
     // MARK: - Static properties
 
@@ -38,61 +38,70 @@ struct EntryTimerView: View {
     // MARK: - Properties
 
     var body: some View {
-        HStack {
-            VStack {
+        Wrapper {
+            if !keyboardIsVisible {
                 HStack {
-                    Text(entryTimer.timeElapsedString)
-                            .accessibilityLabel("Duration")
-                            .accessibilityValue(entryTimer.timeElapsedAccessibilityLabel)
-                            .font(.headline)
-                            .accessibilityAddTraits(.isHeader)
-                    Spacer()
-                }
-                Spacer()
-                VStack {
-                    HStack {
-                        Label(entryTimer.runningEntry?.name ?? "Not Tracking", systemImage: "timer")
-                                .ifNotNil(entryTimer.runningEntry) {
-                                    $0
-                                            .accessibilityLabel("Entry Name")
-                                            .accessibilityValue($1.name)
-                                }
-                                .if(entryTimer.runningEntry == nil) {
-                                    $0.accessibilityHidden(true)
-                                }
-                        Spacer()
-                    }
-                    Spacer()
-                    HStack {
-                        Label(entryTimer.runningEntry?.project?.name ?? "No Project", systemImage: "at")
-                                .accessibilityLabel("Project")
-                                .accessibilityValue(entryTimer.runningEntry?.project?.name ?? "None")
-                        if let parent = entryTimer.runningEntry?.project?.parent {
-                            Label(parent.name, systemImage: "folder")
-                                    .accessibilityLabel("Folder")
-                                    .accessibilityValue(parent.name)
+                    VStack {
+                        HStack {
+                            Text(entryTimer.timeElapsedString)
+                                    .accessibilityLabel("Duration")
+                                    .accessibilityValue(entryTimer.timeElapsedAccessibilityLabel)
+                                    .font(.headline)
+                                    .accessibilityAddTraits(.isHeader)
+                            Spacer()
                         }
                         Spacer()
+                        VStack {
+                            HStack {
+                                Label(entryTimer.runningEntry?.name ?? "Not Tracking", systemImage: "timer")
+                                        .ifNotNil(entryTimer.runningEntry) {
+                                            $0
+                                                    .accessibilityLabel("Entry Name")
+                                                    .accessibilityValue($1.name)
+                                        }
+                                        .if(entryTimer.runningEntry == nil) {
+                                            $0.accessibilityHidden(true)
+                                        }
+                                Spacer()
+                            }
+                            Spacer()
+                            HStack {
+                                Label(entryTimer.runningEntry?.project?.name ?? "No Project", systemImage: "at")
+                                        .accessibilityLabel("Project")
+                                        .accessibilityValue(entryTimer.runningEntry?.project?.name ?? "None")
+                                if let parent = entryTimer.runningEntry?.project?.parent {
+                                    Label(parent.name, systemImage: "folder")
+                                            .accessibilityLabel("Folder")
+                                            .accessibilityValue(parent.name)
+                                }
+                                Spacer()
+                            }
+                        }
+                                .font(.caption)
                     }
+                    Spacer()
+                    Button(action: entryTimer.toggle) {
+                        Image(systemName: entryTimer.isRunning ? "stop.circle.fill" : "play.circle.fill")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                    }
+                            .foregroundColor(entryTimer.theme.foregroundColor)
+                            .accessibilityLabel(entryTimer.isRunning ? "Stop timer" : "Start timer")
                 }
-                        .font(.caption)
+                        .frame(height: 60)
+                        .padding()
+                        .background(entryTimer.theme.backgroundColor)
+                        .foregroundColor(entryTimer.theme.foregroundColor)
             }
-            Spacer()
-            Button(action: entryTimer.toggle) {
-                Image(systemName: entryTimer.isRunning ? "stop.circle.fill" : "play.circle.fill")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-            }
-                    .foregroundColor(entryTimer.theme.foregroundColor)
-                    .accessibilityLabel(entryTimer.isRunning ? "Stop timer" : "Start timer")
         }
-                .frame(height: 60)
-                .padding()
-                .background(entryTimer.theme.backgroundColor)
-                .foregroundColor(entryTimer.theme.foregroundColor)
+                .onReceive(keyboardPublisher) { newValue in
+                    keyboardIsVisible = newValue
+                }
     }
 
     @EnvironmentObject private var entryTimer: EntryTimer
+
+    @State private var keyboardIsVisible = false
 
 }
 
