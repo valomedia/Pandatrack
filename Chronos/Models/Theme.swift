@@ -17,6 +17,7 @@ import SwiftUI
 /// - Todo: Document.
 ///
 enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible, Equatable {
+    case none
     case bubblegum
     case buttercup
     case indigo
@@ -33,7 +34,6 @@ enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible
     case tan
     case teal
     case yellow
-    case none
 
     init() {
         self = .none
@@ -47,12 +47,12 @@ enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible
     ///
     var foregroundColor: Color {
         switch self {
+        case .none:
+            return .primaryForeground
         case .bubblegum, .buttercup, .lavender, .orange, .periwinkle, .poppy, .seafoam, .sky, .tan, .teal, .yellow:
             return .black
         case .indigo, .magenta, .navy, .oxblood, .purple:
             return .white
-        case .none:
-            return .primaryForeground
         }
     }
 
