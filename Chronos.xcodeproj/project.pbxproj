@@ -1542,7 +1542,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.6;
-				PRODUCT_BUNDLE_IDENTIFIER = media.valo.chronos;
+				PRODUCT_BUNDLE_IDENTIFIER = media.valo.pandatrack;
 				PRODUCT_NAME = Pandatrack;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
