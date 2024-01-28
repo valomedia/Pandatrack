@@ -34,15 +34,13 @@ struct EntryDetailEditView<EntryType: Entry>: View {
                         selection: $entry.start,
                         in: PartialRangeThrough((entry as? CompletedEntry)?.end ?? Date()),
                         displayedComponents: [.date, .hourAndMinute])
-                if
-                        let entry = entry as? CompletedEntry,
-                        let end = Binding(
-                                get: { entry.end },
-                                set: { newValue in entry.end = newValue }),
-                        let duration = Binding(
-                                get: { entry.duration },
-                                set: { newValue in entry.duration = newValue })
-                {
+                if let entry = entry as? CompletedEntry {
+                    let end = Binding(
+                            get: { entry.end },
+                            set: { newValue in entry.end = newValue })
+                    let duration = Binding(
+                            get: { entry.duration },
+                            set: { newValue in entry.duration = newValue })
                     DatePicker(
                             "End",
                             selection: end,

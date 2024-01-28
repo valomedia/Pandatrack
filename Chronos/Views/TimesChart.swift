@@ -53,11 +53,11 @@ struct TimesChart: View {
     var body: some View {
         Wrapper {
             Chart(entries) { entry in
-                if entry.start.day == entry.end.day, let day = entry.start.day {
+                if entry.start.day == entry.end.day {
                     RectangleMark(
-                            x: .value("Day", day, unit: .day),
-                            yStart: .value("Start time", (entry.start - day).hours),
-                            yEnd: .value("End time", (entry.end - day).hours)
+                            x: .value("Day", entry.start.day, unit: .day),
+                            yStart: .value("Start time", (entry.start - entry.start.day).hours),
+                            yEnd: .value("End time", (entry.end - entry.start.day).hours)
                     )
                             .foregroundStyle(
                                     by: .value(
