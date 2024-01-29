@@ -21,7 +21,7 @@ extension ISO8601DateFormatter {
     ///
     static let formatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withFullDate,.withDashSeparatorInDate]
+        formatter.formatOptions = [.withInternetDateTime]
         formatter.timeZone = TimeZone.current
         return formatter
     }()
