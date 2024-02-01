@@ -134,26 +134,30 @@ extension {{ entityClassName }}{{ protocol }} {
     {%- else -%}
 
     @objc
-    {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional %}?{% endif %} {
+    {{ accessModifier }} var {{ attribute.name }}: {{ attribute.typeName }}{% if attribute.isOptional and not attribute.isDerived %}?{% endif %} {
         get {
             willAccessValue(forKey: "{{ attribute.name }}")
             defer { didAccessValue(forKey: "{{ attribute.name }}") }
-            return primitive{{ attribute.name|capitalize }} {% if not attribute.isOptional -%} ?? {% call nilValueFor attribute.typeName %} {%- endif %}
+            return primitive{{ attribute.name|capitalize }} {% if not attribute.isOptional or attribute.isDerived -%} ?? {% call nilValueFor attribute.typeName %} {%- endif %}
         }
+        {% if not attribute.isDerived %}
         set {
             willChangeValue(forKey: "{{ attribute.name }}")
             defer { didChangeValue(forKey: "{{ attribute.name }}") }
             primitive{{ attribute.name|capitalize }} = newValue
         }
+        {% endif %}
     }
 
     {{ accessModifier }} var primitive{{ attribute.name|capitalize }}: {{ attribute.typeName }}? {
         get {
             primitiveValue(forKey: "{{ attribute.name }}") as? {{ attribute.typeName }}
         }
+        {% if not attribute.isDerived %}
         set {
             setPrimitiveValue(newValue, forKey: "{{ attribute.name }}")
         }
+        {% endif %}
     }
 
     {%- endif %}
