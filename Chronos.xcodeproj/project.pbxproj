@@ -119,6 +119,7 @@
 		E9E976FBFB2C27DA3479BB19 /* View+modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E977FD63F92CFB9F9A7F1F /* View+modal.swift */; };
 		E9E977164466161F9E608FD3 /* AttributeDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97BDBDB1E86DDEAB314AD /* AttributeDeclaration.swift */; };
 		E9E9771B9C71B1D0FE19C9BB /* Date+startOfNextYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97426F90D95BCD653D745 /* Date+startOfNextYear.swift */; };
+		E9E9771BA66DBFE9693D7131 /* ArrayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9778CB26849B926D52455 /* ArrayBuilder.swift */; };
 		E9E97744F3F0773863973C83 /* Date+endOfYesterday.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9709E4C172370ABEF70F1 /* Date+endOfYesterday.swift */; };
 		E9E9774C6450E09E9C0A3D11 /* Settings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97A68291516E044D2FC0A /* Settings+Generated.swift */; };
 		E9E977535A36C0E29499C2E8 /* PomodoroTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9701B3585ADC256B3C072 /* PomodoroTimerView.swift */; };
@@ -376,6 +377,7 @@
 		E9E97741B501648D2C8CDE54 /* RelativeDateTimeFormatter+formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RelativeDateTimeFormatter+formatter.swift"; sourceTree = "<group>"; };
 		E9E97748F553D8BF86426BD9 /* DateAttributeChoiceRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateAttributeChoiceRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E9774BE7A09A5CAD2F4586 /* EntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
+		E9E9778CB26849B926D52455 /* ArrayBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayBuilder.swift; sourceTree = "<group>"; };
 		E9E9778CF91322897E7EBABA /* NumberAttributeSingleRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NumberAttributeSingleRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E9779A2497C46D5F6E0FA2 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E9E977C130296293C85E2102 /* Date+startOfNextWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+startOfNextWeek.swift"; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 				E9E97144CE8066B4E5280B26 /* ErrorWrapper.swift */,
 				E9E97F7585659BE099A95F1C /* NSManagedObjectContext+noUndo.swift */,
 				E9E97A68291516E044D2FC0A /* Settings+Generated.swift */,
+				E9E9778CB26849B926D52455 /* ArrayBuilder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1301,6 +1304,7 @@
 				E9E97EB68E18FCBD0F7F50B1 /* Sequence+compacted.swift in Sources */,
 				E9E97CB2E94CF79A429F181E /* ChildrenView.swift in Sources */,
 				E9E97E99ECB69CB059E7872C /* KeyboardReadable.swift in Sources */,
+				E9E9771BA66DBFE9693D7131 /* ArrayBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
