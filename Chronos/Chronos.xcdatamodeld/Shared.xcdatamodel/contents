@@ -288,6 +288,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
+        <attribute name="entryCount" optional="YES" attributeType="Integer 64" derived="YES" derivationExpression="entries.@count" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" minValueString="1" regularExpressionString="[^/]+"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="children" toMany="YES" deletionRule="Cascade" destinationEntity="Tag" inverseName="parent" inverseEntity="Tag"/>
