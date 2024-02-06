@@ -58,7 +58,7 @@ struct ThemePicker: View {
 ///
 /// - Todo: Document.
 ///
-struct ThemePicker_Previews: PreviewProvider {
+class ThemePicker_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
