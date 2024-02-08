@@ -37,8 +37,7 @@ struct EntryTagsEditView: View {
         HStack {
             Image(systemName: "number")
                     .foregroundColor(.accentColor)
-            TextField("New Tag", text: $newTagPath)
-                    .multilineTextAlignment(.leading)
+            ComboBox("New Tag", text: $newTagPath, items: existingTags.map(\.path))
             Button(action: addTag) {
                 Image(systemName: "plus.circle.fill")
                         .accessibilityLabel("Add Tag")
@@ -51,8 +50,10 @@ struct EntryTagsEditView: View {
     @Environment(\.managedObjectContext)
     private var moc
 
-    @State
-    private var newTagPath = ""
+    @State private var newTagPath = ""
+
+    @FetchRequest<Tag>(sortDescriptors: [SortDescriptor(\.entryCount)])
+    private var existingTags
 
     // MARK: - Methods
 
