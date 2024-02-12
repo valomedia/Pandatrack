@@ -1,0 +1,22 @@
+{
+  "images" : [
+    {
+      "filename" : "2022_12_19_HiImPandy_Ligthmode.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "2022_12_19_HiImPandy_Darkmode.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
