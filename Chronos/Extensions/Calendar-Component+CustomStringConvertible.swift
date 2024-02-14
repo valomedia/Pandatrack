@@ -38,6 +38,8 @@ extension Calendar.Component: CustomStringConvertible {
         case .calendar: return "Calendar"
         case .timeZone: return "Time Zone"
 
+        case .isLeapMonth: return "Is Leap Month"
+            
         @unknown default: return "Component"
 
         }
