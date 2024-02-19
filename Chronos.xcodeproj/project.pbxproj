@@ -421,6 +421,7 @@
 		E9E9792298A0F3166682C13E /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		E9E9794716BFA60BC9637DD9 /* Date+day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+day.swift"; sourceTree = "<group>"; };
 		E9E9795F50C728A3C7B6421D /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		E9E9796A208E4EA53592C3F8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E9E9797020A278F2F7B4EB08 /* StringAttributeListRelationship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringAttributeListRelationship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9E97970307F11D44BD19382 /* TimeInterval+formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+formatter.swift"; sourceTree = "<group>"; };
 		E9E97974F962512C90AF3AEE /* DateInterval+lastMonth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateInterval+lastMonth.swift"; sourceTree = "<group>"; };
@@ -719,6 +720,7 @@
 				E9E97EC607BA827C5934B6FC /* ChronosTests */,
 				E9E97FE24AA5DE61A1C9D611 /* ChronosUITests */,
 				E1750BEA2947C95B00105378 /* Frameworks */,
+				E9E9796A208E4EA53592C3F8 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
