@@ -11,30 +11,14 @@ import Foundation
 
 // MARK: Attribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 protocol Attribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var description: String { get }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String { get }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String { get }
 
 }

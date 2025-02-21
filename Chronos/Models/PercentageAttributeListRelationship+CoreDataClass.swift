@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: PercentageAttributeListRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(PercentageAttributeListRelationship)
 final class PercentageAttributeListRelationship: NSManagedObject, AttributeListValueRelationship {
 

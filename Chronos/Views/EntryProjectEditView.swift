@@ -12,24 +12,12 @@ import SwiftUI
 
 // MARK: EntryProjectEditView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct EntryProjectEditView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     @Binding var project: Project?
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     var body: some View {
         TreePicker(entity: $project) {
             ProjectView(project: project)
@@ -41,18 +29,10 @@ struct EntryProjectEditView: View {
 
 // MARK: EntryProjectEditView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class EntryProjectEditView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var previews: some View {
         NavigationView {
             List {
@@ -62,4 +42,5 @@ class EntryProjectEditView_Previews: PreviewProvider {
             }
         }
     }
+
 }

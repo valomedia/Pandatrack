@@ -20,15 +20,6 @@ struct NoContentView: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - image:
-    ///     - title:
-    ///     - headline:
-    ///     - caption:
-    ///
     init(title: String = "There is nothing here", headline: String, caption: String? = nil, image: Image? = nil) {
         self.title = title
         self.headline = headline
@@ -38,28 +29,12 @@ struct NoContentView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let image: Image?
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let title: String
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let headline: String
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let caption: String?
 
     var body: some View {
@@ -100,10 +75,6 @@ struct NoContentView: View {
 
 // MARK: NoContentView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document
-///
 class NoContentView_Previews: PreviewProvider {
 
     // MARK: - Static properties

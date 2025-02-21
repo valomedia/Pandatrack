@@ -15,10 +15,6 @@ extension CGRect {
 
     // MARK: + center
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     var center: CGPoint {
         CGPoint(x: midX, y: midY)
     }

@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: NumberAttributeSingleDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(NumberAttributeSingleDeclaration)
 final class NumberAttributeSingleDeclaration: BuiltinAttributeDeclaration {
 

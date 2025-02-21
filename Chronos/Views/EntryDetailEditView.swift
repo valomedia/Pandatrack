@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: EntryDetailEditView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct EntryDetailEditView<EntryType: Entry>: View {
 
     // MARK: - Properties
@@ -73,18 +69,10 @@ struct EntryDetailEditView<EntryType: Entry>: View {
 
 // MARK: EntryDetailEditView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document
-///
 struct EntryDetailEditView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         NavigationView {
             try! EntryDetailEditView(

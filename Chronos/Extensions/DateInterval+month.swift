@@ -15,10 +15,6 @@ extension DateInterval {
 
     // MARK: + month
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var month: DateInterval {
         .lastMonth
     }

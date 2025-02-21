@@ -11,17 +11,9 @@ import Foundation
 
 // MARK: NumberAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(NumberAttribute)
 class NumberAttribute: NSObject, BuiltinAttribute {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     enum Keys: String {
         case id
         case number
@@ -29,10 +21,6 @@ class NumberAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
@@ -72,38 +60,18 @@ class NumberAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let number: Double
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         number
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
         number.description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
         if #available(macCatalyst 15.0, iOS 15.0, *) {
             return number.formatted(.number)
@@ -113,10 +81,6 @@ class NumberAttribute: NSObject, BuiltinAttribute {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
         localizedDescription
     }

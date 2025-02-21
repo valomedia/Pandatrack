@@ -11,10 +11,6 @@ import Foundation
 
 // MARK: MutableNumberAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(MutableNumberAttribute)
 class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
 
@@ -43,22 +39,10 @@ class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var number: Double
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         get {
             number
@@ -68,30 +52,15 @@ class MutableNumberAttribute: NSObject, MutableBuiltinAttribute {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
-        // TODO Replace this with a more efficient solution.
         NumberAttribute(from: self).description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
-        // TODO Replace this with a more efficient solution.
         NumberAttribute(from: self).localizedDescription
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
-        // TODO Replace this with a more efficient solution.
         NumberAttribute(from: self).accessibilityDescription
     }
 

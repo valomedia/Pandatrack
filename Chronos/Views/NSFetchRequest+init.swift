@@ -15,13 +15,6 @@ extension NSFetchRequest {
 
     // MARK: + init
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    /// - Parameters:
-    ///     - entityName:
-    ///     - predicate:
-    ///
     @objc
     convenience init(entityName: String? = nil, predicate: NSPredicate? = nil) {
         if let entityName = entityName {

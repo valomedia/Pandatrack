@@ -16,13 +16,6 @@ extension View {
 
     // MARK: + enabled
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - enabled:
-    /// - Returns:
-    ///
     @ViewBuilder func enabled(_ enabled: Bool) -> some View {
         disabled(!enabled)
     }

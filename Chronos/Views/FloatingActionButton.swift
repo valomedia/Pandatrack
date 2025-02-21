@@ -12,21 +12,10 @@ import SwiftUI
 
 // MARK: FloatingActionButton
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct FloatingActionButton: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - image:
-    ///     - action:
-    ///
     init(image: Image? = nil, action: (()->())? = nil) {
         self.image = image ?? Image(systemName: "plus")
         self.action = action ?? {}
@@ -34,10 +23,6 @@ struct FloatingActionButton: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let image: Image
 
     var body: some View {
@@ -57,10 +42,6 @@ struct FloatingActionButton: View {
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let action: ()->()
 
 }
@@ -68,12 +49,7 @@ struct FloatingActionButton: View {
 
 // MARK: FloatingActionButton_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class FloatingActionButton_Previews: PreviewProvider {
-
 
     // MARK: - Static properties
 

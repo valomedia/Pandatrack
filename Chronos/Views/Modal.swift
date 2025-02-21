@@ -12,15 +12,7 @@ import SwiftUI
 
 // MARK: Modal
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct Modal<Content: View, S: StringProtocol>: View {
-
-    // MARK: - Static properties
-
-    // MARK: - Class methods
 
     // MARK: - Life cycle methods
 

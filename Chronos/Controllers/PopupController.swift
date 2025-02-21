@@ -12,21 +12,10 @@ import SwiftUI
 
 // MARK: PopupModifierController
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct PopupController<Popup: View>: UIViewControllerRepresentable {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - isPresented:
-    ///     - popup:
-    ///
     init(isPresented: Binding<Bool>, @ViewBuilder popup: @escaping () -> Popup) {
         self._isPresented = isPresented
         self.popup = popup
@@ -34,18 +23,10 @@ struct PopupController<Popup: View>: UIViewControllerRepresentable {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     @Binding var isPresented: Bool
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let popup: () -> Popup
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<PopupController<Popup>>)

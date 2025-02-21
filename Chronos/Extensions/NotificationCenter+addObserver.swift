@@ -35,4 +35,5 @@ extension NotificationCenter {
     ) -> [NSObjectProtocol] {
         names.map { name in self.addObserver(forName: name, object: obj, queue: queue, using: block) }
     }
+
 }

@@ -11,17 +11,9 @@ import Foundation
 
 // MARK: StringAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(StringAttribute)
 class StringAttribute: NSObject, BuiltinAttribute {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     enum Keys: String {
         case id
         case string
@@ -29,10 +21,6 @@ class StringAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var supportsSecureCoding = true
 
     // MARK: - Life cycle methods
@@ -72,46 +60,22 @@ class StringAttribute: NSObject, BuiltinAttribute {
 
     // MARK: Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let string: String
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         string
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
         string.description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
         description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
         localizedDescription
     }

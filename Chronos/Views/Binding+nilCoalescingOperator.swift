@@ -16,14 +16,6 @@ extension Binding {
 
     // MARK: + nilCoalescingOperator
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - left:
-    ///     - right:
-    /// - Returns:
-    ///
     static func ??<Type>(left: Binding<Value>, right: @escaping @autoclosure () -> Type) -> Binding<Type>
             where Value == Type? {
         Binding<Type>(get: { left.wrappedValue ?? right() }, set: { newValue in left.wrappedValue = newValue })

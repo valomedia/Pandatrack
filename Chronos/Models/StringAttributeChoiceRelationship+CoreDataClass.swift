@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: StringAttributeChoiceRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(StringAttributeChoiceRelationship)
 final class StringAttributeChoiceRelationship: NSManagedObject, AttributeChoiceValueRelationship {
 

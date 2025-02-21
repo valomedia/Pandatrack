@@ -15,14 +15,6 @@ extension Date {
 
     // MARK: + subtractionOperator
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - lhs:
-    ///     - rhs:
-    /// - Returns:
-    ///
     static func -(lhs: Date, rhs: Date) -> TimeInterval {
         DateInterval(start: rhs, end: lhs).duration
     }

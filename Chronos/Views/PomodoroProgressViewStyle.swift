@@ -12,29 +12,14 @@ import SwiftUI
 
 // MARK: PomodoroProgressViewStyle
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct PomodoroProgressViewStyle: ProgressViewStyle {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let theme: Theme
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    //      - configuration:
-    /// - Returns:
-    ///
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10.0)
@@ -51,10 +36,6 @@ struct PomodoroProgressViewStyle: ProgressViewStyle {
 
 // MARK: PomodoroProgressViewStyle_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct PomodoroProgressViewStyle_Previews: PreviewProvider {
 
     static var previews: some View {

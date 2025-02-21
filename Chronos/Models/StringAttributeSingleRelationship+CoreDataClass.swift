@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: StringAttributeSingleRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(StringAttributeSingleRelationship)
 final class StringAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 

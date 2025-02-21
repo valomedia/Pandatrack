@@ -15,10 +15,6 @@ extension DateInterval {
 
     // MARK: + week
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var week: DateInterval {
         .lastWeek
     }

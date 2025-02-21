@@ -11,17 +11,9 @@ import Foundation
 
 // MARK: PercentageAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(PercentageAttribute)
 class PercentageAttribute: NSObject, BuiltinAttribute {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     enum Keys: String {
         case id
         case percentage
@@ -29,10 +21,6 @@ class PercentageAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var supportsSecureCoding = true
 
     // MARK: - Life cycle methods
@@ -72,38 +60,18 @@ class PercentageAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let percentage: Int
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         percentage
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
         "\(percentage)%"
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
         if #available(macCatalyst 15.0, iOS 15.0, *) {
             return percentage.formatted(.percent)
@@ -113,10 +81,6 @@ class PercentageAttribute: NSObject, BuiltinAttribute {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
         localizedDescription
     }

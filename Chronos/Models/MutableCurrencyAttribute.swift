@@ -11,10 +11,6 @@ import Foundation
 
 // MARK: MutableCurrencyAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(MutableCurrencyAttribute)
 class MutableCurrencyAttribute: NSObject, MutableBuiltinAttribute {
 
@@ -43,22 +39,10 @@ class MutableCurrencyAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var currency: Currency
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         get {
             currency
@@ -68,30 +52,15 @@ class MutableCurrencyAttribute: NSObject, MutableBuiltinAttribute {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
-        // TODO Replace this with a more efficient solution
         CurrencyAttribute(from: self).description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
-        // TODO Replace this with a more efficient solution
         CurrencyAttribute(from: self).localizedDescription
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
-        // TODO Replace this with a more efficient solution
         CurrencyAttribute(from: self).accessibilityDescription
     }
 

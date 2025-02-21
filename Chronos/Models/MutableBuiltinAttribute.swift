@@ -11,24 +11,12 @@ import Foundation
 
 // MARK: MutableBuiltinAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 protocol MutableBuiltinAttribute: Attribute, NSCopying, NSMutableCopying {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var id: UUID { get set }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any { get set }
 
 }

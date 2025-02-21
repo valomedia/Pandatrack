@@ -13,16 +13,8 @@ import CoreData
 
 // MARK: ContentView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ContentView: View {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     enum Tab: String, TabBarTab {
         case entries
         case projects

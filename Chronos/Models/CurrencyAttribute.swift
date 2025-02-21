@@ -11,17 +11,9 @@ import Foundation
 
 // MARK: CurrencyAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(CurrencyAttribute)
 class CurrencyAttribute: NSObject, BuiltinAttribute {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     enum Keys: String {
         case id
         case currency
@@ -68,46 +60,22 @@ class CurrencyAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let currency: Currency
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         currency
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
         currency.description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
         description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
         localizedDescription
     }

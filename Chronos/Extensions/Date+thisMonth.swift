@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + thisMonth
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var thisMonth: Date {
         .startOfThisMonth
     }

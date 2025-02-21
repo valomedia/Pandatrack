@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: PercentageAttributeChoiceDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(PercentageAttributeChoiceDeclaration)
 final class PercentageAttributeChoiceDeclaration: BuiltinAttributeDeclaration {
 

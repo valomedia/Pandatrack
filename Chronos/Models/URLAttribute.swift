@@ -11,17 +11,9 @@ import Foundation
 
 // MARK: URLAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(URLAttribute)
 class URLAttribute: NSObject, BuiltinAttribute {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     enum Keys: String {
         case id
         case url
@@ -68,46 +60,22 @@ class URLAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let url: URL
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         url
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
         url.description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
         description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
         localizedDescription
     }

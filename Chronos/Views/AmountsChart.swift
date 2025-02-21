@@ -14,10 +14,6 @@ import ObservedOptionalObject
 
 // MARK: AmountsChart
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct AmountsChart: View {
 
     // MARK: - Life cycle methods

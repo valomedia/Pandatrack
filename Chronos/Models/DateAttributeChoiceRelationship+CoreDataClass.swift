@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: DateAttributeChoiceRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(DateAttributeChoiceRelationship)
 final class DateAttributeChoiceRelationship: NSManagedObject, AttributeChoiceValueRelationship {
 

@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: ReportsTab
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ReportsTab: View {
 
     // MARK: - Properties

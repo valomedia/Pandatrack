@@ -14,10 +14,6 @@ import ObservedOptionalObject
 
 // MARK: DayView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct DayView: View {
 
     // MARK: - Static properties
@@ -39,12 +35,6 @@ struct DayView: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented
-    ///
-    /// - Todo: Document
-    /// - Parameters
-    ///     - day:
-    ///
     init(interval day: DateInterval? = nil) {
         self.day = day ?? DateInterval.today
 
@@ -167,10 +157,6 @@ struct DayView: View {
 
 // MARK: DayView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document
-///
 class DayView_Previews: PreviewProvider {
 
     // MARK: - Static properties

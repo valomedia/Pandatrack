@@ -15,10 +15,6 @@ extension ISO8601DateFormatter {
 
     // MARK: + formatter
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static let formatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]

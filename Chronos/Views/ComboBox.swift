@@ -12,27 +12,11 @@ import SwiftUI
 
 // MARK: ComboBox
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: View>: View
         where CollectionType.Element: Identifiable & Equatable {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<CollectionType.Element?>,
@@ -50,18 +34,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         self.label = label
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<CollectionType.Element?>? = nil,
@@ -87,18 +59,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<CollectionType.Element?>,
@@ -117,18 +77,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 label: label)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<CollectionType.Element?>? = nil,
@@ -148,18 +96,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 label: label)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///     - label:
-    ///
     init<S: StringProtocol>(
             text: Binding<String>,
             selection: Binding<CollectionType.Element?>,
@@ -178,18 +114,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 label: label)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///     - label:
-    ///
     init<S: StringProtocol>(
             text: Binding<String>,
             selection: Binding<CollectionType.Element?>? = nil,
@@ -209,18 +133,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 label: label)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -241,18 +153,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -273,18 +173,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -305,18 +193,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -337,18 +213,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S: StringProtocol>(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -369,18 +233,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S: StringProtocol>(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -401,18 +253,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -433,18 +273,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -465,18 +293,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -497,18 +313,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -529,18 +333,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S1: StringProtocol, S2: StringProtocol>(
             _ title: S1,
             text: Binding<String>,
@@ -561,18 +353,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S1: StringProtocol, S2: StringProtocol>(
             _ title: S1,
             text: Binding<String>,
@@ -593,18 +373,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -624,18 +392,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 label: label)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -655,18 +411,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 label: label)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///     - label:
-    ///
     init<S: StringProtocol>(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -686,18 +430,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 label: label)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -717,18 +449,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 content: content)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -748,18 +468,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 content: content)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S: StringProtocol>(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -779,18 +487,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 content: content)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -810,18 +506,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 content: content)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -841,18 +525,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 content: content)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - content:
-    ///
     init<S1: StringProtocol, S2: StringProtocol>(
             _ title: S1,
             text: Binding<String>,
@@ -872,17 +544,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
                 content: content)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -903,17 +564,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -934,17 +584,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -965,17 +604,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - label:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -996,17 +624,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - label:
-    ///
     init<S: StringProtocol>(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -1027,16 +644,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - items:
-    ///     - label:
-    ///
     init<S1: StringProtocol>(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -1057,17 +664,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -1087,17 +683,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -1117,17 +702,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -1147,17 +721,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -1177,17 +740,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S: StringProtocol>(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -1207,17 +759,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S: StringProtocol>(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -1237,17 +778,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -1267,17 +797,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -1297,17 +816,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -1327,17 +835,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -1357,17 +854,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S1: StringProtocol, S2: StringProtocol>(
             _ title: S1,
             text: Binding<String>,
@@ -1387,17 +873,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S1: StringProtocol, S2: StringProtocol>(
             _ title: S1,
             text: Binding<String>,
@@ -1417,17 +892,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - label:
-    ///     - items:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -1448,17 +912,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - label:
-    ///     - items:
-    ///
     init(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -1479,17 +932,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///     - label:
-    ///
     init<S: StringProtocol>(
             text: Binding<String>,
             selection: Binding<String?>? = nil,
@@ -1510,17 +952,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -1540,17 +971,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -1570,17 +990,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S: StringProtocol>(
             _ title: LocalizedStringKey,
             text: Binding<String>,
@@ -1600,17 +1009,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -1630,17 +1028,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S: StringProtocol>(
             _ title: S,
             text: Binding<String>,
@@ -1660,17 +1047,6 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - text:
-    ///     - selection:
-    ///     - prompt:
-    ///     - maxItems:
-    ///     - items:
-    ///
     init<S1: StringProtocol, S2: StringProtocol>(
             _ title: S1,
             text: Binding<String>,
@@ -1692,28 +1068,12 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     @Binding var text: String
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     @Binding var selection: CollectionType.Element?
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let prompt: Text?
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let maxItems: Int
 
     var body: some View {
@@ -1756,22 +1116,10 @@ struct ComboBox<CollectionType: RandomAccessCollection, Content: View, Title: Vi
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let items: (String) -> CollectionType
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let content: (CollectionType.Element) -> Content
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let label: () -> Title
 
 }

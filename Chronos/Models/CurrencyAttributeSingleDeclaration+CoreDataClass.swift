@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: CurrencyAttributeSingleDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(CurrencyAttributeSingleDeclaration)
 final class CurrencyAttributeSingleDeclaration: BuiltinAttributeDeclaration {
 

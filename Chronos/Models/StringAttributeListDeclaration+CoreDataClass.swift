@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: StringAttributeListDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(StringAttributeListDeclaration)
 final class StringAttributeListDeclaration: BuiltinAttributeDeclaration {
 

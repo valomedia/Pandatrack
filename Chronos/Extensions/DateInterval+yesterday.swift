@@ -15,10 +15,6 @@ extension DateInterval {
 
     // MARK: + yesterday
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var yesterday: DateInterval {
         DateInterval(start: Date.startOfYesterday, end: Date.endOfYesterday)
     }

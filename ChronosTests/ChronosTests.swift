@@ -16,8 +16,6 @@ import Chronos
 
 /// Unit tests for Chronos.
 ///
-/// - Todo: Implement.
-///
 class ChronosTests: XCTestCase {
 
     // MARK: - Life cycle methods

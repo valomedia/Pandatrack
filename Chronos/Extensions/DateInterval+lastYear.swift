@@ -15,10 +15,6 @@ extension DateInterval {
 
     // MARK: + lastYear
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var lastYear: DateInterval {
         DateInterval(start: .startOfLastYear, end: .endOfLastYear)
     }

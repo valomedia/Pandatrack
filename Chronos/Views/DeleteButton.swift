@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: DeleteButton
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct DeleteButton: View {
 
     // MARK: - Life cycle methods
@@ -33,22 +29,10 @@ struct DeleteButton: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let buttonText: LocalizedStringKey
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let confirmationQuestion: LocalizedStringKey
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let supplementalMessage: LocalizedStringKey?
 
     var body: some View {
@@ -73,10 +57,6 @@ struct DeleteButton: View {
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var action: () -> Void
 
 }

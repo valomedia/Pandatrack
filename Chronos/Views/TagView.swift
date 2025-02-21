@@ -13,10 +13,6 @@ import ObservedOptionalObject
 
 // MARK: TagView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct TagView: View {
 
     // MARK: - Properties
@@ -34,10 +30,6 @@ struct TagView: View {
 
 // MARK: TagView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class TagView_Previews: PreviewProvider {
 
     // MARK: Static properties

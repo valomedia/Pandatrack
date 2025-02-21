@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: DateAttributeListDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(DateAttributeListDeclaration)
 final class DateAttributeListDeclaration: BuiltinAttributeDeclaration {
 

@@ -22,10 +22,6 @@ struct ChronosApp: App {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     init() {
         #if DEBUG
         var injectionBundlePath = "/Applications/InjectionIII.app/Contents/Resources"

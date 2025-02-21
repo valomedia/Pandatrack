@@ -13,21 +13,10 @@ import ObservedOptionalObject
 
 // MARK: ReportView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ReportView: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - interval:
-    ///     - project:
-    ///     - tag:
     init(interval: DateInterval) {
         _entries = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.start)],
@@ -41,10 +30,6 @@ struct ReportView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let interval: DateInterval
 
     var body: some View {

@@ -12,18 +12,10 @@ import CoreData
 
 // MARK: Item
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc protocol Item {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var name: String { get set }
 
 }

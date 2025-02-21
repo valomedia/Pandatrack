@@ -16,10 +16,6 @@ extension PreviewProvider {
 
     // MARK: + entryTimer
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var entryTimer: EntryTimer {
         EntryTimer.preview!
     }

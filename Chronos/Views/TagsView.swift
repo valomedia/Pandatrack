@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: TagsView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct TagsView: View {
 
     // MARK: - Properties
@@ -33,10 +29,6 @@ struct TagsView: View {
 
 // MARK: TagsView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class TagsView_Previews: PreviewProvider {
 
     // MARK: - Static properties

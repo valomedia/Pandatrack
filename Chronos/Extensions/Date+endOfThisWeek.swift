@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + endOfThisWeek
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var endOfThisWeek: Date {
         .startOfNextWeek - 1
     }

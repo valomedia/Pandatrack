@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: URLAttributeListRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(URLAttributeListRelationship)
 final class URLAttributeListRelationship: NSManagedObject, AttributeListValueRelationship {
 

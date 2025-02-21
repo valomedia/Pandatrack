@@ -15,10 +15,6 @@ extension TimeInterval {
 
     // MARK: + formatter
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static let formatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute]

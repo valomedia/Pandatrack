@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: StringAttributeListRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(StringAttributeListRelationship)
 final class StringAttributeListRelationship: NSManagedObject, AttributeListValueRelationship {
 

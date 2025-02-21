@@ -11,10 +11,6 @@ import Foundation
 
 // MARK: MutableURLAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(MutableURLAttribute)
 class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
 
@@ -43,22 +39,10 @@ class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var url: URL
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         get {
             url
@@ -68,28 +52,16 @@ class MutableURLAttribute: NSObject, MutableBuiltinAttribute {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
         // TODO Replace this with a more efficient solution.
         URLAttribute(from: self).description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
         // TODO Replace this with a more efficient solution.
         URLAttribute(from: self).localizedDescription
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
         // TODO Replace this with a more efficient solution.
         URLAttribute(from: self).accessibilityDescription

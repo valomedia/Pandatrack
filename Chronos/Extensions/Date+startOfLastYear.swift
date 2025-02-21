@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + startOfLastYear
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var startOfLastYear: Date {
         Calendar.current.date(byAdding: .year, value: -1, to: Date.startOfThisYear)!
     }

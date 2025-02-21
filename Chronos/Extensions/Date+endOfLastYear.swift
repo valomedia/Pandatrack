@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + endOfLastYear
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var endOfLastYear: Date {
         .startOfThisYear - 1
     }

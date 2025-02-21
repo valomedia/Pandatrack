@@ -16,10 +16,6 @@ extension PreviewProvider {
 
     // MARK: + env
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var env: ChronosEnvironment {
         ChronosEnvironment.preview!
     }

@@ -12,25 +12,11 @@ import CoreData
 
 // MARK: RunningEntry
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(RunningEntry)
 class RunningEntry: Entry {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - context:
-    ///     - name:
-    ///     - start:
-    ///     - project:
-    ///     - tags:
-    ///
     convenience init(
             _ context: NSManagedObjectContext,
             name: String? = nil,
@@ -46,13 +32,6 @@ class RunningEntry: Entry {
         if let tags = tags { self.tags = tags }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - context:
-    ///     - entry:
-    ///
     convenience init(_ context: NSManagedObjectContext, continueFrom entry: CompletedEntry) {
         self.init(context, name: entry.name, start: Date(), project: entry.project, tags: entry.tags)
     }

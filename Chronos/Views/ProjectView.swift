@@ -13,21 +13,10 @@ import ObservedOptionalObject
 
 // MARK: ProjectView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ProjectView: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - project:
-    ///     - compact:
-    ///
     init(project: Project?, compact: Bool = false) {
         _project = ObservedOptionalObject(wrappedValue: project)
         self.compact = compact
@@ -75,18 +64,10 @@ struct ProjectView: View {
 
 // MARK: ProjectView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class ProjectView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         NavigationView {
             List { try! ProjectView(project: moc.fetch(Project.makeFetchRequest()).first { $0.name == "ACME" }!) }

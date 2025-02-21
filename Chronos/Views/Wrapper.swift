@@ -32,10 +32,6 @@ struct Wrapper<Content: View>: View {
 
     // MARK: - Methods
 
-    /// Undocumented
-    ///
-    /// - Todo: Document
-    ///
     var content: () -> Content
 
 }

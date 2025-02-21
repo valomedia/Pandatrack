@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: PercentageAttributeChoiceRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(PercentageAttributeChoiceRelationship)
 final class PercentageAttributeChoiceRelationship: NSManagedObject, AttributeChoiceValueRelationship {
 

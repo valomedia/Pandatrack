@@ -15,10 +15,6 @@ extension DateInterval {
 
     // MARK: + twelveMonths
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var twelveMonths: DateInterval {
         DateInterval(
                 start: Calendar.current.date(byAdding: .month, value: -12, to: .startOfNextMonth)!,

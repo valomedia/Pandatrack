@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: PercentageAttributeSingleDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(PercentageAttributeSingleDeclaration)
 final class PercentageAttributeSingleDeclaration: BuiltinAttributeDeclaration {
 

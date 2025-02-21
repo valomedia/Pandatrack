@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: EntryTagsEditView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct EntryTagsEditView: View {
 
     // MARK: - Properties
@@ -79,10 +75,6 @@ struct EntryTagsEditView: View {
 
 // MARK: TagsEditView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct TagsEditView_Previews: PreviewProvider {
 
     static var previews: some View {

@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: URLAttributeChoiceRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(URLAttributeChoiceRelationship)
 final class URLAttributeChoiceRelationship: NSManagedObject, AttributeChoiceValueRelationship {
 

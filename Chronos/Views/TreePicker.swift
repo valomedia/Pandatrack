@@ -13,23 +13,10 @@ import CoreData
 
 // MARK: TreePicker
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct TreePicker<Entity: NSManagedObject & Tree>: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    /// - Parameters:
-    ///     - entity:
-    ///     - title:
-    ///     - content:
-    ///     - hiddenEntities:
-    ///
     init<Content: View>(
             entity: Binding<Entity?>,
             title: String = Entity.entityName,
@@ -43,22 +30,10 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     @Binding var entity: Entity?
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let title: String
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let hiddenEntities: [Entity]
 
     var body: some View {
@@ -71,10 +46,6 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
 
     // MARK: - Methods
 
-    /// Undocumented
-    ///
-    /// - Todo: Document
-    ///
     var content: () -> AnyView
 
 }
@@ -82,10 +53,6 @@ struct TreePicker<Entity: NSManagedObject & Tree>: View {
 
 // MARK: TreePicker_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document
-///
 class TreePicker_Previews: PreviewProvider {
 
     // MARK: - Static properties

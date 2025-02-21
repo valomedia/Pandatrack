@@ -12,18 +12,10 @@ import SwiftUI
 
 // MARK: TabBar
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct TabBar<Tab: TabBarTab>: View, KeyboardReadable {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     @Binding var selection: Tab
 
     var body: some View {

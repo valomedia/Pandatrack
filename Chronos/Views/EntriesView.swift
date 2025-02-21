@@ -13,10 +13,6 @@ import CoreData
 
 // MARK: EntriesView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct EntriesView: View {
 
     // MARK: - Life cycle methods
@@ -110,10 +106,6 @@ struct EntriesView: View {
 
 // MARK: EntriesView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class EntriesView_Previews: PreviewProvider {
 
     // MARK: - Static properties

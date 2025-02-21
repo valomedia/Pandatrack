@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: NumberAttributeSingleRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(NumberAttributeSingleRelationship)
 final class NumberAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 

@@ -11,10 +11,6 @@ import Foundation
 
 // MARK: MutableStringAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(MutableStringAttribute)
 class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
 
@@ -43,22 +39,10 @@ class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var string: String
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         get {
             string
@@ -68,30 +52,15 @@ class MutableStringAttribute: NSObject, MutableBuiltinAttribute {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
-        // TODO Replace this with a more efficient solution.
         StringAttribute(from: self).description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
-        // TODO Replace this with a more efficient solution
         StringAttribute(from: self).localizedDescription
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
-        // TODO Replace this with a more efficient solution
         StringAttribute(from: self).accessibilityDescription
     }
 

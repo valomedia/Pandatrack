@@ -12,21 +12,10 @@ import SwiftUI
 
 // MARK: CardView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct CardView<Title: View>: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - labels:
-    ///     - title:
-    ///
     init(
             labels: (Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?),
             @ViewBuilder title: @escaping () -> Title) {
@@ -36,10 +25,6 @@ struct CardView<Title: View>: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let labels: (Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?)
 
     var body: some View {
@@ -62,10 +47,6 @@ struct CardView<Title: View>: View {
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let title: () -> Title
 
 }
@@ -74,13 +55,6 @@ struct CardView<Title: View>: View {
 
 extension CardView where Title == Text {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - labels:
-    ///
     init<S: StringProtocol>(
             title: S,
             labels: (Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?)) {
@@ -89,13 +63,6 @@ extension CardView where Title == Text {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - title:
-    ///     - labels:
-    ///
     init(
             title: LocalizedStringKey,
             labels: (Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?, Label<Text, Image>?)) {
@@ -109,10 +76,6 @@ extension CardView where Title == Text {
 
 // MARK: CardView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class CardView_Previews: PreviewProvider {
 
     // MARK: - Static properties

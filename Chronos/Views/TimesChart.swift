@@ -14,18 +14,10 @@ import ObservedOptionalObject
 
 // MARK: TimesChart
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct TimesChart: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     init(entries: AnyRandomAccessCollection<CompletedEntry>, interval: DateInterval, project: Project? = nil) {
         _subProjects = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.name)],

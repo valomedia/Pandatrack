@@ -19,8 +19,6 @@ extension Bool {
     ///
     /// This predicate checks whether the operating system code is running on is at least iOS 15 (or macCatalyst 15).
     ///
-    /// - Todo: Document.
-    ///
     static var iOS15: Bool {
         if #available(iOS 15, macCatalyst 15, *) {
             // Return true if the code is running on iOS 15 (or MacCatalyst 15) or higher. In theory this code path

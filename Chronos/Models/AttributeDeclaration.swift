@@ -12,8 +12,4 @@ import CoreData
 
 // MARK: AttributeDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 protocol AttributeDeclaration: Entity {}

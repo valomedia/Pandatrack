@@ -15,10 +15,6 @@ extension RelativeDateTimeFormatter {
 
     // MARK: + formatter
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static let formatter: RelativeDateTimeFormatter = {
         let formatter = RelativeDateTimeFormatter()
         formatter.dateTimeStyle = .named

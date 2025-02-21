@@ -12,18 +12,10 @@ import SwiftUI
 
 // MARK: ThemePickerView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ThemePicker: View {
 
     // - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     @Binding var selection: Theme?
 
     var body: some View {
@@ -54,10 +46,6 @@ struct ThemePicker: View {
 
 // MARK: ThemePicker_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class ThemePicker_Previews: PreviewProvider {
 
     // MARK: - Static properties

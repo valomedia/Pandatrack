@@ -16,11 +16,6 @@ extension Binding {
 
     // MARK: + subscript
 
-	/// Undocumented.
-	///
-	/// - Todo: Document.
-	/// - Todo: Remove code duplication.
-	///
     subscript<WrappedValue, WrappedSubject>(_ keyPath: WritableKeyPath<WrappedValue, WrappedSubject>)
 			-> Binding<WrappedSubject?> where Value == WrappedValue? {
 		.init(
@@ -37,11 +32,6 @@ extension Binding {
 		)
     }
 
-	/// Undocumented.
-	///
-	/// - Todo: Document.
-	/// - Todo: Remove code duplication.
-	///
 	subscript<WrappedValue, WrappedSubject>(_ keyPath: WritableKeyPath<WrappedValue, WrappedSubject?>)
 			-> Binding<WrappedSubject?> where Value == WrappedValue? {
 		.init(

@@ -12,18 +12,10 @@ import SwiftUI
 
 // MARK: ErrorView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ErrorView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let errorWrapper: ErrorWrapper
 
     var body: some View {
@@ -51,26 +43,14 @@ struct ErrorView: View {
 
 // MARK: ErrorView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document
-///
 class ErrorView_Previews: PreviewProvider {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     enum SampleError: Error {
         case errorRequired
     }
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var wrapper: ErrorWrapper {
         ErrorWrapper(error: SampleError.errorRequired, guidance: "You can safely ignore this error.")
     }

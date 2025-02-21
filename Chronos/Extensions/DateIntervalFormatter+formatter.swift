@@ -15,10 +15,6 @@ extension DateIntervalFormatter {
 
     // MARK: + formatter
 
-    /// Undocument.
-    ///
-    /// - Todo: Document.
-    ///
     static let formatter: DateIntervalFormatter = {
         let formatter = DateIntervalFormatter()
         formatter.dateStyle = .short

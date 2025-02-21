@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: CurrencyAttributeListRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(CurrencyAttributeListRelationship)
 final class CurrencyAttributeListRelationship: NSManagedObject, AttributeListValueRelationship {
 

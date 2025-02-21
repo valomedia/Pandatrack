@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: NumberAttributeListRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(NumberAttributeListRelationship)
 final class NumberAttributeListRelationship: NSManagedObject, AttributeListValueRelationship {
 

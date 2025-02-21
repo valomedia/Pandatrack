@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: URLAttributeListDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(URLAttributeListDeclaration)
 final class URLAttributeListDeclaration: BuiltinAttributeDeclaration {
 

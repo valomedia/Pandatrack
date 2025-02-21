@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: DateAttributeSingleDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(DateAttributeSingleDeclaration)
 final class DateAttributeSingleDeclaration: BuiltinAttributeDeclaration {
 

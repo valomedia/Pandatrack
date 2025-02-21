@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: DateIntervalPicker
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct DateIntervalPicker: View {
 
     private enum DateIntervalPresets: String, Identifiable, CustomStringConvertible, CaseIterable {
@@ -44,10 +40,6 @@ struct DateIntervalPicker: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     @Binding var selection: DateInterval
 
     var body: some View {

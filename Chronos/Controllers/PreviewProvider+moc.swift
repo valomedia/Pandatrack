@@ -17,10 +17,6 @@ extension PreviewProvider {
 
     // MARK: + moc
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var moc: NSManagedObjectContext {
         PersistenceController.preview!.container.viewContext
     }

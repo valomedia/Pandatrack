@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: DateIntervalArc
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct DateIntervalArc: Shape {
 
     // MARK: - Static properties

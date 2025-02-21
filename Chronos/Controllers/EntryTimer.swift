@@ -18,10 +18,6 @@ class EntryTimer: ObservableObject {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static let preview: EntryTimer? = {
         let moc = PersistenceController.preview?.container.viewContext
         let entryTimer = moc.map(EntryTimer.init)
@@ -30,12 +26,6 @@ class EntryTimer: ObservableObject {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters
-    ///     - moc:
-    ///
     init(_ moc: NSManagedObjectContext) {
         self.moc = moc
         reset()
@@ -79,7 +69,6 @@ class EntryTimer: ObservableObject {
     @Published var timeElapsedAccessibilityLabel = ""
 
     /// Whether the Timer is currently running.
-    ///
     ///
     /// This will reflect whether the timer is currently active. This only shows whether the EntryTimer is currently
     /// updating its fields and notifying subscribers once per second. It has nothing to do with the state of the
@@ -132,7 +121,6 @@ class EntryTimer: ObservableObject {
     /// This will stop the current Entry if one is running, create a new entry with the given information and start
     /// tracking.
     ///
-    /// - Todo: Document.
     /// - Parameters:
     ///     - name:
     ///     - start:
@@ -225,7 +213,6 @@ class EntryTimer: ObservableObject {
     ///
     /// This can be used to stop the Timer again, to prevent pointless churn when the Timer isn't visible anywhere on
     /// screen.
-    ///
     ///
     func stopTimer() {
         timer?.invalidate()

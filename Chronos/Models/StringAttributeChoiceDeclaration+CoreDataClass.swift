@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: StringAttributeChoiceDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(StringAttributeChoiceDeclaration)
 final class StringAttributeChoiceDeclaration: BuiltinAttributeDeclaration {
 

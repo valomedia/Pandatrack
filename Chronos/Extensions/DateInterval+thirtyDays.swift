@@ -15,10 +15,6 @@ extension DateInterval {
 
     // MARK: + thirtyDays
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var thirtyDays: DateInterval {
         DateInterval(start: Calendar.current.date(byAdding: .day, value: -30, to: .tomorrow)!, end: .endOfToday)
     }

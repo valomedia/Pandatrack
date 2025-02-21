@@ -17,10 +17,6 @@ extension Optional {
 
     // MARK: + throwingUnwrapOperator
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static postfix func .!?(_ optional: Optional) throws -> Wrapped {
         guard let wrapped = optional else { throw UnwrapError() }
         return wrapped
@@ -28,10 +24,6 @@ extension Optional {
 
     // MARK: + UnwrapError
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     struct UnwrapError: Error {}
 
 }

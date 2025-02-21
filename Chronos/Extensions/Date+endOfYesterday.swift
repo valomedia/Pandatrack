@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + endOfYesterday
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var endOfYesterday: Date {
         .startOfToday - 1
     }

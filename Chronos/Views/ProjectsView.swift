@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: ProjectsView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ProjectsView: View {
 
     // MARK: - Properties
@@ -33,10 +29,6 @@ struct ProjectsView: View {
 
 // MARK: ProjectsView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class ProjectsView_Previews: PreviewProvider {
 
     // MARK: - Static properties

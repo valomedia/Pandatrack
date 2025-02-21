@@ -16,17 +16,6 @@ extension View {
 
     // MARK: + modal
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    /// - Parameters:
-    ///   - title:
-    ///   - isPresented:
-    ///   - onOpen:
-    ///   - onClose:
-    ///   - content:
-    /// - Returns:
-    ///
     @ViewBuilder
     func modal<Content: View, S: StringProtocol>(
             _ title: S? = nil,

@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: Entry
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(Entry)
 class Entry: NSManagedObject, Item {
 
@@ -37,35 +33,19 @@ class Entry: NSManagedObject, Item {
 
     // MARK: - Properties
 
-    ////// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     public var interval: DateInterval {
         DateInterval(start: start, end: Date())
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     public var duration: TimeInterval {
         get { interval.duration }
         set { start = Date() - newValue }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     public var theme: Theme {
         project?.resolveTheme() ?? Theme.none
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     @objc public var day: String {
         Self.dateFormatter.string(from: start)
     }

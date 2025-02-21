@@ -12,25 +12,11 @@ import CoreData
 
 // MARK: Tag
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(Tag)
 final class Tag: NSManagedObject, Tree {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - moc:
-    ///     - name:
-    ///     - entries:
-    ///     - parent:
-    ///     - children:
-    ///
     convenience init(
             _ moc: NSManagedObjectContext,
             name: String? = nil,
@@ -53,15 +39,6 @@ final class Tag: NSManagedObject, Tree {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - moc:
-    ///     - name:
-    ///     - parent:
-    ///     - children:
-    ///
     convenience init(
             _ moc: NSManagedObjectContext,
             name: String,

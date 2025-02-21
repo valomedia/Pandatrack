@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: EntriesTab
 
-/// Undocumented.
-///
-/// - Todo: Document
-///
 struct EntriesTab: View {
 
     // MARK: - Properties
@@ -79,10 +75,6 @@ struct EntriesTab: View {
 
 // MARK: EntriesTab_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document
-///
 class EntriesTab_Previews: PreviewProvider {
 
     // MARK: - Static properties

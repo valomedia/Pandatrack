@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: DateAttributeListRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(DateAttributeListRelationship)
 final class DateAttributeListRelationship: NSManagedObject, AttributeListValueRelationship {
 

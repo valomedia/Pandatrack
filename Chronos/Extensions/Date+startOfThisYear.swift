@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + startOfThisYear
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var startOfThisYear: Date {
         Calendar.current.dateComponents([.calendar, .year], from: Date()).date!
     }

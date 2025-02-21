@@ -11,17 +11,9 @@ import Foundation
 
 // MARK: DateAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(DateAttribute)
 class DateAttribute: NSObject, BuiltinAttribute {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     enum Keys: String {
         case id
         case date
@@ -30,10 +22,6 @@ class DateAttribute: NSObject, BuiltinAttribute {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static let supportsSecureCoding = true
 
     // MARK: - Life cycle methods
@@ -86,52 +74,24 @@ class DateAttribute: NSObject, BuiltinAttribute {
 
     // MARK: Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let date: Date
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let showTime: Bool
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         date
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
         date.description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
         formatter.string(from: date)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
         accessibilityFormatter.string(from: date)
     }

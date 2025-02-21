@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + nextYear
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var nextYear: Date {
         .startOfNextYear
     }

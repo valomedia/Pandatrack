@@ -12,24 +12,10 @@ import SwiftUI
 
 // MARK: TagDetailView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct TagDetailView: View {
-
-    // MARK: - Static properties
-
-    // MARK: - Static methods
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - tag:
-    ///
     init(tag: Tag) {
         self._entries = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.start, order: .reverse)],
@@ -96,10 +82,6 @@ struct TagDetailView: View {
 
 // MARK: TagDetailView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class TagDetailView_Previews: PreviewProvider {
 
     // MARK: - Static properties

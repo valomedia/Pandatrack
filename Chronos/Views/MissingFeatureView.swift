@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: MissingFeatureView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct MissingFeatureView: View {
 
     // MARK: - Properties

@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: LeadingIconLabelStyle
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct LeadingIconLabelStyle: LabelStyle {
 
     // MARK: Methods
@@ -33,18 +29,10 @@ struct LeadingIconLabelStyle: LabelStyle {
 
 // MARK: + LeadingIconLabelStyle
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 extension LabelStyle where Self == LeadingIconLabelStyle {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var leadingIcon: Self {
         Self()
     }

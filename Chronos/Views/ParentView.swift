@@ -14,10 +14,6 @@ import ObservedOptionalObject
 
 // MARK: ParentView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ParentView<Entity: NSManagedObject & Tree>: View {
 
     // MARK: - Properties
@@ -40,10 +36,6 @@ struct ParentView<Entity: NSManagedObject & Tree>: View {
 
 // MARK: ParentView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class ParentView_Previews: PreviewProvider {
 
     // MARK: Static properties

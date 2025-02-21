@@ -1,5 +1,5 @@
 //
-//  UIPopupModifierController.swift
+//  UIPopupController.swift
 //  Chronos
 //
 //  Created by Jean-Pierre Höhmann on 2023-02-01.
@@ -10,22 +10,12 @@ import Foundation
 import SwiftUI
 
 
-// MARK: UIPopupModifierController
+// MARK: UIPopupController
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class UIPopupController<Popup: View>: UIViewController, UIPopoverPresentationControllerDelegate {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - onDismiss:
-    ///
     init(onDismiss: @escaping () -> ()) {
         self.onDismiss = onDismiss
         super.init(nibName: nil, bundle:nil)
@@ -40,24 +30,12 @@ class UIPopupController<Popup: View>: UIViewController, UIPopoverPresentationCon
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var hostingController: UIHostingController<Popup>?
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let onDismiss: () -> Void
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     func presentPopup(popup: () -> Popup) {
         let hostingController: UIHostingController<Popup>
         if self.hostingController != nil {
@@ -75,10 +53,6 @@ class UIPopupController<Popup: View>: UIViewController, UIPopoverPresentationCon
         hostingController.preferredContentSize = hostingController.sizeThatFits(in: UIView.layoutFittingExpandedSize)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     func dismissPopup() {
         defer { hostingController = nil }
         guard let hostingController, !hostingController.isBeingDismissed else { return }

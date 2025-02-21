@@ -15,13 +15,6 @@ import CoreData
 
 extension FetchRequest where Result: NSManagedObject {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - predicate:
-    ///     - animation:
-    ///
     public init(predicate: NSPredicate? = nil, animation: Animation? = nil) {
         self.init(sortDescriptors: [], predicate: predicate, animation: animation)
     }

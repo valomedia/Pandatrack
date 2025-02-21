@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: NumberAttributeChoiceDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(NumberAttributeChoiceDeclaration)
 final class NumberAttributeChoiceDeclaration: BuiltinAttributeDeclaration {
 

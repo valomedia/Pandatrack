@@ -12,18 +12,10 @@ import SwiftUI
 
 // MARK: ThemeView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ThemeView: View {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let theme: Theme
 
     var body: some View {
@@ -50,10 +42,6 @@ struct ThemeView: View {
 
 // MARK: ThemeView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ThemeView_Previews: PreviewProvider {
 
     // MARK: - Static properties

@@ -14,10 +14,6 @@ import SwiftUI
 
 extension View {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     func floatingActionButton(image: Image? = nil, action: (()->())? = nil) -> some View {
         ZStack {
             self

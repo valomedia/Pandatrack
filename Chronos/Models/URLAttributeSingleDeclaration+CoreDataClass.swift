@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: URLAttributeSingleDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(URLAttributeSingleDeclaration)
 final class URLAttributeSingleDeclaration: BuiltinAttributeDeclaration {
 

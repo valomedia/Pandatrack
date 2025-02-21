@@ -13,22 +13,10 @@ import CoreData
 
 // MARK: ChildrenView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ChildrenView<Entity: NSManagedObject & Tree, Header: View, Content: View>: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - entity:
-    ///     - content:
-    ///     - header:
-    ///
     init(entity: Entity, @ViewBuilder content: @escaping (Entity) -> Content, header: @escaping () -> Header) {
         self.header = header
         self.entity = entity
@@ -37,10 +25,6 @@ struct ChildrenView<Entity: NSManagedObject & Tree, Header: View, Content: View>
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let entity: Entity
 
     var body: some View {
@@ -61,16 +45,8 @@ struct ChildrenView<Entity: NSManagedObject & Tree, Header: View, Content: View>
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let content: (Entity) -> Content
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     let header: () -> Header
 
 }
@@ -80,26 +56,10 @@ struct ChildrenView<Entity: NSManagedObject & Tree, Header: View, Content: View>
 
 extension ChildrenView where Header == Text {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - entity:
-    ///     - content:
-    ///
     init<S>(_ text: S, entity: Entity, content: @escaping (Entity) -> Content) where S: StringProtocol {
         self.init(entity: entity, content: content) { Text(text) }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - text:
-    ///     - entity:
-    ///     - content:
-    ///
     init(_ text: LocalizedStringKey, entity: Entity, content: @escaping (Entity) -> Content) {
         self.init(entity: entity, content: content) { Text(text) }
     }

@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: Theme
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible, Equatable {
     case none
     case bubblegum
@@ -41,10 +37,6 @@ enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var foregroundColor: Color {
         switch self {
         case .none:
@@ -56,34 +48,18 @@ enum Theme: String, CaseIterable, Identifiable, Codable, CustomStringConvertible
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var backgroundColor: Color {
         Color(rawValue)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var name: String {
         rawValue.capitalized
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var id: String {
         rawValue
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var description: String {
         name
     }

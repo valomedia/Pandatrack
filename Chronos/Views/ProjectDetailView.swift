@@ -12,20 +12,10 @@ import SwiftUI
 
 // MARK: ProjectDetailView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ProjectDetailView: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - project:
-    ///
     init(project: Project) {
         self._entries = FetchRequest(
                 sortDescriptors: [SortDescriptor(\.start, order: .reverse)],
@@ -88,10 +78,6 @@ struct ProjectDetailView: View {
 
 // MARK: ProjectDetailView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document
-///
 class ProjectDetailView_Previews: PreviewProvider {
 
     // MARK: - Static properties

@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: NumberAttributeChoiceRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(NumberAttributeChoiceRelationship)
 final class NumberAttributeChoiceRelationship: NSManagedObject, AttributeChoiceValueRelationship {
 

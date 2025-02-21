@@ -13,10 +13,6 @@ import CoreData
 
 // MARK: ParentPicker
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct ParentPicker<Entity: NSManagedObject & Tree>: View {
 
     // MARK: - Life cycle methods

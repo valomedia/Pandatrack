@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: DateAttributeSingleRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(DateAttributeSingleRelationship)
 final class DateAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 

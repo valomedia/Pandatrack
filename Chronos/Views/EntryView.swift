@@ -13,10 +13,6 @@ import CoreData
 
 // MARK: EntryView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct EntryView: View {
 
     // MARK: - Static properties
@@ -62,10 +58,6 @@ struct EntryView: View {
 
 // MARK: EntryView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct EntryView_Previews: PreviewProvider {
 
     // MARK: - Static properties

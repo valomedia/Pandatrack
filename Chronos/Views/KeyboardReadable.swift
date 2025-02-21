@@ -21,10 +21,6 @@ protocol KeyboardReadable {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var keyboardPublisher: AnyPublisher<Bool, Never> { get }
 
 }

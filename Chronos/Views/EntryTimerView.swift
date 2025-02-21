@@ -13,10 +13,6 @@ import CoreData
 
 // MARK: EntryTimerView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct EntryTimerView: View, KeyboardReadable {
 
     // MARK: - Static properties
@@ -108,18 +104,10 @@ struct EntryTimerView: View, KeyboardReadable {
 
 // MARK: EntryTimerView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct EntryTimerView_Previews: PreviewProvider {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var previews: some View {
         EntryTimerView()
                 .environmentObject(entryTimer)

@@ -13,10 +13,6 @@ import CoreData
 
 // MARK: EntryDetailView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct EntryDetailView: View {
 
     // MARK: - Static properties
@@ -140,10 +136,6 @@ struct EntryDetailView: View {
 
 // MARK: EntryDetailView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class EntryDetailView_Previews: PreviewProvider {
 
     // MARK: - Static properties
@@ -157,4 +149,5 @@ class EntryDetailView_Previews: PreviewProvider {
                     .environmentObject(env)
         }
     }
+
 }

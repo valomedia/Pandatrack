@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + startOfNextWeek
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var startOfNextWeek: Date {
         Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date.startOfThisWeek)!
     }

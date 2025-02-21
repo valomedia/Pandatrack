@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: NumberAttributeListDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(NumberAttributeListDeclaration)
 final class NumberAttributeListDeclaration: BuiltinAttributeDeclaration {
 

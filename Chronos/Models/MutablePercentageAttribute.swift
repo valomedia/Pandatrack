@@ -11,10 +11,6 @@ import Foundation
 
 // MARK: MutablePercentageAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(MutablePercentageAttribute)
 class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
 
@@ -43,22 +39,10 @@ class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var percentage: Int
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         get {
             percentage
@@ -68,30 +52,15 @@ class MutablePercentageAttribute: NSObject, MutableBuiltinAttribute {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
-        // TODO Replace this with a more efficient solution.
         PercentageAttribute(from: self).description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
-        // TODO Replace this with a more efficient solution.
         PercentageAttribute(from: self).localizedDescription
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
-        // TODO Replace this with a more efficient solution.
         PercentageAttribute(from: self).accessibilityDescription
     }
 

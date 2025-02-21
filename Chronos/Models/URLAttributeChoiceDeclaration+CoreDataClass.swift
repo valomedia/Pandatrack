@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: URLAttributeChoiceDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(URLAttributeChoiceDeclaration)
 final class URLAttributeChoiceDeclaration: BuiltinAttributeDeclaration {
 

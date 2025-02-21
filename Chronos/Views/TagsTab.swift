@@ -12,17 +12,7 @@ import SwiftUI
 
 // MARK: TagsTab
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct TagsTab: View {
-
-    // MARK: - Static properties
-
-    // MARK: - Static methods
-
-    // MARK: - Life cycle methods
 
     // MARK: - Properties
 
@@ -53,10 +43,6 @@ struct TagsTab: View {
 
 // MARK: TagsTab_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class TagsTab_Previews: PreviewProvider {
 
     // MARK: - Static properties

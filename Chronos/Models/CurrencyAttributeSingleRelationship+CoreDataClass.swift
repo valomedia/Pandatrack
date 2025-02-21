@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: CurrencyAttributeSingleRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(CurrencyAttributeSingleRelationship)
 final class CurrencyAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 

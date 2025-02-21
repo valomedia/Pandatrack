@@ -13,24 +13,12 @@ import ObservedOptionalObject
 
 // MARK: PomodoroTimerView
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct PomodoroTimerView: View {
 
     // MARK: - Properties
 
-    /// Undocumented
-    ///
-    /// - Todo: Document.
-    ///
     @ObservedOptionalObject var pomodoroTimer: PomodoroTimer?
 
-    /// Undocumented
-    ///
-    /// - Todo: Document.
-    ///
     let theme: Theme
 
     var body: some View {
@@ -78,10 +66,6 @@ struct PomodoroTimerView: View {
 
 // MARK: PomodoroTimerView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct PomodoroTimerView_Previews: PreviewProvider {
 
     // MARK: - Static properties

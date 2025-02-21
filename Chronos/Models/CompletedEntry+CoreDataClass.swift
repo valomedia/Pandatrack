@@ -12,34 +12,15 @@ import CoreData
 
 // MARK: CompletedEntry
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(CompletedEntry)
 class CompletedEntry: Entry {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static let defaultDuration: TimeInterval = Double(Settings.entryDurationPreference * 60)
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - context:
-    ///     - name:
-    ///     - start:
-    ///     - end:
-    ///     - project:
-    ///     - tags:
-    ///
     convenience init(
             _ context: NSManagedObjectContext,
             name: String? = nil,
@@ -57,16 +38,6 @@ class CompletedEntry: Entry {
         if let tags = tags { self.tags = tags }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - context:
-    ///     - name:
-    ///     - interval:
-    ///     - project:
-    ///     - tags:
-    ///
     convenience init(
             _ context: NSManagedObjectContext,
             name: String? = nil,
@@ -77,13 +48,6 @@ class CompletedEntry: Entry {
         self.init(context, name: name, start: interval.start, end: interval.end, project: project, tags: tags)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - context:
-    ///     - entry:
-    ///
     convenience init(_ context: NSManagedObjectContext, from entry: RunningEntry) {
         self.init(context, name: entry.name, start: entry.start, project: entry.project, tags: entry.tags)
     }
@@ -94,10 +58,6 @@ class CompletedEntry: Entry {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     public override var interval: DateInterval {
         get {
             DateInterval(start: start, end: end)
@@ -108,10 +68,6 @@ class CompletedEntry: Entry {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     public override var duration: TimeInterval {
         get { interval.duration }
         set { interval.duration = newValue }

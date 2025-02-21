@@ -11,10 +11,6 @@ import Foundation
 
 // MARK: MutableDateAttribute
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(MutableDateAttribute)
 class MutableDateAttribute: NSObject, MutableBuiltinAttribute {
 
@@ -44,28 +40,12 @@ class MutableDateAttribute: NSObject, MutableBuiltinAttribute {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var id: UUID
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var date: Date
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var showTime: Bool
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var value: Any {
         get {
             date
@@ -75,30 +55,15 @@ class MutableDateAttribute: NSObject, MutableBuiltinAttribute {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     override var description: String {
-        // TODO Replace this with a more efficient solution
         DateAttribute(from: self).description
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var localizedDescription: String {
-        // TODO Replace this with a more efficient solution
         DateAttribute(from: self).localizedDescription
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var accessibilityDescription: String {
-        // TODO Replace this with a more efficient solution
         DateAttribute(from: self).accessibilityDescription
     }
 

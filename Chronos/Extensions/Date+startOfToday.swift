@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + startOfToday
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var startOfToday: Date {
         Calendar.current.startOfDay(for: Date())
     }

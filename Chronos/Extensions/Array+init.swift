@@ -15,13 +15,6 @@ import Foundation
 
 extension Array {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - value:
-    ///     - keyPath:
-    ///
     init(collecting value: Element, using keyPath: KeyPath<Element, Element?>) {
         self.init()
         var element: Element? = value

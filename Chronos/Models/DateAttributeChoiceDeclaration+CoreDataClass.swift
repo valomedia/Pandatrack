@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: DateAttributeChoiceDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(DateAttributeChoiceDeclaration)
 final class DateAttributeChoiceDeclaration: BuiltinAttributeDeclaration {
 

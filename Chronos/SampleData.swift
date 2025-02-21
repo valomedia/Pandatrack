@@ -16,13 +16,6 @@ extension CompletedEntry {
 
     // MARK: + sampleData
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - context:
-    ///     - projects:
-    ///     - tags:
     @discardableResult
     @SetBuilder<CompletedEntry>
     static func sampleData(for context: NSManagedObjectContext) throws -> Set<CompletedEntry> {
@@ -103,11 +96,6 @@ extension Project {
 
     // MARK: + sampleData
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameter context:
-    ///
     @discardableResult
     @SetBuilder<Project>
     static func sampleData(for context: NSManagedObjectContext) -> Set<Project> {
@@ -133,10 +121,6 @@ extension Tag {
 
     // MARK: + sampleData
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     @discardableResult
     @SetBuilder<Tag>
     static func sampleData(for context: NSManagedObjectContext) -> Set<Tag> {

@@ -12,10 +12,6 @@ import SwiftUI
 
 // MARK: TrailingIconLabelStyle
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 struct TrailingIconLabelStyle: LabelStyle {
 
     // MARK: Methods
@@ -36,10 +32,6 @@ extension LabelStyle where Self == TrailingIconLabelStyle {
 
     // MARK: + TrailingIconLabelStyle
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     static var trailingIcon: Self { Self() }
 
 }

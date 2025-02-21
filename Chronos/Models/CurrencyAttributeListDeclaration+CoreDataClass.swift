@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: CurrencyAttributeListDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(CurrencyAttributeListDeclaration)
 final class CurrencyAttributeListDeclaration: BuiltinAttributeDeclaration {
 

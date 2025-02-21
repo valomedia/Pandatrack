@@ -16,13 +16,6 @@ import SwiftUI
 
 extension View {
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - isPresented:
-    ///     - content:
-    ///
     func popup<Content: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
         self.modifier(PopupModifier(isPresented: isPresented, content: content))
     }

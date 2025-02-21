@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: BuiltinAttributeDeclaration
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(BuiltinAttributeDeclaration)
 class BuiltinAttributeDeclaration: NSManagedObject, AttributeDeclaration {
 

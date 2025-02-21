@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: CurrencyAttributeChoiceRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(CurrencyAttributeChoiceRelationship)
 final class CurrencyAttributeChoiceRelationship: NSManagedObject, AttributeChoiceValueRelationship {
 

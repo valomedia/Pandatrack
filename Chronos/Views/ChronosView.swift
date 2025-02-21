@@ -49,10 +49,6 @@ struct ChronosView: View {
 
 // MARK: ChronosView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class ChronosView_Previews: PreviewProvider {
 
     // MARK: - Static properties

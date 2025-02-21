@@ -32,17 +32,6 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    /// - Parameters:
-    ///     - entity:
-    ///     - root:
-    ///     - search:
-    ///     - depth:
-    ///     - hiddenEntities:
-    ///     - content:
-    ///
     private init<Content: View>(
             entity: Binding<Entity?>?,
             root: Entity?,
@@ -64,16 +53,6 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
         _searchBinding = search
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    /// - Parameters:
-    ///     - entity:
-    ///     - root:
-    ///     - content:
-    ///     - depth:
-    ///     - hiddenEntities:
-    ///
     init<Content: View>(
             root: Entity? = nil,
             depth: Int? = nil,
@@ -82,15 +61,6 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
         self.init(entity: nil, root: root, depth: depth, hiddenEntities: hiddenEntities, content: content)
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    /// - Parameters:
-    ///     - entity:
-    ///     - root:
-    ///     - depth:
-    ///     - hiddenEntities:
-    ///
     init(entity: Binding<Entity?>, root: Entity? = nil, depth: Int? = nil, hiddenEntities: [Entity]? = nil) {
         self.init(
                 entity: entity,
@@ -111,28 +81,12 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
     var searchBinding: Binding<String> { _searchBinding ?? $searchState }
     private var _searchBinding: Binding<String>? = nil
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let root: Entity?
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let content: ((Entity) -> AnyView)?
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let depth: Int
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     let hiddenEntities: [Entity]
 
     var body: some View {
@@ -230,10 +184,6 @@ struct TreeView<Entity: NSManagedObject & Tree>: View {
 
 // MARK: TreeView_Previews
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class TreeView_Previews: PreviewProvider {
 
     // MARK: - Static properties

@@ -14,10 +14,6 @@ extension Date {
 
     // MARK: + startOfLastMonth
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static var startOfLastMonth: Date {
         Calendar.current.date(byAdding: .month, value: -1, to: Date.startOfThisMonth)!
     }

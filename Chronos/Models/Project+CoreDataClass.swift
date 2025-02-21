@@ -13,26 +13,11 @@ import OrderedCollections
 
 // MARK: Project
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(Project)
 final class Project: NSManagedObject, Tree {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///   - moc:
-    ///   - name:
-    ///   - theme:
-    ///   - entries:
-    ///   - parent:
-    ///   - children:
-    ///
     convenience init(
             _ moc: NSManagedObjectContext,
             name: String? = nil,
@@ -57,15 +42,6 @@ final class Project: NSManagedObject, Tree {
         }
     }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - moc:
-    ///     - name:
-    ///     - parent:
-    ///     - children:
-    ///
     convenience init(
             _ moc: NSManagedObjectContext,
             name: String,
@@ -80,10 +56,6 @@ final class Project: NSManagedObject, Tree {
 
     // MARK: - Methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     func resolveTheme() -> Theme? {
         theme ?? parent?.resolveTheme()
     }

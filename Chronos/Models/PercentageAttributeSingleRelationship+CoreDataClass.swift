@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: PercentageAttributeSingleRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(PercentageAttributeSingleRelationship)
 final class PercentageAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 

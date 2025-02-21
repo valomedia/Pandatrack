@@ -12,10 +12,6 @@ import CoreData
 
 // MARK: URLAttributeSingleRelationship
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @objc(URLAttributeSingleRelationship)
 final class URLAttributeSingleRelationship: NSManagedObject, AttributeSingleValueRelationship {
 

@@ -12,18 +12,10 @@ import CoreData
 
 // MARK: ChronosEnvironment
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 class ChronosEnvironment: ObservableObject {
 
     // MARK: - Static properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document
-    ///
     static let preview: ChronosEnvironment? = {
         let moc = PersistenceController.preview?.container.viewContext
         let env = moc.map(ChronosEnvironment.init)
@@ -32,12 +24,6 @@ class ChronosEnvironment: ObservableObject {
 
     // MARK: - Life cycle methods
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - moc:
-    ///
     init(_ moc: NSManagedObjectContext) {
         self.moc = moc
         NotificationCenter.default.addObserver(
@@ -66,10 +52,6 @@ class ChronosEnvironment: ObservableObject {
     ///
     @Published private(set) var waitingForConfirmation = false
 
-    /// Undocumented
-    ///
-    /// - Todo: Document
-    ///
     @Published var errorWrapper: ErrorWrapper?
 
     /// Whether there is anything to undo.
@@ -91,8 +73,6 @@ class ChronosEnvironment: ObservableObject {
     /// Save changes to the context.
     ///
     /// This will save changes to the context and perform error-handling.
-    ///
-    /// - Todo: Exception handling
     ///
     func save() {
         moc.perform { [weak self] in

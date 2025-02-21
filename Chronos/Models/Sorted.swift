@@ -11,10 +11,6 @@ import Foundation
 
 // MARK: Sorted
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 @propertyWrapper class Sorted<Element, Key: Comparable>: RandomAccessCollection {
     typealias Index = AnyRandomAccessCollection<Element>.Index
     typealias Indices = AnyRandomAccessCollection<Element>.Indices
@@ -34,10 +30,6 @@ import Foundation
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var keyPath: KeyPath<Element, Key>
 
     var wrappedValue: AnyCollection<Element>

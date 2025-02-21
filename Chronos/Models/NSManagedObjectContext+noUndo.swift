@@ -16,13 +16,6 @@ extension NSManagedObjectContext {
 
     // MARK: + noUndo
 
-    /// Undocumented.
-    ///
-    /// - Todo Document.
-    /// - Parameter:
-    ///     - cb:
-    /// - Returns:
-    ///
     @discardableResult func noUndo<T>(_ cb: () throws -> T) rethrows -> T {
         // Pause undo management.
         processPendingChanges()

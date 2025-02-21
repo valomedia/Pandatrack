@@ -15,13 +15,6 @@ extension Sequence {
 
     // MARK: + reduce
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    /// - Parameters:
-    ///     - nextPartialResult:
-    /// - Returns:
-    ///
     @inlinable
     public func reduce<Result>(
             _ nextPartialResult: (_ partialResult: Result?, Self.Element) throws -> Result

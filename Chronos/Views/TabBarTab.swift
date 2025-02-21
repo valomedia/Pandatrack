@@ -12,25 +12,13 @@ import SwiftUI
 
 // MARK: Tab
 
-/// Undocumented.
-///
-/// - Todo: Document.
-///
 protocol TabBarTab: RawRepresentable, CaseIterable, Identifiable, Hashable
         where RawValue: Hashable, AllCases == Array<Self> {
 
     // MARK: - Properties
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var image: Image { get }
 
-    /// Undocumented.
-    ///
-    /// - Todo: Document.
-    ///
     var text: Text { get }
 
 }

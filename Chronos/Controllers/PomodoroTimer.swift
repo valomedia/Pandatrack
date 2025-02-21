@@ -11,11 +11,6 @@ import Foundation
 
 // MARK: PomodoroTimer
 
-/// Undocumented.
-///
-/// - Todo: Document.
-/// - Todo: Add tracking of pomodoros and pauses and a longer pause afte a set.
-///
 class PomodoroTimer: ObservableObject {
 
     // MARK: - Life cycle methods
