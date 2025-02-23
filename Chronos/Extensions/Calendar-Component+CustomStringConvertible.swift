@@ -39,7 +39,9 @@ extension Calendar.Component: CustomStringConvertible {
         case .timeZone: return "Time Zone"
 
         case .isLeapMonth: return "Is Leap Month"
-            
+
+        case .dayOfYear: return "Day of the Year"
+
         @unknown default: return "Component"
 
         }
