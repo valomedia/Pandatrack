@@ -10,7 +10,7 @@ import SwiftUI
 import Charts
 import ObservedOptionalObject
 
-// A helper struct representing a daily segment for a given project.
+// A helper structure representing a daily segment for a given project.
 struct DailySegment: Identifiable {
     let id = UUID()
     let day: Date
