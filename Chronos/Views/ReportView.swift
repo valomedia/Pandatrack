@@ -64,7 +64,8 @@ struct ReportView: View {
         AnyRandomAccessCollection(
                 entries.filter { entry in
                     (tag == nil || entry.tags.contains(where: { $0.path.starts(with: tag?.path ?? "") }))
-                            && (project == nil || entry.project!.path.starts(with: project?.path ?? ""))
+                            && (project == nil || (entry.project?.path.starts(with: project?.path ?? "") ?? false))
+// Fixed issue with unexpected nil
                 }
         )
     }
