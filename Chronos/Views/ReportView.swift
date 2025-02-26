@@ -62,13 +62,13 @@ struct ReportView: View {
 
     private var filteredEntries: AnyRandomAccessCollection<CompletedEntry> {
         AnyRandomAccessCollection(
-                entries.filter { entry in
-                    (tag == nil || entry.tags.contains(where: { $0.path.starts(with: tag?.path ?? "") }))
-                            && (project == nil || entry.project!.path.starts(with: project?.path ?? ""))
-                }
+            entries.filter { entry in
+                (tag == nil || entry.tags.contains { $0.path.starts(with: tag?.path ?? "") })
+                && (project == nil || (entry.project?.path.starts(with: project?.path ?? "") ?? false))
+            }
         )
     }
-
+    /// Fixed bug with unexpected nil return.
     @FetchRequest private var entries: FetchedResults<CompletedEntry>
 
     @State private var project: Project?
