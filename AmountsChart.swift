@@ -182,24 +182,6 @@ struct AmountsChart: View {
                     }
                 }
             }
-            .chartXScale(domain: interval.start...interval.end)
-            .chartXAxis {
-                // Same logic you had before for daily or automatic axis marks:
-                if calendar.dateComponents([.day], from: interval.start, to: interval.end).day! <= 7 {
-                    AxisMarks(values: .stride(by: .day))
-                } else {
-                    AxisMarks()
-                }
-            }
-            .chartYAxis { AxisMarks(position: .leading) }
-        }
-        .chartPlotStyle {
-            $0.border(.gray, width: 1)
-        }
-        .if(!subProjects.map(\.theme).compacted().isEmpty) { view in
-            view.chartForegroundStyleScale { category in
-                subProjects.first { $0.name == category }?.theme?.backgroundColor ?? .accentColor
-            }
                     .chartXScale(domain: interval.start...interval.end)
                     .chartXAxis {
                         Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day <= 7

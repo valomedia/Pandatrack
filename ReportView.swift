@@ -68,7 +68,7 @@ struct ReportView: View {
                 }
         )
     }
-    /// Fixed bug with unexpected nil return.
+
     @FetchRequest private var entries: FetchedResults<CompletedEntry>
 
     @State private var project: Project?
