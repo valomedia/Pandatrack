@@ -11,6 +11,14 @@ import SwiftUI
 import Charts
 import ObservedOptionalObject
 
+/// Helper structure for sorting data
+
+struct AggregatedEntry: Identifiable {
+    let id = UUID()
+    let day: Date
+    let project: String
+    let totalHours: Double
+}
 
 // MARK: AmountsChart
 
@@ -125,23 +133,54 @@ struct AmountsChart: View {
                     .fontWeight(.bold)
         }
     }
+    /// Workaround to occasional hashing error
+    struct DayProjectKey: Hashable {
+        let day: Date
+        let project: String
+    }
+    /// Aggregating the data
+    private var aggregatedEntries: [AggregatedEntry] {
+        let calendar = Calendar.current
+        let groups = Dictionary(grouping: entries) { entry -> DayProjectKey in
+            let day = calendar.startOfDay(for: entry.start)
+            let projectName = entry.project?
+                .path
+                .dropFirst(project?.path.count ?? 0)
+                .split(separator: Project.pathSeparator)
+                .first
+                .map(String.init)
+                ?? (project != nil ? project!.name : "Other")
+            return DayProjectKey(day: day, project: projectName)
+        }
+        return groups.map { key, entries in
+            let totalHours = entries.map { $0.duration.hours }.reduce(0, +)
+            return AggregatedEntry(day: key.day, project: key.project, totalHours: totalHours)
+        }
+    }
 
+    private var groupedAggregatedEntries: [Date: [AggregatedEntry]] {
+        Dictionary(grouping: aggregatedEntries, by: { $0.day })
+    }
+    /// Modified chart to use aggregated data
     private var chart: some View {
-        Wrapper {
-            Chart(entries) { entry in
-                BarMark(x: .value(unit.description, entry.start, unit: unit), y: .value("Time", entry.duration.hours))
-                        .foregroundStyle(
-                                by: .value(
-                                        "Folder",
-                                        entry
-                                                .project?
-                                                .path
-                                                .dropFirst(project?.path.count ?? 0)
-                                                .split(separator: Project.pathSeparator)
-                                                .first
-                                                .map(String.init)
-                                                ?? (project != nil ? project!.name : "Other"))
+        let sortedDays = groupedAggregatedEntries.keys.sorted()
+        let calendar = Calendar.current
+
+        return Wrapper {
+            Chart {
+                ForEach(sortedDays, id: \.self) { day in
+                    // Sort the AggregatedEntries for this day in descending order by totalHours.
+                    let dayEntries = groupedAggregatedEntries[day]!.sorted { $0.totalHours > $1.totalHours }
+
+                    ForEach(dayEntries) { aggEntry in
+                        BarMark(
+                            // Use `unit` to let Swift Charts center the bar in that day (or week/month/etc.).
+                            x: .value(unit.description, day, unit: unit),
+                            y: .value("Time", aggEntry.totalHours)
                         )
+                        .foregroundStyle(by: .value("Project", aggEntry.project))
+                    }
+                }
             }
                     .chartXScale(domain: interval.start...interval.end)
                     .chartXAxis {

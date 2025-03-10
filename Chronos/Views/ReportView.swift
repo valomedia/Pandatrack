@@ -63,8 +63,8 @@ struct ReportView: View {
     private var filteredEntries: AnyRandomAccessCollection<CompletedEntry> {
         AnyRandomAccessCollection(
                 entries.filter { entry in
-                    (tag == nil || entry.tags.contains(where: { $0.path.starts(with: tag?.path ?? "") }))
-                            && (project == nil || entry.project!.path.starts(with: project?.path ?? ""))
+                    (tag == nil || entry.tags.contains { $0.path.starts(with: tag?.path ?? "") })
+                    && (project == nil || (entry.project?.path.starts(with: project?.path ?? "") ?? false))
                 }
         )
     }
