@@ -21,7 +21,7 @@ struct AmountsChart: View {
             let id = UUID()
             let day: Date
             let segmentName: String
-            let totalHours: Double
+            let totalTime: TimeInterval
         }
 
     // MARK: - Life cycle methods
@@ -140,7 +140,6 @@ struct AmountsChart: View {
     }
     /// Aggregating the data
     private var aggregatedEntries: [AggregatedEntry] {
-        let calendar = Calendar.current
         let groups = Dictionary(grouping: entries) { entry -> DayProjectKey in
             let day = entry.start.day
             let projectName = entry.project?
@@ -154,7 +153,7 @@ struct AmountsChart: View {
         }
         return groups.map { key, entries in
             let totalHours = entries.map { $0.duration.hours }.reduce(0, +)
-            return AggregatedEntry(day: key.day, segmentName: key.project, totalHours: totalHours)
+            return AggregatedEntry(day: key.day, segmentName: key.project, totalTime: totalHours)
         }
     }
 
@@ -169,13 +168,13 @@ struct AmountsChart: View {
             Chart {
                 ForEach(sortedDays, id: \.self) { day in
                     // Sort the AggregatedEntries for this day in descending order by totalHours.
-                    let dayEntries = groupedAggregatedEntries[day]!.sorted { $0.totalHours > $1.totalHours }
+                    let dayEntries = groupedAggregatedEntries[day]!.sorted { $0.totalTime > $1.totalTime }
 
                     ForEach(dayEntries) { aggEntry in
                         BarMark(
                             // Use `unit` to let Swift Charts center the bar in that day (or week/month/etc.).
                             x: .value(unit.description, day, unit: unit),
-                            y: .value("Time", aggEntry.totalHours)
+                            y: .value("Time", aggEntry.totalTime)
                         )
                         .foregroundStyle(by: .value("Project", aggEntry.segmentName))
                     }
@@ -240,4 +239,3 @@ class AmountsChart_Previews: PreviewProvider {
         }
     }
 }
-
