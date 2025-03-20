@@ -23,6 +23,14 @@ struct AmountsChart: View {
             let segmentName: String
             let totalTime: TimeInterval
         }
+    
+    private func truncatedDate(for date: Date) -> Date {
+        // This returns the start of the current unit (as defined by `unit`).
+        guard let interval = Calendar.current.dateInterval(of: unit, for: date) else {
+            return Calendar.current.startOfDay(for: date)
+        }
+        return interval.start
+    }
 
     // MARK: - Life cycle methods
 
@@ -141,14 +149,14 @@ struct AmountsChart: View {
     /// Aggregating the data
     private var aggregatedEntries: [AggregatedEntry] {
         let groups = Dictionary(grouping: entries) { entry -> DayProjectKey in
-            let day = entry.start.day
+            let day = truncatedDate(for: entry.start)
             let projectName = entry.project?
                 .path
                 .dropFirst(project?.path.count ?? 0)
                 .split(separator: Project.pathSeparator)
                 .first
                 .map(String.init)
-            ?? project?.name ?? "Other"
+                ?? project?.name ?? "Other"
             return DayProjectKey(day: day, project: projectName)
         }
         return groups.map { key, entries in
@@ -167,7 +175,7 @@ struct AmountsChart: View {
         return Wrapper {
             Chart {
                 ForEach(sortedDays, id: \.self) { day in
-                    // Sort the AggregatedEntries for this day in descending order by totalHours.
+                    // Sort segments in each bar by totalTime (largest first)
                     let dayEntries = groupedAggregatedEntries[day]!.sorted { $0.totalTime > $1.totalTime }
 
                     ForEach(dayEntries) { aggEntry in
