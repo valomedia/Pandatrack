@@ -11,17 +11,18 @@ import SwiftUI
 import Charts
 import ObservedOptionalObject
 
-/// Helper structure for sorting data
-struct AggregatedEntry: Identifiable {
-    let id = UUID()
-    let day: Date
-    let segmentName: String
-    let totalHours: Double
-}
-
 // MARK: AmountsChart
 
 struct AmountsChart: View {
+    
+    // MARK: - Private Helper Structures
+        ///Helper struct for sorting data
+        private struct AggregatedEntry: Identifiable {
+            let id = UUID()
+            let day: Date
+            let segmentName: String
+            let totalHours: Double
+        }
 
     // MARK: - Life cycle methods
 
