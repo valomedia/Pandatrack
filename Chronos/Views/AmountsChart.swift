@@ -19,7 +19,7 @@ struct AmountsChart: View {
         ///Helper struct for sorting data
         private struct AggregatedEntry: Identifiable {
             let id = UUID()
-            let day: Date
+            let unitDate: Date
             let segmentName: String
             let totalTime: TimeInterval
         }
@@ -142,31 +142,31 @@ struct AmountsChart: View {
         }
     }
     /// Workaround to occasional hashing error
-    struct DayProjectKey: Hashable {
-        let day: Date
-        let project: String
+    struct UnitSegmentKey: Hashable {
+        let unitDate: Date
+        let segmentName: String
     }
     /// Aggregating the data
     private var aggregatedEntries: [AggregatedEntry] {
-        let groups = Dictionary(grouping: entries) { entry -> DayProjectKey in
+        let groups = Dictionary(grouping: entries) { entry -> UnitSegmentKey in
             let day = truncatedDate(for: entry.start)
-            let projectName = entry.project?
+            let segmentName = entry.project?
                 .path
                 .dropFirst(project?.path.count ?? 0)
                 .split(separator: Project.pathSeparator)
                 .first
                 .map(String.init)
                 ?? project?.name ?? "Other"
-            return DayProjectKey(day: day, project: projectName)
+            return UnitSegmentKey(unitDate: day, segmentName: segmentName)
         }
         return groups.map { key, entries in
             let totalHours = entries.map { $0.duration.hours }.reduce(0, +)
-            return AggregatedEntry(day: key.day, segmentName: key.project, totalTime: totalHours)
+            return AggregatedEntry(unitDate: key.unitDate, segmentName: key.segmentName, totalTime: totalHours)
         }
     }
 
     private var groupedAggregatedEntries: [Date: [AggregatedEntry]] {
-        Dictionary(grouping: aggregatedEntries, by: { $0.day })
+        Dictionary(grouping: aggregatedEntries, by: { $0.unitDate })
     }
     /// Modified chart to use aggregated data
     private var chart: some View {
