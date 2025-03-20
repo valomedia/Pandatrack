@@ -12,11 +12,10 @@ import Charts
 import ObservedOptionalObject
 
 /// Helper structure for sorting data
-
 struct AggregatedEntry: Identifiable {
     let id = UUID()
     let day: Date
-    let project: String
+    let segmentName: String
     let totalHours: Double
 }
 
@@ -142,19 +141,19 @@ struct AmountsChart: View {
     private var aggregatedEntries: [AggregatedEntry] {
         let calendar = Calendar.current
         let groups = Dictionary(grouping: entries) { entry -> DayProjectKey in
-            let day = calendar.startOfDay(for: entry.start)
+            let day = entry.start.day
             let projectName = entry.project?
                 .path
                 .dropFirst(project?.path.count ?? 0)
                 .split(separator: Project.pathSeparator)
                 .first
                 .map(String.init)
-                ?? (project != nil ? project!.name : "Other")
+            ?? project?.name ?? "Other"
             return DayProjectKey(day: day, project: projectName)
         }
         return groups.map { key, entries in
             let totalHours = entries.map { $0.duration.hours }.reduce(0, +)
-            return AggregatedEntry(day: key.day, project: key.project, totalHours: totalHours)
+            return AggregatedEntry(day: key.day, segmentName: key.project, totalHours: totalHours)
         }
     }
 
@@ -164,7 +163,6 @@ struct AmountsChart: View {
     /// Modified chart to use aggregated data
     private var chart: some View {
         let sortedDays = groupedAggregatedEntries.keys.sorted()
-        let calendar = Calendar.current
 
         return Wrapper {
             Chart {
@@ -178,7 +176,7 @@ struct AmountsChart: View {
                             x: .value(unit.description, day, unit: unit),
                             y: .value("Time", aggEntry.totalHours)
                         )
-                        .foregroundStyle(by: .value("Project", aggEntry.project))
+                        .foregroundStyle(by: .value("Project", aggEntry.segmentName))
                     }
                 }
             }
@@ -240,6 +238,5 @@ class AmountsChart_Previews: PreviewProvider {
                     .environment(\.managedObjectContext, moc)
         }
     }
-
 }
 
