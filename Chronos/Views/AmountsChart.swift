@@ -149,7 +149,7 @@ struct AmountsChart: View {
     /// Aggregating the data
     private var aggregatedEntries: [AggregatedEntry] {
         let groups = Dictionary(grouping: entries) { entry -> UnitSegmentKey in
-            let day = truncatedDate(for: entry.start)
+            let unitDate = truncatedDate(for: entry.start)
             let segmentName = entry.project?
                 .path
                 .dropFirst(project?.path.count ?? 0)
@@ -157,21 +157,19 @@ struct AmountsChart: View {
                 .first
                 .map(String.init)
                 ?? project?.name ?? "Other"
-            return UnitSegmentKey(unitDate: day, segmentName: segmentName)
+            return UnitSegmentKey(unitDate: unitDate, segmentName: segmentName)
         }
         return groups.map { key, entries in
             let totalHours = entries.map { $0.duration.hours }.reduce(0, +)
             return AggregatedEntry(unitDate: key.unitDate, segmentName: key.segmentName, totalTime: totalHours)
         }
     }
-
     private var groupedAggregatedEntries: [Date: [AggregatedEntry]] {
         Dictionary(grouping: aggregatedEntries, by: { $0.unitDate })
     }
     /// Modified chart to use aggregated data
     private var chart: some View {
         let sortedDays = groupedAggregatedEntries.keys.sorted()
-
         return Wrapper {
             Chart {
                 ForEach(sortedDays, id: \.self) { day in
