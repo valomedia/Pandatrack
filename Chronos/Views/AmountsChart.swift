@@ -164,10 +164,11 @@ struct AmountsChart: View {
             return AggregatedEntry(unitDate: key.unitDate, segmentName: key.segmentName, totalTime: totalHours)
         }
     }
+    
     private var groupedAggregatedEntries: [Date: [AggregatedEntry]] {
         Dictionary(grouping: aggregatedEntries, by: { $0.unitDate })
     }
-    /// Modified chart to use aggregated data
+
     private var chart: some View {
         let sortedDays = groupedAggregatedEntries.keys.sorted()
         return Wrapper {
@@ -227,7 +228,6 @@ struct AmountsChart: View {
                 .sum()
     }
 }
-
 
 // MARK: AmountsChart_Previews
 
