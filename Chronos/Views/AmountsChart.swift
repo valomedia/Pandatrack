@@ -146,63 +146,63 @@ struct AmountsChart: View {
         let unitDate: Date
         let segmentName: String
     }
-    /// Aggregating the data
-    private var aggregatedEntries: [AggregatedEntry] {
-        let groups = Dictionary(grouping: entries) { entry -> UnitSegmentKey in
-            let unitDate = truncatedDate(for: entry.start)
-            let segmentName = entry.project?
-                .path
-                .dropFirst(project?.path.count ?? 0)
-                .split(separator: Project.pathSeparator)
-                .first
-                .map(String.init)
-                ?? project?.name ?? "Other"
-            return UnitSegmentKey(unitDate: unitDate, segmentName: segmentName)
-        }
-        return groups.map { key, entries in
-            let totalHours = entries.map { $0.duration.hours }.reduce(0, +)
-            return AggregatedEntry(unitDate: key.unitDate, segmentName: key.segmentName, totalTime: totalHours)
-        }
-    }
     
     private var groupedAggregatedEntries: [Date: [AggregatedEntry]] {
-        Dictionary(grouping: aggregatedEntries, by: { $0.unitDate })
+        let groupedByDate = Dictionary(grouping: entries, by: { truncatedDate(for: $0.start) })
+        var result: [Date: [AggregatedEntry]] = [:]
+        for (date, entriesForDate) in groupedByDate {
+            let segments = Dictionary(grouping: entriesForDate, by: { entry in
+                entry.project?
+                    .path
+                    .dropFirst(project?.path.count ?? 0)
+                    .split(separator: Project.pathSeparator)
+                    .first
+                    .map(String.init)
+                ?? project?.name ?? "Other"
+            })
+            // Create an AggregatedEntry for each segment group
+            let aggregated = segments.map { (segment, group) in
+                AggregatedEntry(
+                    unitDate: date,
+                    segmentName: segment,
+                    totalTime: group.reduce(0) { $0 + $1.duration.hours }
+                )
+            }
+            result[date] = aggregated
+        }
+        return result
     }
 
     private var chart: some View {
-        let sortedDays = groupedAggregatedEntries.keys.sorted()
+        let sortedDates = groupedAggregatedEntries.keys.sorted()
         return Wrapper {
             Chart {
-                ForEach(sortedDays, id: \.self) { day in
-                    // Sort segments in each bar by totalTime (largest first)
-                    let dayEntries = groupedAggregatedEntries[day]!.sorted { $0.totalTime > $1.totalTime }
-
-                    ForEach(dayEntries) { aggEntry in
+                ForEach(sortedDates, id: \.self) { date in
+                    // For each unit date, sort the segments by total time
+                    let segments = groupedAggregatedEntries[date]!.sorted { $0.totalTime > $1.totalTime }
+                    ForEach(segments) { entry in
                         BarMark(
-                            // Use `unit` to let Swift Charts center the bar in that day (or week/month/etc.).
-                            x: .value(unit.description, day, unit: unit),
-                            y: .value("Time", aggEntry.totalTime)
+                            x: .value(unit.description, date, unit: unit),
+                            y: .value("Time", entry.totalTime)
                         )
-                        .foregroundStyle(by: .value("Project", aggEntry.segmentName))
+                        .foregroundStyle(by: .value("Project", entry.segmentName))
                     }
                 }
             }
-                    .chartXScale(domain: interval.start...interval.end)
-                    .chartXAxis {
-                        Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day <= 7
-                                ? AxisMarks(values: .stride(by: .day))
-                                : AxisMarks()
-                    }
-                    .chartYAxis { AxisMarks(position: .leading) }
+            .chartXScale(domain: interval.start...interval.end)
+            .chartXAxis {
+                Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day ?? 0 <= 7
+                    ? AxisMarks(values: .stride(by: .day))
+                    : AxisMarks()
+            }
+            .chartYAxis { AxisMarks(position: .leading) }
         }
-                .chartPlotStyle {
-                    $0.border(.gray, width: 1)
-                }
-                .if(!subProjects.map(\.theme).compacted().isEmpty) { view in
-                    view.chartForegroundStyleScale { category in
-                        subProjects.first { $0.name == category }?.theme?.backgroundColor ?? .accentColor
-                    }
-                }
+        .chartPlotStyle { $0.border(.gray, width: 1) }
+        .if(!subProjects.map(\.theme).compacted().isEmpty) { view in
+            view.chartForegroundStyleScale { category in
+                subProjects.first { $0.name == category }?.theme?.backgroundColor ?? .accentColor
+            }
+        }
     }
 
     private var unit: Calendar.Component {
