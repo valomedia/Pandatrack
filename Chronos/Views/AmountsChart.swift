@@ -240,3 +240,15 @@ class AmountsChart_Previews: PreviewProvider {
         }
     }
 }
+
+// MARK: - Dictionary Extensions
+
+private extension Dictionary {
+    func mapValuesWithKey<T>(_ transform: (Key, Value) -> T) -> [Key: T] {
+        var result = [Key: T]()
+        for (key, value) in self {
+            result[key] = transform(key, value)
+        }
+        return result
+    }
+}
