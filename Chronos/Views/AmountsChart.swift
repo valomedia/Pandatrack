@@ -141,11 +141,6 @@ struct AmountsChart: View {
                     .fontWeight(.bold)
         }
     }
-    /// Workaround to occasional hashing error
-    struct UnitSegmentKey: Hashable {
-        let unitDate: Date
-        let segmentName: String
-    }
     
     private var groupedAggregatedEntries: [Date: [AggregatedEntry]] {
         let groupedByDate = Dictionary(grouping: entries, by: { truncatedDate(for: $0.start) })
@@ -174,7 +169,6 @@ struct AmountsChart: View {
     }
 
     private var chart: some View {
-        let sortedDates = groupedAggregatedEntries.keys.sorted()
         return Wrapper {
             Chart {
                 ForEach(sortedDates, id: \.self) { date in
