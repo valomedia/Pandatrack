@@ -163,17 +163,17 @@ struct AmountsChart: View {
                     totalTime: group.reduce(0) { $0 + $1.duration.hours }
                 )
             }
-            result[date] = aggregated
+            result[date] = aggregated.sorted { $0.totalTime > $1.totalTime }
         }
         return result
     }
 
     private var chart: some View {
+        let sortedDates = groupedAggregatedEntries.keys.sorted()
         return Wrapper {
             Chart {
                 ForEach(sortedDates, id: \.self) { date in
-                    // For each unit date, sort the segments by total time
-                    let segments = groupedAggregatedEntries[date]!.sorted { $0.totalTime > $1.totalTime }
+                    let segments = groupedAggregatedEntries[date]!
                     ForEach(segments) { entry in
                         BarMark(
                             x: .value(unit.description, date, unit: unit),
