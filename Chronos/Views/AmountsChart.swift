@@ -144,10 +144,10 @@ struct AmountsChart: View {
     
     private var groupedAggregatedEntries: [Date: [AggregatedEntry]] {
         // Group entries by their truncated date.
-        let groupedByDate: [Date: [CompletedEntry]] = Dictionary(grouping: entries, by: { truncatedDate(for: $0.start) })
-        let aggregatedResults: [(Date, [AggregatedEntry])] = groupedByDate.map { (date, entriesForDate) in
+        let groupedByDate = Dictionary(grouping: entries, by: { truncatedDate(for: $0.start) })
+        return groupedByDate.mapValuesWithKey { date, entriesForDate in
             // Group by segment name.
-            let segments: [String: [CompletedEntry]] = Dictionary(grouping: entriesForDate, by: { entry in
+            let segments = Dictionary(grouping: entriesForDate, by: { entry in
                 entry.project?
                     .path
                     .dropFirst(project?.path.count ?? 0)
@@ -156,7 +156,7 @@ struct AmountsChart: View {
                     .map(String.init)
                 ?? project?.name ?? "Other"
             })
-            let aggregated: [AggregatedEntry] = segments.map { (segment, group) in
+            return segments.map { (segment, group) in
                 AggregatedEntry(
                     unitDate: date,
                     segmentName: segment,
@@ -164,9 +164,7 @@ struct AmountsChart: View {
                 )
             }
             .sorted { $0.totalTime > $1.totalTime }
-            return (date, aggregated)
         }
-        return Dictionary(uniqueKeysWithValues: aggregatedResults)
     }
 
     private var chart: some View {
