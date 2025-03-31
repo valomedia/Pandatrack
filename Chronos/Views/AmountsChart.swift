@@ -11,24 +11,9 @@ import SwiftUI
 import Charts
 import ObservedOptionalObject
 
-public extension Date {
-    /// Returns the start of the interval for the specified calendar component.
-    /// - Parameters:
-    ///   - component: The calendar component (e.g., .day, .weekOfYear, .month, etc.) to truncate to.
-    ///   - calendar: The calendar to use; defaults to Calendar.current.
-    /// - Returns: The start of the interval if available, otherwise the start of the day.
-    func truncated(to component: Calendar.Component, calendar: Calendar = .current) -> Date {
-        guard let interval = calendar.dateInterval(of: component, for: self) else {
-            return calendar.startOfDay(for: self)
-        }
-        return interval.start
-    }
-}
-
 // MARK: AmountsChart
 
 struct AmountsChart: View {
-    
     ///Helper struct for sorting data
     private struct AggregatedEntry: Identifiable {
         let id = UUID()
