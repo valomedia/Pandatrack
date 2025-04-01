@@ -13,8 +13,8 @@ import ObservedOptionalObject
 
 // MARK: AmountsChart
 
+/// A helper struct for sorting data.
 struct AmountsChart: View {
-    ///Helper struct for sorting data
     private struct AggregatedEntry: Identifiable {
         let id = UUID()
         let unitDate: Date
