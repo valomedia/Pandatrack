@@ -132,11 +132,11 @@ struct AmountsChart: View {
         }
     }
     
-    private var groupedAggregatedEntries: [Date: [AggregatedEntry]] {
+    private var sortedAggregatedEntries: [(date: Date, aggregated: [AggregatedEntry])] {
         // Group entries by their truncated date.
         let groupedByDate: [Date: [CompletedEntry]] = Dictionary(grouping: entries, by: { $0.start.truncated(to: unit) })
-        let aggregatedResults: [(Date, [AggregatedEntry])] = groupedByDate.map { (date, entriesForDate) in
-            // Group by segment name.
+        // Aggregate and sort each group by totalTime.
+        let aggregatedResults = groupedByDate.map { (date, entriesForDate) -> (date: Date, aggregated: [AggregatedEntry]) in
             let segments: [String: [CompletedEntry]] = Dictionary(grouping: entriesForDate, by: { entry in
                 entry.project?
                     .path
@@ -154,23 +154,24 @@ struct AmountsChart: View {
                 )
             }
             .sorted { $0.totalTime > $1.totalTime }
-            return (date, aggregated)
+            return (date: date, aggregated: aggregated)
         }
-        return Dictionary(uniqueKeysWithValues: aggregatedResults)
+        // Sort the results by date.
+        return aggregatedResults.sorted { $0.date < $1.date }
     }
 
     private var chart: some View {
-        let sortedDates = groupedAggregatedEntries.keys.sorted()
         return Wrapper {
             Chart {
-                ForEach(sortedDates, id: \.self) { date in
-                    let segments = groupedAggregatedEntries[date]!
-                    ForEach(segments) { entry in
+                ForEach(sortedAggregatedEntries, id: \.date) { entry in
+                    let date = entry.date
+                    let segments = entry.aggregated
+                    ForEach(segments) { segment in
                         BarMark(
                             x: .value(unit.description, date, unit: unit),
-                            y: .value("Time", entry.totalTime)
+                            y: .value("Time", segment.totalTime)
                         )
-                        .foregroundStyle(by: .value("Project", entry.segmentName))
+                        .foregroundStyle(by: .value("Project", segment.segmentName))
                     }
                 }
             }
