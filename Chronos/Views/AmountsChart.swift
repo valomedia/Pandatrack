@@ -14,6 +14,7 @@ import ObservedOptionalObject
 // MARK: AmountsChart
 
 /// A helper struct for sorting data.
+///
 struct AmountsChart: View {
     private struct AggregatedEntry: Identifiable {
         let id = UUID()
@@ -156,8 +157,7 @@ struct AmountsChart: View {
             .sorted { $0.totalTime > $1.totalTime }
             return (date: date, aggregated: aggregated)
         }
-        // Sort the results by date.
-        return aggregatedResults.sorted { $0.date < $1.date }
+        return aggregatedResults
     }
 
     private var chart: some View {
