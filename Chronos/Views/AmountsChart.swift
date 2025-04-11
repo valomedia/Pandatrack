@@ -135,7 +135,7 @@ struct AmountsChart: View {
     
     private var sortedAggregatedEntries: [(date: Date, aggregated: [AggregatedEntry])] {
         // Group entries by the truncated date
-        let groupedByDate = Dictionary(grouping: entries) { $0.start.truncated(to: unit) }
+        let groupedByDate = Dictionary(grouping: entries) { $0.start.truncate(to: unit) }
         return groupedByDate.map { date, dayEntries in
             // Group entries further by segment (using the project path, if available)
             let segments = Dictionary(grouping: dayEntries) { entry -> String in
