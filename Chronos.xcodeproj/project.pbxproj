@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14CB463B2DA9600D00136227 /* Date+truncate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CB463A2DA9600300136227 /* Date+truncate.swift */; };
 		E14C3D8B29466C7300495826 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E14C3D8A29466C7300495826 /* Settings.bundle */; };
 		E15C0D8A28F620D500309C90 /* ObservedOptionalObject in Frameworks */ = {isa = PBXBuildFile; productRef = E15C0D8928F620D500309C90 /* ObservedOptionalObject */; };
 		E15D0353292F946100B1591D /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = E15D0352292F946100B1591D /* DequeModule */; };
@@ -270,6 +271,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14CB463A2DA9600300136227 /* Date+truncate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+truncate.swift"; sourceTree = "<group>"; };
 		E14C3D8A29466C7300495826 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Chronos/Settings.bundle; sourceTree = SOURCE_ROOT; };
 		E1EE0D3029633FB8009371EE /* Chronos--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Chronos--iOS--Info.plist"; sourceTree = "<group>"; };
 		E9E97015F9546A4230C28822 /* ChronosTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChronosTests.swift; sourceTree = "<group>"; };
@@ -743,6 +745,7 @@
 		E9E97BEBA5DB246431144419 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				14CB463A2DA9600300136227 /* Date+truncate.swift */,
 				E9E97BCADA566C9F78A061DA /* Date+startOfToday.swift */,
 				E9E97970307F11D44BD19382 /* TimeInterval+formatter.swift */,
 				E9E9797616665258C6200DD5 /* CGRect+center.swift */,
@@ -1239,6 +1242,7 @@
 				E9E97C63F6F1B3B6864523BE /* Sorted.swift in Sources */,
 				E9E97F91F64DC73145D0689C /* Optional+Comparable.swift in Sources */,
 				E9E97BBD795D951027876D88 /* View+enabled.swift in Sources */,
+				14CB463B2DA9600D00136227 /* Date+truncate.swift in Sources */,
 				E9E9746B5A70DF54DDE72F15 /* PreviewProvider+env.swift in Sources */,
 				E9E97D5F142FD0BCD8BEC7AA /* PreviewProvider+moc.swift in Sources */,
 				E9E976EDAEA680701FE9ED9D /* PreviewProvider+entryTimer.swift in Sources */,
