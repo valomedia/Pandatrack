@@ -134,20 +134,20 @@ struct AmountsChart: View {
     }
     
     private var sortedAggregatedEntries: [(date: Date, aggregated: [AggregatedEntry])] {
-        // Group entries by their truncated date.
-        let groupedByDate: [Date: [CompletedEntry]] = Dictionary(grouping: entries, by: { $0.start.truncated(to: unit) })
-        // Aggregate and sort each group by totalTime.
-        let aggregatedResults = groupedByDate.map { (date, entriesForDate) -> (date: Date, aggregated: [AggregatedEntry]) in
-            let segments: [String: [CompletedEntry]] = Dictionary(grouping: entriesForDate, by: { entry in
+        // Group entries by the truncated date
+        let groupedByDate = Dictionary(grouping: entries) { $0.start.truncated(to: unit) }
+        return groupedByDate.map { date, dayEntries in
+            // Group entries further by segment (using the project path, if available)
+            let segments = Dictionary(grouping: dayEntries) { entry -> String in
                 entry.project?
                     .path
                     .dropFirst(project?.path.count ?? 0)
                     .split(separator: Project.pathSeparator)
                     .first
                     .map(String.init)
-                ?? project?.name ?? "Other"
-            })
-            let aggregated: [AggregatedEntry] = segments.map { (segment, group) in
+                ?? (project?.name ?? "Other")
+            }
+            let aggregated = segments.map { segment, group in
                 AggregatedEntry(
                     unitDate: date,
                     segmentName: segment,
@@ -157,18 +157,16 @@ struct AmountsChart: View {
             .sorted { $0.totalTime > $1.totalTime }
             return (date: date, aggregated: aggregated)
         }
-        return aggregatedResults
     }
 
     private var chart: some View {
+        let dayCount = Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day ?? 0
         return Wrapper {
             Chart {
                 ForEach(sortedAggregatedEntries, id: \.date) { entry in
-                    let date = entry.date
-                    let segments = entry.aggregated
-                    ForEach(segments) { segment in
+                    ForEach(entry.aggregated) { segment in
                         BarMark(
-                            x: .value(unit.description, date, unit: unit),
+                            x: .value(unit.description, entry.date, unit: unit),
                             y: .value("Time", segment.totalTime)
                         )
                         .foregroundStyle(by: .value("Project", segment.segmentName))
@@ -177,7 +175,7 @@ struct AmountsChart: View {
             }
             .chartXScale(domain: interval.start...interval.end)
             .chartXAxis {
-                Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day ?? 0 <= 7
+                dayCount <= 7
                     ? AxisMarks(values: .stride(by: .day))
                     : AxisMarks()
             }
