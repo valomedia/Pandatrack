@@ -16,16 +16,65 @@ import Chronos
 
 /// Unit tests for Chronos.
 ///
-class ChronosTests: XCTestCase {
+final class ChronosTests: XCTestCase {
 
-    // MARK: - Life cycle methods
+    // MARK: - Bool tests
 
-    override func setUpWithError() throws {}
+    func testThenReturnsValueOnlyWhenConditionIsTrue() {
+        XCTAssertEqual(true.then("value"), "value")
+        XCTAssertNil(false.then("value"))
+    }
 
-    override func tearDownWithError() throws {}
+    func testElseReturnsValueOnlyWhenConditionIsFalse() {
+        XCTAssertNil(true.`else`("fallback"))
+        XCTAssertEqual(false.`else`("fallback"), "fallback")
+    }
 
-    // MARK: - Tests
+    func testThenOperatorMatchesThenMethod() {
+        XCTAssertEqual(true .!! "value", true.then("value"))
+        XCTAssertNil(false .!! "value")
+    }
 
-    // Todo
+    // MARK: - Sequence tests
 
+    func testSumAddsNumericSequences() {
+        XCTAssertEqual([1, 2, 3, 4].sum(), 10)
+        XCTAssertEqual([Int]().sum(), 0)
+    }
+
+    func testSortedByKeyPathOrdersElements() {
+        let entries = [
+            TestEntry(name: "later", seconds: 120),
+            TestEntry(name: "earlier", seconds: 30),
+            TestEntry(name: "middle", seconds: 60),
+        ]
+
+        XCTAssertEqual(entries.sorted(by: \.seconds).map(\.name), ["earlier", "middle", "later"])
+    }
+
+    func testReduceWithoutInitialValueUsesPreviousPartialResult() {
+        let result = ["build", "test", "ship"].reduce { partialResult, word in
+            partialResult.map { "\($0), \(word)" } ?? word
+        }
+
+        XCTAssertEqual(result, "build, test, ship")
+    }
+
+    // MARK: - TimeInterval tests
+
+    func testTimeIntervalConversionsUseSeconds() {
+        let interval: TimeInterval = 7_200
+
+        XCTAssertEqual(interval.minutes, 120)
+        XCTAssertEqual(interval.hours, 2)
+    }
+
+}
+
+
+// MARK: - TestEntry
+
+private struct TestEntry {
+    let name: String
+    let seconds: Int
 }

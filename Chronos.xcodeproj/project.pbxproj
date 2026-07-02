@@ -1398,7 +1398,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chronos.app/Chronos";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pandatrack.app/Pandatrack";
 			};
 			name = Debug;
 		};
@@ -1419,7 +1419,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chronos.app/Chronos";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pandatrack.app/Pandatrack";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1491,6 +1491,7 @@
 				MARKETING_VERSION = 0.1.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.pandatrack;
+				PRODUCT_MODULE_NAME = Chronos;
 				PRODUCT_NAME = Pandatrack;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -1583,6 +1584,7 @@
 				MARKETING_VERSION = 0.1.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.pandatrack;
+				PRODUCT_MODULE_NAME = Chronos;
 				PRODUCT_NAME = Pandatrack;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
