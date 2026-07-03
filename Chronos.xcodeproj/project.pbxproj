@@ -272,6 +272,8 @@
 /* Begin PBXFileReference section */
 		E14C3D8A29466C7300495826 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Chronos/Settings.bundle; sourceTree = SOURCE_ROOT; };
 		E1EE0D3029633FB8009371EE /* Chronos--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Chronos--iOS--Info.plist"; sourceTree = "<group>"; };
+		E164C80728C960C10084B829 /* ChronosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChronosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E164C81428C960DB0084B829 /* ChronosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChronosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9E97015F9546A4230C28822 /* ChronosTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChronosTests.swift; sourceTree = "<group>"; };
 		E9E9701B3585ADC256B3C072 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		E9E9702402B61A805908F574 /* TagDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetailView.swift; sourceTree = "<group>"; };
@@ -565,6 +567,8 @@
 			isa = PBXGroup;
 			children = (
 				E9E97A0E3BCD9B16EC444870 /* Pandatrack.app */,
+				E164C80728C960C10084B829 /* ChronosTests.xctest */,
+				E164C81428C960DB0084B829 /* ChronosUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -943,6 +947,7 @@
 			);
 			name = ChronosTests;
 			productName = ChronosTests;
+			productReference = E164C80728C960C10084B829 /* ChronosTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		E164C81328C960DB0084B829 /* ChronosUITests */ = {
@@ -960,6 +965,7 @@
 			);
 			name = ChronosUITests;
 			productName = ChronosUITests;
+			productReference = E164C81428C960DB0084B829 /* ChronosUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		E9E97F443D26387AA33B9B7C /* Chronos (iOS) */ = {
