@@ -8,11 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E14C3D8B29466C7300495826 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E14C3D8A29466C7300495826 /* Settings.bundle */; };
-		E15C0D8A28F620D500309C90 /* ObservedOptionalObject in Frameworks */ = {isa = PBXBuildFile; productRef = E15C0D8928F620D500309C90 /* ObservedOptionalObject */; };
-		E15D0353292F946100B1591D /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = E15D0352292F946100B1591D /* DequeModule */; };
 		E164C81F28C96B830084B829 /* View+if.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E971D3AC3B5A7DB23C372F /* View+if.swift */; };
-		E1750BEC2947C95B00105378 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = E1750BEB2947C95B00105378 /* Collections */; };
-		E1750BEE2947C96000105378 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E1750BED2947C96000105378 /* OrderedCollections */; };
 		E1F9AC46293E0B0000330CDA /* EntryTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9770682748523C48F2078 /* EntryTimerView.swift */; };
 		E9E97004EA810F1A0CFCC432 /* ISO8601DateFormatter+formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E973F2D329D6DB579F96CB /* ISO8601DateFormatter+formatter.swift */; };
 		E9E97018F4CD22CE98462948 /* Date+lastYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97A9186F74C6DF8733E90 /* Date+lastYear.swift */; };
@@ -544,10 +540,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1750BEE2947C96000105378 /* OrderedCollections in Frameworks */,
-				E15D0353292F946100B1591D /* DequeModule in Frameworks */,
-				E1750BEC2947C95B00105378 /* Collections in Frameworks */,
-				E15C0D8A28F620D500309C90 /* ObservedOptionalObject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,12 +968,6 @@
 			dependencies = (
 			);
 			name = "Chronos (iOS)";
-			packageProductDependencies = (
-				E15C0D8928F620D500309C90 /* ObservedOptionalObject */,
-				E15D0352292F946100B1591D /* DequeModule */,
-				E1750BEB2947C95B00105378 /* Collections */,
-				E1750BED2947C96000105378 /* OrderedCollections */,
-			);
 			productName = "Chronos (iOS)";
 			productReference = E9E97A0E3BCD9B16EC444870 /* Pandatrack.app */;
 			productType = "com.apple.product-type.application";
@@ -1015,10 +1001,6 @@
 				Base,
 			);
 			mainGroup = E9E977D591C20B87BADC8590;
-			packageReferences = (
-				E15C0D8828F620D500309C90 /* XCRemoteSwiftPackageReference "observed-optional-object" */,
-				E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */,
-			);
 			productRefGroup = E9E97064E5A24A1ABC72684B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1694,48 +1676,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		E15C0D8828F620D500309C90 /* XCRemoteSwiftPackageReference "observed-optional-object" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fourplusone/observed-optional-object.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.1.0;
-			};
-		};
-		E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-collections.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E15C0D8928F620D500309C90 /* ObservedOptionalObject */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E15C0D8828F620D500309C90 /* XCRemoteSwiftPackageReference "observed-optional-object" */;
-			productName = ObservedOptionalObject;
-		};
-		E15D0352292F946100B1591D /* DequeModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = DequeModule;
-		};
-		E1750BEB2947C95B00105378 /* Collections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = Collections;
-		};
-		E1750BED2947C96000105378 /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E9E97F37D607CE417A672CF9 /* Chronos.xcdatamodeld */ = {

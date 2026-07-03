@@ -2,14 +2,15 @@
 
 ## Project
 - Pandatrack is an iOS time-tracking app.
-- The Xcode project is `Chronos.xcodeproj`; the app target is `Chronos (iOS)`.
+- The Xcode workspace is `Chronos.xcworkspace`; the app target is `Chronos (iOS)`.
 - Source is Swift/SwiftUI with Core Data and a SwiftGen build phase.
 
 ## Commands
-- `open Chronos.xcodeproj` - open the app in Xcode for local development.
-- `xcodebuild -project Chronos.xcodeproj -scheme "Chronos (iOS)" -destination 'platform=iOS Simulator,name=<installed simulator>' build` - build the app on macOS with Xcode.
-- `xcodebuild -project Chronos.xcodeproj -scheme "Chronos (iOS)" -destination 'platform=iOS Simulator,name=<installed simulator>' test` - run unit and UI tests on macOS with Xcode.
-- `SRCROOT="$PWD" Chronos/swiftgen.sh` - regenerate SwiftGen outputs when SwiftGen is installed.
+- `pod install --repo-update` - install CocoaPods dependencies before opening the app.
+- `open Chronos.xcworkspace` - open the app in Xcode for local development.
+- `xcodebuild -workspace Chronos.xcworkspace -scheme "Chronos (iOS)" -destination 'platform=iOS Simulator,name=<installed simulator>' build` - build the app on macOS with Xcode.
+- `xcodebuild -workspace Chronos.xcworkspace -scheme "Chronos (iOS)" -destination 'platform=iOS Simulator,name=<installed simulator>' test` - run unit and UI tests on macOS with Xcode.
+- `SRCROOT="$PWD" Chronos/swiftgen.sh` - regenerate SwiftGen outputs after running `pod install`.
 
 ## Structure
 - `Chronos/ChronosApp.swift` - SwiftUI app entry point.
@@ -24,9 +25,12 @@
 - `ChronosTests/` and `ChronosUITests/` - XCTest targets.
 
 ## Dependencies and generation
-- Xcode resolves Swift Package dependencies from `Chronos.xcodeproj`:
-  `observed-optional-object` and Apple `swift-collections`.
+- CocoaPods dependencies are declared in `Podfile`.
+  Run `pod install --repo-update` and open `Chronos.xcworkspace`, not `Chronos.xcodeproj`.
+- The app target depends on `ObservedOptionalObject`, `OrderedCollections`, and `SwiftGen` through CocoaPods.
+- `Podspecs/ObservedOptionalObject.podspec` provides a local podspec for the SwiftPM-only ObservedOptionalObject package.
 - The app target has a `Run swiftgen` build phase that executes `Chronos/swiftgen.sh`.
+  The script invokes the CocoaPods-managed SwiftGen binary at `Pods/SwiftGen/bin/swiftgen`.
 - SwiftGen outputs are `Chronos/Models/Assets+Generated.swift`,
   `Chronos/Models/CoreData+Generated.swift`,
   `Chronos/Models/Settings+Generated.swift`, and

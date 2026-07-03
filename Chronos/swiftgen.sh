@@ -15,9 +15,20 @@
 # resources.
 #
 
-set +euo pipefail
+set -euo pipefail
 
-# shellcheck disable=SC2164
+if [[ -z "${SRCROOT:-}" ]]; then
+  SRCROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+fi
+
+PODS_ROOT="${PODS_ROOT:-${SRCROOT}/Pods}"
+SWIFTGEN="${PODS_ROOT}/SwiftGen/bin/swiftgen"
+
+if [[ ! -x "${SWIFTGEN}" ]]; then
+  echo "error: SwiftGen is not installed. Run 'pod install --repo-update' to install it." >&2
+  exit 1
+fi
+
 cd "${SRCROOT}/Chronos"
 
-exec swiftgen
+exec "${SWIFTGEN}"
