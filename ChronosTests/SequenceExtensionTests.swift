@@ -1,5 +1,5 @@
 //
-//  ChronosTests.swift
+//  SequenceExtensionTests.swift
 //  ChronosTests
 //
 //  Created by Jean-Pierre Höhmann on 2022-09-08.
@@ -12,30 +12,9 @@ import XCTest
 import Chronos
 
 
-// MARK: ChronosTests
+// MARK: - SequenceExtensionTests
 
-/// Unit tests for Chronos.
-///
-final class ChronosTests: XCTestCase {
-
-    // MARK: - Bool tests
-
-    func testThenReturnsValueOnlyWhenConditionIsTrue() {
-        XCTAssertEqual(true.then("value"), "value")
-        XCTAssertNil(false.then("value"))
-    }
-
-    func testElseReturnsValueOnlyWhenConditionIsFalse() {
-        XCTAssertNil(true.`else`("fallback"))
-        XCTAssertEqual(false.`else`("fallback"), "fallback")
-    }
-
-    func testThenOperatorMatchesThenMethod() {
-        XCTAssertEqual(true .!! "value", true.then("value"))
-        XCTAssertNil(false .!! "value")
-    }
-
-    // MARK: - Sequence tests
+final class SequenceExtensionTests: XCTestCase {
 
     func testSumAddsNumericSequences() {
         XCTAssertEqual([1, 2, 3, 4].sum(), 10)
@@ -58,15 +37,6 @@ final class ChronosTests: XCTestCase {
         }
 
         XCTAssertEqual(result, "build, test, ship")
-    }
-
-    // MARK: - TimeInterval tests
-
-    func testTimeIntervalConversionsUseSeconds() {
-        let interval: TimeInterval = 7_200
-
-        XCTAssertEqual(interval.minutes, 120)
-        XCTAssertEqual(interval.hours, 2)
     }
 
 }
