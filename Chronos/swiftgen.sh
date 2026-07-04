@@ -20,4 +20,6 @@ set +euo pipefail
 # shellcheck disable=SC2164
 cd "${SRCROOT}/Chronos"
 
+export PATH="/opt/homebrew/bin:/usr/local/bin:${PATH}"
+
 exec swiftgen
