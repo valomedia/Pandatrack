@@ -14,7 +14,7 @@ import SwiftUI
 
 // MARK: + Equatable
 
-extension SectionedFetchResults.Section: Equatable where SectionIdentifier: Equatable {
+extension SectionedFetchResults.Section: @retroactive Equatable where SectionIdentifier: Equatable {
 
     public static func ==(lhs: SectionedFetchResults.Section, rhs: SectionedFetchResults.Section) -> Bool {
         lhs.id == rhs.id
