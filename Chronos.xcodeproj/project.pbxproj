@@ -224,7 +224,9 @@
 		E9E97E4262597BF17F1086F8 /* URLAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E979F8BD63253DDB9CEEDF /* URLAttribute.swift */; };
 		E9E97E56DB65CFB6D61E2F6E /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97144CE8066B4E5280B26 /* ErrorWrapper.swift */; };
 		E9E97E6C2AA836FE47F49A24 /* View+ifNotNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97BE09498AD78748525F8 /* View+ifNotNil.swift */; };
-		E9E97E8733CEA017AEF92C1F /* ChronosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97015F9546A4230C28822 /* ChronosTests.swift */; };
+		E9E980000000000000000001 /* BoolExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E980000000000000000004 /* BoolExtensionTests.swift */; };
+		E9E980000000000000000002 /* SequenceExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E980000000000000000005 /* SequenceExtensionTests.swift */; };
+		E9E980000000000000000003 /* TimeIntervalExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E980000000000000000006 /* TimeIntervalExtensionTests.swift */; };
 		E9E97E96428239E4AFCF108B /* PopupModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E976502E95FF9D7592DB0F /* PopupModifier.swift */; };
 		E9E97E99ECB69CB059E7872C /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97F6C982083D19EB2633C /* KeyboardReadable.swift */; };
 		E9E97E9B4DBDB6B36E854861 /* Date+startOfThisYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97C0E03F9784E7D5A3459 /* Date+startOfThisYear.swift */; };
@@ -280,7 +282,11 @@
 		D578DDD6AAEA9D7EF6DAC885 /* Pods-Chronos (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chronos (iOS).release.xcconfig"; path = "Target Support Files/Pods-Chronos (iOS)/Pods-Chronos (iOS).release.xcconfig"; sourceTree = "<group>"; };
 		E14C3D8A29466C7300495826 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Chronos/Settings.bundle; sourceTree = SOURCE_ROOT; };
 		E1EE0D3029633FB8009371EE /* Chronos--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Chronos--iOS--Info.plist"; sourceTree = "<group>"; };
-		E9E97015F9546A4230C28822 /* ChronosTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChronosTests.swift; sourceTree = "<group>"; };
+		E164C80728C960C10084B829 /* ChronosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChronosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E164C81428C960DB0084B829 /* ChronosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChronosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9E980000000000000000004 /* BoolExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolExtensionTests.swift; sourceTree = "<group>"; };
+		E9E980000000000000000005 /* SequenceExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceExtensionTests.swift; sourceTree = "<group>"; };
+		E9E980000000000000000006 /* TimeIntervalExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtensionTests.swift; sourceTree = "<group>"; };
 		E9E9701B3585ADC256B3C072 /* PomodoroTimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroTimerView.swift; sourceTree = "<group>"; };
 		E9E9702402B61A805908F574 /* TagDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetailView.swift; sourceTree = "<group>"; };
 		E9E97035383F15428C40AFD6 /* TagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
@@ -575,6 +581,8 @@
 			isa = PBXGroup;
 			children = (
 				E9E97A0E3BCD9B16EC444870 /* Pandatrack.app */,
+				E164C80728C960C10084B829 /* ChronosTests.xctest */,
+				E164C81428C960DB0084B829 /* ChronosUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -922,7 +930,9 @@
 		E9E97EC607BA827C5934B6FC /* ChronosTests */ = {
 			isa = PBXGroup;
 			children = (
-				E9E97015F9546A4230C28822 /* ChronosTests.swift */,
+				E9E980000000000000000004 /* BoolExtensionTests.swift */,
+				E9E980000000000000000005 /* SequenceExtensionTests.swift */,
+				E9E980000000000000000006 /* TimeIntervalExtensionTests.swift */,
 			);
 			path = ChronosTests;
 			sourceTree = "<group>";
@@ -969,6 +979,7 @@
 			);
 			name = ChronosTests;
 			productName = ChronosTests;
+			productReference = E164C80728C960C10084B829 /* ChronosTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		E164C81328C960DB0084B829 /* ChronosUITests */ = {
@@ -987,6 +998,7 @@
 			);
 			name = ChronosUITests;
 			productName = ChronosUITests;
+			productReference = E164C81428C960DB0084B829 /* ChronosUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		E9E97F443D26387AA33B9B7C /* Chronos (iOS) */ = {
@@ -1191,7 +1203,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9E97E8733CEA017AEF92C1F /* ChronosTests.swift in Sources */,
+				E9E980000000000000000001 /* BoolExtensionTests.swift in Sources */,
+				E9E980000000000000000002 /* SequenceExtensionTests.swift in Sources */,
+				E9E980000000000000000003 /* TimeIntervalExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1495,7 +1509,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4VVD4SUFNL;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.ChronosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1503,7 +1517,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chronos.app/Chronos";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pandatrack.app/Pandatrack";
 			};
 			name = Debug;
 		};
@@ -1516,7 +1530,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4VVD4SUFNL;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.ChronosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1524,7 +1538,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chronos.app/Chronos";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pandatrack.app/Pandatrack";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1537,7 +1551,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4VVD4SUFNL;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.ChronosUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1557,7 +1571,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4VVD4SUFNL;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.ChronosUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1596,6 +1610,7 @@
 				);
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.pandatrack;
+				PRODUCT_MODULE_NAME = Chronos;
 				PRODUCT_NAME = Pandatrack;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -1688,6 +1703,7 @@
 				);
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.pandatrack;
+				PRODUCT_MODULE_NAME = Chronos;
 				PRODUCT_NAME = Pandatrack;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;

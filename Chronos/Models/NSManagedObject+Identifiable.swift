@@ -12,7 +12,7 @@ import CoreData
 
 // MARK: NSManagedObject
 
-extension NSManagedObject: Identifiable {
+extension NSManagedObject: @retroactive Identifiable {
 
     // MARK: + Identifiable
 

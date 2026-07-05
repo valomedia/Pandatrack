@@ -13,7 +13,7 @@ import Foundation
 
 // MARK: + CustomStringConvertible
 
-extension Calendar.Component: CustomStringConvertible {
+extension Calendar.Component: @retroactive CustomStringConvertible {
 
     public var description: String {
         switch self {

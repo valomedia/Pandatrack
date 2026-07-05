@@ -11,7 +11,7 @@ import Foundation
 
 // MARK: Optional
 
-extension Optional: Comparable where Wrapped: Comparable {
+extension Optional: @retroactive Comparable where Wrapped: Comparable {
 
     // MARK: + Comparable
 
