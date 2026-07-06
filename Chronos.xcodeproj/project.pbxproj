@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		102946E33331FDC4BFB50C95 /* Pods_ChronosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F93C79D4BEEC3672195F46F /* Pods_ChronosUITests.framework */; };
+		69C1BB6ADE76983A55809D0E /* Pods_ChronosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50582A4242525BCC6DE7D5E7 /* Pods_ChronosTests.framework */; };
+		C47DAA0619020C0FD0406DC3 /* Pods_Chronos__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120BFA86A6D6F402E3F0BBE4 /* Pods_Chronos__iOS_.framework */; };
 		E14C3D8B29466C7300495826 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E14C3D8A29466C7300495826 /* Settings.bundle */; };
-		E15C0D8A28F620D500309C90 /* ObservedOptionalObject in Frameworks */ = {isa = PBXBuildFile; productRef = E15C0D8928F620D500309C90 /* ObservedOptionalObject */; };
-		E15D0353292F946100B1591D /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = E15D0352292F946100B1591D /* DequeModule */; };
 		E164C81F28C96B830084B829 /* View+if.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E971D3AC3B5A7DB23C372F /* View+if.swift */; };
-		E1750BEC2947C95B00105378 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = E1750BEB2947C95B00105378 /* Collections */; };
-		E1750BEE2947C96000105378 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E1750BED2947C96000105378 /* OrderedCollections */; };
 		E1F9AC46293E0B0000330CDA /* EntryTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E9770682748523C48F2078 /* EntryTimerView.swift */; };
 		E9E97004EA810F1A0CFCC432 /* ISO8601DateFormatter+formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E973F2D329D6DB579F96CB /* ISO8601DateFormatter+formatter.swift */; };
 		E9E97018F4CD22CE98462948 /* Date+lastYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E97A9186F74C6DF8733E90 /* Date+lastYear.swift */; };
@@ -272,6 +271,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		120BFA86A6D6F402E3F0BBE4 /* Pods_Chronos__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chronos__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23FF39E9E838C4C58F7E8EDD /* Pods-ChronosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChronosTests.debug.xcconfig"; path = "Target Support Files/Pods-ChronosTests/Pods-ChronosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3F93C79D4BEEC3672195F46F /* Pods_ChronosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChronosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50582A4242525BCC6DE7D5E7 /* Pods_ChronosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChronosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85E54EE81F68F19097FC3082 /* Pods-ChronosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChronosTests.release.xcconfig"; path = "Target Support Files/Pods-ChronosTests/Pods-ChronosTests.release.xcconfig"; sourceTree = "<group>"; };
+		8EDED06ADA11CB324AA726DD /* Pods-ChronosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChronosUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChronosUITests/Pods-ChronosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A41EF18F2A01F1DE43D0E337 /* Pods-Chronos (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chronos (iOS).debug.xcconfig"; path = "Target Support Files/Pods-Chronos (iOS)/Pods-Chronos (iOS).debug.xcconfig"; sourceTree = "<group>"; };
+		A66E34FAC9BCB35C02639272 /* Pods-ChronosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChronosUITests.release.xcconfig"; path = "Target Support Files/Pods-ChronosUITests/Pods-ChronosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D578DDD6AAEA9D7EF6DAC885 /* Pods-Chronos (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chronos (iOS).release.xcconfig"; path = "Target Support Files/Pods-Chronos (iOS)/Pods-Chronos (iOS).release.xcconfig"; sourceTree = "<group>"; };
 		E14C3D8A29466C7300495826 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Chronos/Settings.bundle; sourceTree = SOURCE_ROOT; };
 		E1EE0D3029633FB8009371EE /* Chronos--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Chronos--iOS--Info.plist"; sourceTree = "<group>"; };
 		E164C80728C960C10084B829 /* ChronosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChronosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -536,6 +544,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69C1BB6ADE76983A55809D0E /* Pods_ChronosTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +552,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				102946E33331FDC4BFB50C95 /* Pods_ChronosUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,10 +560,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1750BEE2947C96000105378 /* OrderedCollections in Frameworks */,
-				E15D0353292F946100B1591D /* DequeModule in Frameworks */,
-				E1750BEC2947C95B00105378 /* Collections in Frameworks */,
-				E15C0D8A28F620D500309C90 /* ObservedOptionalObject in Frameworks */,
+				C47DAA0619020C0FD0406DC3 /* Pods_Chronos__iOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +570,9 @@
 		E1750BEA2947C95B00105378 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				120BFA86A6D6F402E3F0BBE4 /* Pods_Chronos__iOS_.framework */,
+				50582A4242525BCC6DE7D5E7 /* Pods_ChronosTests.framework */,
+				3F93C79D4BEEC3672195F46F /* Pods_ChronosUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -729,6 +739,7 @@
 				E9E97FE24AA5DE61A1C9D611 /* ChronosUITests */,
 				E1750BEA2947C95B00105378 /* Frameworks */,
 				E9E9796A208E4EA53592C3F8 /* LICENSE */,
+				F024A9FACEEB97075D07D3CA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -935,6 +946,20 @@
 			path = ChronosUITests;
 			sourceTree = "<group>";
 		};
+		F024A9FACEEB97075D07D3CA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A41EF18F2A01F1DE43D0E337 /* Pods-Chronos (iOS).debug.xcconfig */,
+				D578DDD6AAEA9D7EF6DAC885 /* Pods-Chronos (iOS).release.xcconfig */,
+				23FF39E9E838C4C58F7E8EDD /* Pods-ChronosTests.debug.xcconfig */,
+				85E54EE81F68F19097FC3082 /* Pods-ChronosTests.release.xcconfig */,
+				8EDED06ADA11CB324AA726DD /* Pods-ChronosUITests.debug.xcconfig */,
+				A66E34FAC9BCB35C02639272 /* Pods-ChronosUITests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -942,6 +967,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E164C80D28C960C20084B829 /* Build configuration list for PBXNativeTarget "ChronosTests" */;
 			buildPhases = (
+				0A8DC20748B44461B140115F /* [CP] Check Pods Manifest.lock */,
 				E164C80328C960C10084B829 /* Sources */,
 				E164C80428C960C10084B829 /* Frameworks */,
 				E164C80528C960C10084B829 /* Resources */,
@@ -960,6 +986,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E164C81C28C960DB0084B829 /* Build configuration list for PBXNativeTarget "ChronosUITests" */;
 			buildPhases = (
+				5F713D61BEB06B41911565B0 /* [CP] Check Pods Manifest.lock */,
 				E164C81028C960DB0084B829 /* Sources */,
 				E164C81128C960DB0084B829 /* Frameworks */,
 				E164C81228C960DB0084B829 /* Resources */,
@@ -978,22 +1005,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9E97BAE35238E1F148C71C8 /* Build configuration list for PBXNativeTarget "Chronos (iOS)" */;
 			buildPhases = (
+				A6E29111AE541735F34C85BA /* [CP] Check Pods Manifest.lock */,
 				E194DE752823F6AF0086E372 /* Run swiftgen */,
 				E9E97008C85AFB52B1E62443 /* Sources */,
 				E9E97738D0913D40A08D748A /* Frameworks */,
 				E9E9715705BD500D8A65A6AB /* Resources */,
+				B9A222B3F4BDE75C183671C9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Chronos (iOS)";
-			packageProductDependencies = (
-				E15C0D8928F620D500309C90 /* ObservedOptionalObject */,
-				E15D0352292F946100B1591D /* DequeModule */,
-				E1750BEB2947C95B00105378 /* Collections */,
-				E1750BED2947C96000105378 /* OrderedCollections */,
-			);
 			productName = "Chronos (iOS)";
 			productReference = E9E97A0E3BCD9B16EC444870 /* Pandatrack.app */;
 			productType = "com.apple.product-type.application";
@@ -1027,10 +1050,6 @@
 				Base,
 			);
 			mainGroup = E9E977D591C20B87BADC8590;
-			packageReferences = (
-				E15C0D8828F620D500309C90 /* XCRemoteSwiftPackageReference "observed-optional-object" */,
-				E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */,
-			);
 			productRefGroup = E9E97064E5A24A1ABC72684B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1071,6 +1090,92 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A8DC20748B44461B140115F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChronosTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F713D61BEB06B41911565B0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChronosUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6E29111AE541735F34C85BA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Chronos (iOS)-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9A222B3F4BDE75C183671C9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Chronos (iOS)/Pods-Chronos (iOS)-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ObservedOptionalObject/ObservedOptionalObject.framework",
+				"${BUILT_PRODUCTS_DIR}/OrderedCollections/OrderedCollections.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObservedOptionalObject.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OrderedCollections.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Chronos (iOS)/Pods-Chronos (iOS)-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E194DE752823F6AF0086E372 /* Run swiftgen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1397,6 +1502,7 @@
 /* Begin XCBuildConfiguration section */
 		E164C80E28C960C20084B829 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23FF39E9E838C4C58F7E8EDD /* Pods-ChronosTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1405,7 +1511,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.ChronosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1418,6 +1523,7 @@
 		};
 		E164C80F28C960C20084B829 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85E54EE81F68F19097FC3082 /* Pods-ChronosTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1426,7 +1532,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.ChronosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1440,6 +1545,7 @@
 		};
 		E164C81D28C960DB0084B829 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EDED06ADA11CB324AA726DD /* Pods-ChronosUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1447,7 +1553,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.ChronosUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1460,6 +1565,7 @@
 		};
 		E164C81E28C960DB0084B829 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A66E34FAC9BCB35C02639272 /* Pods-ChronosUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1467,7 +1573,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.ChronosUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1481,6 +1586,7 @@
 		};
 		E9E97A5C4FF5AA68965EC475 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D578DDD6AAEA9D7EF6DAC885 /* Pods-Chronos (iOS).release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1503,7 +1609,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.pandatrack;
 				PRODUCT_MODULE_NAME = Chronos;
 				PRODUCT_NAME = Pandatrack;
@@ -1566,7 +1671,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -1574,6 +1678,7 @@
 		};
 		E9E97E533F35BEDAAFC870EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A41EF18F2A01F1DE43D0E337 /* Pods-Chronos (iOS).debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1596,7 +1701,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = media.valo.pandatrack;
 				PRODUCT_MODULE_NAME = Chronos;
 				PRODUCT_NAME = Pandatrack;
@@ -1664,7 +1768,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1710,48 +1813,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		E15C0D8828F620D500309C90 /* XCRemoteSwiftPackageReference "observed-optional-object" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fourplusone/observed-optional-object.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.1.0;
-			};
-		};
-		E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-collections.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E15C0D8928F620D500309C90 /* ObservedOptionalObject */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E15C0D8828F620D500309C90 /* XCRemoteSwiftPackageReference "observed-optional-object" */;
-			productName = ObservedOptionalObject;
-		};
-		E15D0352292F946100B1591D /* DequeModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = DequeModule;
-		};
-		E1750BEB2947C95B00105378 /* Collections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = Collections;
-		};
-		E1750BED2947C96000105378 /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E15D034F292F946100B1591D /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E9E97F37D607CE417A672CF9 /* Chronos.xcdatamodeld */ = {

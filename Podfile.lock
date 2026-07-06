@@ -1,0 +1,27 @@
+PODS:
+  - ObservedOptionalObject (0.1.1)
+  - OrderedCollections (1.0.4)
+  - SwiftGen (6.6.3)
+
+DEPENDENCIES:
+  - ObservedOptionalObject (from `Podspecs/ObservedOptionalObject.podspec`)
+  - OrderedCollections (~> 1.0)
+  - SwiftGen (~> 6.6)
+
+SPEC REPOS:
+  trunk:
+    - OrderedCollections
+    - SwiftGen
+
+EXTERNAL SOURCES:
+  ObservedOptionalObject:
+    :podspec: Podspecs/ObservedOptionalObject.podspec
+
+SPEC CHECKSUMS:
+  ObservedOptionalObject: 60051fe51174e4a5f36a5ba2e7794a0201932062
+  OrderedCollections: c754ce5f9e42cf22b73afd73582317347903ab6d
+  SwiftGen: 4993cbf71cbc4886f775e26f8d5c3a1188ec9f99
+
+PODFILE CHECKSUM: ff2d9e33c1969b82b27accc39f82ccd51b285bc6
+
+COCOAPODS: 1.16.2
