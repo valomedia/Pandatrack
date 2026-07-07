@@ -34,6 +34,7 @@ struct FloatingActionButton: View {
                 .buttonStyle(.plain)
                 .if(colorScheme == .light) { $0.colorInvert() }
                 .background(Circle().fill(Color.accentColor))
+                .accessibilityLabel("Add")
                 .padding()
     }
 

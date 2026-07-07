@@ -33,4 +33,30 @@ jobs:
             -workspace Chronos.xcworkspace \
             -scheme Pandatrack \
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -only-testing:ChronosTests \
+            CODE_SIGNING_ALLOWED=NO
+
+  instrumented-tests:
+    name: Instrumented Tests
+    runs-on: macos-15
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Install CocoaPods dependencies
+        run: pod install --repo-update
+
+      - name: Run instrumented tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -workspace Chronos.xcworkspace \
+            -scheme Pandatrack \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -only-testing:ChronosUITests \
             CODE_SIGNING_ALLOWED=NO
