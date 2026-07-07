@@ -38,7 +38,7 @@ struct PersistenceController {
     }()
 
     static var shared: PersistenceController {
-        preview ?? _shared
+        isRunningUITests ? _shared : preview ?? _shared
     }
 
     private static let _shared: PersistenceController = PersistenceController()
@@ -48,6 +48,7 @@ struct PersistenceController {
     private init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Chronos")
         if inMemory { container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null") }
+        if !inMemory && Self.shouldResetPersistentStore { resetPersistentStoreFiles() }
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -59,5 +60,29 @@ struct PersistenceController {
     // MARK: - Properties
 
     let container: NSPersistentContainer
+
+    private static var isRunningUITests: Bool {
+        ProcessInfo.processInfo.arguments.contains("--ui-testing")
+    }
+
+    private static var shouldResetPersistentStore: Bool {
+        isRunningUITests && ProcessInfo.processInfo.arguments.contains("--reset-persistent-store")
+    }
+
+    // MARK: - Methods
+
+    private func resetPersistentStoreFiles() {
+        guard let storeURL = container.persistentStoreDescriptions.first?.url else { return }
+
+        let storeFiles = [
+            storeURL,
+            URL(fileURLWithPath: "\(storeURL.path)-shm"),
+            URL(fileURLWithPath: "\(storeURL.path)-wal")
+        ]
+
+        for url in storeFiles {
+            try? FileManager.default.removeItem(at: url)
+        }
+    }
 
 }

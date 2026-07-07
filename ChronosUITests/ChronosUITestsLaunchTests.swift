@@ -59,6 +59,8 @@ class ChronosUITestsLaunchTests: XCTestCase {
     ///
     func testLaunch() throws {
         let app = XCUIApplication()
+        app.launchArguments.append("--ui-testing")
+        app.launchArguments.append("--reset-persistent-store")
         app.launch()
 
         let attachment = XCTAttachment(screenshot: app.screenshot())
