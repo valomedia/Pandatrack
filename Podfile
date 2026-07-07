@@ -19,10 +19,6 @@ target 'Chronos (iOS)' do
   target 'ChronosTests' do
     inherit! :search_paths
   end
-
-  target 'ChronosUITests' do
-    inherit! :search_paths
-  end
 end
 
 post_install do |installer|
