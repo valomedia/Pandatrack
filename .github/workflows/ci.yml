@@ -26,13 +26,18 @@ jobs:
       - name: Install CocoaPods dependencies
         run: pod install --repo-update
 
+      - name: Create iOS simulator
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/create-ios-simulator.py "Pandatrack CI iPhone"
+
       - name: Run unit tests
         run: |
           set -o pipefail
           xcodebuild test \
             -workspace Chronos.xcworkspace \
             -scheme Pandatrack \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -destination "platform=iOS Simulator,id=${PANDATRACK_SIMULATOR_UDID}" \
             -only-testing:ChronosTests \
             CODE_SIGNING_ALLOWED=NO
 
@@ -51,12 +56,17 @@ jobs:
       - name: Install CocoaPods dependencies
         run: pod install --repo-update
 
+      - name: Create iOS simulator
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/create-ios-simulator.py "Pandatrack CI iPhone"
+
       - name: Run instrumented tests
         run: |
           set -o pipefail
           xcodebuild test \
             -workspace Chronos.xcworkspace \
             -scheme Pandatrack \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -destination "platform=iOS Simulator,id=${PANDATRACK_SIMULATOR_UDID}" \
             -only-testing:ChronosUITests \
             CODE_SIGNING_ALLOWED=NO
