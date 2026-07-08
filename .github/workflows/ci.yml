@@ -39,6 +39,16 @@ jobs:
             CODE_SIGN_STYLE=Automatic \
             DEVELOPMENT_TEAM=PKW2VF887G
 
+      - name: Stamp archive team metadata
+        run: |
+          set -euo pipefail
+          /usr/libexec/PlistBuddy \
+            -c "Set :ApplicationProperties:Team PKW2VF887G" \
+            build/Pandatrack.xcarchive/Info.plist
+          test "$(/usr/libexec/PlistBuddy \
+            -c "Print :ApplicationProperties:Team" \
+            build/Pandatrack.xcarchive/Info.plist)" = "PKW2VF887G"
+
       - name: Zip archive
         run: |
           set -euo pipefail
