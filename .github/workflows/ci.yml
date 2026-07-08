@@ -26,19 +26,29 @@ jobs:
       - name: Install CocoaPods dependencies
         run: pod install --repo-update
 
-      - name: Create iOS simulator
-        run: |
-          set -euo pipefail
-          python3 .github/scripts/create-ios-simulator.py "Pandatrack CI iPhone"
-
-      - name: Build app
+      - name: Archive app
         run: |
           set -o pipefail
-          xcodebuild build \
+          xcodebuild archive \
             -workspace Chronos.xcworkspace \
             -scheme Pandatrack \
-            -destination "platform=iOS Simulator,id=${PANDATRACK_SIMULATOR_UDID}" \
+            -destination "generic/platform=iOS" \
+            -archivePath build/Pandatrack.xcarchive \
             CODE_SIGNING_ALLOWED=NO
+
+      - name: Zip archive
+        run: |
+          set -euo pipefail
+          ditto -c -k --sequesterRsrc --keepParent \
+            build/Pandatrack.xcarchive \
+            build/Pandatrack.xcarchive.zip
+
+      - name: Upload archive artifact
+        uses: actions/upload-artifact@v7
+        with:
+          path: build/Pandatrack.xcarchive.zip
+          if-no-files-found: error
+          archive: false
 
   unit-tests:
     name: Unit Tests
