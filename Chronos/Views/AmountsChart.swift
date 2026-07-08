@@ -128,20 +128,12 @@ struct AmountsChart: View {
 
     private var chart: some View {
         Wrapper {
-            Chart(entries) { entry in
-                BarMark(x: .value(unit.description, entry.start, unit: unit), y: .value("Time", entry.duration.hours))
-                        .foregroundStyle(
-                                by: .value(
-                                        "Folder",
-                                        entry
-                                                .project?
-                                                .path
-                                                .dropFirst(project?.path.count ?? 0)
-                                                .split(separator: Project.pathSeparator)
-                                                .first
-                                                .map(String.init)
-                                                ?? (project != nil ? project!.name : "Other"))
-                        )
+            Chart(chartSegments) { segment in
+                BarMark(
+                        x: .value(unit.description, segment.start, unit: unit),
+                        y: .value("Time", segment.duration.hours)
+                )
+                        .foregroundStyle(by: .value("Folder", segment.project))
             }
                     .chartXScale(domain: interval.start...interval.end)
                     .chartXAxis {
@@ -161,6 +153,31 @@ struct AmountsChart: View {
                 }
     }
 
+    private var chartSegments: [ChartSegment] {
+        var durations: [Date: [String: TimeInterval]] = [:]
+        for entry in entries {
+            let start = bucketStart(for: entry.start)
+            let project = projectName(for: entry)
+            durations[start, default: [:]][project, default: 0] += entry.duration
+        }
+
+        return durations
+                .flatMap { start, durationsByProject in
+                    durationsByProject.map { project, duration in
+                        ChartSegment(start: start, project: project, duration: duration)
+                    }
+                }
+                .sorted { lhs, rhs in
+                    if lhs.start == rhs.start {
+                        if lhs.duration == rhs.duration {
+                            return lhs.project < rhs.project
+                        }
+                        return lhs.duration > rhs.duration
+                    }
+                    return lhs.start < rhs.start
+                }
+    }
+
     private var unit: Calendar.Component {
         switch Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day {
         case .some(0...31): return .day
@@ -175,7 +192,36 @@ struct AmountsChart: View {
 
     @State private var pdfIsReady = false
 
+    private struct ChartSegment: Identifiable {
+        let start: Date
+        let project: String
+        let duration: TimeInterval
+
+        var id: String {
+            "\(start.timeIntervalSinceReferenceDate)-\(project)"
+        }
+    }
+
     // MARK: - Methods
+
+    private func bucketStart(for date: Date) -> Date {
+        guard let start = Calendar.current.dateInterval(of: unit, for: date)?.start else {
+            return date
+        }
+        return start < interval.start ? interval.start : start
+    }
+
+    private func projectName(for entry: CompletedEntry) -> String {
+        entry
+                .project?
+                .path
+                .dropFirst(project?.path.count ?? 0)
+                .split(separator: Project.pathSeparator)
+                .first
+                .map(String.init)
+                ?? project?.name
+                ?? "Other"
+    }
 
     private func sum(for project: Project? = nil) -> TimeInterval {
         entries
