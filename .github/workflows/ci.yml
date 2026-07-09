@@ -103,10 +103,33 @@ jobs:
             -only-testing:ChronosUITests \
             CODE_SIGNING_ALLOWED=NO
 
-      - name: Upload instrumented test results
+      - name: Export instrumented test screenshots
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -d TestResults/InstrumentedTests.xcresult ]; then
+            echo "No instrumented test result bundle found."
+            exit 1
+          fi
+
+          rm -rf TestResults/Screenshots
+          mkdir -p TestResults/Screenshots
+          xcrun xcresulttool export attachments \
+            --path TestResults/InstrumentedTests.xcresult \
+            --output-path TestResults/Screenshots
+
+          screenshot_count=$(find TestResults/Screenshots -type f -iname '*.png' | wc -l | tr -d ' ')
+          if [ "$screenshot_count" -eq 0 ]; then
+            echo "No PNG screenshots were exported from the instrumented test result bundle."
+            exit 1
+          fi
+
+          echo "Exported $screenshot_count screenshot(s)."
+
+      - name: Upload instrumented test screenshots
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: instrumented-test-results
-          path: TestResults/InstrumentedTests.xcresult
-          if-no-files-found: warn
+          name: instrumented-test-screenshots
+          path: TestResults/Screenshots/**/*.png
+          if-no-files-found: error
