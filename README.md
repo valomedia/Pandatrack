@@ -10,3 +10,9 @@ Install CocoaPods dependencies before opening the project:
 pod install --repo-update
 open Chronos.xcworkspace
 ```
+
+Run Xcode static analysis with the repository-local lint command:
+
+```sh
+./scripts/lint.sh
+```

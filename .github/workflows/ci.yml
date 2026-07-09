@@ -11,6 +11,29 @@ permissions:
   contents: read
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: macos-15
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Install CocoaPods dependencies
+        run: pod install --repo-update
+
+      - name: Create iOS simulator
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/create-ios-simulator.py "Pandatrack CI iPhone"
+
+      - name: Run static analysis
+        run: ./scripts/lint.sh
+
   build:
     name: Build
     runs-on: macos-15
