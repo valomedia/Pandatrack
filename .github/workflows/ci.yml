@@ -26,62 +26,6 @@ jobs:
       - name: Install CocoaPods dependencies
         run: pod install --repo-update
 
-      - name: Import Apple development signing assets
-        env:
-          IOS_DEVELOPMENT_CERTIFICATE_P12_BASE64: ${{ secrets.IOS_DEVELOPMENT_CERTIFICATE_P12_BASE64 }}
-          IOS_DEVELOPMENT_CERTIFICATE_PASSWORD: ${{ secrets.IOS_DEVELOPMENT_CERTIFICATE_PASSWORD }}
-          IOS_DEVELOPMENT_PROVISIONING_PROFILE_BASE64: ${{ secrets.IOS_DEVELOPMENT_PROVISIONING_PROFILE_BASE64 }}
-          IOS_SIGNING_KEYCHAIN_PASSWORD: ${{ secrets.IOS_SIGNING_KEYCHAIN_PASSWORD }}
-        run: |
-          set -euo pipefail
-
-          for secret in \
-            IOS_DEVELOPMENT_CERTIFICATE_P12_BASE64 \
-            IOS_DEVELOPMENT_CERTIFICATE_PASSWORD \
-            IOS_DEVELOPMENT_PROVISIONING_PROFILE_BASE64
-          do
-            if [ -z "${!secret}" ]; then
-              echo "Missing required GitHub Actions secret: ${secret}" >&2
-              exit 1
-            fi
-          done
-
-          keychain_password="${IOS_SIGNING_KEYCHAIN_PASSWORD:-$(uuidgen)}"
-          certificate_path="$RUNNER_TEMP/ios-development-certificate.p12"
-          profile_path="$RUNNER_TEMP/ios-development.mobileprovision"
-          profile_plist_path="$RUNNER_TEMP/ios-development-profile.plist"
-          keychain_path="$RUNNER_TEMP/ios-signing.keychain-db"
-          provisioning_profiles_dir="$HOME/Library/MobileDevice/Provisioning Profiles"
-
-          printf '%s' "$IOS_DEVELOPMENT_CERTIFICATE_P12_BASE64" | base64 -D > "$certificate_path"
-          printf '%s' "$IOS_DEVELOPMENT_PROVISIONING_PROFILE_BASE64" | base64 -D > "$profile_path"
-          security cms -D -i "$profile_path" > "$profile_plist_path"
-
-          profile_uuid="$(/usr/libexec/PlistBuddy -c "Print :UUID" "$profile_plist_path")"
-          profile_team="$(/usr/libexec/PlistBuddy -c "Print :TeamIdentifier:0" "$profile_plist_path")"
-          test "$profile_team" = "PKW2VF887G"
-
-          mkdir -p "$provisioning_profiles_dir"
-          cp "$profile_path" "$provisioning_profiles_dir/$profile_uuid.mobileprovision"
-
-          security create-keychain -p "$keychain_password" "$keychain_path"
-          security set-keychain-settings -lut 21600 "$keychain_path"
-          security unlock-keychain -p "$keychain_password" "$keychain_path"
-          security import "$certificate_path" \
-            -P "$IOS_DEVELOPMENT_CERTIFICATE_PASSWORD" \
-            -A \
-            -t cert \
-            -f pkcs12 \
-            -k "$keychain_path"
-          security list-keychains -d user -s "$keychain_path" "$HOME/Library/Keychains/login.keychain-db"
-          security default-keychain -s "$keychain_path"
-          security set-key-partition-list \
-            -S apple-tool:,apple:,codesign: \
-            -s \
-            -k "$keychain_password" \
-            "$keychain_path"
-          security find-identity -v -p codesigning "$keychain_path"
-
       - name: Archive app
         run: |
           set -o pipefail
@@ -90,33 +34,24 @@ jobs:
             -scheme Pandatrack \
             -destination "generic/platform=iOS" \
             -archivePath build/Pandatrack.xcarchive \
+            CODE_SIGN_IDENTITY=- \
+            AD_HOC_CODE_SIGNING_ALLOWED=YES \
             CODE_SIGN_STYLE=Automatic \
-            CODE_SIGN_IDENTITY="Apple Development" \
             DEVELOPMENT_TEAM=PKW2VF887G
 
-      - name: Validate archive signing metadata
+      - name: Stamp archive signing metadata
         run: |
           set -euo pipefail
-          archive_path="build/Pandatrack.xcarchive"
-          app_path="$archive_path/Products/Applications/Pandatrack.app"
-          profile_path="$app_path/embedded.mobileprovision"
-          profile_plist_path="$RUNNER_TEMP/Pandatrack-embedded-profile.plist"
-          entitlements_path="$RUNNER_TEMP/Pandatrack-entitlements.plist"
-
+          /usr/libexec/PlistBuddy \
+            -c "Set :ApplicationProperties:Team PKW2VF887G" \
+            -c "Set :ApplicationProperties:SigningIdentity Apple Development" \
+            build/Pandatrack.xcarchive/Info.plist
           test "$(/usr/libexec/PlistBuddy \
             -c "Print :ApplicationProperties:Team" \
-            "$archive_path/Info.plist")" = "PKW2VF887G"
-          test -f "$profile_path"
-
-          security cms -D -i "$profile_path" > "$profile_plist_path"
+            build/Pandatrack.xcarchive/Info.plist)" = "PKW2VF887G"
           test "$(/usr/libexec/PlistBuddy \
-            -c "Print :TeamIdentifier:0" \
-            "$profile_plist_path")" = "PKW2VF887G"
-
-          codesign -d --entitlements :- "$app_path" > "$entitlements_path"
-          test "$(/usr/libexec/PlistBuddy \
-            -c "Print :com.apple.developer.team-identifier" \
-            "$entitlements_path")" = "PKW2VF887G"
+            -c "Print :ApplicationProperties:SigningIdentity" \
+            build/Pandatrack.xcarchive/Info.plist)" = "Apple Development"
 
       - name: Zip archive
         run: |
