@@ -66,6 +66,23 @@ class ChronosUITests: XCTestCase {
                 .matching(NSPredicate(format: "label == 'Entry' AND value == %@", Self.entryName))
                 .firstMatch
         XCTAssertTrue(entry.waitForExistence(timeout: 5))
+
+        addScreenshotAttachment(named: "Created Time Entry", from: app)
+    }
+
+    /// Show the add-entry form through the real application UI.
+    ///
+    /// - Throws:
+    ///
+    func testShowsAddEntryForm() throws {
+        let app = makeApp(resetPersistentStore: true)
+        app.launch()
+
+        XCTAssertTrue(app.navigationBars["Time Entries"].waitForExistence(timeout: 5))
+        app.buttons["Add"].tap()
+
+        XCTAssertTrue(app.textFields["Name"].waitForExistence(timeout: 5))
+        addScreenshotAttachment(named: "Add Time Entry Form", from: app)
     }
 
     /// Measure how long it takes to launch the application.
@@ -85,6 +102,28 @@ class ChronosUITests: XCTestCase {
         app.launchArguments.append("--ui-testing")
         if resetPersistentStore { app.launchArguments.append("--reset-persistent-store") }
         return app
+    }
+
+}
+
+
+// MARK: - Screenshot attachments
+
+extension XCTestCase {
+
+    // MARK: - Methods
+
+    /// Add a screenshot attachment that is retained in the test result bundle.
+    ///
+    /// - Parameters:
+    ///   - name: The attachment name shown in the test result bundle.
+    ///   - app: The application to capture.
+    ///
+    func addScreenshotAttachment(named name: String, from app: XCUIApplication) {
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 
 }

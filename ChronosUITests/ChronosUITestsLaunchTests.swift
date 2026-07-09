@@ -63,10 +63,7 @@ class ChronosUITestsLaunchTests: XCTestCase {
         app.launchArguments.append("--reset-persistent-store")
         app.launch()
 
-        let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = "Launch Screen"
-        attachment.lifetime = .keepAlways
-        add(attachment)
+        addScreenshotAttachment(named: "Launch Screen", from: app)
     }
 
 }
