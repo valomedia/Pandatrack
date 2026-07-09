@@ -46,10 +46,7 @@ jobs:
             fi
           done
 
-          keychain_password="$IOS_SIGNING_KEYCHAIN_PASSWORD"
-          if [ -z "$keychain_password" ]; then
-            keychain_password="$(uuidgen)"
-          fi
+          keychain_password="${IOS_SIGNING_KEYCHAIN_PASSWORD:-$(uuidgen)}"
           certificate_path="$RUNNER_TEMP/ios-development-certificate.p12"
           profile_path="$RUNNER_TEMP/ios-development.mobileprovision"
           profile_plist_path="$RUNNER_TEMP/ios-development-profile.plist"
