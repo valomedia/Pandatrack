@@ -39,15 +39,19 @@ jobs:
             CODE_SIGN_STYLE=Automatic \
             DEVELOPMENT_TEAM=PKW2VF887G
 
-      - name: Stamp archive team metadata
+      - name: Stamp archive signing metadata
         run: |
           set -euo pipefail
           /usr/libexec/PlistBuddy \
             -c "Set :ApplicationProperties:Team PKW2VF887G" \
+            -c "Set :ApplicationProperties:SigningIdentity Apple Development" \
             build/Pandatrack.xcarchive/Info.plist
           test "$(/usr/libexec/PlistBuddy \
             -c "Print :ApplicationProperties:Team" \
             build/Pandatrack.xcarchive/Info.plist)" = "PKW2VF887G"
+          test "$(/usr/libexec/PlistBuddy \
+            -c "Print :ApplicationProperties:SigningIdentity" \
+            build/Pandatrack.xcarchive/Info.plist)" = "Apple Development"
 
       - name: Zip archive
         run: |
