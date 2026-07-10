@@ -136,7 +136,6 @@ jobs:
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security import "$CERTIFICATE_PATH" \
             -f pkcs12 \
-            -t cert \
             -k "$KEYCHAIN_PATH" \
             -P "$IOS_DISTRIBUTION_CERTIFICATE_PASSWORD" \
             -A \
