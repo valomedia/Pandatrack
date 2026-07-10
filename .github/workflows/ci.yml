@@ -136,15 +136,23 @@ jobs:
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security import "$CERTIFICATE_PATH" \
             -f pkcs12 \
+            -t cert \
             -k "$KEYCHAIN_PATH" \
             -P "$IOS_DISTRIBUTION_CERTIFICATE_PASSWORD" \
+            -A \
             -T /usr/bin/codesign \
             -T /usr/bin/security \
             -T /usr/bin/xcodebuild
           security list-keychains -d user -s "$KEYCHAIN_PATH"
           security default-keychain -s "$KEYCHAIN_PATH"
-          security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          security find-identity -v -p codesigning "$KEYCHAIN_PATH"
+
+          SIGNING_IDENTITIES_PATH="$RUNNER_TEMP/pandatrack-signing-identities.txt"
+          security find-identity -v -p codesigning "$KEYCHAIN_PATH" | tee "$SIGNING_IDENTITIES_PATH"
+          if ! grep -Eq '^[[:space:]]+[0-9]+\) [[:xdigit:]]+ ".+"$' "$SIGNING_IDENTITIES_PATH"; then
+            echo "::error::The imported certificate did not include a valid code-signing identity."
+            echo "::error::Update IOS_DISTRIBUTION_CERTIFICATE_BASE64 with a .p12 export that includes the private key."
+            exit 1
+          fi
 
           {
             echo "PANDATRACK_SIGNING_KEYCHAIN=$KEYCHAIN_PATH"
