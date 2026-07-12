@@ -120,10 +120,82 @@ extension XCTestCase {
     ///   - app: The application to capture.
     ///
     func addScreenshotAttachment(named name: String, from app: XCUIApplication) {
-        let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = name
+        let screenshot = app.screenshot()
+        let slug = ScreenshotAttachmentNames.nextSlug(from: [
+            String(describing: type(of: self)),
+            self.name,
+            name,
+        ])
+        let screenshotsDirectory = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                .appendingPathComponent("PandatrackUITestScreenshots", isDirectory: true)
+        let fileURL = screenshotsDirectory.appendingPathComponent("\(slug).png")
+
+        do {
+            try FileManager.default.createDirectory(at: screenshotsDirectory, withIntermediateDirectories: true)
+            try screenshot.pngRepresentation.write(to: fileURL, options: .atomic)
+        } catch {
+            XCTFail("Failed to write screenshot attachment '\(slug)': \(error)")
+            return
+        }
+
+        let attachment = XCTAttachment(contentsOfFile: fileURL)
+        attachment.name = slug
         attachment.lifetime = .keepAlways
         add(attachment)
+    }
+
+}
+
+
+// MARK: - Screenshot attachment names
+
+private enum ScreenshotAttachmentNames {
+
+    // MARK: - Static properties
+
+    private static let lock = NSLock()
+    private static var counts: [String: Int] = [:]
+
+    // MARK: - Static methods
+
+    static func nextSlug(from components: [String]) -> String {
+        let baseSlug = components.joined(separator: "-").slugified()
+
+        lock.lock()
+        defer { lock.unlock() }
+
+        let count = (counts[baseSlug] ?? 0) + 1
+        counts[baseSlug] = count
+
+        if count == 1 { return baseSlug }
+        return "\(baseSlug)-\(count)"
+    }
+
+}
+
+
+// MARK: - String slugification
+
+private extension String {
+
+    // MARK: - Methods
+
+    func slugified() -> String {
+        let allowedCharacters = CharacterSet.alphanumerics
+        var slug = ""
+        var lastCharacterWasDash = false
+
+        for scalar in lowercased().unicodeScalars {
+            if allowedCharacters.contains(scalar) {
+                slug.append(Character(scalar))
+                lastCharacterWasDash = false
+            } else if !lastCharacterWasDash {
+                slug.append("-")
+                lastCharacterWasDash = true
+            }
+        }
+
+        return slug.trimmingCharacters(in: CharacterSet(charactersIn: "-"))
     }
 
 }
