@@ -1,87 +1,42 @@
 #!/usr/bin/env python3
-"""Rename exported xcresult PNG attachments using their XCTest attachment names."""
+"""Rename exported xcresult PNG attachments using xcresulttool's suggested names."""
 
 from __future__ import annotations
 
 import json
 import re
-import subprocess
 import sys
-from collections import deque
 from pathlib import Path
 from typing import Any, Iterable
 
 UUID_PNG_PATTERN = re.compile(
     r"^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\.png$"
 )
+SUGGESTED_SUFFIX_PATTERN = re.compile(
+    r"_[0-9]+_[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+)
+EXPORT_LOG_PATTERN = re.compile(r"File:\s*(?P<file>[^,\s]+\.png),\s*suggested name:\s*\"(?P<suggested>[^\"]+\.png)\"")
 
 
-def xc_value(value: Any) -> str | None:
-    if isinstance(value, dict):
-        wrapped_value = value.get("_value")
-        if wrapped_value is not None:
-            return str(wrapped_value)
-    if isinstance(value, str):
-        return value
-    return None
-
-
-def run_xcresulttool_get(xcresult_path: Path, object_id: str | None = None) -> dict[str, Any] | None:
-    command = ["xcrun", "xcresulttool", "get", "--format", "json", "--path", str(xcresult_path)]
-    if object_id:
-        command.extend(["--id", object_id])
-
-    for candidate in (command, command[:3] + ["--legacy"] + command[3:]):
-        try:
-            result = subprocess.run(candidate, check=True, capture_output=True, text=True)
-            return json.loads(result.stdout)
-        except subprocess.CalledProcessError as error:
-            last_error = error
-        except json.JSONDecodeError:
-            return None
-
-    print(f"warning: could not read xcresult object {object_id or '<root>'}: {last_error}", file=sys.stderr)
-    return None
-
-
-def iter_child_nodes(node: Any) -> Iterable[Any]:
+def iter_dicts(node: Any) -> Iterable[dict[str, Any]]:
     if isinstance(node, dict):
-        yield from node.values()
-    elif isinstance(node, list):
-        yield from node
-
-
-def find_json_refs(node: Any, parent_key: str = "") -> Iterable[str]:
-    if isinstance(node, dict):
-        if parent_key.endswith("Ref") and parent_key != "payloadRef":
-            ref_id = xc_value(node.get("id"))
-            if ref_id:
-                yield ref_id
-
-        for key, value in node.items():
-            yield from find_json_refs(value, key)
-    elif isinstance(node, list):
-        for value in node:
-            yield from find_json_refs(value, parent_key)
-
-
-def find_png_attachments(node: Any) -> Iterable[tuple[str, str]]:
-    if isinstance(node, dict):
-        payload_ref = node.get("payloadRef")
-        filename = xc_value(node.get("filename"))
-        name = xc_value(node.get("name")) or filename
-        uniform_type = xc_value(node.get("uniformTypeIdentifier"))
-
-        if isinstance(payload_ref, dict) and filename and name:
-            is_png = filename.lower().endswith(".png") or uniform_type == "public.png"
-            if is_png:
-                yield filename, name
-
+        yield node
         for value in node.values():
-            yield from find_png_attachments(value)
+            yield from iter_dicts(value)
     elif isinstance(node, list):
         for value in node:
-            yield from find_png_attachments(value)
+            yield from iter_dicts(value)
+
+
+def iter_strings(node: Any) -> Iterable[str]:
+    if isinstance(node, str):
+        yield node
+    elif isinstance(node, dict):
+        for value in node.values():
+            yield from iter_strings(value)
+    elif isinstance(node, list):
+        for value in node:
+            yield from iter_strings(value)
 
 
 def slugify(value: str) -> str:
@@ -99,6 +54,12 @@ def slugify(value: str) -> str:
     return "".join(slug_parts).strip("-") or "screenshot"
 
 
+def slug_from_suggested_name(suggested_name: str) -> str:
+    stem = Path(suggested_name).stem
+    stem = SUGGESTED_SUFFIX_PATTERN.sub("", stem)
+    return slugify(stem)
+
+
 def unique_path(output_directory: Path, slug: str, source: Path, used_paths: set[Path]) -> Path:
     candidate = output_directory / f"{slug}.png"
     index = 2
@@ -109,67 +70,71 @@ def unique_path(output_directory: Path, slug: str, source: Path, used_paths: set
     return candidate
 
 
-def discover_attachment_names(xcresult_path: Path) -> list[tuple[str, str]]:
-    root = run_xcresulttool_get(xcresult_path)
-    if root is None:
-        raise SystemExit("Could not read xcresult root object.")
+def discover_mappings_from_manifest(output_directory: Path, exported_names: set[str]) -> dict[str, str]:
+    manifest_path = output_directory / "manifest.json"
+    if not manifest_path.exists():
+        return {}
 
-    attachments: list[tuple[str, str]] = []
-    seen_attachment_filenames: set[str] = set()
-    seen_refs: set[str] = set()
-    refs = deque(find_json_refs(root))
+    with manifest_path.open(encoding="utf-8") as manifest_file:
+        manifest = json.load(manifest_file)
 
-    for filename, name in find_png_attachments(root):
-        if filename not in seen_attachment_filenames:
-            attachments.append((filename, name))
-            seen_attachment_filenames.add(filename)
+    mappings: dict[str, str] = {}
+    for item in iter_dicts(manifest):
+        strings = [Path(value).name for value in iter_strings(item) if value.lower().endswith(".png")]
+        source_names = sorted({value for value in strings if value in exported_names})
+        suggested_names = sorted(
+            value
+            for value in strings
+            if value not in exported_names and not UUID_PNG_PATTERN.match(value)
+        )
+        if len(source_names) == 1 and suggested_names:
+            mappings[source_names[0]] = suggested_names[0]
 
-    while refs:
-        ref_id = refs.popleft()
-        if ref_id in seen_refs:
-            continue
-        seen_refs.add(ref_id)
+    return mappings
 
-        node = run_xcresulttool_get(xcresult_path, ref_id)
-        if node is None:
-            continue
 
-        for filename, name in find_png_attachments(node):
-            if filename not in seen_attachment_filenames:
-                attachments.append((filename, name))
-                seen_attachment_filenames.add(filename)
+def discover_mappings_from_export_log(output_directory: Path, exported_names: set[str]) -> dict[str, str]:
+    export_log_path = output_directory / "export.log"
+    if not export_log_path.exists():
+        return {}
 
-        refs.extend(ref for ref in find_json_refs(node) if ref not in seen_refs)
+    mappings: dict[str, str] = {}
+    for match in EXPORT_LOG_PATTERN.finditer(export_log_path.read_text(encoding="utf-8")):
+        source_name = Path(match.group("file")).name
+        suggested_name = Path(match.group("suggested")).name
+        if source_name in exported_names:
+            mappings[source_name] = suggested_name
 
-    return attachments
+    return mappings
 
 
 def main() -> None:
     if len(sys.argv) != 3:
         raise SystemExit("Usage: rename-xcresult-attachments.py <result.xcresult> <exported-attachments-directory>")
 
-    xcresult_path = Path(sys.argv[1])
     output_directory = Path(sys.argv[2])
-
-    if not xcresult_path.exists():
-        raise SystemExit(f"Result bundle does not exist: {xcresult_path}")
     if not output_directory.exists():
         raise SystemExit(f"Attachment directory does not exist: {output_directory}")
 
-    attachments = discover_attachment_names(xcresult_path)
-    if not attachments:
-        raise SystemExit("No PNG attachment metadata found in result bundle.")
-
     exported_files = {path.name: path for path in output_directory.rglob("*.png")}
+    if not exported_files:
+        raise SystemExit("No exported PNG screenshots found.")
+
+    mappings = discover_mappings_from_manifest(output_directory, set(exported_files))
+    if not mappings:
+        mappings = discover_mappings_from_export_log(output_directory, set(exported_files))
+    if not mappings:
+        raise SystemExit("Could not find suggested screenshot names in xcresulttool export metadata.")
+
+    missing_names = sorted(set(exported_files) - set(mappings))
+    if missing_names:
+        raise SystemExit(f"No suggested names found for exported screenshots: {', '.join(missing_names)}")
+
     used_paths: set[Path] = set()
     renamed_count = 0
-
-    for filename, name in attachments:
-        source = exported_files.get(filename)
-        if source is None:
-            raise SystemExit(f"Exported PNG attachment missing for result filename: {filename}")
-
-        slug = slugify(Path(name).stem)
+    for source_name, suggested_name in sorted(mappings.items()):
+        source = exported_files[source_name]
+        slug = slug_from_suggested_name(suggested_name)
         destination = unique_path(output_directory, slug, source, used_paths)
         if source != destination:
             source.replace(destination)

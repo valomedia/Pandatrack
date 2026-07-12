@@ -116,7 +116,8 @@ jobs:
           mkdir -p TestResults/Screenshots
           xcrun xcresulttool export attachments \
             --path TestResults/InstrumentedTests.xcresult \
-            --output-path TestResults/Screenshots
+            --output-path TestResults/Screenshots \
+            | tee TestResults/Screenshots/export.log
           python3 .github/scripts/rename-xcresult-attachments.py \
             TestResults/InstrumentedTests.xcresult \
             TestResults/Screenshots
