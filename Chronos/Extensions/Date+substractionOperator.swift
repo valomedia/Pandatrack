@@ -2,9 +2,6 @@
 //  Date+subtractionOperator.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-12-11.
-//
-//
 
 import Foundation
 

@@ -2,9 +2,6 @@
 //  SampleData.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-10-25.
-//
-//
 
 import Foundation
 import CoreData

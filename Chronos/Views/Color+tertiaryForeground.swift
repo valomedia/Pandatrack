@@ -2,9 +2,6 @@
 //  Color+tertiaryForeground.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-09-22.
-//
-//
 
 import Foundation
 import SwiftUI

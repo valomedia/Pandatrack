@@ -2,9 +2,6 @@
 //  TabBarTab.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-12-05.
-//
-//
 
 import Foundation
 import SwiftUI

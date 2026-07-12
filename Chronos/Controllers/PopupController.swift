@@ -2,9 +2,6 @@
 //  PopupModifierController.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2023-02-01.
-//
-//
 
 import Foundation
 import SwiftUI
