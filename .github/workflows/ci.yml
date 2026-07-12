@@ -117,6 +117,9 @@ jobs:
           xcrun xcresulttool export attachments \
             --path TestResults/InstrumentedTests.xcresult \
             --output-path TestResults/Screenshots
+          python3 .github/scripts/rename-xcresult-attachments.py \
+            TestResults/InstrumentedTests.xcresult \
+            TestResults/Screenshots
 
           screenshot_count=$(find TestResults/Screenshots -type f -iname '*.png' | wc -l | tr -d ' ')
           if [ "$screenshot_count" -eq 0 ]; then
