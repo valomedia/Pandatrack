@@ -119,7 +119,6 @@ jobs:
             --output-path TestResults/Screenshots \
             | tee TestResults/Screenshots/export.log
           python3 .github/scripts/rename-xcresult-attachments.py \
-            TestResults/InstrumentedTests.xcresult \
             TestResults/Screenshots
 
           screenshot_count=$(find TestResults/Screenshots -type f -iname '*.png' | wc -l | tr -d ' ')
