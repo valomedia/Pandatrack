@@ -2,9 +2,6 @@
 //  View+if.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-09-08.
-//
-//
 
 import Foundation
 import SwiftUI

@@ -2,9 +2,6 @@
 //  ChronosView.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-02-07.
-//
-//
 
 import Foundation
 import SwiftUI

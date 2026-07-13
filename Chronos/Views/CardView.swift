@@ -2,9 +2,6 @@
 //  CardView.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-07-02.
-//
-//
 
 import Foundation
 import SwiftUI

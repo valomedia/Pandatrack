@@ -2,9 +2,6 @@
 //  View+floatingActionButton.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-10-18.
-//
-//
 
 import Foundation
 import SwiftUI
