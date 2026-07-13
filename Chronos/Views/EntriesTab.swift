@@ -39,7 +39,9 @@ struct EntriesTab: View {
             }
                     .searchable(text: $search)
                     .navigationTitle("Time Entries")
-                    .floatingActionButton { isPresentingEditView = true }
+                    .floatingActionButton(accessibilityIdentifier: "addEntryButton") {
+                        isPresentingEditView = true
+                    }
                     .modal("New Entry", isPresented: $isPresentingEditView, onOpen: { newEntry = CompletedEntry(moc)}) {
                         if let newEntry { EntryDetailEditView(entry: newEntry) }
                     }
