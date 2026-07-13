@@ -14,14 +14,20 @@ import SwiftUI
 
 extension View {
 
-    func floatingActionButton(image: Image? = nil, action: (()->())? = nil) -> some View {
+    func floatingActionButton(
+            image: Image? = nil,
+            accessibilityIdentifier: String? = nil,
+            action: (()->())? = nil) -> some View {
         ZStack {
             self
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
-                    FloatingActionButton(image: image, action: action)
+                    FloatingActionButton(
+                            image: image,
+                            accessibilityIdentifier: accessibilityIdentifier,
+                            action: action)
                 }
             }
         }

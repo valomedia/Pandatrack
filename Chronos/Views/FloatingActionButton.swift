@@ -16,8 +16,9 @@ struct FloatingActionButton: View {
 
     // MARK: - Life cycle methods
 
-    init(image: Image? = nil, action: (()->())? = nil) {
+    init(image: Image? = nil, accessibilityIdentifier: String? = nil, action: (()->())? = nil) {
         self.image = image ?? Image(systemName: "plus")
+        self.accessibilityIdentifier = accessibilityIdentifier
         self.action = action ?? {}
     }
 
@@ -35,11 +36,14 @@ struct FloatingActionButton: View {
                 .if(colorScheme == .light) { $0.colorInvert() }
                 .background(Circle().fill(Color.accentColor))
                 .accessibilityLabel("Add")
+                .ifNotNil(accessibilityIdentifier) { $0.accessibilityIdentifier($1) }
                 .padding()
     }
 
     @Environment(\.colorScheme)
     private var colorScheme: ColorScheme
+
+    private let accessibilityIdentifier: String?
 
     // MARK: - Methods
 
