@@ -125,16 +125,20 @@ jobs:
           github.event_name == 'push' ||
           (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
         run: |
-          set -o pipefail
+          set -euo pipefail
+
+          python3 .github/scripts/configure-ios-signing.py \
+            Chronos.xcodeproj/project.pbxproj \
+            --bundle-identifier "$PANDATRACK_BUNDLE_IDENTIFIER" \
+            --team-id "$IOS_DEVELOPMENT_TEAM_ID" \
+            --profile-name "$IOS_ADHOC_PROVISIONING_PROFILE_NAME" \
+            --signing-identity "$PANDATRACK_CODE_SIGN_IDENTITY"
+
           xcodebuild archive \
             -workspace Chronos.xcworkspace \
             -scheme Pandatrack \
             -destination "generic/platform=iOS" \
             -archivePath "$RUNNER_TEMP/Pandatrack.xcarchive" \
-            CODE_SIGN_STYLE=Manual \
-            DEVELOPMENT_TEAM="$IOS_DEVELOPMENT_TEAM_ID" \
-            PROVISIONING_PROFILE_SPECIFIER="$IOS_ADHOC_PROVISIONING_PROFILE_NAME" \
-            CODE_SIGN_IDENTITY="Apple Distribution" \
             OTHER_CODE_SIGN_FLAGS="--keychain $PANDATRACK_SIGNING_KEYCHAIN"
 
       - name: Export ad-hoc IPA
