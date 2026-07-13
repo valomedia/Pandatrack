@@ -64,11 +64,8 @@ class ChronosUITestsLaunchTests: XCTestCase {
         app.launchArguments.append("--reset-persistent-store")
         app.launch()
 
-        // The screenshot exporter currently produces cropped, black-padded images for landscape launch captures.
-        // Keep the launch coverage for every UI configuration, but only retain readable portrait screenshots.
-        guard !XCUIDevice.shared.orientation.isLandscape else { return }
-
-        addScreenshotAttachment(named: "Launch Screen", from: app)
+        let screenshot = app.screenshot()
+        addScreenshotAttachment(named: "Launch Screen \(screenshot.pandatrackOrientationName)", screenshot: screenshot)
     }
 
 }
