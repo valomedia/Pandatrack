@@ -28,7 +28,11 @@ struct Modal<Content: View, S: StringProtocol>: View {
 
     var body: some View {
         NavigationView {
-            content()
+            Group {
+                if isContentPresented {
+                    content()
+                }
+            }
                     .navigationTitle(title.isEmpty ? "Untitled" : title)
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
@@ -44,11 +48,11 @@ struct Modal<Content: View, S: StringProtocol>: View {
                         }
                     }
         }
-                .onAppear(perform: env.waitForConfirmation)
-                .onAppear(perform: onOpen)
-                .onDisappear(perform: onClose)
-                .onDisappear(perform: env.discardChanges)
+                .onAppear(perform: open)
+                .onDisappear(perform: close)
     }
+
+    @State private var isContentPresented = false
 
     private var title: S
     private var content: () -> Content
@@ -62,5 +66,19 @@ struct Modal<Content: View, S: StringProtocol>: View {
 
     private let onOpen: () -> Void
     private let onClose: () -> Void
+
+    private func open() {
+        guard !isContentPresented else { return }
+
+        env.waitForConfirmation()
+        onOpen()
+        isContentPresented = true
+    }
+
+    private func close() {
+        isContentPresented = false
+        onClose()
+        env.discardChanges()
+    }
 
 }
