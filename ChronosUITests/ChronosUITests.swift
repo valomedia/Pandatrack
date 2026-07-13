@@ -147,7 +147,20 @@ extension XCUIScreenshot {
     // MARK: - Properties
 
     var pandatrackOrientationName: String {
-        image.size.width > image.size.height ? "Landscape" : "Portrait"
+        guard let size = pngPixelSize else {
+            return image.size.width > image.size.height ? "Landscape" : "Portrait"
+        }
+
+        return size.width > size.height ? "Landscape" : "Portrait"
+    }
+
+    private var pngPixelSize: (width: Int, height: Int)? {
+        let bytes = [UInt8](pngRepresentation)
+        guard bytes.count >= 24 else { return nil }
+
+        let width = (Int(bytes[16]) << 24) | (Int(bytes[17]) << 16) | (Int(bytes[18]) << 8) | Int(bytes[19])
+        let height = (Int(bytes[20]) << 24) | (Int(bytes[21]) << 16) | (Int(bytes[22]) << 8) | Int(bytes[23])
+        return (width, height)
     }
 
 }
