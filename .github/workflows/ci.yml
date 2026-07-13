@@ -80,6 +80,7 @@ jobs:
           {
             echo "PANDATRACK_SIGNING_KEYCHAIN=$KEYCHAIN_PATH"
             echo "PANDATRACK_CERTIFICATE_PATH=$CERTIFICATE_PATH"
+            echo "PANDATRACK_SIGNING_IDENTITIES_PATH=$SIGNING_IDENTITIES_PATH"
           } >> "$GITHUB_ENV"
 
       - name: Install ad-hoc provisioning profile
@@ -103,6 +104,10 @@ jobs:
           TEAM_ID="$(/usr/libexec/PlistBuddy -c 'Print TeamIdentifier:0' "$PROFILE_PLIST")"
           APPLICATION_IDENTIFIER="$(/usr/libexec/PlistBuddy -c 'Print Entitlements:application-identifier' "$PROFILE_PLIST")"
           BUNDLE_IDENTIFIER="${APPLICATION_IDENTIFIER#${TEAM_ID}.}"
+
+          python3 .github/scripts/select-ios-signing-identity.py \
+            "$PROFILE_PLIST" \
+            "$PANDATRACK_SIGNING_IDENTITIES_PATH"
 
           mkdir -p "$PROFILE_INSTALL_DIR"
           cp "$PROFILE_PATH" "$PROFILE_INSTALL_DIR/$PROFILE_UUID.mobileprovision"
@@ -195,6 +200,7 @@ jobs:
             security delete-keychain "$PANDATRACK_SIGNING_KEYCHAIN"
           fi
           rm -f "${PANDATRACK_CERTIFICATE_PATH:-}"
+          rm -f "${PANDATRACK_SIGNING_IDENTITIES_PATH:-}"
           rm -f "${IOS_ADHOC_PROVISIONING_PROFILE_PATH:-}"
 
   unit-tests:
