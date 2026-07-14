@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 import XCTest
 
 
@@ -68,7 +67,7 @@ class ChronosUITests: XCTestCase {
                 .firstMatch
         XCTAssertTrue(entry.waitForExistence(timeout: 5))
 
-        addScreenshotAttachment(named: "Created Time Entry", from: app)
+        addScreenshotAttachment(named: "created-time-entry", from: app)
     }
 
     /// Show the add-entry form through the real application UI.
@@ -83,7 +82,7 @@ class ChronosUITests: XCTestCase {
         app.buttons["Add"].tap()
 
         XCTAssertTrue(app.textFields["Name"].waitForExistence(timeout: 5))
-        addScreenshotAttachment(named: "Add Time Entry Form", from: app)
+        addScreenshotAttachment(named: "add-time-entry-form", from: app)
     }
 
     /// Measure how long it takes to launch the application.
@@ -103,64 +102,6 @@ class ChronosUITests: XCTestCase {
         app.launchArguments.append("--ui-testing")
         if resetPersistentStore { app.launchArguments.append("--reset-persistent-store") }
         return app
-    }
-
-}
-
-
-// MARK: - Screenshot attachments
-
-extension XCTestCase {
-
-    // MARK: - Methods
-
-    /// Add a screenshot attachment that is retained in the test result bundle.
-    ///
-    /// - Parameters:
-    ///   - name: The attachment name shown in the test result bundle.
-    ///   - app: The application to capture.
-    ///
-    func addScreenshotAttachment(named name: String, from app: XCUIApplication) {
-        addScreenshotAttachment(named: name, screenshot: app.screenshot())
-    }
-
-    /// Add a screenshot attachment that is retained in the test result bundle.
-    ///
-    /// - Parameters:
-    ///   - name: The attachment name shown in the test result bundle.
-    ///   - screenshot: The screenshot to attach.
-    ///
-    func addScreenshotAttachment(named name: String, screenshot: XCUIScreenshot) {
-        let attachment = XCTAttachment(screenshot: screenshot)
-        attachment.name = name
-        attachment.lifetime = .keepAlways
-        add(attachment)
-    }
-
-}
-
-
-// MARK: - Screenshot orientation
-
-extension XCUIScreenshot {
-
-    // MARK: - Properties
-
-    var pandatrackOrientationName: String {
-        guard let size = pngPixelSize else {
-            return image.size.width > image.size.height ? "Landscape" : "Portrait"
-        }
-
-        return size.width > size.height ? "Landscape" : "Portrait"
-    }
-
-    private var pngPixelSize: (width: Int, height: Int)? {
-        let bytes = [UInt8](pngRepresentation)
-        guard bytes.count >= 24 else { return nil }
-
-        let width = (Int(bytes[16]) << 24) | (Int(bytes[17]) << 16) | (Int(bytes[18]) << 8) | Int(bytes[19])
-        let height = (Int(bytes[20]) << 24) | (Int(bytes[21]) << 16) | (Int(bytes[22]) << 8) | Int(bytes[23])
-        return (width, height)
     }
 
 }

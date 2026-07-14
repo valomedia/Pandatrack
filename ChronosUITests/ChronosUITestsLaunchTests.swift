@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 import XCTest
 
 
@@ -64,8 +63,7 @@ class ChronosUITestsLaunchTests: XCTestCase {
         app.launchArguments.append("--reset-persistent-store")
         app.launch()
 
-        let screenshot = app.screenshot()
-        addScreenshotAttachment(named: "Launch Screen \(screenshot.pandatrackOrientationName)", screenshot: screenshot)
+        addScreenshotAttachment(named: "launch-screen", from: app)
     }
 
 }
