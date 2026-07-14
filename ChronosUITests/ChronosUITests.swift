@@ -53,7 +53,9 @@ class ChronosUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Time Entries"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["Hi, I‘m Pandy!"].exists)
 
-        app.buttons["Add"].tap()
+        let addEntryButton = app.buttons["addEntryButton"]
+        XCTAssertTrue(addEntryButton.waitForExistence(timeout: 5))
+        addEntryButton.tap()
 
         let nameField = app.textFields["Name"]
         XCTAssertTrue(nameField.waitForExistence(timeout: 5))
@@ -79,7 +81,10 @@ class ChronosUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(app.navigationBars["Time Entries"].waitForExistence(timeout: 5))
-        app.buttons["Add"].tap()
+
+        let addEntryButton = app.buttons["addEntryButton"]
+        XCTAssertTrue(addEntryButton.waitForExistence(timeout: 5))
+        addEntryButton.tap()
 
         XCTAssertTrue(app.textFields["Name"].waitForExistence(timeout: 5))
         addScreenshotAttachment(named: "add-time-entry-form", from: app)
