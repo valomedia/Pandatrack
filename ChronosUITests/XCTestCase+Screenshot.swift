@@ -44,8 +44,7 @@ private extension XCUIScreenshot {
     var pngDataForCurrentOrientation: Data {
         let pngData = pngRepresentation
         guard XCUIDevice.shared.orientation.isLandscape,
-              let image = UIImage(data: pngData),
-              let rotatedData = image.rotatedForLandscapeScreenshot.pngData()
+              let rotatedData = UIImage(data: pngData)?.landscapeScreenshotPNGData
         else { return pngData }
 
         return rotatedData
@@ -60,15 +59,26 @@ private extension UIImage {
 
     // MARK: - Properties
 
-    var rotatedForLandscapeScreenshot: UIImage {
-        let rotatedSize = CGSize(width: size.height, height: size.width)
-        let renderer = UIGraphicsImageRenderer(size: rotatedSize)
+    var landscapeScreenshotPNGData: Data? {
+        guard let cgImage else { return nil }
+
+        let imageSize = CGSize(width: cgImage.width, height: cgImage.height)
+        let rotatedSize = CGSize(width: imageSize.height, height: imageSize.width)
+        let rendererFormat = UIGraphicsImageRendererFormat()
+        rendererFormat.scale = 1
+        let renderer = UIGraphicsImageRenderer(size: rotatedSize, format: rendererFormat)
+        let drawRect = CGRect(
+                x: -imageSize.width / 2,
+                y: -imageSize.height / 2,
+                width: imageSize.width,
+                height: imageSize.height
+        )
         return renderer.image { context in
             let cgContext = context.cgContext
             cgContext.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
             cgContext.rotate(by: .pi / 2)
-            draw(in: CGRect(x: -size.width / 2, y: -size.height / 2, width: size.width, height: size.height))
-        }
+            UIImage(cgImage: cgImage).draw(in: drawRect)
+        }.pngData()
     }
 
 }
