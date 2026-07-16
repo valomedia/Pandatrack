@@ -20,8 +20,8 @@ extension XCTestCase {
     ///   - name: The base slug for the attachment name shown in the test result bundle.
     ///   - app: The application to capture.
     ///
-    func addScreenshotAttachment(named name: String, from app: XCUIApplication) {
-        let screenshot = app.screenshot()
+    func addScreenshotAttachment(named name: String, from _: XCUIApplication) {
+        let screenshot = XCUIScreen.main.screenshot()
         let orientation = screenshot.pngPixelSize.width > screenshot.pngPixelSize.height ? "landscape" : "portrait"
         let attachment = XCTAttachment(screenshot: screenshot)
         attachment.name = "\(name)-\(orientation)"
