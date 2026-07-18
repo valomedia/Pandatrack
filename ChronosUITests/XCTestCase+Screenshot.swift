@@ -21,15 +21,101 @@ extension XCTestCase {
     ///   - name: The base slug for the attachment name shown in the test result bundle.
     ///   - app: The application to capture.
     ///
-    func addScreenshotAttachment(named name: String, from _: XCUIApplication) {
+    func addScreenshotAttachment(named name: String, from app: XCUIApplication) {
         let screenshot = XCUIScreen.main.screenshot()
         let pngData = screenshot.pngDataForCurrentOrientation
         let pixelSize = pngData.pngPixelSize
         let orientation = pixelSize.width > pixelSize.height ? "landscape" : "portrait"
+        let configuration = app.targetApplicationUIConfigurationScreenshotNameComponent
         let attachment = XCTAttachment(data: pngData, uniformTypeIdentifier: "public.png")
-        attachment.name = "\(name)-\(orientation)"
+        attachment.name = "\(name)-\(configuration)-\(orientation)"
         attachment.lifetime = .keepAlways
         add(attachment)
+    }
+
+}
+
+
+// MARK: - Target application UI configuration
+
+private extension XCUIApplication {
+
+    // MARK: - Properties
+
+    var targetApplicationUIConfigurationScreenshotNameComponent: String {
+        let traits = UIScreen.main.traitCollection
+        return [
+            "style-\(traits.userInterfaceStyle.screenshotNameComponent)",
+            "content-size-\(contentSizeCategoryScreenshotNameComponent(from: traits))",
+            "languages-\(languagesScreenshotNameComponent)",
+            "locale-\(localeScreenshotNameComponent)"
+        ].joined(separator: "-")
+    }
+
+    private var languagesScreenshotNameComponent: String {
+        launchArgumentValue(after: "-AppleLanguages")?.screenshotNameComponent
+                ?? Locale.preferredLanguages.joined(separator: ",").screenshotNameComponent
+    }
+
+    private var localeScreenshotNameComponent: String {
+        launchArgumentValue(after: "-AppleLocale")?.screenshotNameComponent
+                ?? Locale.current.identifier.screenshotNameComponent
+    }
+
+    // MARK: - Methods
+
+    private func contentSizeCategoryScreenshotNameComponent(from traits: UITraitCollection) -> String {
+        launchArgumentValue(after: "-UIPreferredContentSizeCategoryName")?.screenshotNameComponent
+                ?? traits.preferredContentSizeCategory.rawValue.screenshotNameComponent
+    }
+
+    private func launchArgumentValue(after option: String) -> String? {
+        guard let optionIndex = launchArguments.firstIndex(of: option) else { return nil }
+
+        let valueIndex = launchArguments.index(after: optionIndex)
+        guard valueIndex < launchArguments.endIndex else { return nil }
+
+        return launchArguments[valueIndex]
+    }
+
+}
+
+
+// MARK: - Interface style names
+
+private extension UIUserInterfaceStyle {
+
+    // MARK: - Properties
+
+    var screenshotNameComponent: String {
+        switch self {
+        case .unspecified:
+            return "unspecified"
+        case .light:
+            return "light"
+        case .dark:
+            return "dark"
+        @unknown default:
+            return "unknown-\(rawValue)"
+        }
+    }
+
+}
+
+
+// MARK: - Screenshot name components
+
+private extension String {
+
+    // MARK: - Properties
+
+    var screenshotNameComponent: String {
+        let components = lowercased()
+                .split { !$0.isLetter && !$0.isNumber }
+                .map(String.init)
+        guard !components.isEmpty else { return "unspecified" }
+
+        return components.joined(separator: "-")
     }
 
 }
