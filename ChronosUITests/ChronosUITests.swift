@@ -66,6 +66,26 @@ class ChronosUITests: XCTestCase {
                 .matching(NSPredicate(format: "label == 'Entry' AND value == %@", Self.entryName))
                 .firstMatch
         XCTAssertTrue(entry.waitForExistence(timeout: 5))
+
+        addScreenshotAttachment(named: "created-time-entry", from: app)
+    }
+
+    /// Show the add-entry form through the real application UI.
+    ///
+    /// - Throws:
+    ///
+    func testShowsAddEntryForm() throws {
+        let app = makeApp(resetPersistentStore: true)
+        app.launch()
+
+        XCTAssertTrue(app.navigationBars["Time Entries"].waitForExistence(timeout: 5))
+
+        let addEntryButton = app.buttons["addEntryButton"]
+        XCTAssertTrue(addEntryButton.waitForExistence(timeout: 5))
+        addEntryButton.tap()
+
+        XCTAssertTrue(app.textFields["Name"].waitForExistence(timeout: 5))
+        addScreenshotAttachment(named: "add-time-entry-form", from: app)
     }
 
     /// Measure how long it takes to launch the application.
