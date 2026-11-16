@@ -13,7 +13,7 @@ permissions:
 jobs:
   lint:
     name: Lint
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - name: Checkout
@@ -35,7 +35,7 @@ jobs:
 
   build:
     name: Build
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - name: Checkout
@@ -231,7 +231,7 @@ jobs:
 
   unit-tests:
     name: Unit Tests
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - name: Checkout
@@ -260,7 +260,7 @@ jobs:
 
   instrumented-tests:
     name: Instrumented Tests
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - name: Checkout
