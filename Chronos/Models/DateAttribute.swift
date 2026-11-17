@@ -2,9 +2,6 @@
 //  DateAttribute.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-02-19.
-//
-//
 
 import Foundation
 

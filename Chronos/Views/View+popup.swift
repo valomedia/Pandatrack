@@ -2,9 +2,6 @@
 //  View+popup.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2023-01-28.
-//
-//
 
 import Foundation
 import SwiftUI

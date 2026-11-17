@@ -1,15 +1,11 @@
 {#
     Strings.stencil
     Chronos
-
-    Created by Jean-Pierre Höhmann on 2022-05-05.
-
 #}//
 // Strings+Generated.swift
 // Chronos
 //
 // Generated using SwiftGen -- https://github.com/SwiftGen/SwiftGen
-//
 //
 
 // swiftlint:disable all

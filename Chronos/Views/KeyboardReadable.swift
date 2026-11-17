@@ -2,9 +2,6 @@
 //  KeyboardReadable.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2023-01-17.
-//
-//
 
 import Foundation
 import Combine

@@ -2,9 +2,6 @@
 //  MutablePercentageAttribute.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-03-26.
-//
-//
 
 import Foundation
 

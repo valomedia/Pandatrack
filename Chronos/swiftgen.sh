@@ -4,9 +4,6 @@
 # swiftgen.sh
 # Chronos
 #
-# Created by Jean-Pierre Höhmann on 2022-04-20.
-#
-#
 
 #
 # Code Generation

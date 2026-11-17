@@ -2,9 +2,6 @@
 # Podfile
 # Chronos
 #
-# Created by Jean-Pierre Höhmann on 2026-07-03.
-#
-#
 
 platform :ios, '16.2'
 

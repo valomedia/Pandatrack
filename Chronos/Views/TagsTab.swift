@@ -2,9 +2,6 @@
 //  TagsTab.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-11-29.
-//
-//
 
 import Foundation
 import SwiftUI

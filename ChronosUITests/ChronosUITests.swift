@@ -2,8 +2,6 @@
 //  ChronosUITests.swift
 //  ChronosUITests
 //
-//  Created by Jean-Pierre Höhmann on 2022-09-08.
-//
 
 import Foundation
 import XCTest

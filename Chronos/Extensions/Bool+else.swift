@@ -2,9 +2,6 @@
 //  Bool+else.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-10-26.
-//
-//
 
 import Foundation
 

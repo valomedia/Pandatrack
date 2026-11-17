@@ -2,9 +2,6 @@
 //  NotificationCenter+addObserver.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-11-28.
-//
-//
 
 import Foundation
 

@@ -2,9 +2,6 @@
 //  Theme.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-02-08.
-//
-//
 
 import Foundation
 import SwiftUI

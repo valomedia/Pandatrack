@@ -2,9 +2,6 @@
 //  MutableStringAttribute.swift
 //  Chronos
 //
-//  Created by Jean-Pierre Höhmann on 2022-03-25.
-//
-//
 
 import Foundation
 
